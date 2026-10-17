@@ -1,0 +1,5200 @@
+{
+  "title": "스킬",
+  "defaultPreset": "기본",
+  "newPresetPrefix": "프리셋",
+  "filters": [
+    {
+      "name": "전체",
+      "icon": "grid"
+    },
+    {
+      "name": "즐겨찾기",
+      "icon": "star"
+    }
+  ],
+  "categoryRows": [
+    [
+      "마법",
+      "신성술",
+      "정령술",
+      "주술"
+    ],
+    [
+      "검술",
+      "무기술",
+      "궁술",
+      "체술",
+      "도적술",
+      "연주술"
+    ],
+    [
+      "연금술",
+      "제작술",
+      "생활술",
+      "탐험술",
+      "학술"
+    ]
+  ],
+  "categories": [
+    {
+      "name": "마법",
+      "icon": "wand",
+      "levels": [
+        "1서클",
+        "2서클",
+        "3서클",
+        "4서클",
+        "5서클",
+        "6서클",
+        "7서클",
+        "8서클",
+        "9서클",
+        "불명"
+      ],
+      "subcategories": [
+        {
+          "name": "화염계",
+          "color": "#b45136",
+          "skills": [
+            {
+              "name": "파이어 볼트",
+              "level": "1서클",
+              "description": "작은 화염탄을 직선으로 발사한다.",
+              "icon": "fire"
+            },
+            {
+              "name": "파이어 볼",
+              "level": "3서클",
+              "description": "응축한 화염구를 폭발시켜 주변까지 불태운다.",
+              "icon": "fireball"
+            },
+            {
+              "name": "플레임 월",
+              "level": "5서클",
+              "description": "일정 구간에 거대한 불길의 장벽을 세운다.",
+              "icon": "flamewall"
+            },
+            {
+              "name": "인페르노",
+              "level": "7서클",
+              "description": "넓은 지역을 화염폭풍으로 뒤덮는다.",
+              "icon": "storm"
+            },
+            {
+              "name": "프로미넌스",
+              "level": "9서클",
+              "description": "태양의 홍염을 닮은 초고열 화염을 현현시킨다.",
+              "icon": "sun"
+            }
+          ]
+        },
+        {
+          "name": "수류계",
+          "color": "#367f9d",
+          "skills": [
+            {
+              "name": "워터 볼",
+              "level": "1서클",
+              "description": "압축한 물덩이를 충격탄처럼 발사한다.",
+              "icon": "droplet"
+            },
+            {
+              "name": "아쿠아 커터",
+              "level": "3서클",
+              "description": "고압의 물줄기를 칼날처럼 분사한다.",
+              "icon": "waterblade"
+            },
+            {
+              "name": "워터 프리즌",
+              "level": "5서클",
+              "description": "대상을 거대한 물구체 안에 가둔다.",
+              "icon": "prison"
+            },
+            {
+              "name": "타이달 웨이브",
+              "level": "7서클",
+              "description": "거대한 파도를 일으켜 전장을 휩쓴다.",
+              "icon": "wave"
+            },
+            {
+              "name": "리바이어던",
+              "level": "9서클",
+              "description": "막대한 수량을 거대한 수룡의 형태로 구현해 적을 집어삼킨다.",
+              "icon": "dragon"
+            }
+          ]
+        },
+        {
+          "name": "냉기계",
+          "color": "#629faf",
+          "skills": [
+            {
+              "name": "프로스트",
+              "level": "1서클",
+              "description": "대상의 표면을 얼려 움직임을 둔화한다.",
+              "icon": "snowflake"
+            },
+            {
+              "name": "아이스 스피어",
+              "level": "3서클",
+              "description": "단단한 얼음창을 만들어 발사한다.",
+              "icon": "spear"
+            },
+            {
+              "name": "아이스 월",
+              "level": "4서클",
+              "description": "두꺼운 빙벽을 만들어 공격과 이동을 차단한다.",
+              "icon": "wall"
+            },
+            {
+              "name": "블리자드",
+              "level": "7서클",
+              "description": "광범위한 지역에 혹한의 눈보라를 일으킨다.",
+              "icon": "storm"
+            },
+            {
+              "name": "앱솔루트 제로",
+              "level": "9서클",
+              "description": "제한된 영역의 열을 극단적으로 빼앗아 모든 것을 동결시킨다.",
+              "icon": "snowflake"
+            }
+          ]
+        },
+        {
+          "name": "바람계",
+          "color": "#5d9383",
+          "skills": [
+            {
+              "name": "윈드 블레이드",
+              "level": "1서클",
+              "description": "압축한 바람을 칼날처럼 발사한다.",
+              "icon": "wind"
+            },
+            {
+              "name": "에어 스텝",
+              "level": "3서클",
+              "description": "공기를 순간적으로 발판 삼아 허공에서 도약한다.",
+              "icon": "wind"
+            },
+            {
+              "name": "게일",
+              "level": "5서클",
+              "description": "강력한 돌풍으로 적과 투사체를 밀어낸다.",
+              "icon": "wind"
+            },
+            {
+              "name": "토네이도",
+              "level": "7서클",
+              "description": "거대한 회오리바람을 발생시켜 주변을 휩쓴다.",
+              "icon": "storm"
+            },
+            {
+              "name": "템페스트",
+              "level": "9서클",
+              "description": "광범위한 기류를 장악해 거대한 폭풍을 일으킨다.",
+              "icon": "storm"
+            }
+          ]
+        },
+        {
+          "name": "대지계",
+          "color": "#99774e",
+          "skills": [
+            {
+              "name": "스톤 샷",
+              "level": "1서클",
+              "description": "돌조각을 탄환처럼 발사한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "어스 월",
+              "level": "3서클",
+              "description": "지면을 솟구치게 해 견고한 암벽을 만든다.",
+              "icon": "wall"
+            },
+            {
+              "name": "스톤 스파이크",
+              "level": "4서클",
+              "description": "지면에서 날카로운 암석기둥을 솟구치게 한다.",
+              "icon": "rock"
+            },
+            {
+              "name": "어스퀘이크",
+              "level": "7서클",
+              "description": "넓은 범위의 지반에 강력한 지진을 일으킨다.",
+              "icon": "rock"
+            },
+            {
+              "name": "테라 브레이크",
+              "level": "9서클",
+              "description": "대지를 갈라 지형 자체를 붕괴시킨다.",
+              "icon": "burst"
+            }
+          ]
+        },
+        {
+          "name": "뇌전계",
+          "color": "#a08b41",
+          "skills": [
+            {
+              "name": "쇼크",
+              "level": "1서클",
+              "description": "약한 전격으로 대상을 순간적으로 경직시킨다.",
+              "icon": "lightning"
+            },
+            {
+              "name": "라이트닝 볼트",
+              "level": "3서클",
+              "description": "강력한 번개를 한 대상에게 방출한다.",
+              "icon": "lightning"
+            },
+            {
+              "name": "체인 라이트닝",
+              "level": "5서클",
+              "description": "전격이 가까운 대상 사이를 연쇄적으로 이동한다.",
+              "icon": "chainlightning"
+            },
+            {
+              "name": "썬더 스톰",
+              "level": "7서클",
+              "description": "뇌운을 생성해 일정 지역에 낙뢰를 쏟아붓는다.",
+              "icon": "lightning"
+            },
+            {
+              "name": "헤븐즈 썬더",
+              "level": "9서클",
+              "description": "막대한 전하를 집중해 재앙급 낙뢰를 내려친다.",
+              "icon": "lightning"
+            }
+          ]
+        },
+        {
+          "name": "광휘계",
+          "color": "#ad9551",
+          "skills": [
+            {
+              "name": "라이트",
+              "level": "1서클",
+              "description": "일정시간 유지되는 밝은 광구를 만든다.",
+              "icon": "sun"
+            },
+            {
+              "name": "플래시",
+              "level": "2서클",
+              "description": "강렬한 섬광으로 주변의 시야를 순간적으로 빼앗는다.",
+              "icon": "sun"
+            },
+            {
+              "name": "라이트 스피어",
+              "level": "4서클",
+              "description": "빛을 창 형태로 압축해 발사한다.",
+              "icon": "spear"
+            },
+            {
+              "name": "프리즘 배리어",
+              "level": "6서클",
+              "description": "빛을 굴절시켜 시야와 광선공격을 왜곡한다.",
+              "icon": "wall"
+            },
+            {
+              "name": "솔라 레이",
+              "level": "9서클",
+              "description": "태양빛을 집중한 초고열 광선을 내려꽂는다.",
+              "icon": "sun"
+            }
+          ]
+        },
+        {
+          "name": "암흑계",
+          "color": "#6b5687",
+          "skills": [
+            {
+              "name": "다크 볼트",
+              "level": "1서클",
+              "description": "어둠의 마력을 응축해 발사한다.",
+              "icon": "shadow"
+            },
+            {
+              "name": "섀도 바인드",
+              "level": "3서클",
+              "description": "대상의 그림자를 붙잡아 움직임을 제한한다.",
+              "icon": "chains"
+            },
+            {
+              "name": "다크니스",
+              "level": "5서클",
+              "description": "일정 지역을 짙은 암흑으로 뒤덮는다.",
+              "icon": "shadow"
+            },
+            {
+              "name": "섀도 워크",
+              "level": "7서클",
+              "description": "이어진 그림자 사이를 이동한다.",
+              "icon": "shadow"
+            },
+            {
+              "name": "이클립스",
+              "level": "9서클",
+              "description": "광범위한 영역의 빛을 억제하고 그림자를 장악한다.",
+              "icon": "shadow"
+            }
+          ]
+        },
+        {
+          "name": "무속성계",
+          "color": "#77719c",
+          "skills": [
+            {
+              "name": "매직 미사일",
+              "level": "1서클",
+              "description": "순수한 마력을 탄환 형태로 발사한다.",
+              "icon": "wand"
+            },
+            {
+              "name": "마나 볼트",
+              "level": "2서클",
+              "description": "응축한 마력을 직선으로 쏘아 충격을 준다.",
+              "icon": "wand"
+            },
+            {
+              "name": "마나 실드",
+              "level": "3서클",
+              "description": "순수 마력으로 보호막을 만든다.",
+              "icon": "shield"
+            },
+            {
+              "name": "마나 버스트",
+              "level": "5서클",
+              "description": "응축한 마력을 순간적으로 폭발시킨다.",
+              "icon": "burst"
+            },
+            {
+              "name": "마나 캐논",
+              "level": "7서클",
+              "description": "막대한 마력을 고밀도 광선처럼 방출한다.",
+              "icon": "beam"
+            }
+          ]
+        },
+        {
+          "name": "치유계",
+          "color": "#a76b75",
+          "skills": [
+            {
+              "name": "힐",
+              "level": "1서클",
+              "description": "작은 상처와 타박상을 치료한다.",
+              "icon": "heal"
+            },
+            {
+              "name": "클로즈 운드",
+              "level": "3서클",
+              "description": "출혈을 멈추고 벌어진 상처를 봉합한다.",
+              "icon": "heart"
+            },
+            {
+              "name": "큐어",
+              "level": "4서클",
+              "description": "독이나 질병으로 인한 신체이상을 완화한다.",
+              "icon": "heart"
+            },
+            {
+              "name": "그레이터 힐",
+              "level": "6서클",
+              "description": "골절과 중증외상을 빠르게 회복시킨다.",
+              "icon": "heal"
+            },
+            {
+              "name": "풀 리커버리",
+              "level": "9서클",
+              "description": "생존 중인 대상의 육체를 정상에 가까운 상태로 회복시킨다.",
+              "icon": "heal"
+            }
+          ]
+        },
+        {
+          "name": "재생계",
+          "color": "#5b8a58",
+          "skills": [
+            {
+              "name": "리제너레이션",
+              "level": "2서클",
+              "description": "자연적인 상처회복 속도를 크게 높인다.",
+              "icon": "sprout"
+            },
+            {
+              "name": "셀 리페어",
+              "level": "4서클",
+              "description": "손상된 근육과 조직을 빠르게 복구한다.",
+              "icon": "sprout"
+            },
+            {
+              "name": "리그로스",
+              "level": "6서클",
+              "description": "절단된 신체 일부의 재생을 유도한다.",
+              "icon": "sprout"
+            },
+            {
+              "name": "바디 리스토어",
+              "level": "8서클",
+              "description": "장기와 골격을 포함한 대규모 신체손상을 재생한다.",
+              "icon": "sprout"
+            },
+            {
+              "name": "퍼펙트 리제너레이션",
+              "level": "9서클",
+              "description": "생명정보가 남아 있는 한 육체를 원형에 가깝게 복원한다.",
+              "icon": "sprout"
+            }
+          ]
+        },
+        {
+          "name": "강화계",
+          "color": "#a08458",
+          "skills": [
+            {
+              "name": "스트렝스",
+              "level": "1서클",
+              "description": "일정시간 근력을 높인다.",
+              "icon": "arm"
+            },
+            {
+              "name": "퀵니스",
+              "level": "2서클",
+              "description": "반응속도와 움직임을 빠르게 한다.",
+              "icon": "arm"
+            },
+            {
+              "name": "아이언 바디",
+              "level": "4서클",
+              "description": "피부와 근육의 내구력을 강화한다.",
+              "icon": "arm"
+            },
+            {
+              "name": "오버드라이브",
+              "level": "6서클",
+              "description": "여러 신체능력을 동시에 한계 가까이 끌어올린다.",
+              "icon": "arm"
+            },
+            {
+              "name": "오버리미트",
+              "level": "9서클",
+              "description": "육체가 가진 안전한계를 마법적으로 확장한다.",
+              "icon": "arm"
+            }
+          ]
+        },
+        {
+          "name": "약화계",
+          "color": "#776385",
+          "skills": [
+            {
+              "name": "위크니스",
+              "level": "1서클",
+              "description": "대상의 근력과 체력을 낮춘다.",
+              "icon": "skull"
+            },
+            {
+              "name": "브리틀",
+              "level": "3서클",
+              "description": "신체와 장비의 내구력을 약화한다.",
+              "icon": "skull"
+            },
+            {
+              "name": "마나 리크",
+              "level": "4서클",
+              "description": "대상의 마력이 지속적으로 새어나가게 한다.",
+              "icon": "skull"
+            },
+            {
+              "name": "디제너레이션",
+              "level": "6서클",
+              "description": "체력과 마력의 회복을 동시에 방해한다.",
+              "icon": "skull"
+            },
+            {
+              "name": "콜랩스",
+              "level": "8서클",
+              "description": "신체와 마력운용능력을 종합적으로 붕괴시킨다.",
+              "icon": "skull"
+            }
+          ]
+        },
+        {
+          "name": "정신계",
+          "color": "#80728f",
+          "skills": [
+            {
+              "name": "캄",
+              "level": "1서클",
+              "description": "공포와 흥분을 진정시킨다.",
+              "icon": "mind"
+            },
+            {
+              "name": "컨퓨전",
+              "level": "3서클",
+              "description": "판단력과 방향감각을 흐트러뜨린다.",
+              "icon": "mind"
+            },
+            {
+              "name": "참",
+              "level": "4서클",
+              "description": "대상이 술자를 우호적인 존재로 인식하게 만든다.",
+              "icon": "slash"
+            },
+            {
+              "name": "마인드 리드",
+              "level": "6서클",
+              "description": "대상의 표층적인 생각과 감정을 읽는다.",
+              "icon": "mind"
+            },
+            {
+              "name": "도미네이션",
+              "level": "8서클",
+              "description": "대상의 의지를 억누르고 행동을 직접 통제한다.",
+              "icon": "mind"
+            }
+          ]
+        },
+        {
+          "name": "환영계",
+          "color": "#819393",
+          "skills": [
+            {
+              "name": "미러 이미지",
+              "level": "2서클",
+              "description": "자신과 동일한 모습의 허상을 만든다.",
+              "icon": "mirror"
+            },
+            {
+              "name": "페이크 사운드",
+              "level": "2서클",
+              "description": "원하는 위치에서 존재하지 않는 소리를 만든다.",
+              "icon": "mirror"
+            },
+            {
+              "name": "인비지빌리티",
+              "level": "4서클",
+              "description": "빛을 굴절시켜 대상의 모습을 감춘다.",
+              "icon": "cloak"
+            },
+            {
+              "name": "미라지",
+              "level": "6서클",
+              "description": "넓은 범위의 풍경과 감각을 거짓으로 꾸민다.",
+              "icon": "mirror"
+            },
+            {
+              "name": "팬텀 월드",
+              "level": "9서클",
+              "description": "대상의 오감을 완전히 장악하는 대규모 환상을 구현한다.",
+              "icon": "mirror"
+            }
+          ]
+        },
+        {
+          "name": "공간계",
+          "color": "#567f9b",
+          "skills": [
+            {
+              "name": "블링크",
+              "level": "3서클",
+              "description": "가까운 장소로 순간이동한다.",
+              "icon": "portal"
+            },
+            {
+              "name": "텔레포트",
+              "level": "5서클",
+              "description": "알고 있는 위치로 장거리 순간이동한다.",
+              "icon": "portal"
+            },
+            {
+              "name": "디멘션 포켓",
+              "level": "5서클",
+              "description": "현실과 분리된 작은 저장공간을 만든다.",
+              "icon": "pocket"
+            },
+            {
+              "name": "게이트",
+              "level": "7서클",
+              "description": "멀리 떨어진 두 장소를 통로로 연결한다.",
+              "icon": "portal"
+            },
+            {
+              "name": "디멘션 슬래시",
+              "level": "9서클",
+              "description": "공간 자체를 절단해 일반적인 방어를 무시한다.",
+              "icon": "portal"
+            }
+          ]
+        },
+        {
+          "name": "시간계",
+          "color": "#9e8d6f",
+          "skills": [
+            {
+              "name": "헤이스트",
+              "level": "3서클",
+              "description": "대상의 체감시간을 가속해 행동속도를 높인다.",
+              "icon": "clock"
+            },
+            {
+              "name": "슬로우",
+              "level": "3서클",
+              "description": "대상의 시간흐름을 늦춰 움직임을 둔화한다.",
+              "icon": "clock"
+            },
+            {
+              "name": "스테이시스",
+              "level": "6서클",
+              "description": "하나의 대상이 변화하는 시간을 일시적으로 멈춘다.",
+              "icon": "clock"
+            },
+            {
+              "name": "리와인드",
+              "level": "8서클",
+              "description": "대상의 상태를 짧은 시간 전으로 되돌린다.",
+              "icon": "clock"
+            },
+            {
+              "name": "타임 스톱",
+              "level": "9서클",
+              "description": "극히 제한된 공간의 시간흐름을 순간적으로 정지시킨다.",
+              "icon": "clock"
+            }
+          ]
+        },
+        {
+          "name": "중력계",
+          "color": "#898080",
+          "skills": [
+            {
+              "name": "웨이트",
+              "level": "2서클",
+              "description": "대상에게 작용하는 중력을 증가시킨다.",
+              "icon": "gravity"
+            },
+            {
+              "name": "라이트 웨이트",
+              "level": "2서클",
+              "description": "대상에게 작용하는 중력을 감소시킨다.",
+              "icon": "gravity"
+            },
+            {
+              "name": "그래비티 필드",
+              "level": "5서클",
+              "description": "일정 범위의 중력세기를 조절한다.",
+              "icon": "gravity"
+            },
+            {
+              "name": "리버스 그래비티",
+              "level": "7서클",
+              "description": "지정영역의 중력방향을 반전시킨다.",
+              "icon": "gravity"
+            },
+            {
+              "name": "싱귤래리티",
+              "level": "9서클",
+              "description": "한 점에 극단적인 중력을 집중한다.",
+              "icon": "gravity"
+            }
+          ]
+        },
+        {
+          "name": "소환계",
+          "color": "#7e8d6b",
+          "skills": [
+            {
+              "name": "패밀리어 콜",
+              "level": "2서클",
+              "description": "계약한 사역마를 자신의 곁으로 부른다.",
+              "icon": "paw"
+            },
+            {
+              "name": "서먼 웨폰",
+              "level": "3서클",
+              "description": "미리 등록한 무기를 즉시 소환한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "서먼 비스트",
+              "level": "4서클",
+              "description": "계약한 마수 한 개체를 일정시간 현현시킨다.",
+              "icon": "paw"
+            },
+            {
+              "name": "그레이터 서먼",
+              "level": "7서클",
+              "description": "강력한 상위마수나 이계존재를 소환한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "그랜드 서먼",
+              "level": "9서클",
+              "description": "전설급 존재의 분신이나 권능 일부를 현실에 불러낸다.",
+              "icon": "paw"
+            }
+          ]
+        },
+        {
+          "name": "변환계",
+          "color": "#7b858c",
+          "skills": [
+            {
+              "name": "셰이프",
+              "level": "2서클",
+              "description": "작은 무생물의 형태를 단순하게 바꾼다.",
+              "icon": "morph"
+            },
+            {
+              "name": "폴리모프",
+              "level": "4서클",
+              "description": "생명체의 외형과 신체특징 일부를 변화시킨다.",
+              "icon": "morph"
+            },
+            {
+              "name": "트랜스뮤트",
+              "level": "5서클",
+              "description": "물질의 일부 성질을 다른 형태로 변화시킨다.",
+              "icon": "morph"
+            },
+            {
+              "name": "매터 컨버전",
+              "level": "7서클",
+              "description": "한 종류의 물질을 유사한 다른 물질로 바꾼다.",
+              "icon": "morph"
+            },
+            {
+              "name": "퍼펙트 트랜스폼",
+              "level": "9서클",
+              "description": "대상의 형태와 신체구조를 완전히 다른 모습으로 재구성한다.",
+              "icon": "morph"
+            }
+          ]
+        },
+        {
+          "name": "결계계",
+          "color": "#7e9e9a",
+          "skills": [
+            {
+              "name": "알람",
+              "level": "1서클",
+              "description": "지정영역에 침입자가 들어오면 술자에게 신호를 보낸다.",
+              "icon": "shield"
+            },
+            {
+              "name": "프로텍션",
+              "level": "3서클",
+              "description": "물리공격과 약한 마법을 막는 보호결계를 만든다.",
+              "icon": "shield"
+            },
+            {
+              "name": "매직 배리어",
+              "level": "5서클",
+              "description": "마법공격에 특화된 강한 방벽을 펼친다.",
+              "icon": "wall"
+            },
+            {
+              "name": "아이솔레이션",
+              "level": "6서클",
+              "description": "빛과 소리와 마력의 출입을 차단한다.",
+              "icon": "shield"
+            },
+            {
+              "name": "그랜드 배리어",
+              "level": "9서클",
+              "description": "성채 규모의 지역을 보호하는 대형결계를 형성한다.",
+              "icon": "wall"
+            }
+          ]
+        },
+        {
+          "name": "탐지계",
+          "color": "#8c9476",
+          "skills": [
+            {
+              "name": "디텍트 마나",
+              "level": "1서클",
+              "description": "주변의 마력반응을 감지한다.",
+              "icon": "search"
+            },
+            {
+              "name": "라이프 센스",
+              "level": "2서클",
+              "description": "일정 범위의 생명체 위치를 파악한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "디텍트 트랩",
+              "level": "3서클",
+              "description": "주변의 마법함정과 비정상적인 장치를 감지한다.",
+              "icon": "search"
+            },
+            {
+              "name": "트루 사이트",
+              "level": "5서클",
+              "description": "투명화와 일반적인 환상을 간파한다.",
+              "icon": "search"
+            },
+            {
+              "name": "월드 스캔",
+              "level": "8서클",
+              "description": "넓은 범위의 생명·마력·공간변화를 동시에 관측한다.",
+              "icon": "search"
+            }
+          ]
+        },
+        {
+          "name": "무효계",
+          "color": "#8a748e",
+          "skills": [
+            {
+              "name": "디스펠",
+              "level": "2서클",
+              "description": "발동 중인 낮은 수준의 마법효과를 해체한다.",
+              "icon": "ban"
+            },
+            {
+              "name": "카운터 스펠",
+              "level": "4서클",
+              "description": "상대가 시전 중인 주문을 방해해 취소시킨다.",
+              "icon": "ban"
+            },
+            {
+              "name": "마나 브레이크",
+              "level": "6서클",
+              "description": "대상의 마력흐름을 일시적으로 끊는다.",
+              "icon": "burst"
+            },
+            {
+              "name": "스펠 리플렉트",
+              "level": "8서클",
+              "description": "자신에게 향한 마법을 반사한다.",
+              "icon": "ban"
+            },
+            {
+              "name": "안티 매직",
+              "level": "9서클",
+              "description": "일정 범위에서 마법의 발동과 유지를 강하게 억제한다.",
+              "icon": "ban"
+            }
+          ]
+        },
+        {
+          "name": "미지계",
+          "color": "#6f7687",
+          "skills": [
+            {
+              "name": "노이즈",
+              "level": "불명",
+              "description": "감지와 분석을 방해하는 정체불명의 마력잡음을 일으킨다.",
+              "icon": "question"
+            },
+            {
+              "name": "글리치",
+              "level": "불명",
+              "description": "현실의 물리법칙이 짧은 순간 비정상적으로 작동하게 만든다.",
+              "icon": "question"
+            },
+            {
+              "name": "에러",
+              "level": "불명",
+              "description": "대상이 사용하는 능력 하나를 예측하기 어려운 형태로 오작동시킨다.",
+              "icon": "question"
+            },
+            {
+              "name": "미싱",
+              "level": "불명",
+              "description": "대상의 일부 정보가 감지와 기록에서 일시적으로 누락된다.",
+              "icon": "question"
+            },
+            {
+              "name": "언노운",
+              "level": "불명",
+              "description": "기존 마법이론으로 설명할 수 없는 현상을 발생시킨다.",
+              "icon": "question"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "신성술",
+      "icon": "cross",
+      "levels": [
+        "하급",
+        "중급",
+        "상급",
+        "고위",
+        "최고위",
+        "신화급"
+      ],
+      "subcategories": [
+        {
+          "name": "치유계",
+          "color": "#839865",
+          "skills": [
+            {
+              "name": "힐링 프레이어",
+              "level": "하급",
+              "description": "기도를 통해 작은 상처와 통증을 치료한다.",
+              "icon": "heal"
+            },
+            {
+              "name": "성자의 손길",
+              "level": "중급",
+              "description": "출혈과 골절을 빠르게 회복시킨다.",
+              "icon": "heal"
+            },
+            {
+              "name": "대치유",
+              "level": "상급",
+              "description": "중상과 장기손상을 치료한다.",
+              "icon": "heal"
+            },
+            {
+              "name": "완전치유",
+              "level": "고위",
+              "description": "치유 가능한 육체손상을 빠르게 정상화한다.",
+              "icon": "heal"
+            },
+            {
+              "name": "신성회복",
+              "level": "최고위",
+              "description": "죽음 직전의 대상까지 안정적인 상태로 회복시킨다.",
+              "icon": "heal"
+            }
+          ]
+        },
+        {
+          "name": "부활계",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "영혼감지",
+              "level": "상급",
+              "description": "죽은 자의 영혼이 아직 현실에 남아 있는지 확인한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "소생",
+              "level": "고위",
+              "description": "죽은 지 오래되지 않은 자를 조건부로 되살린다.",
+              "icon": "wing"
+            },
+            {
+              "name": "부활",
+              "level": "최고위",
+              "description": "육체와 영혼을 다시 결합해 죽은 자를 되살린다.",
+              "icon": "wing"
+            },
+            {
+              "name": "대부활",
+              "level": "신화급",
+              "description": "심하게 훼손된 육체와 영혼을 복구해 부활시킨다.",
+              "icon": "wing"
+            }
+          ]
+        },
+        {
+          "name": "정화계",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "클린즈",
+              "level": "하급",
+              "description": "약한 독과 오염을 제거한다.",
+              "icon": "light"
+            },
+            {
+              "name": "퓨리파이",
+              "level": "중급",
+              "description": "질병과 강한 독성을 정화한다.",
+              "icon": "light"
+            },
+            {
+              "name": "저주해제",
+              "level": "상급",
+              "description": "저주와 사악한 마력을 걷어낸다.",
+              "icon": "light"
+            },
+            {
+              "name": "영혼정화",
+              "level": "고위",
+              "description": "타락하거나 오염된 영혼을 정상에 가깝게 되돌린다.",
+              "icon": "light"
+            },
+            {
+              "name": "대정화",
+              "level": "최고위",
+              "description": "넓은 지역에 퍼진 사기와 오염을 한꺼번에 제거한다.",
+              "icon": "light"
+            }
+          ]
+        },
+        {
+          "name": "축복계",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "용기의 축복",
+              "level": "하급",
+              "description": "공포와 위압에 대한 저항을 높인다.",
+              "icon": "cross"
+            },
+            {
+              "name": "강건의 축복",
+              "level": "중급",
+              "description": "체력과 질병저항력을 강화한다.",
+              "icon": "cross"
+            },
+            {
+              "name": "승전의 축복",
+              "level": "상급",
+              "description": "전투 중 집중력과 신체능력을 높인다.",
+              "icon": "cross"
+            },
+            {
+              "name": "성인의 축복",
+              "level": "고위",
+              "description": "여러 종류의 강화효과를 동시에 부여한다.",
+              "icon": "cross"
+            },
+            {
+              "name": "신의 가호",
+              "level": "최고위",
+              "description": "짧은 시간 압도적인 신성보정을 받는다.",
+              "icon": "cross"
+            }
+          ]
+        },
+        {
+          "name": "수호계",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "성호",
+              "level": "하급",
+              "description": "대상에게 약한 신성보호를 부여한다.",
+              "icon": "shield"
+            },
+            {
+              "name": "홀리 실드",
+              "level": "중급",
+              "description": "물리와 마법공격을 막는 신성방패를 만든다.",
+              "icon": "shield"
+            },
+            {
+              "name": "수호의 빛",
+              "level": "상급",
+              "description": "공격받을 때 자동으로 펼쳐지는 보호막을 부여한다.",
+              "icon": "shield"
+            },
+            {
+              "name": "불가침",
+              "level": "고위",
+              "description": "일정시간 강력한 신성방호를 유지한다.",
+              "icon": "shield"
+            },
+            {
+              "name": "천상의 수호",
+              "level": "최고위",
+              "description": "치명적인 공격을 한 차례 무효에 가깝게 막아낸다.",
+              "icon": "shield"
+            }
+          ]
+        },
+        {
+          "name": "성역계",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "축성",
+              "level": "하급",
+              "description": "작은 장소를 신성한 공간으로 만든다.",
+              "icon": "altar"
+            },
+            {
+              "name": "성역",
+              "level": "중급",
+              "description": "언데드와 악령의 접근을 어렵게 만든다.",
+              "icon": "altar"
+            },
+            {
+              "name": "신성영역",
+              "level": "상급",
+              "description": "영역 내부의 신성력을 높이고 사악한 힘을 약화한다.",
+              "icon": "altar"
+            },
+            {
+              "name": "대성역",
+              "level": "고위",
+              "description": "넓은 지역을 장시간 신성한 보호 아래 둔다.",
+              "icon": "altar"
+            },
+            {
+              "name": "천상강림",
+              "level": "최고위",
+              "description": "제한된 영역을 잠시 천상에 가까운 환경으로 변화시킨다.",
+              "icon": "altar"
+            }
+          ]
+        },
+        {
+          "name": "심판계",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "홀리 볼트",
+              "level": "하급",
+              "description": "부정한 존재에게 강한 신성탄을 발사한다.",
+              "icon": "scales"
+            },
+            {
+              "name": "스마이트",
+              "level": "중급",
+              "description": "신성력을 무기에 실어 강한 일격을 가한다.",
+              "icon": "scales"
+            },
+            {
+              "name": "심판의 창",
+              "level": "상급",
+              "description": "거대한 신성의 창을 대상에게 내려친다.",
+              "icon": "scales"
+            },
+            {
+              "name": "대심판",
+              "level": "고위",
+              "description": "넓은 범위의 언데드와 마족을 동시에 공격한다.",
+              "icon": "scales"
+            },
+            {
+              "name": "최후심판",
+              "level": "최고위",
+              "description": "강대한 악성존재를 소멸시키는 신성한 심판을 내린다.",
+              "icon": "scales"
+            }
+          ]
+        },
+        {
+          "name": "퇴마계",
+          "color": "#678786",
+          "skills": [
+            {
+              "name": "축귀",
+              "level": "하급",
+              "description": "약한 악령을 사람이나 장소에서 몰아낸다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "엑소시즘",
+              "level": "중급",
+              "description": "빙의된 악령이나 마족을 육체에서 분리한다.",
+              "icon": "light"
+            },
+            {
+              "name": "파마",
+              "level": "상급",
+              "description": "악령과 마족의 힘을 크게 약화한다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "대퇴마",
+              "level": "고위",
+              "description": "상위악령과 고위마족을 강제로 추방한다.",
+              "icon": "light"
+            },
+            {
+              "name": "성절",
+              "level": "최고위",
+              "description": "대상과 악성차원 사이의 연결 자체를 끊는다.",
+              "icon": "ghost"
+            }
+          ]
+        },
+        {
+          "name": "계시계",
+          "color": "#77719c",
+          "skills": [
+            {
+              "name": "성징감지",
+              "level": "하급",
+              "description": "신성한 물건이나 장소의 기척을 느낀다.",
+              "icon": "eye"
+            },
+            {
+              "name": "인도",
+              "level": "중급",
+              "description": "여러 선택지 중 위험한 방향을 희미하게 감지한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "신탁",
+              "level": "상급",
+              "description": "상징과 환시를 통해 미래나 진실의 단편을 전달받는다.",
+              "icon": "eye"
+            },
+            {
+              "name": "대계시",
+              "level": "고위",
+              "description": "국가나 시대에 영향을 미칠 사건의 징조를 읽는다.",
+              "icon": "eye"
+            },
+            {
+              "name": "신언",
+              "level": "최고위",
+              "description": "신의 의지를 직접적인 의미를 가진 언어로 전달받는다.",
+              "icon": "eye"
+            }
+          ]
+        },
+        {
+          "name": "서약계",
+          "color": "#71976a",
+          "skills": [
+            {
+              "name": "맹세",
+              "level": "하급",
+              "description": "스스로 정한 약속을 지키는 동안 신성한 보정을 얻는다.",
+              "icon": "contract"
+            },
+            {
+              "name": "성약",
+              "level": "중급",
+              "description": "둘 이상의 대상이 신 앞에서 구속력 있는 계약을 맺는다.",
+              "icon": "contract"
+            },
+            {
+              "name": "수호서약",
+              "level": "상급",
+              "description": "특정 대상이나 장소를 지키는 동안 능력이 강화된다.",
+              "icon": "contract"
+            },
+            {
+              "name": "순교서약",
+              "level": "고위",
+              "description": "자신의 생명력을 대가로 타인을 보호하거나 치유한다.",
+              "icon": "contract"
+            },
+            {
+              "name": "불변성약",
+              "level": "최고위",
+              "description": "신의 이름 아래 맺은 계약을 강력한 구속력으로 고정한다.",
+              "icon": "contract"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "정령술",
+      "icon": "spirit",
+      "levels": [
+        "하급",
+        "중급",
+        "상급",
+        "대정령급",
+        "정령왕급",
+        "신화급"
+      ],
+      "subcategories": [
+        {
+          "name": "화정령술",
+          "color": "#b45136",
+          "skills": [
+            {
+              "name": "불씨의 부탁",
+              "level": "하급",
+              "description": "하급 화정령에게 작은 불꽃을 피우게 한다.",
+              "icon": "fire"
+            },
+            {
+              "name": "화령탄",
+              "level": "중급",
+              "description": "화정령의 힘을 빌려 불꽃탄을 발사한다.",
+              "icon": "fire"
+            },
+            {
+              "name": "화염정령",
+              "level": "상급",
+              "description": "전투 가능한 화염정령을 현현시킨다.",
+              "icon": "fire"
+            },
+            {
+              "name": "대화령",
+              "level": "대정령급",
+              "description": "강대한 화염정령을 현실에 불러낸다.",
+              "icon": "fire"
+            },
+            {
+              "name": "염왕강림",
+              "level": "정령왕급",
+              "description": "화염정령왕의 권능 일부를 현현시킨다.",
+              "icon": "fire"
+            }
+          ]
+        },
+        {
+          "name": "수정령술",
+          "color": "#367f9d",
+          "skills": [
+            {
+              "name": "샘의 부탁",
+              "level": "하급",
+              "description": "수정령에게 깨끗한 물을 만들어달라 청한다.",
+              "icon": "droplet"
+            },
+            {
+              "name": "물결막",
+              "level": "중급",
+              "description": "수정령의 힘으로 흐르는 수막을 만든다.",
+              "icon": "droplet"
+            },
+            {
+              "name": "치유의 물",
+              "level": "상급",
+              "description": "수정령의 생명력으로 상처회복을 돕는다.",
+              "icon": "heal"
+            },
+            {
+              "name": "대수령",
+              "level": "대정령급",
+              "description": "강대한 수정령을 현실에 불러낸다.",
+              "icon": "droplet"
+            },
+            {
+              "name": "해왕강림",
+              "level": "정령왕급",
+              "description": "수정령왕의 권능으로 주변의 물을 지배한다.",
+              "icon": "droplet"
+            }
+          ]
+        },
+        {
+          "name": "풍정령술",
+          "color": "#5d9383",
+          "skills": [
+            {
+              "name": "미풍의 부탁",
+              "level": "하급",
+              "description": "풍정령에게 약한 바람을 일으키게 한다.",
+              "icon": "wind"
+            },
+            {
+              "name": "바람걸음",
+              "level": "중급",
+              "description": "풍정령의 힘으로 몸을 가볍게 만든다.",
+              "icon": "wind"
+            },
+            {
+              "name": "정령비행",
+              "level": "상급",
+              "description": "풍정령의 힘을 빌려 공중을 비행한다.",
+              "icon": "wind"
+            },
+            {
+              "name": "대풍령",
+              "level": "대정령급",
+              "description": "강대한 바람정령을 현실에 불러낸다.",
+              "icon": "wind"
+            },
+            {
+              "name": "풍왕강림",
+              "level": "정령왕급",
+              "description": "풍정령왕의 권능으로 기류와 폭풍을 지배한다.",
+              "icon": "wind"
+            }
+          ]
+        },
+        {
+          "name": "지정령술",
+          "color": "#99774e",
+          "skills": [
+            {
+              "name": "흙의 손",
+              "level": "하급",
+              "description": "지정령에게 흙과 작은 돌을 움직이게 한다.",
+              "icon": "rock"
+            },
+            {
+              "name": "암석수호",
+              "level": "중급",
+              "description": "지정령이 주변의 돌을 모아 방어한다.",
+              "icon": "shield"
+            },
+            {
+              "name": "대지감응",
+              "level": "상급",
+              "description": "지면을 통해 주변의 진동과 움직임을 감지한다.",
+              "icon": "rock"
+            },
+            {
+              "name": "대지령",
+              "level": "대정령급",
+              "description": "강대한 대지정령을 현실에 불러낸다.",
+              "icon": "rock"
+            },
+            {
+              "name": "지왕강림",
+              "level": "정령왕급",
+              "description": "대지정령왕의 권능으로 광범위한 지형을 움직인다.",
+              "icon": "rock"
+            }
+          ]
+        },
+        {
+          "name": "정령계약술",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "정령감응",
+              "level": "하급",
+              "description": "주변 정령의 기척과 감정을 느낀다.",
+              "icon": "contract"
+            },
+            {
+              "name": "하급계약",
+              "level": "중급",
+              "description": "하급정령 하나와 지속적인 계약을 맺는다.",
+              "icon": "contract"
+            },
+            {
+              "name": "다중계약",
+              "level": "상급",
+              "description": "여러 정령과 동시에 계약관계를 유지한다.",
+              "icon": "contract"
+            },
+            {
+              "name": "대정령계약",
+              "level": "대정령급",
+              "description": "독립된 이름과 권능을 가진 대정령과 계약한다.",
+              "icon": "contract"
+            },
+            {
+              "name": "왕의 계약",
+              "level": "정령왕급",
+              "description": "정령왕에게 인정받아 그 권능 일부를 빌린다.",
+              "icon": "contract"
+            }
+          ]
+        },
+        {
+          "name": "정령소환술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "정령호출",
+              "level": "하급",
+              "description": "주변에 존재하는 정령을 자신의 곁으로 부른다.",
+              "icon": "spirit"
+            },
+            {
+              "name": "계약소환",
+              "level": "중급",
+              "description": "계약한 정령을 즉시 현현시킨다.",
+              "icon": "contract"
+            },
+            {
+              "name": "다중소환",
+              "level": "상급",
+              "description": "여러 정령을 동시에 현현시킨다.",
+              "icon": "spirit"
+            },
+            {
+              "name": "대정령소환",
+              "level": "대정령급",
+              "description": "대정령을 완전한 형태로 현실에 불러낸다.",
+              "icon": "spirit"
+            },
+            {
+              "name": "정령군세",
+              "level": "정령왕급",
+              "description": "다수의 정령을 한꺼번에 소환하고 지휘한다.",
+              "icon": "spirit"
+            }
+          ]
+        },
+        {
+          "name": "정령동화술",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "감각공유",
+              "level": "하급",
+              "description": "계약정령의 감각 일부를 공유한다.",
+              "icon": "morph"
+            },
+            {
+              "name": "부분동화",
+              "level": "중급",
+              "description": "정령의 특성을 신체 일부에 구현한다.",
+              "icon": "morph"
+            },
+            {
+              "name": "속성동화",
+              "level": "상급",
+              "description": "정령의 속성을 자신의 육체와 마력에 반영한다.",
+              "icon": "morph"
+            },
+            {
+              "name": "완전동화",
+              "level": "대정령급",
+              "description": "일정시간 대정령과 육체와 마력을 하나로 합친다.",
+              "icon": "morph"
+            },
+            {
+              "name": "정령화",
+              "level": "정령왕급",
+              "description": "자신의 육체를 일시적으로 정령에 가까운 존재로 변화시킨다.",
+              "icon": "morph"
+            }
+          ]
+        },
+        {
+          "name": "정령강림술",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "정령빙의",
+              "level": "중급",
+              "description": "정령의 힘을 자신의 몸에 받아들인다.",
+              "icon": "crown"
+            },
+            {
+              "name": "정령현신",
+              "level": "상급",
+              "description": "정령이 현실에 완전한 힘을 행사하게 한다.",
+              "icon": "crown"
+            },
+            {
+              "name": "대정령강림",
+              "level": "대정령급",
+              "description": "대정령의 본체에 가까운 힘을 현실에 불러낸다.",
+              "icon": "crown"
+            },
+            {
+              "name": "정령왕강림",
+              "level": "정령왕급",
+              "description": "정령왕의 분신이나 권능을 현현시킨다.",
+              "icon": "crown"
+            },
+            {
+              "name": "정령문",
+              "level": "신화급",
+              "description": "정령계와 현실 사이에 대규모 통로를 연다.",
+              "icon": "portal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "주술",
+      "icon": "talisman",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "고위",
+        "금기",
+        "불명"
+      ],
+      "subcategories": [
+        {
+          "name": "저주술",
+          "color": "#776385",
+          "skills": [
+            {
+              "name": "쇠약",
+              "level": "초급",
+              "description": "대상의 체력회복을 서서히 방해한다.",
+              "icon": "skull"
+            },
+            {
+              "name": "불운",
+              "level": "중급",
+              "description": "대상 주변에서 작은 실패가 반복되게 한다.",
+              "icon": "skull"
+            },
+            {
+              "name": "침식",
+              "level": "상급",
+              "description": "특정 능력이나 감각을 시간이 지날수록 약화한다.",
+              "icon": "skull"
+            },
+            {
+              "name": "혈족저주",
+              "level": "고위",
+              "description": "같은 혈통을 따라 이어지는 장기저주를 건다.",
+              "icon": "skull"
+            },
+            {
+              "name": "파멸의 저주",
+              "level": "금기",
+              "description": "정해진 조건을 만족하면 치명적인 결과가 발생하게 한다.",
+              "icon": "skull"
+            }
+          ]
+        },
+        {
+          "name": "부적술",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "방재부",
+              "level": "초급",
+              "description": "작은 사고와 잡귀를 막는 부적을 만든다.",
+              "icon": "talisman"
+            },
+            {
+              "name": "화염부",
+              "level": "중급",
+              "description": "부적에 불꽃을 저장해 원하는 순간 방출한다.",
+              "icon": "talisman"
+            },
+            {
+              "name": "수호부",
+              "level": "상급",
+              "description": "소지자를 한 차례 위험에서 보호한다.",
+              "icon": "shield"
+            },
+            {
+              "name": "천뢰부",
+              "level": "고위",
+              "description": "발동지점에 강력한 낙뢰를 불러낸다.",
+              "icon": "lightning"
+            },
+            {
+              "name": "봉마부",
+              "level": "금기",
+              "description": "강대한 존재나 능력을 장기간 억누르는 부적을 만든다.",
+              "icon": "talisman"
+            }
+          ]
+        },
+        {
+          "name": "인형술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "조종인형",
+              "level": "초급",
+              "description": "간단한 명령을 수행하는 인형을 움직인다.",
+              "icon": "doll"
+            },
+            {
+              "name": "대리인형",
+              "level": "중급",
+              "description": "소유자에게 향한 약한 저주나 충격 일부를 대신 받는다.",
+              "icon": "doll"
+            },
+            {
+              "name": "저주인형",
+              "level": "상급",
+              "description": "대상의 신체재료를 매개로 원거리에서 저주를 건다.",
+              "icon": "doll"
+            },
+            {
+              "name": "분신인형",
+              "level": "고위",
+              "description": "술자와 유사하게 행동하는 전투인형을 조종한다.",
+              "icon": "doll"
+            },
+            {
+              "name": "생명인형",
+              "level": "금기",
+              "description": "인간에 가까운 자율성을 가진 인형을 만들어낸다.",
+              "icon": "sprout"
+            }
+          ]
+        },
+        {
+          "name": "혈주술",
+          "color": "#9c4950",
+          "skills": [
+            {
+              "name": "혈인",
+              "level": "초급",
+              "description": "자신의 피를 이용해 주술표식을 남긴다.",
+              "icon": "blood"
+            },
+            {
+              "name": "혈추적",
+              "level": "중급",
+              "description": "혈액이 남아 있는 대상의 위치를 추적한다.",
+              "icon": "blood"
+            },
+            {
+              "name": "혈계약",
+              "level": "상급",
+              "description": "피를 나눈 대상 사이에 강한 계약을 맺는다.",
+              "icon": "contract"
+            },
+            {
+              "name": "혈맥속박",
+              "level": "고위",
+              "description": "혈연을 매개로 여러 대상을 동시에 구속한다.",
+              "icon": "chains"
+            },
+            {
+              "name": "혈제",
+              "level": "금기",
+              "description": "생명과 피를 대가로 주술의 위력을 폭증시킨다.",
+              "icon": "blood"
+            }
+          ]
+        },
+        {
+          "name": "강령술",
+          "color": "#678786",
+          "skills": [
+            {
+              "name": "영감",
+              "level": "초급",
+              "description": "주변에 존재하는 혼령의 기척을 느낀다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "초혼",
+              "level": "중급",
+              "description": "가까운 망자의 혼을 잠시 불러낸다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "빙의",
+              "level": "상급",
+              "description": "영혼을 자신의 몸에 받아들여 능력을 빌린다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "영매의 문",
+              "level": "고위",
+              "description": "여러 혼령이 드나드는 통로를 연다.",
+              "icon": "portal"
+            },
+            {
+              "name": "백귀야행",
+              "level": "금기",
+              "description": "수많은 혼령을 현실에 끌어내 한꺼번에 움직인다.",
+              "icon": "ghost"
+            }
+          ]
+        },
+        {
+          "name": "사령술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "스켈레톤",
+              "level": "초급",
+              "description": "뼈에 사기를 불어넣어 언데드로 움직인다.",
+              "icon": "bone"
+            },
+            {
+              "name": "좀비",
+              "level": "중급",
+              "description": "시체에 사기를 주입해 단순한 명령을 수행하게 한다.",
+              "icon": "bone"
+            },
+            {
+              "name": "데스 나이트",
+              "level": "상급",
+              "description": "강한 혼을 무장한 시신에 정착시킨다.",
+              "icon": "bone"
+            },
+            {
+              "name": "언데드 군단",
+              "level": "고위",
+              "description": "다수의 언데드를 하나의 의지 아래 통솔한다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "리치화",
+              "level": "금기",
+              "description": "자신의 영혼을 육체에서 분리해 불사에 가까운 존재가 된다.",
+              "icon": "bone"
+            }
+          ]
+        },
+        {
+          "name": "봉인술",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "금제",
+              "level": "초급",
+              "description": "물건 하나에 간단한 사용제한을 건다.",
+              "icon": "lock"
+            },
+            {
+              "name": "구속인",
+              "level": "중급",
+              "description": "대상의 움직임이나 능력 일부를 억누르는 표식을 새긴다.",
+              "icon": "chains"
+            },
+            {
+              "name": "마력봉인",
+              "level": "상급",
+              "description": "대상의 마력사용을 장시간 제한한다.",
+              "icon": "chains"
+            },
+            {
+              "name": "대봉인",
+              "level": "고위",
+              "description": "강대한 마수나 악령을 특정 장소나 물건에 가둔다.",
+              "icon": "chains"
+            },
+            {
+              "name": "영겁봉인",
+              "level": "금기",
+              "description": "대상의 육체와 영혼을 함께 봉쇄한다.",
+              "icon": "chains"
+            }
+          ]
+        },
+        {
+          "name": "점복술",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "패점",
+              "level": "초급",
+              "description": "카드나 패를 이용해 가까운 미래의 흐름을 읽는다.",
+              "icon": "cards"
+            },
+            {
+              "name": "수정점",
+              "level": "중급",
+              "description": "수정구를 통해 먼 곳의 희미한 장면을 본다.",
+              "icon": "cards"
+            },
+            {
+              "name": "성점",
+              "level": "상급",
+              "description": "별의 움직임에서 장기적인 운세와 재앙의 징조를 읽는다.",
+              "icon": "cards"
+            },
+            {
+              "name": "운명점",
+              "level": "고위",
+              "description": "한 사람의 삶에서 중요한 분기점을 찾아낸다.",
+              "icon": "cards"
+            },
+            {
+              "name": "천명읽기",
+              "level": "금기",
+              "description": "국가나 시대의 운명을 엿본다고 전해지는 점복이다.",
+              "icon": "eye"
+            }
+          ]
+        },
+        {
+          "name": "몽환술",
+          "color": "#77719c",
+          "skills": [
+            {
+              "name": "입몽",
+              "level": "초급",
+              "description": "잠든 대상의 꿈에 간섭한다.",
+              "icon": "moon"
+            },
+            {
+              "name": "악몽",
+              "level": "중급",
+              "description": "대상에게 반복되는 공포스러운 꿈을 꾸게 한다.",
+              "icon": "moon"
+            },
+            {
+              "name": "몽중대화",
+              "level": "상급",
+              "description": "꿈속에서 거리와 언어의 제약 없이 대화한다.",
+              "icon": "moon"
+            },
+            {
+              "name": "몽옥",
+              "level": "고위",
+              "description": "대상의 의식을 끝나지 않는 꿈속에 가둔다.",
+              "icon": "prison"
+            },
+            {
+              "name": "몽계유랑",
+              "level": "금기",
+              "description": "다른 사람의 꿈을 통로 삼아 정신세계 사이를 이동한다.",
+              "icon": "moon"
+            }
+          ]
+        },
+        {
+          "name": "의식술",
+          "color": "#71976a",
+          "skills": [
+            {
+              "name": "기원제",
+              "level": "초급",
+              "description": "향과 제물을 바쳐 영적존재의 호의를 구한다.",
+              "icon": "altar"
+            },
+            {
+              "name": "호명식",
+              "level": "중급",
+              "description": "특정 존재의 이름과 상징을 이용해 의식에 응답하게 한다.",
+              "icon": "altar"
+            },
+            {
+              "name": "대의식",
+              "level": "상급",
+              "description": "다수의 술자가 참여해 넓은 범위의 주술효과를 발생시킨다.",
+              "icon": "altar"
+            },
+            {
+              "name": "강신식",
+              "level": "고위",
+              "description": "상위존재의 힘 일부를 의식장소에 내려받는다.",
+              "icon": "altar"
+            },
+            {
+              "name": "희생제",
+              "level": "금기",
+              "description": "생명이나 영혼을 대가로 통상적인 한계를 넘는 현상을 일으킨다.",
+              "icon": "altar"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "검술",
+      "icon": "sword",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "장검술",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "베기",
+              "level": "초급",
+              "description": "장검을 이용해 기본적인 참격을 가한다.",
+              "icon": "slash"
+            },
+            {
+              "name": "받아흘리기",
+              "level": "중급",
+              "description": "상대의 공격을 옆으로 흘려 빈틈을 만든다.",
+              "icon": "sword"
+            },
+            {
+              "name": "연환검",
+              "level": "상급",
+              "description": "공격과 방어를 끊김 없이 이어간다.",
+              "icon": "slash"
+            },
+            {
+              "name": "반격일섬",
+              "level": "달인",
+              "description": "상대의 공격 직후 열린 빈틈을 정확히 베어낸다.",
+              "icon": "slash"
+            },
+            {
+              "name": "무흔검",
+              "level": "초월",
+              "description": "검의 궤적조차 인지하기 어려운 극한의 참격을 구사한다.",
+              "icon": "slash"
+            }
+          ]
+        },
+        {
+          "name": "대검술",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "강베기",
+              "level": "초급",
+              "description": "대검의 무게를 실어 강하게 내리친다.",
+              "icon": "slash"
+            },
+            {
+              "name": "파갑",
+              "level": "중급",
+              "description": "갑옷과 방패를 파괴하는 데 특화된 참격을 가한다.",
+              "icon": "sword"
+            },
+            {
+              "name": "대회전",
+              "level": "상급",
+              "description": "대검을 크게 휘둘러 주변의 적을 공격한다.",
+              "icon": "sword"
+            },
+            {
+              "name": "지맥참",
+              "level": "달인",
+              "description": "전신의 힘을 검에 실어 지면까지 깊게 가른다.",
+              "icon": "slash"
+            },
+            {
+              "name": "산가르기",
+              "level": "초월",
+              "description": "거대한 구조물이나 대형마수까지 양단하는 참격을 가한다.",
+              "icon": "sword"
+            }
+          ]
+        },
+        {
+          "name": "쌍검술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "교차베기",
+              "level": "초급",
+              "description": "두 검을 교차시켜 동시에 공격한다.",
+              "icon": "slash"
+            },
+            {
+              "name": "연격",
+              "level": "중급",
+              "description": "한쪽 검의 회수동작을 다른 검의 공격으로 연결한다.",
+              "icon": "slash"
+            },
+            {
+              "name": "쌍방어",
+              "level": "상급",
+              "description": "두 검을 독립적으로 움직여 여러 공격을 흘린다.",
+              "icon": "crossedswords"
+            },
+            {
+              "name": "난무",
+              "level": "달인",
+              "description": "접근한 적에게 빈틈 없는 연속참격을 퍼붓는다.",
+              "icon": "slash"
+            },
+            {
+              "name": "천수검",
+              "level": "초월",
+              "description": "수십 번의 참격이 동시에 쏟아지는 듯한 극한의 연격을 구사한다.",
+              "icon": "slash"
+            }
+          ]
+        },
+        {
+          "name": "세검술",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "찌르기 (세검술)",
+              "level": "초급",
+              "description": "최소한의 동작으로 빠른 찌르기를 가한다.",
+              "icon": "rapier"
+            },
+            {
+              "name": "페인트",
+              "level": "중급",
+              "description": "가짜 공격으로 상대의 방어를 유도한다.",
+              "icon": "rapier"
+            },
+            {
+              "name": "연속찌르기",
+              "level": "상급",
+              "description": "빠르고 정밀한 찌르기를 연속으로 가한다.",
+              "icon": "rapier"
+            },
+            {
+              "name": "심장꿰기",
+              "level": "달인",
+              "description": "방어의 틈을 읽어 치명적인 급소를 찌른다.",
+              "icon": "rapier"
+            },
+            {
+              "name": "백화",
+              "level": "초월",
+              "description": "한순간 수많은 찌르기를 쏟아낸다.",
+              "icon": "rapier"
+            }
+          ]
+        },
+        {
+          "name": "발도술",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "발도",
+              "level": "초급",
+              "description": "검을 뽑는 동작과 공격을 하나로 연결한다.",
+              "icon": "slash"
+            },
+            {
+              "name": "역발도",
+              "level": "중급",
+              "description": "회피와 동시에 검을 뽑아 반격한다.",
+              "icon": "slash"
+            },
+            {
+              "name": "거합참",
+              "level": "상급",
+              "description": "정지상태에서 폭발적인 속도의 참격을 가한다.",
+              "icon": "slash"
+            },
+            {
+              "name": "무음발도",
+              "level": "달인",
+              "description": "기척과 소리를 거의 드러내지 않고 검을 뽑는다.",
+              "icon": "slash"
+            },
+            {
+              "name": "찰나일섬",
+              "level": "초월",
+              "description": "발도와 참격이 인식하기 어려울 정도로 동시에 이루어진다.",
+              "icon": "slash"
+            }
+          ]
+        },
+        {
+          "name": "마검술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "마력검",
+              "level": "초급",
+              "description": "검날에 마력을 둘러 절삭력과 내구도를 높인다.",
+              "icon": "slash"
+            },
+            {
+              "name": "속성검",
+              "level": "중급",
+              "description": "검에 화염·냉기·뇌전 등의 속성을 부여한다.",
+              "icon": "slash"
+            },
+            {
+              "name": "마력참",
+              "level": "상급",
+              "description": "검에 실은 마력을 참격 형태로 날린다.",
+              "icon": "slash"
+            },
+            {
+              "name": "오러 블레이드",
+              "level": "달인",
+              "description": "검날보다 훨씬 긴 마력칼날을 형성한다.",
+              "icon": "weapon"
+            },
+            {
+              "name": "마검해방",
+              "level": "초월",
+              "description": "무기와 사용자의 마력을 완전히 동조시킨다.",
+              "icon": "weapon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "무기술",
+      "icon": "axe",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "창술",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "찌르기 (창술)",
+              "level": "초급",
+              "description": "창의 사거리를 살려 직선으로 공격한다.",
+              "icon": "spear"
+            },
+            {
+              "name": "회창",
+              "level": "중급",
+              "description": "창대를 회전시켜 근거리 공격을 걷어낸다.",
+              "icon": "spear"
+            },
+            {
+              "name": "나선창",
+              "level": "상급",
+              "description": "회전력을 더한 찌르기로 관통력을 높인다.",
+              "icon": "spear"
+            },
+            {
+              "name": "용아격",
+              "level": "달인",
+              "description": "모든 힘을 한 점에 집중해 방어를 관통한다.",
+              "icon": "spear"
+            },
+            {
+              "name": "천공창",
+              "level": "초월",
+              "description": "창끝의 기세를 먼 거리까지 뻗어낸다.",
+              "icon": "spear"
+            }
+          ]
+        },
+        {
+          "name": "도끼술",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "내려찍기",
+              "level": "초급",
+              "description": "도끼의 무게를 실어 강하게 내려친다.",
+              "icon": "axe"
+            },
+            {
+              "name": "휩쓸기 (도끼술)",
+              "level": "중급",
+              "description": "넓은 궤도로 도끼를 휘두른다.",
+              "icon": "axe"
+            },
+            {
+              "name": "갑주파쇄",
+              "level": "상급",
+              "description": "갑옷과 방패를 부수는 데 특화된 일격을 가한다.",
+              "icon": "axe"
+            },
+            {
+              "name": "대단절",
+              "level": "달인",
+              "description": "강력한 도끼참격으로 방어선을 무너뜨린다.",
+              "icon": "axe"
+            },
+            {
+              "name": "처형",
+              "level": "초월",
+              "description": "하나의 적에게 모든 힘을 집중하는 필살기를 가한다.",
+              "icon": "axe"
+            }
+          ]
+        },
+        {
+          "name": "둔기술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "스매시",
+              "level": "초급",
+              "description": "둔기의 질량을 이용해 강한 충격을 준다.",
+              "icon": "hammer"
+            },
+            {
+              "name": "아머 브레이크",
+              "level": "중급",
+              "description": "갑옷을 찌그러뜨려 내부까지 충격을 전달한다.",
+              "icon": "burst"
+            },
+            {
+              "name": "그라운드 스매시",
+              "level": "상급",
+              "description": "지면을 내려쳐 주변의 균형을 무너뜨린다.",
+              "icon": "hammer"
+            },
+            {
+              "name": "쇼크 웨이브",
+              "level": "달인",
+              "description": "타격의 충격을 주변으로 확산시킨다.",
+              "icon": "wave"
+            },
+            {
+              "name": "타이탄 크러시",
+              "level": "초월",
+              "description": "거인의 일격처럼 막대한 충격을 한 번에 쏟아붓는다.",
+              "icon": "burst"
+            }
+          ]
+        },
+        {
+          "name": "방패술",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "가드",
+              "level": "초급",
+              "description": "방패로 정면의 공격을 막는다.",
+              "icon": "shield"
+            },
+            {
+              "name": "쉴드 배시",
+              "level": "중급",
+              "description": "방패로 상대를 밀쳐 균형을 무너뜨린다.",
+              "icon": "shield"
+            },
+            {
+              "name": "인터셉트",
+              "level": "상급",
+              "description": "아군에게 향한 공격 사이에 끼어들어 대신 막는다.",
+              "icon": "shield"
+            },
+            {
+              "name": "포트리스",
+              "level": "달인",
+              "description": "움직임을 최소화해 방어효율을 극대화한다.",
+              "icon": "wall"
+            },
+            {
+              "name": "불락",
+              "level": "초월",
+              "description": "압도적인 공격에도 자리를 내주지 않는 방어기술이다.",
+              "icon": "shield"
+            }
+          ]
+        },
+        {
+          "name": "봉술",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "타봉",
+              "level": "초급",
+              "description": "봉의 끝으로 빠른 타격을 가한다.",
+              "icon": "log"
+            },
+            {
+              "name": "휩쓸기 (봉술)",
+              "level": "중급",
+              "description": "긴 봉을 회전시켜 주변을 공격한다.",
+              "icon": "log"
+            },
+            {
+              "name": "봉쇄",
+              "level": "상급",
+              "description": "상대의 무기나 팔다리를 봉으로 얽어 움직임을 막는다.",
+              "icon": "log"
+            },
+            {
+              "name": "연환봉",
+              "level": "달인",
+              "description": "회전과 타격을 끊김 없이 이어간다.",
+              "icon": "log"
+            },
+            {
+              "name": "천륜",
+              "level": "초월",
+              "description": "봉의 회전으로 접근하기 어려운 방어공간을 만든다.",
+              "icon": "log"
+            }
+          ]
+        },
+        {
+          "name": "사슬술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "사슬타",
+              "level": "초급",
+              "description": "사슬을 휘둘러 중거리의 적을 공격한다.",
+              "icon": "chains"
+            },
+            {
+              "name": "속박",
+              "level": "중급",
+              "description": "상대의 팔다리나 무기를 사슬로 휘감는다.",
+              "icon": "chains"
+            },
+            {
+              "name": "끌어당기기",
+              "level": "상급",
+              "description": "사슬에 걸린 대상이나 물체를 강제로 끌어온다.",
+              "icon": "chains"
+            },
+            {
+              "name": "철망",
+              "level": "달인",
+              "description": "여러 방향으로 사슬을 펼쳐 공간을 통제한다.",
+              "icon": "chains"
+            },
+            {
+              "name": "천쇄",
+              "level": "초월",
+              "description": "사슬을 자신의 팔다리처럼 자유롭게 다룬다.",
+              "icon": "chains"
+            }
+          ]
+        },
+        {
+          "name": "투척술",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "투석",
+              "level": "초급",
+              "description": "작은 물체를 정확하게 던져 목표를 맞힌다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "단검투척",
+              "level": "중급",
+              "description": "단검을 안정적인 회전으로 날린다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "곡선투척",
+              "level": "상급",
+              "description": "회전을 이용해 장애물을 돌아 공격한다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "연속투척",
+              "level": "달인",
+              "description": "여러 투척물을 빠르게 다른 목표에 명중시킨다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "필중",
+              "level": "초월",
+              "description": "시야 안의 목표를 극단적으로 높은 정확도로 맞힌다.",
+              "icon": "dagger"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "궁술",
+      "icon": "bow",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "단궁술",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "퀵 샷",
+              "level": "초급",
+              "description": "짧은 시간 안에 화살을 걸고 발사한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "무빙 샷",
+              "level": "중급",
+              "description": "이동 중에도 사격정확도를 유지한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "더블 샷",
+              "level": "상급",
+              "description": "두 발을 거의 동시에 발사한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "연환사",
+              "level": "달인",
+              "description": "끊임없는 사격으로 근중거리의 적을 압박한다.",
+              "icon": "bow"
+            },
+            {
+              "name": "비연",
+              "level": "초월",
+              "description": "발사음과 궤적을 인지하기 어려운 극고속 사격을 구사한다.",
+              "icon": "bow"
+            }
+          ]
+        },
+        {
+          "name": "장궁술",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "강사",
+              "level": "초급",
+              "description": "활시위를 끝까지 당겨 높은 관통력을 낸다.",
+              "icon": "bow"
+            },
+            {
+              "name": "장거리사격",
+              "level": "중급",
+              "description": "먼 거리의 목표를 안정적으로 맞힌다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "철갑관통",
+              "level": "상급",
+              "description": "중장갑의 약점을 노려 깊게 관통한다.",
+              "icon": "bow"
+            },
+            {
+              "name": "용살사",
+              "level": "달인",
+              "description": "대형마수의 급소를 꿰뚫도록 힘을 한 발에 집중한다.",
+              "icon": "dragon"
+            },
+            {
+              "name": "천리사",
+              "level": "초월",
+              "description": "육안으로 보기 어려운 거리의 목표까지 정확히 맞힌다.",
+              "icon": "bow"
+            }
+          ]
+        },
+        {
+          "name": "속사술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "속사",
+              "level": "초급",
+              "description": "짧은 간격으로 여러 발을 발사한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "삼연사",
+              "level": "중급",
+              "description": "세 발의 화살을 빠르게 연달아 쏜다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "억제사격",
+              "level": "상급",
+              "description": "일정 지역에 계속 화살을 쏘아 접근을 막는다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "화살폭우",
+              "level": "달인",
+              "description": "짧은 시간 수십 발의 화살을 퍼붓는다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "무간연사",
+              "level": "초월",
+              "description": "사격동작 사이의 간격을 극한까지 줄인다.",
+              "icon": "arrows"
+            }
+          ]
+        },
+        {
+          "name": "저격술",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "조준",
+              "level": "초급",
+              "description": "호흡과 자세를 안정시켜 명중률을 높인다.",
+              "icon": "target"
+            },
+            {
+              "name": "약점사격",
+              "level": "중급",
+              "description": "상대의 방어가 약한 부위를 노린다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "무음사격",
+              "level": "상급",
+              "description": "발사소리와 움직임을 최소화한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "필살저격",
+              "level": "달인",
+              "description": "한 발로 치명적인 급소를 노린다.",
+              "icon": "target"
+            },
+            {
+              "name": "지평선의 눈",
+              "level": "초월",
+              "description": "극원거리에서도 미세한 움직임과 약점을 식별한다.",
+              "icon": "target"
+            }
+          ]
+        },
+        {
+          "name": "곡사술",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "곡사",
+              "level": "초급",
+              "description": "포물선을 이용해 장애물 뒤의 목표를 공격한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "고각사격",
+              "level": "중급",
+              "description": "높은 각도로 쏘아 긴 사거리를 확보한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "낙하사격",
+              "level": "상급",
+              "description": "높은 곳에서 떨어지는 화살의 위력을 높인다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "화살비",
+              "level": "달인",
+              "description": "넓은 지역에 다수의 화살을 떨어뜨린다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "천우",
+              "level": "초월",
+              "description": "전장 전체를 덮는 정교한 곡사사격을 구사한다.",
+              "icon": "arrows"
+            }
+          ]
+        },
+        {
+          "name": "기마궁술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "승마사격",
+              "level": "초급",
+              "description": "달리는 말 위에서 기본적인 사격을 수행한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "측면사격",
+              "level": "중급",
+              "description": "말을 달리며 측면의 적을 공격한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "후방사격",
+              "level": "상급",
+              "description": "이동방향 반대쪽의 적을 안정적으로 겨냥한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "질주연사",
+              "level": "달인",
+              "description": "전속력으로 이동하면서 연속사격한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "인마일체",
+              "level": "초월",
+              "description": "기수와 말이 하나처럼 움직이며 모든 방향에 사격한다.",
+              "icon": "horse"
+            }
+          ]
+        },
+        {
+          "name": "마궁술",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "마력화살",
+              "level": "초급",
+              "description": "화살에 마력을 실어 위력을 높인다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "추적화살",
+              "level": "중급",
+              "description": "발사 후 목표를 따라 궤도를 수정한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "속성화살",
+              "level": "상급",
+              "description": "화살에 원소속성을 부여한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "관통광시",
+              "level": "달인",
+              "description": "고밀도 마력을 화살에 집중해 여러 대상을 관통한다.",
+              "icon": "arrows"
+            },
+            {
+              "name": "별꿰기",
+              "level": "초월",
+              "description": "초장거리에서 강력한 마력화살을 발사한다.",
+              "icon": "arrows"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "체술",
+      "icon": "fist",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "권법",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "잽",
+              "level": "초급",
+              "description": "빠른 주먹으로 거리와 반응을 확인한다.",
+              "icon": "fist"
+            },
+            {
+              "name": "스트레이트",
+              "level": "중급",
+              "description": "체중을 실어 강한 직선타를 가한다.",
+              "icon": "fist"
+            },
+            {
+              "name": "연타",
+              "level": "상급",
+              "description": "여러 타격을 끊김 없이 이어간다.",
+              "icon": "fist"
+            },
+            {
+              "name": "발경",
+              "level": "달인",
+              "description": "짧은 거리에서 폭발적인 힘을 전달한다.",
+              "icon": "fist"
+            },
+            {
+              "name": "파천권",
+              "level": "초월",
+              "description": "모든 힘을 한 점에 집중한 강력한 권격을 가한다.",
+              "icon": "fist"
+            }
+          ]
+        },
+        {
+          "name": "각법",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "로우 킥",
+              "level": "초급",
+              "description": "상대의 다리를 공격해 움직임을 둔화한다.",
+              "icon": "kick"
+            },
+            {
+              "name": "회전차기",
+              "level": "중급",
+              "description": "회전력을 이용해 강한 타격을 가한다.",
+              "icon": "kick"
+            },
+            {
+              "name": "연환각",
+              "level": "상급",
+              "description": "여러 발차기를 연속으로 이어간다.",
+              "icon": "kick"
+            },
+            {
+              "name": "승천각",
+              "level": "달인",
+              "description": "아래에서 위로 강하게 차올린다.",
+              "icon": "kick"
+            },
+            {
+              "name": "천추각",
+              "level": "초월",
+              "description": "낙하와 회전력을 실어 강력한 발차기를 가한다.",
+              "icon": "kick"
+            }
+          ]
+        },
+        {
+          "name": "유술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "잡기",
+              "level": "초급",
+              "description": "상대의 팔이나 몸을 붙잡아 움직임을 제한한다.",
+              "icon": "grapple"
+            },
+            {
+              "name": "던지기",
+              "level": "중급",
+              "description": "상대의 중심을 무너뜨려 지면에 내던진다.",
+              "icon": "grapple"
+            },
+            {
+              "name": "관절기",
+              "level": "상급",
+              "description": "관절을 제압해 움직임을 봉쇄한다.",
+              "icon": "grapple"
+            },
+            {
+              "name": "반전",
+              "level": "달인",
+              "description": "상대의 힘을 이용해 즉시 중심을 뒤집는다.",
+              "icon": "grapple"
+            },
+            {
+              "name": "완전제압",
+              "level": "초월",
+              "description": "공격을 받아내는 순간 구속과 제압으로 연결한다.",
+              "icon": "grapple"
+            }
+          ]
+        },
+        {
+          "name": "기공술",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "호흡법",
+              "level": "초급",
+              "description": "호흡을 조절해 체력소모를 줄인다.",
+              "icon": "breath"
+            },
+            {
+              "name": "기순환",
+              "level": "중급",
+              "description": "체내의 기를 순환시켜 피로와 통증을 줄인다.",
+              "icon": "breath"
+            },
+            {
+              "name": "외기방출",
+              "level": "상급",
+              "description": "체내의 기를 몸 밖으로 방출한다.",
+              "icon": "breath"
+            },
+            {
+              "name": "호신강기",
+              "level": "달인",
+              "description": "기를 전신에 둘러 방어력을 높인다.",
+              "icon": "breath"
+            },
+            {
+              "name": "천인합일",
+              "level": "초월",
+              "description": "자신의 기와 주변의 흐름을 하나로 일치시킨다.",
+              "icon": "breath"
+            }
+          ]
+        },
+        {
+          "name": "경신술",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "경보",
+              "level": "초급",
+              "description": "발놀림을 가볍게 해 이동속도를 높인다.",
+              "icon": "footsteps"
+            },
+            {
+              "name": "축지",
+              "level": "중급",
+              "description": "짧은 거리를 폭발적으로 좁힌다.",
+              "icon": "footsteps"
+            },
+            {
+              "name": "벽주",
+              "level": "상급",
+              "description": "벽과 기둥을 발판 삼아 이동한다.",
+              "icon": "wall"
+            },
+            {
+              "name": "허공답보",
+              "level": "달인",
+              "description": "연속적인 도약으로 공중을 달리는 듯 이동한다.",
+              "icon": "footsteps"
+            },
+            {
+              "name": "무영보",
+              "level": "초월",
+              "description": "움직임을 눈으로 따라가기 어려운 극한의 보법이다.",
+              "icon": "footsteps"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "도적술",
+      "icon": "dagger",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "은신술",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "숨죽이기",
+              "level": "초급",
+              "description": "호흡과 움직임을 조절해 소음을 줄인다.",
+              "icon": "cloak"
+            },
+            {
+              "name": "기척감추기",
+              "level": "중급",
+              "description": "자신의 존재감을 최대한 낮춘다.",
+              "icon": "cloak"
+            },
+            {
+              "name": "그림자숨기",
+              "level": "상급",
+              "description": "어둠과 사각지대에 몸을 완전히 숨긴다.",
+              "icon": "cloak"
+            },
+            {
+              "name": "완전은신",
+              "level": "달인",
+              "description": "숙련된 감지자에게도 위치를 들키기 어렵게 만든다.",
+              "icon": "cloak"
+            },
+            {
+              "name": "존재희석",
+              "level": "초월",
+              "description": "눈앞에 있어도 자연스럽게 인식에서 벗어난다.",
+              "icon": "cloak"
+            }
+          ]
+        },
+        {
+          "name": "잠입술",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "사각이동",
+              "level": "초급",
+              "description": "경비의 시야가 겹치지 않는 경로를 찾아 움직인다.",
+              "icon": "footsteps"
+            },
+            {
+              "name": "소음제거",
+              "level": "중급",
+              "description": "장비와 복장에서 발생하는 소리를 최소화한다.",
+              "icon": "footsteps"
+            },
+            {
+              "name": "경계통과",
+              "level": "상급",
+              "description": "순찰과 감시패턴을 읽어 자연스럽게 통과한다.",
+              "icon": "footsteps"
+            },
+            {
+              "name": "무흔잠입",
+              "level": "달인",
+              "description": "이동흔적과 침입흔적을 거의 남기지 않는다.",
+              "icon": "cloak"
+            },
+            {
+              "name": "유령침입",
+              "level": "초월",
+              "description": "침입사실 자체를 들키지 않고 목표에 접근한다.",
+              "icon": "footsteps"
+            }
+          ]
+        },
+        {
+          "name": "암살술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "급소파악",
+              "level": "초급",
+              "description": "생물의 주요 급소를 파악한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "사각찌르기",
+              "level": "중급",
+              "description": "상대의 시야 밖에서 급소를 공격한다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "침묵의 일격",
+              "level": "상급",
+              "description": "대상이 대응하기 전에 치명상을 입힌다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "일격필살",
+              "level": "달인",
+              "description": "한 번의 기회에 모든 공격을 집중한다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "사신의 손",
+              "level": "초월",
+              "description": "찰나의 빈틈만으로 생사를 결정짓는 경지다.",
+              "icon": "dagger"
+            }
+          ]
+        },
+        {
+          "name": "절도술",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "소매치기",
+              "level": "초급",
+              "description": "눈치채지 못하게 작은 물건을 훔친다.",
+              "icon": "hand"
+            },
+            {
+              "name": "손놀림",
+              "level": "중급",
+              "description": "손동작을 감춰 물건을 바꾸거나 숨긴다.",
+              "icon": "hand"
+            },
+            {
+              "name": "장비탈취",
+              "level": "상급",
+              "description": "전투 중 상대의 작은 장비를 빼앗는다.",
+              "icon": "hand"
+            },
+            {
+              "name": "유령손",
+              "level": "달인",
+              "description": "상대가 보고 있어도 순간적인 사각을 이용해 훔친다.",
+              "icon": "hand"
+            },
+            {
+              "name": "대도",
+              "level": "초월",
+              "description": "최고수준의 경비 아래 있는 물건도 흔적 없이 훔친다.",
+              "icon": "hand"
+            }
+          ]
+        },
+        {
+          "name": "자물쇠해제",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "락픽",
+              "level": "초급",
+              "description": "단순한 기계식 자물쇠를 연다.",
+              "icon": "lock"
+            },
+            {
+              "name": "정밀해제",
+              "level": "중급",
+              "description": "복잡한 잠금장치를 손상 없이 해제한다.",
+              "icon": "lock"
+            },
+            {
+              "name": "마법자물쇠해제",
+              "level": "상급",
+              "description": "물리장치와 약한 마법봉인을 함께 해제한다.",
+              "icon": "lock"
+            },
+            {
+              "name": "무흔개방",
+              "level": "달인",
+              "description": "자물쇠를 열었다는 흔적조차 남기지 않는다.",
+              "icon": "lock"
+            },
+            {
+              "name": "만능열쇠",
+              "level": "초월",
+              "description": "구조를 파악할 수 있는 잠금장치 대부분을 해제한다.",
+              "icon": "lock"
+            }
+          ]
+        },
+        {
+          "name": "함정술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "함정감지",
+              "level": "초급",
+              "description": "주변의 부자연스러운 흔적에서 함정을 찾아낸다.",
+              "icon": "eye"
+            },
+            {
+              "name": "함정해체",
+              "level": "중급",
+              "description": "기계식 함정을 안전하게 무력화한다.",
+              "icon": "trap"
+            },
+            {
+              "name": "함정설치",
+              "level": "상급",
+              "description": "환경에 맞는 복합함정을 설치한다.",
+              "icon": "trap"
+            },
+            {
+              "name": "역이용",
+              "level": "달인",
+              "description": "발견한 함정을 적에게 작동하도록 수정한다.",
+              "icon": "trap"
+            },
+            {
+              "name": "죽음의 방",
+              "level": "초월",
+              "description": "제한된 공간 전체를 하나의 거대한 함정으로 만든다.",
+              "icon": "trap"
+            }
+          ]
+        },
+        {
+          "name": "변장술",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "외형변장",
+              "level": "초급",
+              "description": "의복과 소품으로 인상을 바꾼다.",
+              "icon": "mask"
+            },
+            {
+              "name": "화장변장",
+              "level": "중급",
+              "description": "얼굴형과 나이의 인상을 크게 변화시킨다.",
+              "icon": "mask"
+            },
+            {
+              "name": "성대모사",
+              "level": "상급",
+              "description": "대상의 목소리와 말버릇을 흉내낸다.",
+              "icon": "mask"
+            },
+            {
+              "name": "신분위장",
+              "level": "달인",
+              "description": "행동과 지식까지 특정 신분에 맞게 연기한다.",
+              "icon": "mask"
+            },
+            {
+              "name": "천의얼굴",
+              "level": "초월",
+              "description": "가까운 지인조차 속일 수 있는 완벽한 변장을 완성한다.",
+              "icon": "mask"
+            }
+          ]
+        },
+        {
+          "name": "추적술",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "발자국읽기",
+              "level": "초급",
+              "description": "흔적에서 이동방향을 파악한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "시간추정",
+              "level": "중급",
+              "description": "흔적의 상태를 보고 언제 지나갔는지 판단한다.",
+              "icon": "clock"
+            },
+            {
+              "name": "환경추적",
+              "level": "상급",
+              "description": "부러진 가지와 먼지 같은 미세한 흔적을 연결한다.",
+              "icon": "search"
+            },
+            {
+              "name": "역추적",
+              "level": "달인",
+              "description": "자신을 추적하는 상대를 찾아내 거꾸로 뒤쫓는다.",
+              "icon": "search"
+            },
+            {
+              "name": "사냥개의 눈",
+              "level": "초월",
+              "description": "거의 지워진 흔적으로도 이동경로를 복원한다.",
+              "icon": "search"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "연주술",
+      "icon": "lyre",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "고양곡",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "행진곡",
+              "level": "초급",
+              "description": "이동 중 동료의 피로감을 줄이고 보조를 맞춘다.",
+              "icon": "music"
+            },
+            {
+              "name": "용기의 노래",
+              "level": "중급",
+              "description": "공포와 불안을 완화한다.",
+              "icon": "music"
+            },
+            {
+              "name": "승전가",
+              "level": "상급",
+              "description": "아군의 사기와 집중력을 높인다.",
+              "icon": "music"
+            },
+            {
+              "name": "영웅찬가",
+              "level": "달인",
+              "description": "주변 아군의 전투의지를 크게 끌어올린다.",
+              "icon": "music"
+            },
+            {
+              "name": "왕의 찬가",
+              "level": "초월",
+              "description": "대군 전체의 사기를 뒤흔들 정도의 연주를 펼친다.",
+              "icon": "music"
+            }
+          ]
+        },
+        {
+          "name": "회복곡",
+          "color": "#a76b75",
+          "skills": [
+            {
+              "name": "휴식곡",
+              "level": "초급",
+              "description": "피로와 긴장을 완화한다.",
+              "icon": "heart"
+            },
+            {
+              "name": "생기의 선율",
+              "level": "중급",
+              "description": "체력회복을 서서히 촉진한다.",
+              "icon": "music"
+            },
+            {
+              "name": "치유의 노래",
+              "level": "상급",
+              "description": "상처회복과 통증완화를 돕는다.",
+              "icon": "heal"
+            },
+            {
+              "name": "생명찬가",
+              "level": "달인",
+              "description": "넓은 범위 아군의 회복력을 크게 높인다.",
+              "icon": "sprout"
+            },
+            {
+              "name": "봄의 노래",
+              "level": "초월",
+              "description": "듣는 생명체의 활력과 회복능력을 장시간 극대화한다.",
+              "icon": "music"
+            }
+          ]
+        },
+        {
+          "name": "수호곡",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "평온의 선율",
+              "level": "초급",
+              "description": "공포와 정신적 동요를 줄인다.",
+              "icon": "music"
+            },
+            {
+              "name": "수호의 화음",
+              "level": "중급",
+              "description": "듣는 이의 정신저항을 높인다.",
+              "icon": "shield"
+            },
+            {
+              "name": "철벽의 노래",
+              "level": "상급",
+              "description": "아군의 방어와 자세유지를 돕는다.",
+              "icon": "wall"
+            },
+            {
+              "name": "성벽의 합주",
+              "level": "달인",
+              "description": "다수의 아군이 서로 보호하며 싸우도록 만든다.",
+              "icon": "wall"
+            },
+            {
+              "name": "불굴의 교향곡",
+              "level": "초월",
+              "description": "압도적인 상황에서도 전열이 쉽게 무너지지 않게 한다.",
+              "icon": "music"
+            }
+          ]
+        },
+        {
+          "name": "전투곡",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "전투박자",
+              "level": "초급",
+              "description": "동료들이 일정한 리듬으로 움직이게 돕는다.",
+              "icon": "music"
+            },
+            {
+              "name": "속주의 노래",
+              "level": "중급",
+              "description": "행동속도와 반응을 높인다.",
+              "icon": "music"
+            },
+            {
+              "name": "격전곡",
+              "level": "상급",
+              "description": "공격성과 전투집중을 강화한다.",
+              "icon": "music"
+            },
+            {
+              "name": "전장의 지휘곡",
+              "level": "달인",
+              "description": "연주만으로 아군의 움직임과 공격타이밍을 맞춘다.",
+              "icon": "music"
+            },
+            {
+              "name": "종전의 북소리",
+              "level": "초월",
+              "description": "전장 전체의 사기와 전투리듬을 지배한다.",
+              "icon": "music"
+            }
+          ]
+        },
+        {
+          "name": "현혹곡",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "유혹의 선율",
+              "level": "초급",
+              "description": "듣는 이의 경계심을 낮춘다.",
+              "icon": "music"
+            },
+            {
+              "name": "졸음노래",
+              "level": "중급",
+              "description": "강한 졸음을 유발한다.",
+              "icon": "music"
+            },
+            {
+              "name": "매혹곡",
+              "level": "상급",
+              "description": "연주자에게 호의적인 감정을 느끼게 만든다.",
+              "icon": "mask"
+            },
+            {
+              "name": "환몽곡",
+              "level": "달인",
+              "description": "듣는 이의 감각에 환상과 착각을 일으킨다.",
+              "icon": "mask"
+            },
+            {
+              "name": "세이렌의 노래",
+              "level": "초월",
+              "description": "다수의 정신을 한꺼번에 사로잡는다.",
+              "icon": "music"
+            }
+          ]
+        },
+        {
+          "name": "진혼곡",
+          "color": "#678786",
+          "skills": [
+            {
+              "name": "위령곡",
+              "level": "초급",
+              "description": "불안정한 혼령을 진정시킨다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "애도의 노래",
+              "level": "중급",
+              "description": "죽은 자의 원념과 집착을 누그러뜨린다.",
+              "icon": "music"
+            },
+            {
+              "name": "진혼곡",
+              "level": "상급",
+              "description": "약한 망령을 잠재우거나 성불시킨다.",
+              "icon": "ghost"
+            },
+            {
+              "name": "안식의 합창",
+              "level": "달인",
+              "description": "다수의 원혼과 언데드의 활동을 억제한다.",
+              "icon": "music"
+            },
+            {
+              "name": "영원의 자장가",
+              "level": "초월",
+              "description": "강대한 망령조차 깊은 안식으로 이끈다고 전해지는 연주다.",
+              "icon": "ghost"
+            }
+          ]
+        },
+        {
+          "name": "의식곡",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "기원가",
+              "level": "초급",
+              "description": "작은 의식의 집중과 분위기를 안정시킨다.",
+              "icon": "lyre"
+            },
+            {
+              "name": "공명가",
+              "level": "중급",
+              "description": "여러 술자의 마력과 호흡을 하나로 맞춘다.",
+              "icon": "lyre"
+            },
+            {
+              "name": "소환찬가",
+              "level": "상급",
+              "description": "소환과 강림계 의식의 안정성을 높인다.",
+              "icon": "music"
+            },
+            {
+              "name": "대의식악",
+              "level": "달인",
+              "description": "대규모 의식에 참여하는 술자들의 마력흐름을 조율한다.",
+              "icon": "lyre"
+            },
+            {
+              "name": "창세찬가",
+              "level": "초월",
+              "description": "고대의 대의식을 재현하기 위한 핵심음률로 전해진다.",
+              "icon": "music"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "연금술",
+      "icon": "flask",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "약제연금",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "하급 회복약",
+              "level": "초급",
+              "description": "가벼운 상처와 피로를 회복하는 포션을 제조한다.",
+              "icon": "heal"
+            },
+            {
+              "name": "마나 포션",
+              "level": "중급",
+              "description": "소모한 마력을 보충하는 포션을 제조한다.",
+              "icon": "potion"
+            },
+            {
+              "name": "재생포션",
+              "level": "상급",
+              "description": "일정시간 자연회복력을 크게 높이는 포션을 제조한다.",
+              "icon": "sprout"
+            },
+            {
+              "name": "상급 회복약",
+              "level": "달인",
+              "description": "중상을 빠르게 안정시키는 고급포션을 제조한다.",
+              "icon": "heal"
+            },
+            {
+              "name": "엘릭서",
+              "level": "초월",
+              "description": "생명력과 신체기능을 극적으로 회복시키는 전설적인 영약을 제조한다.",
+              "icon": "potion"
+            }
+          ]
+        },
+        {
+          "name": "독약연금",
+          "color": "#78964d",
+          "skills": [
+            {
+              "name": "마비독",
+              "level": "중급",
+              "description": "신경과 근육의 움직임을 둔화시키는 독을 제조한다.",
+              "icon": "poison"
+            },
+            {
+              "name": "출혈독",
+              "level": "중급",
+              "description": "혈액응고를 방해하는 독을 제조한다.",
+              "icon": "poison"
+            },
+            {
+              "name": "환각독",
+              "level": "상급",
+              "description": "감각과 판단력을 흐리는 독을 제조한다.",
+              "icon": "poison"
+            },
+            {
+              "name": "용살독",
+              "level": "달인",
+              "description": "강한 독내성을 가진 거대마수에게도 작용하는 맹독을 만든다.",
+              "icon": "dragon"
+            },
+            {
+              "name": "왕독",
+              "level": "초월",
+              "description": "극소량으로도 치명적인 최고등급 독을 제조한다.",
+              "icon": "poison"
+            }
+          ]
+        },
+        {
+          "name": "폭약연금",
+          "color": "#a36c3a",
+          "skills": [
+            {
+              "name": "연금폭탄",
+              "level": "초급",
+              "description": "충격을 받으면 폭발하는 기본적인 연금폭탄을 만든다.",
+              "icon": "bomb"
+            },
+            {
+              "name": "화염병",
+              "level": "중급",
+              "description": "파열과 동시에 불길을 퍼뜨리는 투척폭약을 만든다.",
+              "icon": "bomb"
+            },
+            {
+              "name": "섬광탄",
+              "level": "상급",
+              "description": "강한 빛과 소리로 감각을 방해하는 폭약을 만든다.",
+              "icon": "bomb"
+            },
+            {
+              "name": "마나 폭탄",
+              "level": "달인",
+              "description": "저장된 마력을 한꺼번에 폭주시켜 폭발시킨다.",
+              "icon": "bomb"
+            },
+            {
+              "name": "현자의 폭탄",
+              "level": "초월",
+              "description": "연금반응 자체를 폭주시켜 광범위한 파괴를 일으킨다.",
+              "icon": "bomb"
+            }
+          ]
+        },
+        {
+          "name": "약초연금",
+          "color": "#6e8c4c",
+          "skills": [
+            {
+              "name": "약초추출",
+              "level": "초급",
+              "description": "약초에서 필요한 성분을 분리한다.",
+              "icon": "herb"
+            },
+            {
+              "name": "약성농축",
+              "level": "중급",
+              "description": "약초의 유효성분을 농축한다.",
+              "icon": "herb"
+            },
+            {
+              "name": "복합배합",
+              "level": "상급",
+              "description": "여러 약초의 약성을 안정적으로 조합한다.",
+              "icon": "herb"
+            },
+            {
+              "name": "영초정련",
+              "level": "달인",
+              "description": "마력이 강한 희귀약초를 손실 없이 정련한다.",
+              "icon": "herb"
+            },
+            {
+              "name": "신목정수",
+              "level": "초월",
+              "description": "신성한 식물에서 극소량의 생명정수를 추출한다.",
+              "icon": "gem"
+            }
+          ]
+        },
+        {
+          "name": "광물연금",
+          "color": "#698ca1",
+          "skills": [
+            {
+              "name": "광물정제",
+              "level": "초급",
+              "description": "광석에서 불순물을 제거한다.",
+              "icon": "gem"
+            },
+            {
+              "name": "마석정련",
+              "level": "중급",
+              "description": "마석 내부의 불안정한 마력을 안정화한다.",
+              "icon": "gem"
+            },
+            {
+              "name": "합금연성",
+              "level": "상급",
+              "description": "여러 금속의 특성을 연금술적으로 결합한다.",
+              "icon": "gem"
+            },
+            {
+              "name": "마력결정",
+              "level": "달인",
+              "description": "고농도의 마력을 결정형태로 응축한다.",
+              "icon": "gem"
+            },
+            {
+              "name": "현자의 금속",
+              "level": "초월",
+              "description": "자연에는 존재하지 않는 특성을 가진 인공금속을 제조한다.",
+              "icon": "gem"
+            }
+          ]
+        },
+        {
+          "name": "마수연금",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "슬라임 젤 정제",
+              "level": "초급",
+              "description": "슬라임의 점액을 포션용 재료로 가공한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "마수혈 정련",
+              "level": "중급",
+              "description": "마수의 혈액에서 마력성분을 추출한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "독샘분리",
+              "level": "상급",
+              "description": "마수의 독기관을 안전하게 분리하고 보존한다.",
+              "icon": "poison"
+            },
+            {
+              "name": "심장핵 추출",
+              "level": "달인",
+              "description": "강한 마수의 심장에서 고농도 생명력을 추출한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "용체정련",
+              "level": "초월",
+              "description": "용의 혈액과 비늘과 장기를 최고급 연금재료로 가공한다.",
+              "icon": "dragon"
+            }
+          ]
+        },
+        {
+          "name": "변성연금",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "연화",
+              "level": "초급",
+              "description": "단단한 재료를 일시적으로 부드럽게 만든다.",
+              "icon": "morph"
+            },
+            {
+              "name": "경화",
+              "level": "중급",
+              "description": "재료의 강도를 높인다.",
+              "icon": "morph"
+            },
+            {
+              "name": "재질변성",
+              "level": "상급",
+              "description": "물질의 표면성질을 다른 재료처럼 바꾼다.",
+              "icon": "morph"
+            },
+            {
+              "name": "물질전환",
+              "level": "달인",
+              "description": "유사한 구조의 물질을 서로 변환한다.",
+              "icon": "morph"
+            },
+            {
+              "name": "대연성",
+              "level": "초월",
+              "description": "물질의 구성과 성질을 근본적으로 재조합한다.",
+              "icon": "morph"
+            }
+          ]
+        },
+        {
+          "name": "생체연금",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "배양액",
+              "level": "중급",
+              "description": "생체조직을 보존하고 성장시키는 용액을 만든다.",
+              "icon": "heartflask"
+            },
+            {
+              "name": "조직배양",
+              "level": "상급",
+              "description": "손실된 생체조직을 인공적으로 증식시킨다.",
+              "icon": "heartflask"
+            },
+            {
+              "name": "인공장기",
+              "level": "달인",
+              "description": "기능 가능한 대체장기를 배양한다.",
+              "icon": "heartflask"
+            },
+            {
+              "name": "호문쿨루스",
+              "level": "초월",
+              "description": "독립적으로 움직이는 인공생명체를 만들어낸다.",
+              "icon": "heartflask"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "제작술",
+      "icon": "hammer",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "무기제작",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "기초단조",
+              "level": "초급",
+              "description": "일반적인 철제무기를 제작한다.",
+              "icon": "anvil"
+            },
+            {
+              "name": "균형조정",
+              "level": "중급",
+              "description": "무기의 무게중심을 사용자에게 맞춘다.",
+              "icon": "anvil"
+            },
+            {
+              "name": "복합단조",
+              "level": "상급",
+              "description": "서로 다른 금속을 하나의 무기에 결합한다.",
+              "icon": "anvil"
+            },
+            {
+              "name": "마력단조",
+              "level": "달인",
+              "description": "미스릴과 같은 마력금속을 안정적으로 가공한다.",
+              "icon": "anvil"
+            },
+            {
+              "name": "명검제작",
+              "level": "초월",
+              "description": "이름을 얻을 수준의 최고급 무기를 제작한다.",
+              "icon": "anvil"
+            }
+          ]
+        },
+        {
+          "name": "방어구제작",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "갑주제작",
+              "level": "초급",
+              "description": "일반적인 갑옷을 제작한다.",
+              "icon": "armor"
+            },
+            {
+              "name": "경량화",
+              "level": "중급",
+              "description": "방어력을 유지하며 갑옷의 무게를 줄인다.",
+              "icon": "armor"
+            },
+            {
+              "name": "마수갑주",
+              "level": "상급",
+              "description": "마수의 비늘과 갑각으로 방어구를 만든다.",
+              "icon": "armor"
+            },
+            {
+              "name": "마력갑주",
+              "level": "달인",
+              "description": "마력전도와 방어를 함께 고려한 갑옷을 제작한다.",
+              "icon": "armor"
+            },
+            {
+              "name": "전설갑주",
+              "level": "초월",
+              "description": "최고급 희귀재료로 대대로 전승될 방어구를 제작한다.",
+              "icon": "armor"
+            }
+          ]
+        },
+        {
+          "name": "가죽제작",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "무두질",
+              "level": "초급",
+              "description": "동물과 마수의 가죽을 가공한다.",
+              "icon": "leather"
+            },
+            {
+              "name": "방수가공",
+              "level": "중급",
+              "description": "가죽장비의 방수성과 내구도를 높인다.",
+              "icon": "leather"
+            },
+            {
+              "name": "마수가죽가공",
+              "level": "상급",
+              "description": "마력이 남은 희귀가죽을 손상 없이 다룬다.",
+              "icon": "leather"
+            },
+            {
+              "name": "경갑제작",
+              "level": "달인",
+              "description": "가벼우면서 높은 방어력을 가진 전투용 경갑을 만든다.",
+              "icon": "leather"
+            },
+            {
+              "name": "용피가공",
+              "level": "초월",
+              "description": "용의 가죽을 최고급 장비재료로 가공한다.",
+              "icon": "dragon"
+            }
+          ]
+        },
+        {
+          "name": "의복제작",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "재단",
+              "level": "초급",
+              "description": "원단을 목적에 맞게 재단한다.",
+              "icon": "needle"
+            },
+            {
+              "name": "정밀봉제",
+              "level": "중급",
+              "description": "튼튼하고 정교한 의복을 만든다.",
+              "icon": "needle"
+            },
+            {
+              "name": "마력직조",
+              "level": "상급",
+              "description": "마력섬유를 천으로 엮는다.",
+              "icon": "needle"
+            },
+            {
+              "name": "마법복제작",
+              "level": "달인",
+              "description": "마법효과를 안정적으로 유지하는 의복을 제작한다.",
+              "icon": "needle"
+            },
+            {
+              "name": "성의제작",
+              "level": "초월",
+              "description": "강력한 마도구에 가까운 최고급 의복을 만든다.",
+              "icon": "needle"
+            }
+          ]
+        },
+        {
+          "name": "목공제작",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "목재가공",
+              "level": "초급",
+              "description": "일반목재를 원하는 형태로 다듬는다.",
+              "icon": "log"
+            },
+            {
+              "name": "활제작",
+              "level": "중급",
+              "description": "균형과 탄성이 좋은 활을 제작한다.",
+              "icon": "log"
+            },
+            {
+              "name": "마목가공",
+              "level": "상급",
+              "description": "마력이 깃든 희귀목재를 손상 없이 가공한다.",
+              "icon": "log"
+            },
+            {
+              "name": "지팡이제작",
+              "level": "달인",
+              "description": "마력을 안정적으로 증폭하는 마법지팡이를 제작한다.",
+              "icon": "log"
+            },
+            {
+              "name": "세계수세공",
+              "level": "초월",
+              "description": "신목급 목재를 손상 없이 가공한다.",
+              "icon": "log"
+            }
+          ]
+        },
+        {
+          "name": "장신구제작",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "보석절삭",
+              "level": "초급",
+              "description": "원석을 깎아 형태와 광택을 낸다.",
+              "icon": "ring"
+            },
+            {
+              "name": "마석세공",
+              "level": "중급",
+              "description": "마석을 장비에 삽입할 수 있도록 가공한다.",
+              "icon": "gem"
+            },
+            {
+              "name": "마력배열",
+              "level": "상급",
+              "description": "여러 마석의 흐름이 충돌하지 않도록 배치한다.",
+              "icon": "ring"
+            },
+            {
+              "name": "마법장신구",
+              "level": "달인",
+              "description": "지속적인 마법효과를 가진 장신구를 제작한다.",
+              "icon": "ring"
+            },
+            {
+              "name": "왕가의 보석",
+              "level": "초월",
+              "description": "국가급 보물로 남을 최고수준의 장신구를 제작한다.",
+              "icon": "ring"
+            }
+          ]
+        },
+        {
+          "name": "룬제작",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "기초룬",
+              "level": "초급",
+              "description": "간단한 효과를 가진 룬을 새긴다.",
+              "icon": "rune"
+            },
+            {
+              "name": "복합룬",
+              "level": "중급",
+              "description": "여러 룬이 서로 간섭하지 않도록 조합한다.",
+              "icon": "rune"
+            },
+            {
+              "name": "조건룬",
+              "level": "상급",
+              "description": "특정 조건에서만 작동하는 룬을 제작한다.",
+              "icon": "rune"
+            },
+            {
+              "name": "영구룬",
+              "level": "달인",
+              "description": "장기간 마력을 유지하는 고급룬을 새긴다.",
+              "icon": "rune"
+            },
+            {
+              "name": "원초룬",
+              "level": "초월",
+              "description": "고대의 원형룬을 현대장비에 구현한다.",
+              "icon": "rune"
+            }
+          ]
+        },
+        {
+          "name": "마도구제작",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "마력회로",
+              "level": "초급",
+              "description": "마력이 흐를 기본적인 회로를 설계한다.",
+              "icon": "circuit"
+            },
+            {
+              "name": "마력전지",
+              "level": "중급",
+              "description": "마력을 저장하고 방출하는 장치를 만든다.",
+              "icon": "circuit"
+            },
+            {
+              "name": "자동술식",
+              "level": "상급",
+              "description": "조건을 만족하면 마법이 자동으로 발동하도록 만든다.",
+              "icon": "circuit"
+            },
+            {
+              "name": "마도기관",
+              "level": "달인",
+              "description": "대량의 마력을 안정적인 동력으로 전환한다.",
+              "icon": "circuit"
+            },
+            {
+              "name": "대마도구",
+              "level": "초월",
+              "description": "도시나 국가 단위로 사용할 수 있는 대형 마도장치를 제작한다.",
+              "icon": "circuit"
+            }
+          ]
+        },
+        {
+          "name": "골렘제작",
+          "color": "#77719c",
+          "skills": [
+            {
+              "name": "점토골렘",
+              "level": "초급",
+              "description": "간단한 명령만 수행하는 점토골렘을 만든다.",
+              "icon": "golem"
+            },
+            {
+              "name": "석재골렘",
+              "level": "중급",
+              "description": "방어력이 높은 석재골렘을 제작한다.",
+              "icon": "golem"
+            },
+            {
+              "name": "철제골렘",
+              "level": "상급",
+              "description": "전투에 특화된 금속골렘을 제작한다.",
+              "icon": "golem"
+            },
+            {
+              "name": "마도골렘",
+              "level": "달인",
+              "description": "여러 마법과 복잡한 명령을 수행하는 골렘을 만든다.",
+              "icon": "golem"
+            },
+            {
+              "name": "수호거신",
+              "level": "초월",
+              "description": "성채방어가 가능한 거대골렘을 제작한다.",
+              "icon": "shield"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "생활술",
+      "icon": "leaf",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "요리술",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "굽기",
+              "level": "초급",
+              "description": "불과 시간을 조절해 재료를 적절하게 익힌다.",
+              "icon": "cook"
+            },
+            {
+              "name": "향신",
+              "level": "중급",
+              "description": "향신료를 조합해 풍미와 잡내를 조절한다.",
+              "icon": "cook"
+            },
+            {
+              "name": "마수요리",
+              "level": "상급",
+              "description": "마수고기의 독성과 마력을 안전하게 처리한다.",
+              "icon": "cook"
+            },
+            {
+              "name": "왕실요리",
+              "level": "달인",
+              "description": "최고급재료를 이용해 완성도 높은 만찬을 만든다.",
+              "icon": "cook"
+            },
+            {
+              "name": "신찬",
+              "level": "초월",
+              "description": "섭취자의 체력과 정신까지 회복시키는 경지의 요리를 만든다.",
+              "icon": "cook"
+            }
+          ]
+        },
+        {
+          "name": "의술",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "지혈",
+              "level": "초급",
+              "description": "상처의 출혈을 빠르게 멈춘다.",
+              "icon": "bandage"
+            },
+            {
+              "name": "봉합",
+              "level": "중급",
+              "description": "찢어진 상처를 청결하게 꿰맨다.",
+              "icon": "bandage"
+            },
+            {
+              "name": "골절정복",
+              "level": "상급",
+              "description": "부러진 뼈를 정상위치에 맞춰 고정한다.",
+              "icon": "bandage"
+            },
+            {
+              "name": "외과수술",
+              "level": "달인",
+              "description": "장기와 혈관의 손상을 직접 치료한다.",
+              "icon": "bandage"
+            },
+            {
+              "name": "명의",
+              "level": "초월",
+              "description": "일반적인 의술로 치료 가능한 중증환자 대부분을 다룬다.",
+              "icon": "bandage"
+            }
+          ]
+        },
+        {
+          "name": "농경술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "파종",
+              "level": "초급",
+              "description": "토질과 계절에 맞게 씨앗을 심는다.",
+              "icon": "wheat"
+            },
+            {
+              "name": "토양관리",
+              "level": "중급",
+              "description": "작물에 맞도록 토질을 조절한다.",
+              "icon": "wheat"
+            },
+            {
+              "name": "병충해관리",
+              "level": "상급",
+              "description": "작물질병과 해충의 피해를 줄인다.",
+              "icon": "wheat"
+            },
+            {
+              "name": "품종개량",
+              "level": "달인",
+              "description": "우수한 형질을 선별해 새로운 작물품종을 만든다.",
+              "icon": "wheat"
+            },
+            {
+              "name": "풍년농법",
+              "level": "초월",
+              "description": "넓은 농경지의 수확량과 품질을 안정적으로 높인다.",
+              "icon": "wheat"
+            }
+          ]
+        },
+        {
+          "name": "채집술",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "약초채집",
+              "level": "초급",
+              "description": "흔한 약초를 손상 없이 채집한다.",
+              "icon": "basket"
+            },
+            {
+              "name": "희귀식물탐색",
+              "level": "중급",
+              "description": "서식환경을 보고 희귀식물의 위치를 추정한다.",
+              "icon": "basket"
+            },
+            {
+              "name": "마력초채집",
+              "level": "상급",
+              "description": "마력이 강한 식물을 약효손실 없이 채취한다.",
+              "icon": "basket"
+            },
+            {
+              "name": "위험지역채집",
+              "level": "달인",
+              "description": "위험한 지역에서도 희귀재료를 안전하게 확보한다.",
+              "icon": "basket"
+            },
+            {
+              "name": "천재지보감식",
+              "level": "초월",
+              "description": "극희귀 자연재료의 상태와 가치를 정확히 판별한다.",
+              "icon": "basket"
+            }
+          ]
+        },
+        {
+          "name": "수렵술",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "덫사냥",
+              "level": "초급",
+              "description": "작은 동물을 잡기 위한 덫을 설치한다.",
+              "icon": "antler"
+            },
+            {
+              "name": "추적사냥",
+              "level": "중급",
+              "description": "흔적을 따라 야생동물을 추적한다.",
+              "icon": "antler"
+            },
+            {
+              "name": "대형수렵",
+              "level": "상급",
+              "description": "대형야수를 안전하게 사냥한다.",
+              "icon": "antler"
+            },
+            {
+              "name": "마수사냥",
+              "level": "달인",
+              "description": "마수의 습성과 약점을 이용해 사냥한다.",
+              "icon": "antler"
+            },
+            {
+              "name": "왕수렵",
+              "level": "초월",
+              "description": "거대마수까지 환경과 행동패턴을 이용해 사냥한다.",
+              "icon": "antler"
+            }
+          ]
+        },
+        {
+          "name": "어로술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "낚시",
+              "level": "초급",
+              "description": "일반적인 물고기를 낚는다.",
+              "icon": "fish"
+            },
+            {
+              "name": "그물어업",
+              "level": "중급",
+              "description": "수역과 어종에 맞는 그물을 사용한다.",
+              "icon": "fish"
+            },
+            {
+              "name": "심해어로",
+              "level": "상급",
+              "description": "깊은 수역의 대형어종을 잡는다.",
+              "icon": "fish"
+            },
+            {
+              "name": "마수어로",
+              "level": "달인",
+              "description": "수중마수와 희귀어종을 전문적으로 포획한다.",
+              "icon": "fish"
+            },
+            {
+              "name": "해왕어로",
+              "level": "초월",
+              "description": "거대한 해양생물의 이동과 습성을 읽어낸다.",
+              "icon": "fish"
+            }
+          ]
+        },
+        {
+          "name": "조련술",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "길들이기",
+              "level": "초급",
+              "description": "온순한 동물과 친밀감을 쌓는다.",
+              "icon": "horse"
+            },
+            {
+              "name": "명령훈련",
+              "level": "중급",
+              "description": "동물이 정해진 명령에 따르게 한다.",
+              "icon": "horse"
+            },
+            {
+              "name": "전투조련",
+              "level": "상급",
+              "description": "전투상황에서도 명령을 수행하게 한다.",
+              "icon": "horse"
+            },
+            {
+              "name": "마수조련",
+              "level": "달인",
+              "description": "위험한 마수와 장기적인 유대관계를 형성한다.",
+              "icon": "horse"
+            },
+            {
+              "name": "환수교감",
+              "level": "초월",
+              "description": "자아가 높은 환수와 동등한 동료관계를 맺는다.",
+              "icon": "horse"
+            }
+          ]
+        },
+        {
+          "name": "야영술",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "야영지선정",
+              "level": "초급",
+              "description": "주변 위험이 적은 숙영지를 찾는다.",
+              "icon": "tent"
+            },
+            {
+              "name": "천막설치",
+              "level": "초급",
+              "description": "환경에 맞게 숙영시설을 설치한다.",
+              "icon": "tent"
+            },
+            {
+              "name": "은폐야영",
+              "level": "중급",
+              "description": "불빛과 냄새가 멀리 퍼지지 않게 야영한다.",
+              "icon": "tent"
+            },
+            {
+              "name": "극지야영",
+              "level": "상급",
+              "description": "사막·설원·고산에서도 안전하게 숙영한다.",
+              "icon": "tent"
+            },
+            {
+              "name": "장기주둔",
+              "level": "달인",
+              "description": "야외에서 장기간 생활할 안정적인 거점을 만든다.",
+              "icon": "tent"
+            }
+          ]
+        },
+        {
+          "name": "항해술",
+          "color": "#77719c",
+          "skills": [
+            {
+              "name": "조타",
+              "level": "초급",
+              "description": "소형선박의 방향을 조절한다.",
+              "icon": "ship"
+            },
+            {
+              "name": "항로판독",
+              "level": "중급",
+              "description": "해도와 해류를 이용해 항로를 정한다.",
+              "icon": "poison"
+            },
+            {
+              "name": "폭풍항해",
+              "level": "상급",
+              "description": "악천후 속에서 선박을 유지하며 이동한다.",
+              "icon": "storm"
+            },
+            {
+              "name": "원양항해",
+              "level": "달인",
+              "description": "장기간 육지가 보이지 않는 바다를 항해한다.",
+              "icon": "ship"
+            },
+            {
+              "name": "대항해",
+              "level": "초월",
+              "description": "미지의 해역에서도 안전한 항로를 개척한다.",
+              "icon": "ship"
+            }
+          ]
+        },
+        {
+          "name": "상술",
+          "color": "#71976a",
+          "skills": [
+            {
+              "name": "흥정",
+              "level": "초급",
+              "description": "거래가격을 조금 더 유리하게 조정한다.",
+              "icon": "coins"
+            },
+            {
+              "name": "시세파악",
+              "level": "중급",
+              "description": "지역별 물품가격과 수요를 파악한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "가치평가",
+              "level": "상급",
+              "description": "상품의 품질과 희소성을 바탕으로 적정가격을 산출한다.",
+              "icon": "coins"
+            },
+            {
+              "name": "대규모거래",
+              "level": "달인",
+              "description": "길드와 귀족 및 국가 단위의 거래를 조율한다.",
+              "icon": "coins"
+            },
+            {
+              "name": "대상인",
+              "level": "초월",
+              "description": "여러 도시의 시장과 유통망을 동시에 움직인다.",
+              "icon": "coins"
+            }
+          ]
+        },
+        {
+          "name": "가사술",
+          "color": "#639f84",
+          "skills": [
+            {
+              "name": "세탁",
+              "level": "초급",
+              "description": "의복을 손상시키지 않고 깨끗하게 세탁한다.",
+              "icon": "broom"
+            },
+            {
+              "name": "청소",
+              "level": "초급",
+              "description": "주거공간의 오염과 먼지를 효율적으로 제거한다.",
+              "icon": "broom"
+            },
+            {
+              "name": "정리정돈",
+              "level": "중급",
+              "description": "많은 물건을 체계적으로 분류하고 보관한다.",
+              "icon": "broom"
+            },
+            {
+              "name": "저장관리",
+              "level": "상급",
+              "description": "식량과 물자의 상태를 장기간 유지한다.",
+              "icon": "broom"
+            },
+            {
+              "name": "가사관리",
+              "level": "달인",
+              "description": "대저택 규모의 살림과 인력을 효율적으로 관리한다.",
+              "icon": "broom"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "탐험술",
+      "icon": "compass",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "생존술",
+          "color": "#b45136",
+          "skills": [
+            {
+              "name": "불피우기",
+              "level": "초급",
+              "description": "습한 환경에서도 불을 피운다.",
+              "icon": "fire"
+            },
+            {
+              "name": "식수확보",
+              "level": "중급",
+              "description": "지형과 식물을 통해 마실 물을 찾는다.",
+              "icon": "fire"
+            },
+            {
+              "name": "식량판별",
+              "level": "상급",
+              "description": "야생동식물의 식용가능 여부를 판단한다.",
+              "icon": "fire"
+            },
+            {
+              "name": "극지생존",
+              "level": "달인",
+              "description": "사막·설원·밀림에서 장기간 살아남는다.",
+              "icon": "fire"
+            },
+            {
+              "name": "무흔생존",
+              "level": "초월",
+              "description": "흔적과 환경훼손을 거의 남기지 않고 이동한다.",
+              "icon": "fire"
+            }
+          ]
+        },
+        {
+          "name": "지도술",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "거리측정",
+              "level": "초급",
+              "description": "이동거리와 방향을 대략적으로 기록한다.",
+              "icon": "map"
+            },
+            {
+              "name": "지형기록",
+              "level": "중급",
+              "description": "주변 지형을 간략한 지도로 남긴다.",
+              "icon": "map"
+            },
+            {
+              "name": "정밀지도",
+              "level": "상급",
+              "description": "고도와 지형특징까지 포함한 지도를 제작한다.",
+              "icon": "map"
+            },
+            {
+              "name": "미궁지도",
+              "level": "달인",
+              "description": "복잡하게 겹친 통로도 빠짐없이 기록한다.",
+              "icon": "map"
+            },
+            {
+              "name": "완전지도",
+              "level": "초월",
+              "description": "변화하는 지형까지 지속적으로 갱신해 기록한다.",
+              "icon": "map"
+            }
+          ]
+        },
+        {
+          "name": "탐색술",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "흔적탐색",
+              "level": "초급",
+              "description": "사람이나 동물이 남긴 흔적을 발견한다.",
+              "icon": "search"
+            },
+            {
+              "name": "은닉물탐색",
+              "level": "중급",
+              "description": "숨겨진 물건과 비밀공간을 찾아낸다.",
+              "icon": "search"
+            },
+            {
+              "name": "함정탐색",
+              "level": "상급",
+              "description": "육안으로 드러나지 않는 함정을 발견한다.",
+              "icon": "search"
+            },
+            {
+              "name": "광역수색",
+              "level": "달인",
+              "description": "넓은 지역의 흔적과 이상징후를 체계적으로 조사한다.",
+              "icon": "search"
+            },
+            {
+              "name": "탐색본능",
+              "level": "초월",
+              "description": "명확한 단서가 없어도 숨겨진 장소와 이상을 찾아낸다.",
+              "icon": "search"
+            }
+          ]
+        },
+        {
+          "name": "감정술",
+          "color": "#698ca1",
+          "skills": [
+            {
+              "name": "재질감정",
+              "level": "초급",
+              "description": "물건의 기본재질과 품질을 판별한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "마력감정",
+              "level": "중급",
+              "description": "물건에 깃든 마력량과 속성을 확인한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "효과감정",
+              "level": "상급",
+              "description": "마법물품의 효과와 발동조건을 분석한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "저주감정",
+              "level": "달인",
+              "description": "물품에 숨겨진 저주와 위험한 조건을 찾아낸다.",
+              "icon": "eye"
+            },
+            {
+              "name": "진명감정",
+              "level": "초월",
+              "description": "전설적인 물건의 본래 이름과 핵심능력을 알아낸다.",
+              "icon": "eye"
+            }
+          ]
+        },
+        {
+          "name": "해체술",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "기초해체",
+              "level": "초급",
+              "description": "사냥감의 가죽과 고기를 분리한다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "마수해체",
+              "level": "중급",
+              "description": "마수의 위험부위와 유용한 부위를 구분한다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "소재적출",
+              "level": "상급",
+              "description": "마석과 독샘 등 섬세한 기관을 손상 없이 꺼낸다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "거대종해체",
+              "level": "달인",
+              "description": "거대마수의 사체를 체계적으로 해체한다.",
+              "icon": "dagger"
+            },
+            {
+              "name": "완전해체",
+              "level": "초월",
+              "description": "가치 있는 소재를 거의 손실 없이 회수한다.",
+              "icon": "dagger"
+            }
+          ]
+        },
+        {
+          "name": "채굴술",
+          "color": "#9a8543",
+          "skills": [
+            {
+              "name": "광맥탐색",
+              "level": "초급",
+              "description": "암석에서 광물의 흔적을 읽는다.",
+              "icon": "pickaxe"
+            },
+            {
+              "name": "안전채굴",
+              "level": "중급",
+              "description": "붕괴위험을 줄이며 광석을 캐낸다.",
+              "icon": "pickaxe"
+            },
+            {
+              "name": "마석채굴",
+              "level": "상급",
+              "description": "충격에 민감한 마석을 손상 없이 채굴한다.",
+              "icon": "gem"
+            },
+            {
+              "name": "심층채굴",
+              "level": "달인",
+              "description": "지하 깊은 곳의 희귀광맥을 찾아 작업한다.",
+              "icon": "pickaxe"
+            },
+            {
+              "name": "용맥채굴",
+              "level": "초월",
+              "description": "지맥과 마력이 만나는 극희귀 광맥을 다룬다.",
+              "icon": "pickaxe"
+            }
+          ]
+        },
+        {
+          "name": "유적탐사",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "비문판독",
+              "level": "초급",
+              "description": "흔한 고대문자와 기호를 알아본다.",
+              "icon": "poison"
+            },
+            {
+              "name": "구조분석",
+              "level": "중급",
+              "description": "유적의 용도와 건축방식을 추정한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "장치해석",
+              "level": "상급",
+              "description": "고대유적의 기계와 마법장치를 분석한다.",
+              "icon": "ruins"
+            },
+            {
+              "name": "고대유적복원",
+              "level": "달인",
+              "description": "파편적인 자료만으로 유적의 기능을 추정한다.",
+              "icon": "sprout"
+            },
+            {
+              "name": "신대유적해독",
+              "level": "초월",
+              "description": "신화시대 유적의 구조와 목적을 해석한다.",
+              "icon": "poison"
+            }
+          ]
+        },
+        {
+          "name": "던전탐사",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "위험감지",
+              "level": "초급",
+              "description": "던전 입구와 통로의 위험요소를 확인한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "층계분석",
+              "level": "중급",
+              "description": "층마다 변하는 생태와 함정의 규칙을 파악한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "핵심부추정",
+              "level": "상급",
+              "description": "마력흐름을 통해 던전 중심부의 방향을 추정한다.",
+              "icon": "dungeon"
+            },
+            {
+              "name": "미궁공략",
+              "level": "달인",
+              "description": "구조가 변하는 미궁에서도 귀환로를 유지한다.",
+              "icon": "dungeon"
+            },
+            {
+              "name": "심층공략",
+              "level": "초월",
+              "description": "최고난도 던전에서도 생존과 공략을 동시에 수행한다.",
+              "icon": "dungeon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "학술",
+      "icon": "book",
+      "levels": [
+        "초급",
+        "중급",
+        "상급",
+        "달인",
+        "초월"
+      ],
+      "subcategories": [
+        {
+          "name": "마법학",
+          "color": "#ab5e3e",
+          "skills": [
+            {
+              "name": "마력기초",
+              "level": "초급",
+              "description": "마력과 주문이 작동하는 기본원리를 이해한다.",
+              "icon": "wand"
+            },
+            {
+              "name": "술식해독",
+              "level": "중급",
+              "description": "알려진 마법식의 구조를 분석한다.",
+              "icon": "poison"
+            },
+            {
+              "name": "술식개량",
+              "level": "상급",
+              "description": "기존마법의 효율과 안정성을 개선한다.",
+              "icon": "wand"
+            },
+            {
+              "name": "신규술식",
+              "level": "달인",
+              "description": "새로운 마법을 독자적으로 설계한다.",
+              "icon": "wand"
+            },
+            {
+              "name": "근원마법론",
+              "level": "초월",
+              "description": "마법이 성립하는 세계법칙 자체를 연구한다.",
+              "icon": "wand"
+            }
+          ]
+        },
+        {
+          "name": "신학",
+          "color": "#3f87a8",
+          "skills": [
+            {
+              "name": "교리학",
+              "level": "초급",
+              "description": "주요 신앙과 교단의 기본교리를 이해한다.",
+              "icon": "cross"
+            },
+            {
+              "name": "성전해석",
+              "level": "중급",
+              "description": "신성문헌의 상징과 문맥을 분석한다.",
+              "icon": "cross"
+            },
+            {
+              "name": "이단연구",
+              "level": "상급",
+              "description": "이단교파와 사교의 교리와 의식을 연구한다.",
+              "icon": "cross"
+            },
+            {
+              "name": "신성현상론",
+              "level": "달인",
+              "description": "기적과 신성력의 작동원리를 연구한다.",
+              "icon": "cross"
+            },
+            {
+              "name": "비교신학",
+              "level": "초월",
+              "description": "여러 신과 종교의 권능체계를 종합적으로 분석한다.",
+              "icon": "cross"
+            }
+          ]
+        },
+        {
+          "name": "정령학",
+          "color": "#749daf",
+          "skills": [
+            {
+              "name": "정령분류",
+              "level": "초급",
+              "description": "기본적인 정령종과 속성을 구분한다.",
+              "icon": "spirit"
+            },
+            {
+              "name": "정령생태",
+              "level": "중급",
+              "description": "정령의 서식지와 행동양식을 이해한다.",
+              "icon": "spirit"
+            },
+            {
+              "name": "계약이론",
+              "level": "상급",
+              "description": "인간과 정령 사이의 계약구조를 연구한다.",
+              "icon": "contract"
+            },
+            {
+              "name": "정령계연구",
+              "level": "달인",
+              "description": "정령계의 구조와 현실과의 관계를 분석한다.",
+              "icon": "spirit"
+            },
+            {
+              "name": "정령기원론",
+              "level": "초월",
+              "description": "정령의 탄생과 세계에서의 역할을 연구한다.",
+              "icon": "spirit"
+            }
+          ]
+        },
+        {
+          "name": "주술학",
+          "color": "#688c7d",
+          "skills": [
+            {
+              "name": "주술기초",
+              "level": "초급",
+              "description": "매개체와 상징이 주술에 미치는 영향을 이해한다.",
+              "icon": "talisman"
+            },
+            {
+              "name": "저주분석",
+              "level": "중급",
+              "description": "저주의 구조와 발동조건을 파악한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "의식연구",
+              "level": "상급",
+              "description": "복잡한 의식의 단계와 목적을 분석한다.",
+              "icon": "talisman"
+            },
+            {
+              "name": "금주연구",
+              "level": "달인",
+              "description": "위험한 고대주술을 이론적으로 해독한다.",
+              "icon": "talisman"
+            },
+            {
+              "name": "원시주술론",
+              "level": "초월",
+              "description": "가장 오래된 주술체계의 원리를 연구한다.",
+              "icon": "talisman"
+            }
+          ]
+        },
+        {
+          "name": "마물학",
+          "color": "#9b8156",
+          "skills": [
+            {
+              "name": "마물분류",
+              "level": "초급",
+              "description": "흔한 마물의 종류와 특징을 구분한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "생태연구",
+              "level": "중급",
+              "description": "마물의 먹이와 영역 및 번식습성을 분석한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "약점분석",
+              "level": "상급",
+              "description": "마물의 구조와 행동에서 전투상 약점을 찾는다.",
+              "icon": "eye"
+            },
+            {
+              "name": "고위마물연구",
+              "level": "달인",
+              "description": "용종과 고위마족처럼 희귀한 존재를 연구한다.",
+              "icon": "paw"
+            },
+            {
+              "name": "환수학",
+              "level": "초월",
+              "description": "신화와 현실의 경계에 있는 전설적 생물을 연구한다.",
+              "icon": "paw"
+            }
+          ]
+        },
+        {
+          "name": "약초학",
+          "color": "#6e8c4c",
+          "skills": [
+            {
+              "name": "약초식별",
+              "level": "초급",
+              "description": "흔한 약초와 독초를 구별한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "약성분류",
+              "level": "중급",
+              "description": "약초의 효능과 부작용을 이해한다.",
+              "icon": "herb"
+            },
+            {
+              "name": "서식연구",
+              "level": "상급",
+              "description": "희귀약초가 자라는 환경조건을 분석한다.",
+              "icon": "herb"
+            },
+            {
+              "name": "영초학",
+              "level": "달인",
+              "description": "높은 마력을 품은 희귀식물을 연구한다.",
+              "icon": "herb"
+            },
+            {
+              "name": "신목학",
+              "level": "초월",
+              "description": "세계수와 신성식물처럼 신화적 식생을 연구한다.",
+              "icon": "herb"
+            }
+          ]
+        },
+        {
+          "name": "고대어학",
+          "color": "#b09a59",
+          "skills": [
+            {
+              "name": "고대문자",
+              "level": "초급",
+              "description": "흔한 고대문자와 기본단어를 읽는다.",
+              "icon": "scroll"
+            },
+            {
+              "name": "고문헌해독",
+              "level": "중급",
+              "description": "오래된 기록과 비문을 번역한다.",
+              "icon": "poison"
+            },
+            {
+              "name": "주문언어",
+              "level": "상급",
+              "description": "고대마법에 사용된 특수언어를 해석한다.",
+              "icon": "scroll"
+            },
+            {
+              "name": "신대문자",
+              "level": "달인",
+              "description": "신화시대의 문자와 계약문을 읽는다.",
+              "icon": "scroll"
+            },
+            {
+              "name": "원초어",
+              "level": "초월",
+              "description": "최초의 언어라고 전해지는 극고대 언어를 연구한다.",
+              "icon": "scroll"
+            }
+          ]
+        },
+        {
+          "name": "역사학",
+          "color": "#75618f",
+          "skills": [
+            {
+              "name": "왕조사",
+              "level": "초급",
+              "description": "주요 국가와 왕조의 역사를 이해한다.",
+              "icon": "book"
+            },
+            {
+              "name": "전쟁사",
+              "level": "중급",
+              "description": "과거 전쟁의 원인과 전개를 분석한다.",
+              "icon": "book"
+            },
+            {
+              "name": "문명사",
+              "level": "상급",
+              "description": "여러 종족과 문명의 흥망을 연구한다.",
+              "icon": "book"
+            },
+            {
+              "name": "고대사",
+              "level": "달인",
+              "description": "기록이 희박한 고대시대를 복원한다.",
+              "icon": "book"
+            },
+            {
+              "name": "신화사",
+              "level": "초월",
+              "description": "신화와 실제 역사의 연결점을 연구한다.",
+              "icon": "book"
+            }
+          ]
+        },
+        {
+          "name": "지리학",
+          "color": "#77719c",
+          "skills": [
+            {
+              "name": "지역지리",
+              "level": "초급",
+              "description": "국가와 도시의 위치와 환경을 이해한다.",
+              "icon": "map"
+            },
+            {
+              "name": "지형분석",
+              "level": "중급",
+              "description": "산맥과 강 및 평야의 구조를 파악한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "기후분석",
+              "level": "상급",
+              "description": "지역별 기후와 계절변화를 예측한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "마력지리",
+              "level": "달인",
+              "description": "지맥과 마력밀도가 지형에 미치는 영향을 연구한다.",
+              "icon": "map"
+            },
+            {
+              "name": "세계지리",
+              "level": "초월",
+              "description": "알려진 세계의 지질과 환경을 종합적으로 이해한다.",
+              "icon": "map"
+            }
+          ]
+        },
+        {
+          "name": "전략학",
+          "color": "#71976a",
+          "skills": [
+            {
+              "name": "진형론",
+              "level": "초급",
+              "description": "기본적인 군사대형과 역할을 이해한다.",
+              "icon": "chess"
+            },
+            {
+              "name": "전술분석",
+              "level": "중급",
+              "description": "소규모 전투에서 병력운용을 분석한다.",
+              "icon": "eye"
+            },
+            {
+              "name": "보급론",
+              "level": "상급",
+              "description": "장기전에 필요한 물자와 이동을 계산한다.",
+              "icon": "chess"
+            },
+            {
+              "name": "대전략",
+              "level": "달인",
+              "description": "국가 단위의 전쟁목표와 자원을 종합적으로 운용한다.",
+              "icon": "chess"
+            },
+            {
+              "name": "전쟁론",
+              "level": "초월",
+              "description": "정치·경제·외교까지 포함해 전쟁 전체를 연구한다.",
+              "icon": "chess"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "levelGuide": "[마법계열]\n마법: 1서클 ~ 9서클 → 불명\n신성술: 하급 → 중급 → 상급 → 고위 → 최고위 → 신화급\n정령술: 하급 → 중급 → 상급 → 대정령급 → 정령왕급 → 신화급\n주술: 초급 → 중급 → 상급 → 고위 → 금기 → 불명\n\n[체술계열]\n검술/무기술/궁술/체술/도적술/연주술\n수준: 초급 → 중급 → 상급 → 달인 → 초월\n\n[생활계열]\n연금술/제작술/생활술/탐험술/학술\n수준: 초급 → 중급 → 상급 → 달인 → 초월"
+}

@@ -452,3 +452,25 @@ dialog.cc-ui.cc-sample-window { width: min(640px, calc(100vw - 28px)); }
 .cc-ui .cc-toggle[aria-checked=true] .cc-toggle-thumb {
   transform: translateX(16px); border-color: #e5d2a6; background: var(--pressed-plate);
 }
+
+/* 재사용 가능한 아이콘 버튼·선택 입력·편집형 콤보박스의 트리거·비모달 팝오버. */
+.cc-ui .icon-button.framed {
+  display: inline-grid; place-items: center; flex-shrink: 0; width: 32px; height: 30px; padding: 5px;
+  border: 1px solid #8e806249; border-radius: 2px; color: #d4c4a2; background: var(--plate);
+  box-shadow: inset 0 1px #e7d4a81c, inset 0 0 0 1px #10171d66, 0 1px 2px #0004;
+}
+.cc-ui .icon-button.framed:hover { border-color: #baa16d; color: #ffe0a6; filter: brightness(1.13); }
+.cc-ui .icon-button.framed:active { box-shadow: var(--recess); }
+.cc-ui .icon-button.framed svg { width: 19px; height: 19px; stroke-width: 2; }
+.cc-ui .select-input {
+  width: 100%; min-width: 0; height: 32px; padding: 3px 9px; border: 1px solid #74766c; border-radius: 2px;
+  color: var(--text); background: linear-gradient(#1c242b, #111a21); box-shadow: var(--recess); font-size: 12px;
+}
+.cc-ui .select-input:disabled { opacity: .45; cursor: default; }
+.cc-ui .combobox-trigger { display: flex; align-items: center; justify-content: space-between; gap: 9px; flex: 1; min-width: 0; height: 31px; padding: 4px 9px; border: 1px solid #74766c; border-radius: 2px; background: #121b22; box-shadow: var(--recess); text-align: left; font-size: 12px; }
+.cc-ui .combobox-trigger > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cc-ui .combobox-trigger > svg { width: 14px; height: 14px; color: var(--accent); }
+.cc-ui .popover {
+  position: absolute; z-index: 8; padding: 6px; border: 1px solid #b19a6a; border-radius: 3px;
+  background: linear-gradient(130deg, #303940, #1b252d 85%); box-shadow: inset 0 0 0 2px #111a20cc, 0 9px 26px #000b;
+}

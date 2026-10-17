@@ -11,6 +11,7 @@
   /**
    * @typedef {Object} ContentStorage
    * @property {(path?: string) => Promise<JsonValue>} load 선택한 저장소에서 JSON 값 또는 null을 읽는다.
+   * @property {(path?: string) => Promise<string[]>} keys 지정 경로 바로 아래의 키 이름만 읽는다. 저장용 ETag는 만들지 않는다.
    * @property {(data: JsonValue, path?: string) => Promise<JsonValue>} save 지정 경로를 JSON 값으로 교체한다. 경로 생략 시 콘텐츠 전체를 교체한다.
    */
 
@@ -36,6 +37,14 @@
     register(definition) {
       const id = registerContent(definition);
       return Object.freeze({
+        /**
+         * 지정 경로 바로 아래의 키 이름을 조회한다. Firebase에서는 하위 값을 다운로드하지 않는다.
+         * @param {string} [path=""] 콘텐츠 내부의 상대 경로. 생략하면 콘텐츠 바로 아래.
+         * @returns {Promise<string[]>} 키 목록. 데이터가 없거나 원시 값이면 빈 배열. 순서는 보장하지 않는다.
+         * @throws {CoreError} DATABASE_DISABLED/INVALID_PATH/LOGIN_REQUIRED 또는 조회 오류.
+         * 이 호출은 저장 기준을 만들지 않는다. save() 전에는 같은 경로의 load()가 필요하다.
+         */
+        keys(path = '') { return exclusive(id, () => listContentKeys(id, path)); },
         /**
          * 선택한 저장소에서 데이터를 읽는다. Firebase는 페이지에서 해당 경로를 처음 읽을 때 서버에 요청하고 이후 캐시를 사용한다.
          * @param {string} [path=""] 콘텐츠 내부의 상대 경로. 생략하면 전체.
@@ -80,7 +89,7 @@
   let activeEditor;
   let activeToken;
   let candidates = [];
-  let selectedCandidate = 0;
+  let selectedCandidate = -1;
   let composing = false;
   let suggestionFrame;
   let toastTimer;
@@ -480,6 +489,22 @@
     if (await currentProvider(id) === 'firebase') return readRemote(id, path);
     const value = await readStore('data', id);
     return cloneData(valueAtPath(value ?? null, parts));
+  }
+
+  async function listContentKeys(id, path = '') {
+    requireContent(id);
+    const parts = pathSegments(path);
+    let value;
+    if (await currentProvider(id) === 'firebase') {
+      const context = await remoteContext(id, path);
+      const response = await requestJson('GET', `${context.url}&shallow=true`);
+      checkResponse(response);
+      checkConnection(context);
+      value = response.data;
+    } else {
+      value = valueAtPath(await readStore('data', id) ?? null, parts);
+    }
+    return value !== null && typeof value === 'object' ? Object.keys(value) : [];
   }
 
   async function saveContent(id, value, path = '') {
@@ -969,13 +994,14 @@
     activeEditor?.removeAttribute('aria-controls');
     activeToken = null;
     candidates = [];
+    selectedCandidate = -1;
     window.removeEventListener('resize', scheduleSuggestionPosition);
     window.removeEventListener('scroll', scheduleSuggestionPosition, true);
     if (suggestionFrame) cancelAnimationFrame(suggestionFrame);
     suggestionFrame = null;
   }
 
-  function updateSuggestions(editor, allowExecution = true) {
+  function updateSuggestions(editor) {
     activeEditor = editor;
     const text = editor instanceof HTMLTextAreaElement ? editor.value : editor.textContent;
     if (!text.includes('!')) { hideSuggestions(); return; }
@@ -983,22 +1009,19 @@
     if (!token) { hideSuggestions(); return; }
     const nextCandidates = commandItems(token.query);
     if (!nextCandidates.length) { hideSuggestions(); return; }
-    const unchanged = activeToken?.editor === editor && activeToken.query === token.query &&
+    const unchanged = activeToken?.editor === editor && activeToken.query === token.query && activeToken.rawOffset === token.rawOffset &&
       nextCandidates.length === candidates.length && nextCandidates.every((command, index) => command.id === candidates[index].id);
     activeToken = token;
     candidates = nextCandidates;
-    if (allowExecution && !composing) {
-      const exact = candidates.find(command => command.label === token.query);
-      if (exact) { executeCommand(exact); return; }
-    }
     ensureSuggestions();
     if (!unchanged || suggestionBox.hidden) {
-      suggestionBox.innerHTML = candidates.map((command, index) => `<button type="button" role="option" id="cc-suggestion-${index}" data-command-index="${index}" aria-selected="${index === 0}"><span>${icon(command.id === '__settings' ? 'code' : 'box')}<span class="cc-command-bang">!</span>${escapeHtml(command.label)}</span>${icon('arrow')}</button>`).join('');
-      selectedCandidate = 0;
+      suggestionBox.innerHTML = candidates.map((command, index) => `<button type="button" role="option" id="cc-suggestion-${index}" data-command-index="${index}" aria-selected="false"><span>${icon(command.id === '__settings' ? 'code' : 'box')}<span class="cc-command-bang">!</span>${escapeHtml(command.label)}</span>${icon('arrow')}</button>`).join('');
+      selectedCandidate = -1;
     }
     suggestionBox.hidden = false;
     editor.setAttribute('aria-controls', suggestionBox.id);
-    editor.setAttribute('aria-activedescendant', `cc-suggestion-${selectedCandidate}`);
+    if (selectedCandidate >= 0) editor.setAttribute('aria-activedescendant', `cc-suggestion-${selectedCandidate}`);
+    else editor.removeAttribute('aria-activedescendant');
     positionSuggestions();
     window.addEventListener('resize', scheduleSuggestionPosition, { passive: true });
     window.addEventListener('scroll', scheduleSuggestionPosition, { passive: true, capture: true });
@@ -1047,7 +1070,7 @@
   function startCommandInput() {
     document.addEventListener('input', event => {
       const editor = editorFrom(event.target);
-      if (editor) updateSuggestions(editor, !event.isComposing);
+      if (editor) updateSuggestions(editor);
     }, true);
     document.addEventListener('compositionstart', event => { if (editorFrom(event.target)) composing = true; }, true);
     document.addEventListener('compositionend', event => {
@@ -1057,24 +1080,27 @@
     }, true);
     document.addEventListener('focusin', event => {
       const editor = editorFrom(event.target);
-      if (editor) updateSuggestions(editor, false);
+      if (editor) updateSuggestions(editor);
       else if (!suggestionBox?.contains(event.target)) hideSuggestions();
     }, true);
     document.addEventListener('keydown', event => {
       const editor = editorFrom(event.target);
       if (!editor || composing || event.isComposing || event.keyCode === 229) return;
       if (event.key === 'Escape') { hideSuggestions(); return; }
-      if (!['Enter', 'Tab', 'ArrowDown', 'ArrowUp'].includes(event.key)) return;
-      updateSuggestions(editor, false);
+      if (event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) return;
+      if (!['Enter', 'ArrowDown', 'ArrowUp'].includes(event.key)) return;
+      updateSuggestions(editor);
       if (!activeToken || !candidates.length) return;
+      // 단순 입력·일반 Enter는 채팅 동작이다. 방향키로 고른 항목만 Enter로 실행한다.
+      if (event.key === 'Enter' && selectedCandidate < 0) { hideSuggestions(); return; }
       event.preventDefault();
       event.stopImmediatePropagation();
       if (event.key === 'ArrowDown') selectSuggestion(selectedCandidate + 1);
-      else if (event.key === 'ArrowUp') selectSuggestion(selectedCandidate - 1);
+      else if (event.key === 'ArrowUp') selectSuggestion(selectedCandidate < 0 ? candidates.length - 1 : selectedCandidate - 1);
       else executeCommand(candidates[selectedCandidate]);
     }, true);
     document.addEventListener('selectionchange', () => {
-      if (!suggestionBox?.hidden && activeEditor && document.activeElement === activeEditor) updateSuggestions(activeEditor, false);
+      if (!suggestionBox?.hidden && activeEditor && document.activeElement === activeEditor) updateSuggestions(activeEditor);
     });
   }
 
