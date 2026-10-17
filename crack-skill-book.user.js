@@ -384,6 +384,12 @@
     returnFocus = document.activeElement;
     ui.root.hidden = false;
     events = new window.AbortController();
+    fitVisibleViewport();
+    window.addEventListener('resize', fitVisibleViewport, { passive: true, signal: events.signal });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', fitVisibleViewport, { passive: true, signal: events.signal });
+      window.visualViewport.addEventListener('scroll', fitVisibleViewport, { passive: true, signal: events.signal });
+    }
     document.addEventListener('pointerdown', event => {
       if (!ui.root.contains(event.target)) dismissMenus();
     }, { signal: events.signal });
@@ -417,6 +423,21 @@
       createdNames.add(catalog.defaultPreset);
     }
     if (!names.has(selectedPreset)) selectedPreset = names.values().next().value;
+  }
+
+  // 키보드가 차지한 영역을 제외하고 실제로 보이는 화면 안에 창을 맞춘다.
+  function fitVisibleViewport() {
+    const viewport = window.visualViewport;
+    const visibleHeight = viewport?.height ?? window.innerHeight;
+    const availableHeight = Math.max(0, visibleHeight - 24);
+    const narrow = window.innerWidth <= 540;
+    const height = Math.min(510, availableHeight, Math.max(220, visibleHeight - (narrow ? 165 : 170)));
+    const center = Math.max(12 + height / 2,
+      Math.min(visibleHeight * (narrow ? 0.42 : 0.44), visibleHeight - 12 - height / 2));
+    ui.root.style.height = `${height}px`;
+    ui.root.style.minHeight = `${Math.min(220, availableHeight)}px`;
+    ui.root.style.maxHeight = `${availableHeight}px`;
+    ui.root.style.top = `${(viewport?.offsetTop ?? 0) + center}px`;
   }
 
   async function loadPreset(name) {
