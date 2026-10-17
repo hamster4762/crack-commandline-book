@@ -38,7 +38,7 @@
       const id = registerContent(definition);
       return Object.freeze({
         /**
-         * 지정 경로 바로 아래의 키 이름을 조회한다. Firebase에서는 하위 값을 다운로드하지 않는다.
+         * 지정 경로 바로 아래의 키 이름을 조회한다. Firebase 목록은 페이지 메모리에 캐시하며 하위 값은 다운로드하지 않는다.
          * @param {string} [path=""] 콘텐츠 내부의 상대 경로. 생략하면 콘텐츠 바로 아래.
          * @returns {Promise<string[]>} 키 목록. 데이터가 없거나 원시 값이면 빈 배열. 순서는 보장하지 않는다.
          * @throws {CoreError} DATABASE_DISABLED/INVALID_PATH/LOGIN_REQUIRED 또는 조회 오류.
@@ -75,6 +75,7 @@
   const commands = new Map();
   const queues = new Map();
   const remoteCache = new Map();
+  const remoteKeyCache = new Map();
   let cacheGeneration = 0;
   // 한글 완성형의 초성 순서. 'ㅅ', '설', '설ㅈ'처럼 초성·음절을 섞은 검색에 사용한다.
   const HANGUL_INITIALS = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
@@ -328,6 +329,8 @@
     session = nextSession;
     connectionRevision += 1;
     remoteCache.clear();
+
+    remoteKeyCache.clear();
   }
 
   function signOut() {
@@ -335,6 +338,8 @@
     session = null;
     connectionRevision += 1;
     remoteCache.clear();
+
+    remoteKeyCache.clear();
   }
 
   async function getAccessToken() {
@@ -434,6 +439,27 @@
     // 관련 경로의 ETag는 추측하지 않는다. 각 경로에서 받은 ETag만 조건부 저장에 사용한다.
     remoteCache.set(context.location, { ...record, databaseURL: context.databaseURL,
       revision: context.revision, generation: context.generation, conflicted });
+    // 키 목록은 값/ETag 캐시와 분리한다. 저장·조회 응답으로 확인한 경로만 갱신한다.
+    for (const [location, keys] of remoteKeyCache) {
+      if (location === context.location || location.startsWith(`${context.location}/`)) {
+        const relative = location.slice(context.location.length + 1);
+        const value = relative ? valueAtPath(record.data, relative.split('/')) : record.data;
+        remoteKeyCache.set(location, remoteKeys(value));
+      } else if (context.location.startsWith(`${location}/`)) {
+        const relative = context.location.slice(location.length + 1);
+        const child = relative.split('/')[0];
+        if (record.data !== null) {
+          if (!keys.includes(child)) remoteKeyCache.set(location, [...keys, child]);
+        } else if (relative.includes('/')) {
+          // 깊은 경로 삭제로 상위 노드까지 사라졌는지는 응답만으로 추측하지 않는다.
+          remoteKeyCache.delete(location);
+        } else remoteKeyCache.set(location, keys.filter(key => key !== child));
+      }
+    }
+  }
+
+  function remoteKeys(value) {
+    return value !== null && typeof value === 'object' ? Object.keys(value).filter(key => value[key] !== null) : [];
   }
 
   function checkConnection(context) {
@@ -497,10 +523,13 @@
     let value;
     if (await currentProvider(id) === 'firebase') {
       const context = await remoteContext(id, path);
+      if (remoteKeyCache.has(context.location)) return [...remoteKeyCache.get(context.location)];
       const response = await requestJson('GET', `${context.url}&shallow=true`);
       checkResponse(response);
       checkConnection(context);
-      value = response.data;
+      const keys = remoteKeys(response.data);
+      remoteKeyCache.set(context.location, keys);
+      return [...keys];
     } else {
       value = valueAtPath(await readStore('data', id) ?? null, parts);
     }
@@ -743,8 +772,10 @@
       transaction.onabort = () => reject(transaction.error);
       transaction.onerror = () => {};
     });
-    for (const location of remoteCache.keys()) {
-      if (location === id || location.startsWith(`${id}/`)) remoteCache.delete(location);
+    for (const cache of [remoteCache, remoteKeyCache]) {
+      for (const location of cache.keys()) {
+        if (location === id || location.startsWith(`${id}/`)) cache.delete(location);
+      }
     }
   }
 
@@ -1127,10 +1158,14 @@
     session = readStoredSession();
     connectionRevision += 1;
     remoteCache.clear();
+
+    remoteKeyCache.clear();
     updateConnectionStatus();
   });
   function resetPageCache() {
     remoteCache.clear();
+
+    remoteKeyCache.clear();
     cacheGeneration += 1;
   }
   if (window.navigation) window.navigation.addEventListener('navigatesuccess', resetPageCache);
