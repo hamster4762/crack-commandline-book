@@ -197,6 +197,7 @@
   let allSkills;
   let ui;
   let selectedPreset;
+  let placeholderPreset;
   let selectedCategory;
   let selectedSubcategory = '';
   let view = 'list';
@@ -397,6 +398,12 @@
     ready = false;
     await run(async () => {
       const stored = await book.keys();
+      // 저장된 프리셋이 있으면 편집하지 않은 자동 기본 항목은 목록에 합치지 않는다.
+      if (stored.length && placeholderPreset && !drafts.has(placeholderPreset)) {
+        createdNames.delete(placeholderPreset);
+        cache.delete(placeholderPreset);
+        placeholderPreset = undefined;
+      }
       persistedNames.clear();
       names.clear();
       for (const name of stored) {
@@ -421,6 +428,7 @@
     if (!names.size) {
       names.add(catalog.defaultPreset);
       createdNames.add(catalog.defaultPreset);
+      placeholderPreset = catalog.defaultPreset;
     }
     if (!names.has(selectedPreset)) selectedPreset = names.values().next().value;
   }
@@ -695,6 +703,7 @@
         if (persistedNames.has(name)) drafts.set(name, null);
         else drafts.delete(name);
         createdNames.delete(name);
+        if (placeholderPreset === name) placeholderPreset = undefined;
         createdNames.add(next);
         drafts.set(next, value);
         selectedPreset = next;
@@ -782,7 +791,11 @@
       persistedNames.delete(name);
       if (names.has(name)) createdNames.add(name);
     }
-    else { persistedNames.add(name); createdNames.delete(name); }
+    else {
+      persistedNames.add(name);
+      createdNames.delete(name);
+      if (placeholderPreset === name) placeholderPreset = undefined;
+    }
     // 성공한 항목만 정리한다. 다른 항목의 실패가 이 결과를 되돌리지 않는다.
     if (drafts.get(name) === value) drafts.delete(name);
   }

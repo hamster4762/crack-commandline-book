@@ -554,9 +554,9 @@
     const local = (await readStore('data', id)) ?? null;
     const remote = await readRemote(id);
     const baseline = { ...remoteCache.get(id) };
-    const targetData = target === 'local' ? local : remote;
-    let choice = from;
-    if (targetData !== null) {
+    // 한쪽만 비어 있으면 데이터가 있는 쪽을 사용한다. 양쪽에 있을 때만 선택받는다.
+    let choice = local === null ? 'firebase' : remote === null ? 'local' : null;
+    if (choice === null) {
       choice = await chooseSwitchData(command.label, from, target);
       if (choice === null) return from;
     }
