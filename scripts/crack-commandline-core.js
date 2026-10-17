@@ -49,15 +49,18 @@
          * 선택한 저장소에서 데이터를 읽는다. Firebase는 페이지에서 해당 경로를 처음 읽을 때 서버에 요청하고 이후 캐시를 사용한다.
          * @param {string} [path=""] 콘텐츠 내부의 상대 경로. 생략하면 전체.
          * @returns {Promise<JsonValue>} 저장된 데이터. 데이터가 없으면 null.
+         * 부모·자식 경로 중 하나를 저장하면 다른 쪽의 캐시는 무효화되며, 다음 load()에서 다시 조회한다.
          * @throws {CoreError} DATABASE_DISABLED: 저장 미사용. INVALID_PATH: 잘못된 경로. LOGIN_REQUIRED: Firebase 로그인 필요.
          */
         load(path = '') { return exclusive(id, () => loadContent(id, path)); },
         /**
          * 지정 경로의 데이터를 교체한다. Firebase는 같은 경로의 load()를 먼저 호출해야 한다.
          * @param {JsonValue} data 저장할 JSON 값. null은 지정 경로 삭제.
+         * 객체 구조나 문자열 내용은 해석하지 않는다. Local 배열 내부 경로는 기존 인덱스 또는 바로 다음 인덱스만 쓸 수 있다.
          * @param {string} [path=""] 콘텐츠 내부의 상대 경로. 예: element, presets/preset1. 생략하면 전체.
          * @returns {Promise<JsonValue>} 저장한 값.
          * @throws {CoreError} INVALID_DATA: 저장 불가 값. INVALID_PATH: 잘못된 경로. LOAD_REQUIRED: 같은 경로를 먼저 읽어야 함.
+         * INVALID_ARRAY_INDEX: 배열에 숫자가 아닌 키를 쓰거나 빈 슬롯을 만드는 경로.
          * CONFLICT: 원격 변경으로 저장 거절. error.latestData 확인 후 load()로 다시 읽는다.
          * ETAG_MISSING: 직전 응답에 식별자가 없어 페이지 새로고침 필요. 그 밖의 저장 실패도 reject된다.
          */
@@ -277,7 +280,8 @@
     return new Promise((resolve, reject) => {
       GM_xmlhttpRequest({
         method, url, headers, timeout: 20000, anonymous: true,
-        ...(data !== undefined ? { data: typeof data === 'string' ? data : JSON.stringify(data) } : {}),
+        ...(data !== undefined ? { data: headers['Content-Type'] === 'application/x-www-form-urlencoded'
+          ? data : JSON.stringify(data) } : {}),
         onload(response) {
           let body = null;
           try { if (response.responseText) body = JSON.parse(response.responseText); }
@@ -388,14 +392,17 @@
   function replaceAtPath(data, parts, value, index = 0) {
     if (index === parts.length) return value;
     const key = parts[index];
-    const keepArray = Array.isArray(data) && /^(0|[1-9]\d*)$/.test(key) && Number(key) < 4294967295;
+    // 존재하지 않는 하위 경로 삭제는 부모의 값이나 빈 컨테이너를 바꾸지 않는다.
+    if (value === null && (data === null || typeof data !== 'object' || !Object.hasOwn(data, key))) return data;
+    const keepArray = Array.isArray(data);
+    if (keepArray && (!/^(0|[1-9]\d*)$/.test(key) || Number(key) > data.length || Number(key) >= 4294967295)) {
+      throw new CoreError('INVALID_ARRAY_INDEX', '배열 경로에는 기존 인덱스 또는 바로 다음 인덱스를 사용하세요.');
+    }
     const node = keepArray ? data.slice() : Object.assign(Object.create(null), data && typeof data === 'object' ? data : {});
     const child = Object.hasOwn(node, key) ? node[key] : null;
     const next = replaceAtPath(child, parts, value, index + 1);
+    if (value === null && index + 1 < parts.length && next === child) return data;
     if (keepArray) {
-      const previousLength = node.length;
-      node.length = Math.max(previousLength, Number(key) + 1);
-      node.fill(null, previousLength, Number(key));
       node[Number(key)] = next;
     } else if (next === null) delete node[key];
     else Object.defineProperty(node, key, { value: next, writable: true, enumerable: true, configurable: true });
@@ -408,13 +415,19 @@
       const transaction = database.transaction('data', 'readwrite');
       const store = transaction.objectStore('data');
       const request = store.get(id);
+      let failure;
       request.onsuccess = () => {
-        const root = replaceAtPath(request.result ?? null, parts, data);
-        if (root === null) store.delete(id);
-        else store.put(root, id);
+        try {
+          const root = replaceAtPath(request.result ?? null, parts, data);
+          if (root === null) store.delete(id);
+          else store.put(root, id);
+        } catch (error) {
+          failure = error;
+          transaction.abort();
+        }
       };
       transaction.oncomplete = resolve;
-      transaction.onabort = () => reject(transaction.error);
+      transaction.onabort = () => reject(failure || transaction.error);
       transaction.onerror = () => {};
     });
   }
@@ -427,14 +440,20 @@
       url: `${config.databaseURL}/${location.split('/').map(encodeURIComponent).join('/')}.json?auth=${encodeURIComponent(token)}` };
   }
 
-  function cacheRemoteResult(context, record, conflicted = false) {
+  function cacheRemoteResult(context, record, conflicted = false, written = false) {
     for (const [location, cached] of remoteCache) {
       if (cached.databaseURL !== context.databaseURL || location === context.location) continue;
+      let previous;
+      let current;
       if (context.location.startsWith(`${location}/`)) {
-        cached.data = replaceAtPath(cached.data, context.location.slice(location.length + 1).split('/'), record.data);
+        previous = valueAtPath(cached.data, context.location.slice(location.length + 1).split('/'));
+        current = record.data;
       } else if (location.startsWith(`${context.location}/`)) {
-        cached.data = valueAtPath(record.data, location.slice(context.location.length + 1).split('/'));
-      }
+        previous = cached.data;
+        current = valueAtPath(record.data, location.slice(context.location.length + 1).split('/'));
+      } else continue;
+      // 다른 경로의 ETag는 갱신할 수 없으므로, 값이 달라졌거나 저장한 경우 다시 읽게 한다.
+      if (written || JSON.stringify(previous) !== JSON.stringify(current)) remoteCache.delete(location);
     }
     // 관련 경로의 ETag는 추측하지 않는다. 각 경로에서 받은 ETag만 조건부 저장에 사용한다.
     remoteCache.set(context.location, { ...record, databaseURL: context.databaseURL,
@@ -497,12 +516,12 @@
       { 'Content-Type': 'application/json', 'X-Firebase-ETag': 'true', 'if-match': baseline.etag });
     checkConnection(context);
     if (response.status === 412) {
-      cacheRemoteResult(context, { data: response.data, etag: response.etag }, true);
+      cacheRemoteResult(context, { data: response.data, etag: response.etag }, true, true);
       throw new CoreError('CONFLICT', '서버의 데이터가 변경되었습니다. 최신본을 불러와 확인한 뒤 다시 저장하세요.',
         { latestData: cloneData(response.data) });
     }
     checkResponse(response);
-    cacheRemoteResult(context, { data: response.data, etag: response.etag });
+    cacheRemoteResult(context, { data: response.data, etag: response.etag }, false, true);
   }
 
   async function currentProvider(id) {
@@ -558,7 +577,7 @@
       let failure;
       const request = data.get(id);
       request.onsuccess = () => {
-        if (JSON.stringify(request.result ?? null) !== JSON.stringify(expectedLocal)) {
+        if (target === 'local' && JSON.stringify(request.result ?? null) !== JSON.stringify(expectedLocal)) {
           failure = new CoreError('LOCAL_CONFLICT', '다른 탭에서 로컬 데이터가 변경되었습니다. 다시 선택하세요.');
           transaction.abort();
           return;
@@ -589,7 +608,14 @@
       choice = await chooseSwitchData(command.label, from, target);
       if (choice === null) return from;
     }
-    if (target === 'firebase' && choice === 'local') await writeRemote(id, local, '', baseline);
+    if (target === 'firebase' && choice === 'local') {
+      const currentLocal = (await readStore('data', id)) ?? null;
+      if (JSON.stringify(currentLocal) !== JSON.stringify(local)) {
+        throw new CoreError('LOCAL_CONFLICT', '다른 탭에서 로컬 데이터가 변경되었습니다. 다시 선택하세요.');
+      }
+      // 선택한 스냅샷을 전송하며, 전송 도중 바뀐 Local 원본은 덮어쓰지 않는다.
+      await writeRemote(id, local, '', baseline);
+    }
     const nextLocal = choice === 'firebase' ? remote : local;
     await commitProvider(id, target, nextLocal, local);
     return target;
