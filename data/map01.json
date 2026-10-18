@@ -1,0 +1,993 @@
+{
+  "name": "에르다 대륙",
+  "width": 80,
+  "height": 60,
+  "distanceScale": 3,
+  "backgroundImage": "map01.svg",
+  "regions": [
+    {
+      "id": 1,
+      "name": "빙해 관문",
+      "type": "fortress",
+      "scale": 2,
+      "x": 22,
+      "y": 9,
+      "description": "빙해로 이어지는 북쪽 관문. 방한 장비를 갖춘 상단이 머문다.",
+      "neighbors": [
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "name": "서리항",
+      "type": "port",
+      "scale": 2,
+      "x": 15,
+      "y": 12,
+      "description": "유빙 사이로 쇄빙선이 드나드는 항구. 고래기름이 특산물이다.",
+      "neighbors": [
+        1,
+        11
+      ]
+    },
+    {
+      "id": 3,
+      "name": "백설 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 25,
+      "y": 14,
+      "description": "설원 사냥꾼들의 작은 마을. 은여우 모피를 거래한다.",
+      "neighbors": [
+        12,
+        4
+      ]
+    },
+    {
+      "id": 4,
+      "name": "흰늑대 숲",
+      "type": "forest",
+      "scale": 4,
+      "x": 28,
+      "y": 7,
+      "description": "흰늑대 무리가 지키는 침엽수림. 눈 아래 약초가 자란다.",
+      "neighbors": [
+        5
+      ]
+    },
+    {
+      "id": 5,
+      "name": "서리왕관 산맥",
+      "type": "mountainRange",
+      "scale": 5,
+      "x": 40,
+      "y": 9,
+      "description": "북부를 가르는 만년설 산맥. 푸른 수정이 매장되어 있다.",
+      "neighbors": [
+        15,
+        7
+      ]
+    },
+    {
+      "id": 6,
+      "name": "까마귀 요새",
+      "type": "fortress",
+      "scale": 2,
+      "x": 52,
+      "y": 12,
+      "description": "검은 깃발을 내건 국경 요새. 봉화로 북부 전역과 연락한다.",
+      "neighbors": [
+        8
+      ]
+    },
+    {
+      "id": 7,
+      "name": "북풍 고개",
+      "type": "mountain",
+      "scale": 3,
+      "x": 46,
+      "y": 15,
+      "description": "눈보라가 잠시 잦아드는 좁은 산길. 오래된 이정표가 남아 있다.",
+      "neighbors": [
+        6,
+        17
+      ]
+    },
+    {
+      "id": 8,
+      "name": "별잠 호수",
+      "type": "lake",
+      "scale": 4,
+      "x": 60,
+      "y": 10,
+      "description": "밤이면 물속 별빛이 떠오르는 호수. 얼어붙지 않는 샘이 있다.",
+      "neighbors": [
+        10,
+        9,
+        19
+      ]
+    },
+    {
+      "id": 9,
+      "name": "침묵의 탑",
+      "type": "tower",
+      "scale": 2,
+      "x": 66,
+      "y": 7,
+      "description": "종소리가 사라진 북방 마탑. 창문에는 언제나 불빛이 켜져 있다.",
+      "neighbors": []
+    },
+    {
+      "id": 10,
+      "name": "겨울 성소",
+      "type": "temple",
+      "scale": 2,
+      "x": 58,
+      "y": 5,
+      "description": "여행자에게 따뜻한 잠자리를 내어주는 눈의 여신의 성소.",
+      "neighbors": [
+        9
+      ]
+    },
+    {
+      "id": 11,
+      "name": "은솔 해안",
+      "type": "coast",
+      "scale": 3,
+      "x": 10,
+      "y": 20,
+      "description": "은빛 자갈이 길게 이어지는 해안. 파도에 유리 조각이 떠밀려온다.",
+      "neighbors": [
+        12,
+        21
+      ]
+    },
+    {
+      "id": 12,
+      "name": "솔바람 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 18,
+      "y": 19,
+      "description": "송진과 훈제 고기를 파는 숲 가장자리의 마을.",
+      "neighbors": [
+        13
+      ]
+    },
+    {
+      "id": 13,
+      "name": "엘른의 숲",
+      "type": "forest",
+      "scale": 5,
+      "x": 24,
+      "y": 23,
+      "description": "오래된 나무들이 길을 감추는 숲. 달빛 버섯이 자란다.",
+      "neighbors": [
+        14,
+        24
+      ]
+    },
+    {
+      "id": 14,
+      "name": "사슴뿔 성소",
+      "type": "temple",
+      "scale": 2,
+      "x": 29,
+      "y": 19,
+      "description": "숲의 수호자에게 바치는 성소. 순례자들이 나무패를 걸어둔다.",
+      "neighbors": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": 15,
+      "name": "회색 봉우리",
+      "type": "mountain",
+      "scale": 3,
+      "x": 35,
+      "y": 14,
+      "description": "회백색 바위가 드러난 산. 능선 아래 철광맥이 뻗어 있다.",
+      "neighbors": []
+    },
+    {
+      "id": 16,
+      "name": "돌다리 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 32,
+      "y": 21,
+      "description": "북부와 왕도를 잇는 돌다리 곁 마을. 작은 여관이 유명하다.",
+      "neighbors": [
+        35
+      ]
+    },
+    {
+      "id": 17,
+      "name": "별가루 평원",
+      "type": "plains",
+      "scale": 4,
+      "x": 47,
+      "y": 20,
+      "description": "밤마다 풀잎 끝에 빛나는 이슬이 맺히는 초원.",
+      "neighbors": [
+        27
+      ]
+    },
+    {
+      "id": 18,
+      "name": "청명 호수",
+      "type": "lake",
+      "scale": 3,
+      "x": 59,
+      "y": 20,
+      "description": "바닥이 비치는 맑은 호수. 청어와 민물 진주가 난다.",
+      "neighbors": []
+    },
+    {
+      "id": 19,
+      "name": "아르켄 마탑",
+      "type": "tower",
+      "scale": 2,
+      "x": 64,
+      "y": 16,
+      "description": "별의 운행을 연구하는 마탑. 천문 기구를 제작한다.",
+      "neighbors": [
+        20,
+        18
+      ]
+    },
+    {
+      "id": 20,
+      "name": "안개 문턱",
+      "type": "rift",
+      "scale": 2,
+      "x": 72,
+      "y": 15,
+      "description": "희뿌연 안개 뒤로 낯선 풍경이 보이는 불안정한 균열.",
+      "neighbors": []
+    },
+    {
+      "id": 21,
+      "name": "해묵은 등대",
+      "type": "ruins",
+      "scale": 2,
+      "x": 9,
+      "y": 28,
+      "description": "등불이 꺼진 옛 등대. 밀물 때 지하 통로가 드러난다.",
+      "neighbors": [
+        31
+      ]
+    },
+    {
+      "id": 22,
+      "name": "수레국화 들판",
+      "type": "plains",
+      "scale": 3,
+      "x": 26,
+      "y": 31,
+      "description": "푸른 수레국화가 피는 평원. 말 사육과 양봉이 활발하다.",
+      "neighbors": [
+        26
+      ]
+    },
+    {
+      "id": 23,
+      "name": "브린 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 22,
+      "y": 28,
+      "description": "숲꿀과 말린 과일을 파는 조용한 농촌 마을.",
+      "neighbors": [
+        22
+      ]
+    },
+    {
+      "id": 24,
+      "name": "녹음 회랑",
+      "type": "forest",
+      "scale": 4,
+      "x": 17,
+      "y": 26,
+      "description": "굽은 나뭇가지가 지붕을 이루는 숲길. 약초꾼이 자주 찾는다.",
+      "neighbors": [
+        23
+      ]
+    },
+    {
+      "id": 25,
+      "name": "실버런 강",
+      "type": "river",
+      "scale": 2,
+      "x": 34,
+      "y": 28,
+      "description": "북부 호수에서 왕도까지 흐르는 강. 은빛 비늘의 물고기가 산다.",
+      "neighbors": [
+        26,
+        34,
+        16
+      ]
+    },
+    {
+      "id": 26,
+      "name": "풍차 언덕",
+      "type": "village",
+      "scale": 1,
+      "x": 33,
+      "y": 24,
+      "description": "여섯 개의 풍차가 돌아가는 언덕 마을. 밀가루를 공급한다.",
+      "neighbors": [
+        16
+      ]
+    },
+    {
+      "id": 27,
+      "name": "라벤 성도",
+      "type": "city",
+      "scale": 3,
+      "x": 45,
+      "y": 24,
+      "description": "흰 돌로 지은 종교 도시. 치유사와 필경사가 모여 산다.",
+      "neighbors": [
+        29
+      ]
+    },
+    {
+      "id": 28,
+      "name": "금빛 밀밭",
+      "type": "plains",
+      "scale": 4,
+      "x": 46,
+      "y": 31,
+      "description": "왕국의 곡창지대. 수확철이면 황금빛 물결이 지평선을 덮는다.",
+      "neighbors": [
+        39
+      ]
+    },
+    {
+      "id": 29,
+      "name": "해오름 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 51,
+      "y": 25,
+      "description": "왕도 동편의 과수원 마을. 붉은 사과주가 특산물이다.",
+      "neighbors": [
+        30,
+        38
+      ]
+    },
+    {
+      "id": 30,
+      "name": "붉은 모래 관문",
+      "type": "fortress",
+      "scale": 2,
+      "x": 58,
+      "y": 29,
+      "description": "사막 상단의 통행을 관리하는 요새. 대상들이 물을 보충한다.",
+      "neighbors": [
+        49
+      ]
+    },
+    {
+      "id": 31,
+      "name": "로웬 항구",
+      "type": "port",
+      "scale": 2,
+      "x": 15,
+      "y": 34,
+      "description": "서녘해 무역선이 모이는 항구. 향신료와 염료를 거래한다.",
+      "neighbors": [
+        32,
+        33
+      ]
+    },
+    {
+      "id": 32,
+      "name": "소금바람 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 12,
+      "y": 39,
+      "description": "바닷바람으로 소금을 말리는 마을. 흰 염전이 이어진다.",
+      "neighbors": [
+        52
+      ]
+    },
+    {
+      "id": 33,
+      "name": "가시나무 숲",
+      "type": "forest",
+      "scale": 4,
+      "x": 21,
+      "y": 37,
+      "description": "얽힌 덩굴이 오래된 길을 덮은 숲. 붉은 열매가 맺힌다.",
+      "neighbors": [
+        43
+      ]
+    },
+    {
+      "id": 34,
+      "name": "서문 수비대",
+      "type": "fortress",
+      "scale": 2,
+      "x": 32,
+      "y": 33,
+      "description": "왕도 서쪽 가도를 지키는 주둔지. 말발굽 소리가 끊이지 않는다.",
+      "neighbors": [
+        22
+      ]
+    },
+    {
+      "id": 35,
+      "name": "엘데른 왕국",
+      "type": "kingdom",
+      "scale": 5,
+      "x": 40,
+      "y": 18,
+      "description": "강과 평원을 품은 왕국. 은화와 왕실 문장이 통용된다.",
+      "neighbors": [
+        17,
+        27
+      ]
+    },
+    {
+      "id": 36,
+      "name": "왕도 엘데른",
+      "type": "capital",
+      "scale": 4,
+      "x": 40,
+      "y": 30,
+      "description": "왕궁과 대시장이 자리한 왕도. 각지의 물산과 소문이 모인다.",
+      "neighbors": [
+        28,
+        37,
+        34,
+        46,
+        44
+      ]
+    },
+    {
+      "id": 37,
+      "name": "성왕의 사원",
+      "type": "temple",
+      "scale": 2,
+      "x": 45,
+      "y": 34,
+      "description": "왕국의 오래된 맹세를 보관하는 사원. 푸른 성화가 타오른다.",
+      "neighbors": []
+    },
+    {
+      "id": 38,
+      "name": "장인 지구",
+      "type": "town",
+      "scale": 2,
+      "x": 46,
+      "y": 28,
+      "description": "대장장이와 세공사의 공방 도시. 정교한 장신구를 만든다.",
+      "neighbors": [
+        27,
+        36
+      ]
+    },
+    {
+      "id": 39,
+      "name": "햇살 여울",
+      "type": "river",
+      "scale": 2,
+      "x": 48,
+      "y": 36,
+      "description": "얕은 물길에 햇빛이 부서지는 여울. 작은 나룻배가 오간다.",
+      "neighbors": [
+        37,
+        40
+      ]
+    },
+    {
+      "id": 40,
+      "name": "사프란 시장",
+      "type": "town",
+      "scale": 2,
+      "x": 57,
+      "y": 36,
+      "description": "사막과 왕국의 물산이 만나는 교역 도시. 향신료 향이 짙다.",
+      "neighbors": [
+        30
+      ]
+    },
+    {
+      "id": 41,
+      "name": "서녘 군도",
+      "type": "island",
+      "scale": 3,
+      "x": 9,
+      "y": 48,
+      "description": "낮은 섬들이 점점이 이어진 바다. 조개와 산호를 채취한다.",
+      "neighbors": [
+        61
+      ]
+    },
+    {
+      "id": 42,
+      "name": "비취 호수",
+      "type": "lake",
+      "scale": 4,
+      "x": 27,
+      "y": 42,
+      "description": "깊은 녹색 물빛을 띤 호수. 호숫가에 비취석이 섞여 있다.",
+      "neighbors": [
+        45
+      ]
+    },
+    {
+      "id": 43,
+      "name": "물레방아 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 31,
+      "y": 38,
+      "description": "수로를 따라 물레방아가 선 마을. 질 좋은 종이를 만든다.",
+      "neighbors": [
+        34,
+        42
+      ]
+    },
+    {
+      "id": 44,
+      "name": "잊힌 왕릉",
+      "type": "dungeon",
+      "scale": 2,
+      "x": 37,
+      "y": 39,
+      "description": "봉인이 약해진 옛 왕의 지하 묘소. 묘비의 글자가 지워져 있다.",
+      "neighbors": [
+        56
+      ]
+    },
+    {
+      "id": 45,
+      "name": "갈대 강변",
+      "type": "river",
+      "scale": 2,
+      "x": 34,
+      "y": 43,
+      "description": "키 큰 갈대가 자라는 완만한 강변. 물새들이 둥지를 튼다.",
+      "neighbors": [
+        44,
+        55
+      ]
+    },
+    {
+      "id": 46,
+      "name": "보리들 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 39,
+      "y": 36,
+      "description": "보리밭과 작은 양조장이 있는 마을. 짙은 맥주가 유명하다.",
+      "neighbors": []
+    },
+    {
+      "id": 47,
+      "name": "길잡이 평원",
+      "type": "plains",
+      "scale": 3,
+      "x": 51,
+      "y": 43,
+      "description": "오래된 표석들이 남아 있는 넓은 초원. 상단들이 야영한다.",
+      "neighbors": [
+        66,
+        76,
+        77
+      ]
+    },
+    {
+      "id": 48,
+      "name": "호박빛 사구",
+      "type": "desert",
+      "scale": 5,
+      "x": 68,
+      "y": 34,
+      "description": "호박색 모래언덕이 이어지는 사막. 바람에 고대 동전이 드러난다.",
+      "neighbors": [
+        49,
+        50,
+        78
+      ]
+    },
+    {
+      "id": 49,
+      "name": "붉은 바늘탑",
+      "type": "tower",
+      "scale": 2,
+      "x": 73,
+      "y": 28,
+      "description": "사막 한가운데 솟은 붉은 마탑. 열기 속에 모습이 흔들린다.",
+      "neighbors": [
+        79
+      ]
+    },
+    {
+      "id": 50,
+      "name": "태양 우물",
+      "type": "village",
+      "scale": 1,
+      "x": 65,
+      "y": 39,
+      "description": "마르지 않는 우물 주변의 작은 정착지. 대추야자가 자란다.",
+      "neighbors": [
+        40
+      ]
+    },
+    {
+      "id": 51,
+      "name": "서녘해",
+      "type": "sea",
+      "scale": 5,
+      "x": 3,
+      "y": 33,
+      "description": "왕국 서쪽으로 펼쳐진 바다. 로웬 항구와 군도를 잇는 항로가 지난다.",
+      "neighbors": [
+        31,
+        41
+      ]
+    },
+    {
+      "id": 52,
+      "name": "그물손 항구",
+      "type": "port",
+      "scale": 2,
+      "x": 17,
+      "y": 44,
+      "description": "어선이 빽빽이 정박한 항구. 훈제 청어와 로프를 판매한다.",
+      "neighbors": [
+        41,
+        51
+      ]
+    },
+    {
+      "id": 53,
+      "name": "검은 버드나무 숲",
+      "type": "forest",
+      "scale": 4,
+      "x": 24,
+      "y": 47,
+      "description": "검은 줄기의 버드나무가 자라는 습한 숲. 약용 수액이 난다.",
+      "neighbors": [
+        54
+      ]
+    },
+    {
+      "id": 54,
+      "name": "잠든 거인 유적",
+      "type": "ruins",
+      "scale": 2,
+      "x": 30,
+      "y": 48,
+      "description": "거인의 손을 닮은 석상이 묻혀 있는 고대 유적.",
+      "neighbors": [
+        64
+      ]
+    },
+    {
+      "id": 55,
+      "name": "청동 수문",
+      "type": "fortress",
+      "scale": 2,
+      "x": 36,
+      "y": 47,
+      "description": "남부 수로를 관리하는 견고한 요새. 청동 문이 강물을 가른다.",
+      "neighbors": [
+        65,
+        73
+      ]
+    },
+    {
+      "id": 56,
+      "name": "여섯길 마을",
+      "type": "town",
+      "scale": 2,
+      "x": 43,
+      "y": 39,
+      "description": "여섯 갈래 길이 만나는 소도시. 마차 수리공들이 모여 있다.",
+      "neighbors": [
+        46,
+        39
+      ]
+    },
+    {
+      "id": 57,
+      "name": "황혼 사막",
+      "type": "desert",
+      "scale": 5,
+      "x": 64,
+      "y": 47,
+      "description": "해질녘 모래가 자줏빛으로 물드는 사막. 낮과 밤의 차가 크다.",
+      "neighbors": [
+        58,
+        67,
+        59
+      ]
+    },
+    {
+      "id": 58,
+      "name": "유리모래 분지",
+      "type": "desert",
+      "scale": 4,
+      "x": 72,
+      "y": 44,
+      "description": "모래 알갱이가 유리처럼 빛나는 분지. 유리 공예 재료를 얻는다.",
+      "neighbors": [
+        80,
+        60
+      ]
+    },
+    {
+      "id": 59,
+      "name": "잿불 산",
+      "type": "volcano",
+      "scale": 4,
+      "x": 73,
+      "y": 52,
+      "description": "붉은 틈 사이로 열기가 새어 나오는 화산. 유황을 채취한다.",
+      "neighbors": [
+        69,
+        70
+      ]
+    },
+    {
+      "id": 60,
+      "name": "흑요석 채굴장",
+      "type": "dungeon",
+      "scale": 2,
+      "x": 76,
+      "y": 48,
+      "description": "굳은 용암 아래로 파고든 갱도. 깊은 곳에서 금속성이 울린다.",
+      "neighbors": [
+        59
+      ]
+    },
+    {
+      "id": 61,
+      "name": "푸른 닻 섬",
+      "type": "island",
+      "scale": 3,
+      "x": 15,
+      "y": 54,
+      "description": "커다란 푸른 바위가 배를 맞이하는 섬. 작은 정박지가 있다.",
+      "neighbors": [
+        72
+      ]
+    },
+    {
+      "id": 62,
+      "name": "남녘 망루",
+      "type": "fortress",
+      "scale": 2,
+      "x": 20,
+      "y": 51,
+      "description": "먼바다를 감시하는 남쪽 망루. 폭풍을 알리는 종이 걸려 있다.",
+      "neighbors": [
+        53
+      ]
+    },
+    {
+      "id": 63,
+      "name": "이끼 늪",
+      "type": "marsh",
+      "scale": 4,
+      "x": 36,
+      "y": 53,
+      "description": "두꺼운 이끼가 물길을 가리는 늪. 야광 반딧불이가 모인다.",
+      "neighbors": [
+        64,
+        71
+      ]
+    },
+    {
+      "id": 64,
+      "name": "안개발 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 33,
+      "y": 49,
+      "description": "늪 위에 높은 기둥을 세워 지은 마을. 약초와 갈대 공예품을 판다.",
+      "neighbors": [
+        55
+      ]
+    },
+    {
+      "id": 65,
+      "name": "푸른 독 늪",
+      "type": "marsh",
+      "scale": 3,
+      "x": 43,
+      "y": 51,
+      "description": "청록색 물안개가 낮게 깔린 늪지. 독에 강한 약초가 자란다.",
+      "neighbors": [
+        63,
+        75
+      ]
+    },
+    {
+      "id": 66,
+      "name": "망각의 회랑",
+      "type": "ruins",
+      "scale": 2,
+      "x": 49,
+      "y": 47,
+      "description": "기록에서 이름이 사라진 석조 회랑. 벽화가 어둠 속에 남아 있다.",
+      "neighbors": [
+        75
+      ]
+    },
+    {
+      "id": 67,
+      "name": "사막 장벽",
+      "type": "mountainRange",
+      "scale": 5,
+      "x": 56,
+      "y": 47,
+      "description": "남부 사막을 둘러싼 낮고 긴 산맥. 바람 소리가 날카롭다.",
+      "neighbors": [
+        47
+      ]
+    },
+    {
+      "id": 68,
+      "name": "홍옥 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 61,
+      "y": 53,
+      "description": "붉은 원석을 다듬는 광부 마을. 밤에도 작업등이 밝다.",
+      "neighbors": [
+        69,
+        57
+      ]
+    },
+    {
+      "id": 69,
+      "name": "용의 이빨",
+      "type": "mountain",
+      "scale": 4,
+      "x": 67,
+      "y": 56,
+      "description": "송곳니처럼 솟은 검은 암봉. 능선에서 용의 화석이 발견된다.",
+      "neighbors": []
+    },
+    {
+      "id": 70,
+      "name": "재의 균열",
+      "type": "rift",
+      "scale": 2,
+      "x": 76,
+      "y": 57,
+      "description": "재가 거꾸로 떠오르는 갈라진 대지. 가까이 가면 바람이 멎는다.",
+      "neighbors": []
+    },
+    {
+      "id": 71,
+      "name": "남녘해",
+      "type": "sea",
+      "scale": 5,
+      "x": 29,
+      "y": 55,
+      "description": "따뜻한 해류가 흐르는 남쪽 바다. 낮은 섬 사이로 무역선이 오간다.",
+      "neighbors": [
+        61
+      ]
+    },
+    {
+      "id": 72,
+      "name": "조개빛 해안",
+      "type": "coast",
+      "scale": 3,
+      "x": 21,
+      "y": 55,
+      "description": "잘게 부서진 조개껍데기로 빛나는 해안. 엷은 분홍빛을 띤다.",
+      "neighbors": [
+        62
+      ]
+    },
+    {
+      "id": 73,
+      "name": "등불 마을",
+      "type": "village",
+      "scale": 1,
+      "x": 45,
+      "y": 45,
+      "description": "밤마다 강가에 등을 띄우는 마을. 종이등과 밀랍을 만든다.",
+      "neighbors": [
+        66
+      ]
+    },
+    {
+      "id": 74,
+      "name": "남부 대삼림",
+      "type": "forest",
+      "scale": 5,
+      "x": 48,
+      "y": 55,
+      "description": "왕국 남쪽으로 끝없이 이어지는 삼림. 오래된 나무의 뿌리가 깊다.",
+      "neighbors": [
+        68
+      ]
+    },
+    {
+      "id": 75,
+      "name": "달무리 성소",
+      "type": "temple",
+      "scale": 2,
+      "x": 51,
+      "y": 51,
+      "description": "보름달이 뜨면 둥근 그림자가 드리우는 숲속 성소.",
+      "neighbors": [
+        74
+      ]
+    },
+    {
+      "id": 76,
+      "name": "새벽 야영지",
+      "type": "village",
+      "scale": 1,
+      "x": 53,
+      "y": 40,
+      "description": "탐험가들이 보급품을 교환하는 작은 정착지. 아침 시장이 열린다.",
+      "neighbors": [
+        56
+      ]
+    },
+    {
+      "id": 77,
+      "name": "오래된 지하도",
+      "type": "dungeon",
+      "scale": 2,
+      "x": 61,
+      "y": 43,
+      "description": "사막 아래까지 이어진다는 지하 통로. 벽에는 낯선 표식이 새겨져 있다.",
+      "neighbors": [
+        50,
+        57
+      ]
+    },
+    {
+      "id": 78,
+      "name": "청사금 오아시스",
+      "type": "lake",
+      "scale": 3,
+      "x": 70,
+      "y": 39,
+      "description": "맑은 샘 바닥에 푸른 모래가 쌓이는 오아시스.",
+      "neighbors": [
+        50,
+        58
+      ]
+    },
+    {
+      "id": 79,
+      "name": "붉은 달 유적",
+      "type": "ruins",
+      "scale": 2,
+      "x": 77,
+      "y": 36,
+      "description": "붉은 달을 새긴 석문이 남은 유적. 오래된 제단이 서 있다.",
+      "neighbors": [
+        80
+      ]
+    },
+    {
+      "id": 80,
+      "name": "메마른 종착지",
+      "type": "town",
+      "scale": 2,
+      "x": 75,
+      "y": 40,
+      "description": "사막길 끝에 자리한 교역 도시. 먼 동쪽 상인들의 언어가 들린다.",
+      "neighbors": [
+        78
+      ]
+    }
+  ]
+}
