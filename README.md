@@ -2,8 +2,8 @@
 
 ## 다운로드
 
-- [스킬 도감 설치](https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-skill-book.user.js)
-- [지도 도감 설치](https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-map-book.user.js)
+- 스킬 도감 설치 : https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-skill-book.user.js
+- 지도 도감 설치 : https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-map-book.user.js
 
 ## 사용법
 
