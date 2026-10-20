@@ -403,8 +403,14 @@
     if (!ui) return;
     const value = normalizePreset(valueFor(), true), favorite = new Set(value.bookmark), owned = new Set(value.inventory);
     const group = tab ? catalog.groups[tab - 1] : null;
-    const visible = items.filter(item => (!group || group.categories.includes(item.category)) && (!subcategory || item.subcategory === subcategory) &&
-      (!favoriteOnly || favorite.has(item.name)) && (!ownedOnly || owned.has(item.name)));
+    const visible = [], unowned = [];
+    for (const item of items) {
+      const isOwned = owned.has(item.name);
+      if ((group && !group.categories.includes(item.category)) || (subcategory && item.subcategory !== subcategory) ||
+          (favoriteOnly && !favorite.has(item.name)) || (ownedOnly && !isOwned)) continue;
+      (isOwned ? visible : unowned).push(item);
+    }
+    visible.push(...unowned);
     $('category-label').textContent = subcategory || group?.label || '전체 아이템';
     $('item-count').textContent = `${visible.length} / ${items.length}`;
     $('items').className = `item-items ${listView ? 'list-view' : 'grid-view'}`;
@@ -477,7 +483,7 @@
     const index = value[key].indexOf(name);
     if (index < 0) value[key].push(name); else value[key].splice(index, 1);
     editPreset(selectedPreset, value);
-    if (favoriteOnly || ownedOnly) render();
+    if (key === 'inventory' || favoriteOnly || ownedOnly) render();
     else button.setAttribute('aria-pressed', String(index < 0));
     if (activeDetail === name) renderDetailStatus(name);
   }
