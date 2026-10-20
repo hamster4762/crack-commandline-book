@@ -74,6 +74,8 @@
 
   const CONFIG_KEY = 'crack-commandline:firebase-config';
   const SESSION_KEY = 'crack-commandline:firebase-session';
+  const WINDOW_LAYOUT_PREFIX = 'crack-commandline:window-layout:';
+  const bookWindowLayouts = new WeakMap();
   const DB_NAME = 'crack-commandline';
   const commands = new Map();
   const queues = new Map();
@@ -951,9 +953,13 @@
         </section>
         <section class="section"><div class="section-heading"><div class="section-title"><span class="section-number">02</span><h2>명령어별 저장소</h2></div><span class="section-meta">등록된 명령어 <span data-command-count>0</span></span></div><div class="command-list" data-command-list></div></section>
       </div>
-      <footer class="window-footer"><span class="shortcut">명령어 <kbd>!설정</kbd></span><button class="button primary" data-action="close">완료</button></footer>`;
+      <footer class="window-footer"><span class="shortcut">명령어 <kbd>!설정</kbd></span><button class="button subtle" data-reset-layouts title="도감 창의 위치와 크기를 기본값으로 되돌립니다">창 배치 초기화</button><button class="button primary" data-action="close">완료</button></footer>`;
     dialog.querySelector('[data-config]').value = config ? JSON.stringify(config, null, 2) : '';
     dialog.querySelector('#cc-email').value = session?.email || '';
+    dialog.querySelector('[data-reset-layouts]').addEventListener('click', () => {
+      try { resetBookWindowLayouts(); showToast('창 위치와 크기를 초기화했어요.'); }
+      catch (error) { showError(error); }
+    });
     dialog.querySelectorAll('[data-action="close"]').forEach(button => button.addEventListener('click', () => dialog.close()));
     dialog.addEventListener('close', () => { dialog.remove(); if (settingsDialog === dialog) settingsDialog = null; }, { once: true });
     dialog.querySelector('[data-action="guide"]').addEventListener('click', () => createDialog('Firebase 연동 가이드', GUIDE_BODY,
@@ -1199,7 +1205,58 @@
       .sort((a, b) => (Number(a.style.zIndex) || 2147483600) - (Number(b.style.zIndex) || 2147483600));
   }
 
+  function canAdjustBookWindow() {
+    return window.matchMedia('(min-width: 641px) and (pointer: fine)').matches;
+  }
+
+  // 창은 data-cc-book-window에 등록 ID를 넣고, 표시 직후 cc-book-open을 발생시킨다.
+  // 배치는 첫 PC 열기에서 한 번 읽고 메모리에 유지한다. DB API와는 무관하다.
+  function prepareBookWindow(root) {
+    const id = root.dataset.ccBookWindow;
+    if (!commands.has(id)) return;
+    if (!bookWindowLayouts.has(root)) {
+      const defaults = Object.fromEntries(['left', 'top', 'width', 'height'].map(key => [key, root.style[key]]));
+      bookWindowLayouts.set(root, { defaults, layout: undefined });
+    }
+    if (!canAdjustBookWindow()) return;
+    const state = bookWindowLayouts.get(root);
+    if (state.layout === undefined) {
+      const value = readSetting(WINDOW_LAYOUT_PREFIX + id);
+      state.layout = value && ['left', 'top', 'width', 'height'].every(key => Number.isFinite(value[key])) &&
+        value.width > 0 && value.height > 0 ? value : null;
+    }
+    const value = state.layout;
+    if (!value) return;
+    for (const key of ['left', 'top', 'width', 'height']) root.style[key] = `${value[key]}px`;
+  }
+
+  function saveBookWindowLayout(root) {
+    const id = root.dataset.ccBookWindow, state = bookWindowLayouts.get(root);
+    if (!state || root.hidden || !canAdjustBookWindow()) return;
+    const bounds = root.getBoundingClientRect();
+    const value = Object.fromEntries(['left', 'top', 'width', 'height'].map(key => [key, Math.round(bounds[key])]));
+    if (state.layout && Object.keys(value).every(key => state.layout[key] === value[key])) return;
+    try {
+      writeSetting(WINDOW_LAYOUT_PREFIX + id, value);
+      state.layout = value;
+    }
+    catch (error) { showError(error); }
+  }
+
+  function resetBookWindowLayouts() {
+    for (const key of Object.keys(localStorage)) if (key.startsWith(WINDOW_LAYOUT_PREFIX)) writeSetting(key, null);
+    for (const root of document.querySelectorAll('[data-cc-book-window]')) {
+      const state = bookWindowLayouts.get(root);
+      if (!state) continue;
+      state.layout = null;
+      for (const [key, value] of Object.entries(state.defaults)) root.style[key] = value;
+    }
+  }
+
   function startBookWindowEvents() {
+    document.addEventListener('cc-book-open', event => {
+      if (event.target.matches?.('[data-cc-book-window]')) prepareBookWindow(event.target);
+    }, true);
     document.addEventListener('keydown', event => {
       if (event.key !== 'Escape' || event.isComposing || document.querySelector('dialog[open]')) return;
       const root = visibleBookWindows().at(-1);
@@ -1215,12 +1272,19 @@
       if (!root || root.hidden) return;
       const others = visibleBookWindows().filter(node => node !== root);
       [...others, root].forEach((node, index) => { node.style.zIndex = String(2147483600 + index); });
+      if (event.target === root && event.button === 0 && event.pointerType === 'mouse' && canAdjustBookWindow()) {
+        const width = root.style.width, height = root.style.height;
+        window.addEventListener('mouseup', () => {
+          if (root.style.width !== width || root.style.height !== height) saveBookWindowLayout(root);
+        }, { once: true, capture: true });
+      }
       const header = event.target.closest('[data-cc-drag-handle]');
       if (!header || event.button !== 0 || event.pointerType !== 'mouse' ||
-          !window.matchMedia('(min-width: 641px) and (pointer: fine)').matches ||
+          !canAdjustBookWindow() ||
           event.target.closest('button, input, select, textarea')) return;
       const bounds = root.getBoundingClientRect();
       const x = event.clientX - bounds.left, y = event.clientY - bounds.top;
+      const initialLeft = root.style.left, initialTop = root.style.top;
       const events = new AbortController();
       header.setPointerCapture(event.pointerId);
       event.preventDefault();
@@ -1235,8 +1299,9 @@
       }, { signal: events.signal });
       const finish = end => {
         if (end.pointerId !== event.pointerId) return;
-        if (header.hasPointerCapture(event.pointerId)) header.releasePointerCapture(event.pointerId);
         events.abort();
+        if (header.hasPointerCapture(event.pointerId)) header.releasePointerCapture(event.pointerId);
+        if (root.style.left !== initialLeft || root.style.top !== initialTop) saveBookWindowLayout(root);
       };
       for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) {
         header.addEventListener(name, finish, { signal: events.signal });

@@ -69,7 +69,7 @@
   const BUNDLED_MAPS = [{ data: 'map01', background: 'map01Background' }];
   const MAP_CSS = `
 .cc-ui.ui-window.cc-map-window {
-  --inset: 9px; position: fixed; z-index: 2147483600; left: calc(50vw - 530px); top: 74px;
+  --inset: 9px; position: fixed; z-index: 2147483600; left: max(12px, calc(50vw - 530px)); top: 74px;
   display: flex; flex-direction: column; padding: 4px; width: min(1060px, calc(100vw - 24px));
   height: min(700px, calc(100dvh - 98px)); min-width: 328px; min-height: 220px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); border-radius: 4px;
 }
@@ -224,7 +224,7 @@
 .cc-ui.cc-map-window .map-menu { max-height: calc(100% - 82px); overflow-y: auto; scrollbar-width: thin; }
 .cc-ui.cc-map-window .map-detail { max-height: calc(100% - 26px); overflow-y: auto; }
 `;
-  const MAP_TEMPLATE = `<section id="cc-map-map-window" data-cc-book-window class="cc-ui ui-window cc-map-window" role="dialog" aria-modal="false" aria-labelledby="cc-map-map-title">
+  const MAP_TEMPLATE = `<section id="cc-map-map-window" data-cc-book-window="crack-map-book" class="cc-ui ui-window cc-map-window" role="dialog" aria-modal="false" aria-labelledby="cc-map-map-title">
       <header class="map-header" data-cc-drag-handle>
         <h1 id="cc-map-map-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2zm6-2v16m6-14v16"/></svg>지도</h1>
         <button id="cc-map-close-map" class="icon-button" aria-label="지도 닫기" title="닫기"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
@@ -861,6 +861,7 @@
     try {
       if (!ui) { readBuiltins(); makeWindow(); }
       ui.hidden = false;
+      ui.dispatchEvent(new Event('cc-book-open', { bubbles: true }));
       if (!map) renderMap(builtin);
       fitVisibleViewport();
     } catch (error) {
@@ -889,22 +890,21 @@
   }
 
   function fitVisibleViewport() {
-    if (!ui || ui.hidden) return;
+    if (!ui || ui.hidden || window.innerWidth > 640) return;
     const viewport = window.visualViewport;
     const left = viewport?.offsetLeft ?? 0, top = viewport?.offsetTop ?? 0;
     const width = viewport?.width ?? window.innerWidth, height = viewport?.height ?? window.innerHeight;
-    const available = Math.max(0, height - 16), narrow = window.innerWidth <= 640;
+    const available = Math.max(0, height - 16);
     ui.style.maxWidth = `${Math.max(0, width - 16)}px`;
     ui.style.maxHeight = `${available}px`;
     ui.style.minWidth = `${Math.min(328, Math.max(0, width - 16))}px`;
     ui.style.minHeight = `${Math.min(220, available)}px`;
-    const currentHeight = narrow ? Math.min(480, Math.max(240, height - 165)) :
-      Number.parseFloat(ui.style.height) || Math.min(700, Math.max(220, height - 98));
+    const currentHeight = Math.min(480, Math.max(240, height - 165));
     ui.style.height = `${Math.min(currentHeight, available)}px`;
     const box = ui.getBoundingClientRect();
     const x = Number.parseFloat(ui.style.left), y = Number.parseFloat(ui.style.top);
     ui.style.left = `${Math.max(left + 8, Math.min(Number.isFinite(x) ? x : left + (width - box.width) / 2, left + width - box.width - 8))}px`;
-    ui.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + (narrow ? 12 : 74), top + height - box.height - 8))}px`;
+    ui.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + 12, top + height - box.height - 8))}px`;
     updateCamera();
   }
 

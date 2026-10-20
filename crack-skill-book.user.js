@@ -33,7 +33,7 @@
   const SKILL_CSS = `
 /* 스킬 도감: 채팅을 가리지 않는 비모달 창. 보기 방식과 무관하게 창 크기는 같다. */
 .cc-ui.ui-window.cc-skill-window {
-  position: fixed; left: calc(50vw - 380px); top: 74px; z-index: 2147483600;
+  position: fixed; left: max(12px, calc(50vw - 380px)); top: 74px; z-index: 2147483600;
   display: flex; flex-direction: column; width: min(760px, calc(100vw - 24px));
   height: min(510px, calc(100dvh - 98px)); min-width: 328px; min-height: 220px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px);
   padding: 4px; border-radius: 4px; --inset: 10px;
@@ -266,7 +266,7 @@
     root.setAttribute('aria-modal', 'false');
     root.setAttribute('aria-label', catalog.title);
     root.hidden = true;
-    root.setAttribute('data-cc-book-window', '');
+    root.setAttribute('data-cc-book-window', 'crack-skill-book');
 
     const stylesheet = element('style');
     stylesheet.textContent = SKILL_CSS;
@@ -402,6 +402,7 @@
     if (typeof book.keys !== 'function') throw new Error('스킬 도감에는 keys()를 제공하는 core가 필요합니다.');
     returnFocus = document.activeElement;
     ui.root.hidden = false;
+    ui.root.dispatchEvent(new Event('cc-book-open', { bubbles: true }));
     events = new window.AbortController();
     fitVisibleViewport();
     window.addEventListener('resize', fitVisibleViewport, { passive: true, signal: events.signal });
@@ -453,20 +454,20 @@
 
   // 키보드가 차지한 영역을 제외하고 실제로 보이는 화면 안에 창을 맞춘다.
   function fitVisibleViewport() {
-    if (!ui || ui.root.hidden) return;
+    if (!ui || ui.root.hidden || window.innerWidth > 640) return;
     const root = ui.root, viewport = window.visualViewport;
     const left = viewport?.offsetLeft ?? 0, top = viewport?.offsetTop ?? 0;
     const width = viewport?.width ?? window.innerWidth, height = viewport?.height ?? window.innerHeight;
-    const available = Math.max(0, height - 16), narrow = window.innerWidth <= 640;
+    const available = Math.max(0, height - 16);
     root.style.maxWidth = `${Math.max(0, width - 16)}px`;
     root.style.maxHeight = `${available}px`;
     root.style.minHeight = `${Math.min(220, available)}px`;
-    const currentHeight = Number.parseFloat(root.style.height) || Math.min(510, Math.max(220, height - (narrow ? 165 : 98)));
+    const currentHeight = Number.parseFloat(root.style.height) || Math.min(510, Math.max(220, height - 165));
     root.style.height = `${Math.min(currentHeight, available)}px`;
     const box = root.getBoundingClientRect();
     const x = Number.parseFloat(root.style.left), y = Number.parseFloat(root.style.top);
     root.style.left = `${Math.max(left + 8, Math.min(Number.isFinite(x) ? x : left + (width - box.width) / 2, left + width - box.width - 8))}px`;
-    root.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + (narrow ? 12 : 74), top + height - box.height - 8))}px`;
+    root.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + 12, top + height - box.height - 8))}px`;
     ui.detail.hidden = true;
   }
 
@@ -477,6 +478,15 @@
     }
     cache.set(name, value === null ? null : [...value]);
     return value;
+  }
+
+  function discardAndClose() {
+    for (const name of createdNames) cache.delete(name);
+    drafts.clear(); createdNames.clear(); names.clear();
+    for (const name of persistedNames) names.add(name);
+    placeholderPreset = undefined;
+    ensurePreset(); renderDirty();
+    closeBook();
   }
 
   function closeBook() {
@@ -530,7 +540,7 @@
     dismissMenus();
     showNotice({ title: '저장하지 않은 변경사항',
       message: '변경사항이 저장되지 않았습니다. 계속 편집하거나 저장하지 않고 닫을 수 있습니다.',
-      cancelLabel: '돌아가기', confirmLabel: '저장하지 않고 닫기', onConfirm: closeBook });
+      cancelLabel: '돌아가기', confirmLabel: '저장하지 않고 닫기', onConfirm: discardAndClose });
   }
 
   function setStatus(message, error = false) {

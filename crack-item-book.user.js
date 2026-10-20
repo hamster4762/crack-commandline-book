@@ -162,7 +162,7 @@
   .cc-ui.cc-item-window .view-tools { padding-left: 3px; }
   .cc-ui.cc-item-window .item-toggles button { width: 20px; height: 20px; }
 }`;
-  const ITEM_TEMPLATE = `<section data-item-ui="inventory" class="cc-ui ui-window cc-item-window" role="dialog" aria-modal="false" hidden data-cc-book-window aria-label="아이템">
+  const ITEM_TEMPLATE = `<section data-item-ui="inventory" class="cc-ui ui-window cc-item-window" role="dialog" aria-modal="false" hidden data-cc-book-window="crack-item-book" aria-label="아이템">
       <header class="item-header" data-item-ui="drag-handle" data-cc-drag-handle><h1><svg viewBox="0 0 24 24"><path d="M4 8h16v13H4zM8 8V4h8v4M4 12h16M9 10v4m6-4v4"/></svg>아이템<i data-item-ui="dirty" hidden></i></h1><div><button data-item-ui="save" class="icon-button" title="저장" aria-label="저장" data-icon="save"></button><button data-item-ui="close" class="icon-button" title="닫기" aria-label="닫기" data-icon="close"></button></div></header>
       <div class="item-toolbar">
         <div data-item-ui="tabs" class="category-tabs" role="group" aria-label="아이템 분류"></div>
@@ -212,7 +212,6 @@
   let ownedOnly = false;
   let listView = false;
   let activeDetail = null;
-  let hoverTimer;
   let toastTimer;
   let busy = false;
   let ready = false;
@@ -315,6 +314,7 @@
     if (!ui) makeWindow();
     returnFocus = document.activeElement;
     ui.hidden = false; ready = false;
+    ui.dispatchEvent(new Event('cc-book-open', { bubbles: true }));
     fitVisibleViewport();
     events = new window.AbortController();
     for (const target of [window, window.visualViewport].filter(Boolean)) {
@@ -381,16 +381,6 @@
       const card = event.target.closest('[data-item-name]');
       if (!card || event.target.closest('button') || !['Enter', ' '].includes(event.key)) return;
       event.preventDefault(); const box = card.getBoundingClientRect(); showDetail(card.dataset.itemName, box.right, box.top);
-    });
-    $('items').addEventListener('pointerover', event => {
-      const card = event.target.closest('[data-item-name]');
-      if (!card || event.pointerType !== 'mouse' || card.contains(event.relatedTarget)) return;
-      clearTimeout(hoverTimer);
-      hoverTimer = setTimeout(() => showDetail(card.dataset.itemName, event.clientX, event.clientY), 260);
-    });
-    $('items').addEventListener('pointerout', event => {
-      const card = event.target.closest('[data-item-name]');
-      if (card && !card.contains(event.relatedTarget)) clearTimeout(hoverTimer);
     });
     ui.addEventListener('pointerdown', event => {
       if (!event.target.closest('.item-card, .item-detail')) hideDetail();
@@ -482,7 +472,7 @@
     const card = event.target.closest('[data-item-name]');
     if (!card || busy || !ready) return;
     const button = event.target.closest('[data-toggle]');
-    if (!button) { clearTimeout(hoverTimer); showDetail(card.dataset.itemName, event.clientX, event.clientY); return; }
+    if (!button) { showDetail(card.dataset.itemName, event.clientX, event.clientY); return; }
     const value = normalizePreset(valueFor()), key = button.dataset.toggle, name = card.dataset.itemName;
     const index = value[key].indexOf(name);
     if (index < 0) value[key].push(name); else value[key].splice(index, 1);
@@ -711,7 +701,7 @@
     }
   }
 
-  function hideDetail() { clearTimeout(hoverTimer); $('detail').hidden = true; activeDetail = null; }
+  function hideDetail() { $('detail').hidden = true; activeDetail = null; }
   function hideMenus() {
     $('subcategory-menu').hidden = true; $('preset-menu').hidden = true;
     $('preset-toggle').setAttribute('aria-expanded', 'false'); $('subcategory').setAttribute('aria-expanded', 'false');
@@ -739,9 +729,18 @@
 
   function requestClose() {
     if (!drafts.size) { closeBook(); return; }
-    const actions = [['돌아가기', '', () => ui.dispatchEvent(new Event('cc-book-close-cancelled'))], ['저장하지 않고 닫기', 'danger', closeBook]];
+    const actions = [['돌아가기', '', () => ui.dispatchEvent(new Event('cc-book-close-cancelled'))], ['저장하지 않고 닫기', 'danger', discardAndClose]];
     if (!busy && ready) actions.push(['저장 후 닫기', 'primary', () => requestSave(true)]);
     showNotice('저장하지 않은 변경사항', '프리셋과 즐겨찾기·소지중 변경사항이 저장되지 않았습니다.', '', actions);
+  }
+
+  function discardAndClose() {
+    for (const name of createdNames) cache.delete(name);
+    drafts.clear(); createdNames.clear(); names.clear();
+    for (const name of persistedNames) names.add(name);
+    placeholderPreset = undefined;
+    ensurePreset(); renderDirty();
+    closeBook();
   }
 
   function closeBook() {
@@ -756,18 +755,18 @@
   }
 
   function fitVisibleViewport() {
-    if (!ui || ui.hidden) return;
+    if (!ui || ui.hidden || window.innerWidth > 640) return;
     const viewport = window.visualViewport, top = viewport?.offsetTop ?? 0, left = viewport?.offsetLeft ?? 0;
     const width = viewport?.width ?? window.innerWidth, height = viewport?.height ?? window.innerHeight;
-    const narrow = window.innerWidth <= 640, available = Math.max(0, height - 16);
+    const available = Math.max(0, height - 16);
     ui.style.maxWidth = `${Math.max(0, width - 16)}px`; ui.style.maxHeight = `${available}px`;
     ui.style.minHeight = `${Math.min(240, available)}px`;
-    const currentHeight = Number.parseFloat(ui.style.height) || Math.min(narrow ? 480 : 715, Math.max(240, height - (narrow ? 165 : 98)));
+    const currentHeight = Number.parseFloat(ui.style.height) || Math.min(480, Math.max(240, height - 165));
     ui.style.height = `${Math.min(currentHeight, available)}px`;
     const box = ui.getBoundingClientRect();
     const x = Number.parseFloat(ui.style.left), y = Number.parseFloat(ui.style.top);
-    ui.style.left = `${Math.max(left + 8, Math.min(Number.isFinite(x) ? x : left + width - box.width - (narrow ? 8 : 24), left + width - box.width - 8))}px`;
-    ui.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + (narrow ? 12 : 74), top + height - box.height - 8))}px`;
+    ui.style.left = `${Math.max(left + 8, Math.min(Number.isFinite(x) ? x : left + width - box.width - 8, left + width - box.width - 8))}px`;
+    ui.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + 12, top + height - box.height - 8))}px`;
     hideDetail();
   }
 
