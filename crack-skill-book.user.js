@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         크랙 스킬 도감
 // @namespace    crack-commandline
-// @version      1.0.0.0
+// @version      1.0.1.0
 // @description  !스킬로 스킬을 보고 프리셋별 즐겨찾기를 관리합니다. (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-idle
@@ -33,9 +33,9 @@
   const SKILL_CSS = `
 /* 스킬 도감: 채팅을 가리지 않는 비모달 창. 보기 방식과 무관하게 창 크기는 같다. */
 .cc-ui.ui-window.cc-skill-window {
-  position: fixed; left: 50%; top: 44%; z-index: 2147483600; transform: translate(-50%, -50%);
+  position: fixed; left: calc(50vw - 380px); top: 74px; z-index: 2147483600;
   display: flex; flex-direction: column; width: min(760px, calc(100vw - 24px));
-  height: min(510px, calc(100dvh - 170px)); min-height: 220px; max-height: calc(100dvh - 24px);
+  height: min(510px, calc(100dvh - 98px)); min-width: 328px; min-height: 220px; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px);
   padding: 4px; border-radius: 4px; --inset: 10px;
 }
 .cc-ui .cc-skill-sprite { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
@@ -58,7 +58,7 @@
 .cc-ui .cc-skill-header-actions .icon-button:hover { border-color: #baa16d70; background: #ddc39410; }
 .cc-ui .cc-skill-header-actions [data-action=save] { color: #d9c18d; }
 .cc-ui .cc-skill-toolbar {
-  display: grid; grid-template-columns: 36px minmax(0, 1fr) 32px 32px; align-items: center; gap: 5px;
+  display: grid; grid-template-columns: 36px minmax(0, 1fr) 32px 32px 32px; align-items: center; gap: 5px;
   padding: 7px 8px; flex-shrink: 0; border-bottom: 1px solid #69706c70;
 }
 .cc-ui .cc-skill-toolbar > [data-action=categories] { width: 36px; height: 34px; }
@@ -72,13 +72,14 @@
 .cc-ui .cc-skill-detail { width: min(300px, calc(100% - 16px)); max-height: calc(100% - 16px); overflow: auto; padding: 11px 13px; }
 .cc-ui .cc-skill-detail-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .cc-ui .cc-skill-detail-heading strong { color: var(--accent); font-size: 13px; overflow-wrap: anywhere; }
+.cc-ui .cc-skill-detail { user-select: text; cursor: text; }
 .cc-ui .cc-skill-detail p { margin: 8px 0 0; color: var(--text); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
 .cc-ui .cc-skill-list {
   flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; margin: 0 4px;
-  scrollbar-width: thin; scrollbar-color: #9b875977 #111920; background: #11192177; box-shadow: inset 0 2px 5px #0004;
+  scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: #9b875977 #111920; background: #11192177; box-shadow: inset 0 2px 5px #0004;
 }
 .cc-ui .cc-skill-row {
-  display: grid; grid-template-columns: 42px minmax(100px, 1.1fr) 66px minmax(130px, 1.9fr) 28px;
+  display: grid; grid-template-columns: 42px minmax(100px, min(24%, 180px)) 66px minmax(70px, 1fr) 28px;
   align-items: center; gap: 7px; min-height: 49px; padding: 5px 7px; border-bottom: 1px solid #56606948;
   background: linear-gradient(90deg, #46515c12, #222e360a); box-shadow: inset 0 1px #b8c7c403; cursor: pointer;
   content-visibility: auto; contain-intrinsic-size: auto 49px;
@@ -108,21 +109,21 @@
 .cc-ui .cc-skill-favorite[aria-pressed=true] { color: #e8c16d; }
 .cc-ui .cc-skill-favorite[aria-pressed=true] svg { fill: #c9a35244; filter: drop-shadow(0 0 3px #d4b66c29); }
 .cc-ui .cc-skill-list[data-view=grid] {
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-auto-rows: max-content; align-content: start; gap: 4px; padding: 6px;
+  display: grid; grid-template-columns: repeat(auto-fill, 64px); justify-content: space-between; grid-auto-rows: max-content; align-content: start; gap: 4px; padding: 6px;
 }
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-row {
-  position: relative; grid-template-columns: minmax(0, 1fr) 21px; grid-template-rows: 64px 14px 22px;
-  justify-items: center; gap: 0; padding: 5px 4px 3px; min-height: 109px; border: 1px solid #736b5742; border-radius: 2px;
-  background: linear-gradient(#74818a10, #10182033); contain-intrinsic-size: auto 109px;
+  position: relative; grid-template-columns: minmax(0, 1fr) 17px; grid-template-rows: 47px 12px 20px;
+  justify-items: center; gap: 0; padding: 5px 4px 3px; min-height: 90px; border: 1px solid #736b5742; border-radius: 2px;
+  background: linear-gradient(#74818a10, #10182033); contain-intrinsic-size: auto 90px;
 }
-.cc-ui .cc-skill-list[data-view=grid] .cc-skill-art { width: 58px; height: 58px; grid-row: 1; grid-column: 1 / -1; }
-.cc-ui .cc-skill-list[data-view=grid] .cc-skill-art > svg { width: 45px; height: 45px; stroke-width: 1.65; }
-.cc-ui .cc-skill-list[data-view=grid] .cc-skill-category-badge { width: 19px; height: 19px; }
-.cc-ui .cc-skill-list[data-view=grid] .cc-skill-category-badge svg { width: 14px; height: 14px; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-art { width: 42px; height: 42px; grid-row: 1; grid-column: 1 / -1; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-art > svg { width: 33px; height: 33px; stroke-width: 1.65; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-category-badge { width: 15px; height: 15px; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-category-badge svg { width: 11px; height: 11px; }
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-level { grid-row: 2; grid-column: 1 / -1; font-size: 9px; }
-.cc-ui .cc-skill-list[data-view=grid] .cc-skill-name { grid-row: 3; grid-column: 1; width: 100%; text-align: center; font-size: 10px; }
-.cc-ui .cc-skill-list[data-view=grid] .cc-skill-favorite { grid-row: 3; grid-column: 2; width: 21px; height: 23px; padding: 2px; }
-.cc-ui .cc-skill-list[data-view=grid] .cc-skill-favorite svg { width: 16px; height: 16px; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-name { grid-row: 3; grid-column: 1; width: 100%; text-align: center; font-size: 9px; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-favorite { grid-row: 3; grid-column: 2; width: 17px; height: 23px; padding: 2px; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-favorite svg { width: 14px; height: 14px; }
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-description { display: none; }
 .cc-ui .cc-skill-list[data-reorder=true] .cc-skill-row { cursor: grab; user-select: none; -webkit-user-select: none; }
 .cc-ui .cc-skill-list.is-reordering .cc-skill-row { content-visibility: visible; }
@@ -161,9 +162,9 @@
 .cc-ui .cc-skill-notice-actions { display: flex; justify-content: flex-end; gap: 6px; margin-top: 13px; }
 .cc-ui .cc-skill-notice-actions .button { min-height: 30px; min-width: 65px; padding: 5px 10px; font-size: 11px; }
 
-@media (max-width: 540px) {
-  .cc-ui.ui-window.cc-skill-window { top: 42%; height: min(510px, calc(100dvh - 165px)); }
-  .cc-ui .cc-skill-row { grid-template-columns: 34px minmax(65px, 1fr) 49px minmax(50px, 1.2fr) 23px; gap: 4px; padding: 4px 5px; min-height: 44px; }
+@media (max-width: 640px) {
+  .cc-ui.ui-window.cc-skill-window { left: 8px; top: 48px; width: calc(100vw - 16px); min-width: 0; height: min(510px, calc(100dvh - 165px)); }
+  .cc-ui .cc-skill-row { grid-template-columns: 34px minmax(65px, min(28%, 140px)) 49px minmax(50px, 1fr) 23px; gap: 4px; padding: 4px 5px; min-height: 44px; }
   .cc-ui .cc-skill-art { width: 29px; height: 29px; }
   .cc-ui .cc-skill-art > svg { width: 22px; height: 22px; }
   .cc-ui .cc-skill-name { font-size: 11px; }
@@ -200,6 +201,7 @@
   let placeholderPreset;
   let selectedCategory;
   let selectedSubcategory = '';
+  let favoriteOnly = true;
   let view = 'list';
   let busy = false;
   let ready = false;
@@ -251,7 +253,7 @@
         }
       }
     }
-    selectedCategory = catalog.filters[1].name;
+    selectedCategory = catalog.filters[0].name;
   }
 
   function makeWindow() {
@@ -260,6 +262,7 @@
     root.setAttribute('aria-modal', 'false');
     root.setAttribute('aria-label', catalog.title);
     root.hidden = true;
+    root.setAttribute('data-cc-book-window', '');
 
     const stylesheet = element('style');
     stylesheet.textContent = SKILL_CSS;
@@ -273,6 +276,7 @@
     sprite.append(document.importNode(definitions, true));
 
     const header = element('header', 'cc-skill-header');
+    header.setAttribute('data-cc-drag-handle', '');
     const title = element('h1', 'cc-skill-title', catalog.title);
     const dirty = element('span', 'cc-skill-dirty');
     dirty.hidden = true;
@@ -292,17 +296,20 @@
     categoryButton.setAttribute('aria-expanded', 'false');
     const subcategory = element('select', 'select-input cc-skill-subcategory');
     subcategory.setAttribute('aria-label', '소분류');
+    const favoriteButton = iconButton('즐겨찾기 필터', 'star', 'filter-favorite');
+    favoriteButton.setAttribute('aria-pressed', String(favoriteOnly));
     const viewButton = iconButton('썸네일로 보기', 'grid', 'view');
     const helpButton = iconButton('수준표', 'question', 'help');
     helpButton.setAttribute('aria-haspopup', 'dialog');
     helpButton.setAttribute('aria-expanded', 'false');
-    toolbar.append(categoryButton, subcategory, viewButton, helpButton);
+    toolbar.append(categoryButton, subcategory, favoriteButton, viewButton, helpButton);
 
     const categoryMenu = element('div', 'popover cc-skill-category-menu');
     categoryMenu.hidden = true;
     categoryMenu.setAttribute('role', 'dialog');
     categoryMenu.setAttribute('aria-label', '대분류 선택');
-    for (const rowNames of [catalog.filters.map(filter => filter.name), ...catalog.categoryRows]) {
+    for (const [index, categoryRow] of catalog.categoryRows.entries()) {
+      const rowNames = index === 0 ? [catalog.filters[0].name, ...categoryRow] : categoryRow;
       const row = element('div', 'cc-skill-category-line');
       for (const name of rowNames) {
         const category = categoriesByName.get(name) || catalog.filters.find(filter => filter.name === name);
@@ -358,7 +365,7 @@
     detail.setAttribute('aria-label', '스킬 정보');
     root.append(stylesheet, sprite, header, toolbar, status, list, footer, categoryMenu, help, presetMenu, detail, notice);
     document.body.append(root);
-    ui = { root, dirty, save, close, categoryButton, subcategory, viewButton, helpButton,
+    ui = { root, dirty, save, close, categoryButton, subcategory, favoriteButton, viewButton, helpButton,
       categoryMenu, help, status, list, presetButton, presetLabel, presetMenu, detail, notice };
     root.addEventListener('click', handleClick);
     root.addEventListener('pointerdown', handlePointerDown);
@@ -368,6 +375,8 @@
     root.addEventListener('touchmove', event => { if (drag?.active) event.preventDefault(); }, { passive: false });
     root.addEventListener('contextmenu', event => { if (drag) event.preventDefault(); });
     root.addEventListener('keydown', handleKeyDown);
+    root.addEventListener('cc-book-escape', handleEscape);
+    root.addEventListener('cc-book-close-request', requestClose);
     list.addEventListener('scroll', () => { detail.hidden = true; }, { passive: true });
     subcategory.addEventListener('change', () => {
       selectedSubcategory = subcategory.value;
@@ -435,17 +444,21 @@
 
   // 키보드가 차지한 영역을 제외하고 실제로 보이는 화면 안에 창을 맞춘다.
   function fitVisibleViewport() {
-    const viewport = window.visualViewport;
-    const visibleHeight = viewport?.height ?? window.innerHeight;
-    const availableHeight = Math.max(0, visibleHeight - 24);
-    const narrow = window.innerWidth <= 540;
-    const height = Math.min(510, availableHeight, Math.max(220, visibleHeight - (narrow ? 165 : 170)));
-    const center = Math.max(12 + height / 2,
-      Math.min(visibleHeight * (narrow ? 0.42 : 0.44), visibleHeight - 12 - height / 2));
-    ui.root.style.height = `${height}px`;
-    ui.root.style.minHeight = `${Math.min(220, availableHeight)}px`;
-    ui.root.style.maxHeight = `${availableHeight}px`;
-    ui.root.style.top = `${(viewport?.offsetTop ?? 0) + center}px`;
+    if (!ui || ui.root.hidden) return;
+    const root = ui.root, viewport = window.visualViewport;
+    const left = viewport?.offsetLeft ?? 0, top = viewport?.offsetTop ?? 0;
+    const width = viewport?.width ?? window.innerWidth, height = viewport?.height ?? window.innerHeight;
+    const available = Math.max(0, height - 16), narrow = window.innerWidth <= 640;
+    root.style.maxWidth = `${Math.max(0, width - 16)}px`;
+    root.style.maxHeight = `${available}px`;
+    root.style.minHeight = `${Math.min(220, available)}px`;
+    const currentHeight = Number.parseFloat(root.style.height) || Math.min(510, Math.max(220, height - (narrow ? 165 : 98)));
+    root.style.height = `${Math.min(currentHeight, available)}px`;
+    const box = root.getBoundingClientRect();
+    const x = Number.parseFloat(root.style.left), y = Number.parseFloat(root.style.top);
+    root.style.left = `${Math.max(left + 8, Math.min(Number.isFinite(x) ? x : left + (width - box.width) / 2, left + width - box.width - 8))}px`;
+    root.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + (narrow ? 12 : 74), top + height - box.height - 8))}px`;
+    ui.detail.hidden = true;
   }
 
   async function loadPreset(name) {
@@ -465,6 +478,7 @@
     ui.root.hidden = true;
     events?.abort();
     if (ui.root.contains(document.activeElement)) restoreFocus();
+    ui.root.dispatchEvent(new Event('cc-book-closed'));
   }
 
   function restoreFocus() {
@@ -505,8 +519,8 @@
     if (!drafts.size) { closeBook(); return; }
     dismissMenus();
     showNotice({ title: '저장하지 않은 변경사항',
-      message: '변경사항이 저장되지 않았습니다. 저장하려면 취소한 뒤 상단 저장 버튼을 눌러 주세요.',
-      confirmLabel: '닫기', onConfirm: closeBook });
+      message: '변경사항이 저장되지 않았습니다. 계속 편집하거나 저장하지 않고 닫을 수 있습니다.',
+      cancelLabel: '돌아가기', confirmLabel: '저장하지 않고 닫기', onConfirm: closeBook });
   }
 
   function setStatus(message, error = false) {
@@ -542,6 +556,7 @@
     for (const button of ui.categoryMenu.querySelectorAll('[data-category]')) {
       button.setAttribute('aria-pressed', String(button.dataset.category === selectedCategory));
     }
+    ui.favoriteButton.setAttribute('aria-pressed', String(favoriteOnly));
     ui.viewButton.replaceChildren(icon(view === 'list' ? 'grid' : 'list'));
     ui.viewButton.title = view === 'list' ? '썸네일로 보기' : '목록으로 보기';
     ui.viewButton.setAttribute('aria-label', ui.viewButton.title);
@@ -578,13 +593,11 @@
   function renderSkills() {
     const favorites = knownNames(selectedNames());
     const favoriteSet = new Set(favorites);
-    let skills;
-    if (selectedCategory === catalog.filters[1].name) skills = favorites.map(name => skillsByName.get(name));
-    else if (selectedCategory === catalog.filters[0].name) skills = allSkills;
-    else skills = allSkills.filter(skill => skill.category.name === selectedCategory &&
-      (!selectedSubcategory || skill.subcategory.name === selectedSubcategory));
+    const source = favoriteOnly ? favorites.map(name => skillsByName.get(name)) : allSkills;
+    const skills = source.filter(skill => selectedCategory === catalog.filters[0].name ||
+      (skill.category.name === selectedCategory && (!selectedSubcategory || skill.subcategory.name === selectedSubcategory)));
     ui.list.dataset.view = view;
-    ui.list.dataset.reorder = String(selectedCategory === catalog.filters[1].name);
+    ui.list.dataset.reorder = String(favoriteOnly);
     const fragment = document.createDocumentFragment();
     for (const skill of skills) {
       const row = element('div', 'cc-skill-row');
@@ -604,8 +617,8 @@
     }
     if (!skills.length) {
       const empty = element('div', 'cc-skill-empty');
-      empty.append(icon(selectedCategory === catalog.filters[1].name ? 'star' : 'book'),
-        element('span', '', selectedCategory === catalog.filters[1].name ? '즐겨찾기를 선택해 주세요.' : '표시할 스킬이 없습니다.'));
+      empty.append(icon(favoriteOnly ? 'star' : 'book'),
+        element('span', '', favoriteOnly ? '표시할 즐겨찾기가 없습니다.' : '표시할 스킬이 없습니다.'));
       fragment.append(empty);
     }
     ui.list.replaceChildren(fragment);
@@ -751,7 +764,7 @@
       detail: empty.join(' · '), confirmLabel: '저장', onConfirm: () => { void saveChanges(); } });
   }
 
-  function showNotice({ title, message, detail, confirmLabel, onConfirm }) {
+  function showNotice({ title, message, detail, cancelLabel = '취소', confirmLabel, onConfirm }) {
     const panel = element('div', 'cc-skill-notice');
     panel.setAttribute('role', 'alertdialog');
     panel.setAttribute('aria-modal', 'false');
@@ -760,10 +773,10 @@
     heading.append(icon('warning'), element('strong', '', title));
     const text = element('p', '', message);
     const actions = element('div', 'cc-skill-notice-actions');
-    const cancel = element('button', 'button', '취소');
+    const cancel = element('button', 'button', cancelLabel);
     const confirm = element('button', 'button primary', confirmLabel);
     cancel.type = confirm.type = 'button';
-    cancel.addEventListener('click', () => { ui.notice.hidden = true; });
+    cancel.addEventListener('click', () => { ui.notice.hidden = true; ui.root.dispatchEvent(new Event('cc-book-close-cancelled')); });
     confirm.addEventListener('click', () => { ui.notice.hidden = true; onConfirm(); });
     actions.append(cancel, confirm);
     panel.append(heading, text);
@@ -882,6 +895,8 @@
     if (button.dataset.remove) { confirmDelete(button.dataset.remove, button.parentElement); return; }
     switch (button.dataset.action) {
       case 'close': requestClose(); break;
+      case 'filter-favorite':
+        cancelDrag(); favoriteOnly = !favoriteOnly; dismissMenus(); renderToolbar(); renderSkills(); break;
       case 'save': requestSave(); break;
       case 'categories': toggleMenu(ui.categoryMenu, ui.categoryButton); break;
       case 'help': toggleMenu(ui.help, ui.helpButton); break;
@@ -902,7 +917,11 @@
     event.stopPropagation();
     if (event.key !== 'Escape') return;
     event.preventDefault();
-    if (!ui.notice.hidden) ui.notice.hidden = true;
+    handleEscape();
+  }
+
+  function handleEscape() {
+    if (!ui.notice.hidden) ui.notice.querySelector('button')?.click();
     else if ([ui.categoryMenu, ui.presetMenu, ui.help, ui.detail].some(menu => !menu.hidden)) dismissMenus();
     else requestClose();
     restoreFocus();
@@ -913,10 +932,10 @@
     const target = event.target;
     if (!ui.root.contains(document.activeElement)) returnFocus = document.activeElement;
     // 보기·버튼·드래그는 채팅 포커스를 유지한다. 이름 편집·설명 복사·select만 입력 포커스를 받는다.
-    if (!target.closest('input, textarea, select')) event.preventDefault();
+    if (!target.closest('input, textarea, select, .cc-skill-detail')) event.preventDefault();
     if (!target.closest('.popover') && !target.closest('[data-action="categories"], [data-action="help"], [data-action="presets"]')) dismissMenus();
     const row = target.closest('.cc-skill-row');
-    if (!row || target.closest('button') || busy || selectedCategory !== catalog.filters[1].name || event.button !== 0) return;
+    if (!row || target.closest('button') || busy || !favoriteOnly || event.button !== 0) return;
     cancelDrag();
     drag = { row, pointerId: event.pointerId, x: event.clientX, y: event.clientY, active: false };
     drag.timer = setTimeout(() => {
@@ -950,7 +969,9 @@
     if (drag.active) {
       suppressSkillClick = true;
       const ordered = [...ui.list.querySelectorAll('[data-skill-name]')].map(row => row.dataset.skillName);
-      editPreset(selectedPreset, ordered);
+      const visible = new Set(ordered);
+      let index = 0;
+      editPreset(selectedPreset, knownNames(selectedNames()).map(name => visible.has(name) ? ordered[index++] : name));
     }
     clearDrag();
   }

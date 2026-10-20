@@ -89,6 +89,7 @@
   let connectionRevision = 0;
   let tokenRefresh;
   let settingsDialog;
+  let openingSettings = false;
   let suggestionBox;
   let activeEditor;
   let activeToken;
@@ -902,9 +903,40 @@
     });
   }
 
+  // 도감마다 기존 닫기/미저장 경고를 사용한다. 취소하면 설정도 열지 않는다.
+  async function closeBookWindows() {
+    for (const root of visibleBookWindows().reverse()) {
+      // 진행 중인 읽기/저장이 끝난 뒤 닫아 저장소 전환이 작업을 앞지르지 않게 한다.
+      if (root.getAttribute('aria-busy') === 'true') await new Promise(resolve => {
+        const observer = new MutationObserver(() => {
+          if (root.getAttribute('aria-busy') === 'true') return;
+          observer.disconnect();
+          resolve();
+        });
+        observer.observe(root, { attributes: true, attributeFilter: ['aria-busy'] });
+      });
+      const closed = await new Promise(resolve => {
+        const finish = event => {
+          root.removeEventListener('cc-book-closed', finish);
+          root.removeEventListener('cc-book-close-cancelled', finish);
+          resolve(event.type === 'cc-book-closed');
+        };
+        root.addEventListener('cc-book-closed', finish);
+        root.addEventListener('cc-book-close-cancelled', finish);
+        root.dispatchEvent(new Event('cc-book-close-request'));
+      });
+      if (!closed) return false;
+    }
+    return true;
+  }
+
   async function openSettingsDialog() {
     hideSuggestions();
     if (settingsDialog?.open) return settingsDialog;
+    if (openingSettings) return;
+    openingSettings = true;
+    try { if (!await closeBookWindows()) return; }
+    finally { openingSettings = false; }
     const dialog = document.createElement('dialog');
     settingsDialog = dialog;
     dialog.className = 'cc-ui ui-window settings';
@@ -1161,6 +1193,57 @@
     });
   }
 
+  // UI의 겹침 순서만 DOM에서 읽는다. 등록 정보나 저장 캐시와는 분리한다.
+  function visibleBookWindows() {
+    return [...document.querySelectorAll('[data-cc-book-window]:not([hidden])')]
+      .sort((a, b) => (Number(a.style.zIndex) || 2147483600) - (Number(b.style.zIndex) || 2147483600));
+  }
+
+  function startBookWindowEvents() {
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || event.isComposing || document.querySelector('dialog[open]')) return;
+      const root = visibleBookWindows().at(-1);
+      if (!root) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (event.repeat) return;
+      if (suggestionBox && !suggestionBox.hidden) hideSuggestions();
+      else root.dispatchEvent(new Event('cc-book-escape'));
+    }, true);
+    document.addEventListener('pointerdown', event => {
+      const root = event.target.closest?.('[data-cc-book-window]');
+      if (!root || root.hidden) return;
+      const others = visibleBookWindows().filter(node => node !== root);
+      [...others, root].forEach((node, index) => { node.style.zIndex = String(2147483600 + index); });
+      const header = event.target.closest('[data-cc-drag-handle]');
+      if (!header || event.button !== 0 || event.pointerType !== 'mouse' ||
+          !window.matchMedia('(min-width: 641px) and (pointer: fine)').matches ||
+          event.target.closest('button, input, select, textarea')) return;
+      const bounds = root.getBoundingClientRect();
+      const x = event.clientX - bounds.left, y = event.clientY - bounds.top;
+      const events = new AbortController();
+      header.setPointerCapture(event.pointerId);
+      event.preventDefault();
+      event.stopPropagation();
+      header.addEventListener('pointermove', move => {
+        if (move.pointerId !== event.pointerId) return;
+        const viewport = window.visualViewport, box = root.getBoundingClientRect();
+        const left = viewport?.offsetLeft ?? 0, top = viewport?.offsetTop ?? 0;
+        const right = left + (viewport?.width ?? window.innerWidth), bottom = top + (viewport?.height ?? window.innerHeight);
+        root.style.left = `${Math.max(left + 8, Math.min(move.clientX - x, right - box.width - 8))}px`;
+        root.style.top = `${Math.max(top + 8, Math.min(move.clientY - y, bottom - box.height - 8))}px`;
+      }, { signal: events.signal });
+      const finish = end => {
+        if (end.pointerId !== event.pointerId) return;
+        if (header.hasPointerCapture(event.pointerId)) header.releasePointerCapture(event.pointerId);
+        events.abort();
+      };
+      for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+        header.addEventListener(name, finish, { signal: events.signal });
+      }
+    }, true);
+  }
+
   const GUIDE_BODY = `
 <div class="guide-intro"><span class="tag">Realtime Database · 이메일 / 비밀번호</span><a class="button subtle" href="https://console.firebase.google.com/" target="_blank" rel="noopener noreferrer">Firebase 콘솔<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS.external}</svg></a></div>
       <div class="guide-stack">
@@ -1197,5 +1280,6 @@
   if (window.navigation) window.navigation.addEventListener('navigatesuccess', resetPageCache);
   else window.addEventListener('popstate', resetPageCache);
   window.addEventListener('pagehide', resetPageCache);
+  startBookWindowEvents();
   startCommandInput();
 })();

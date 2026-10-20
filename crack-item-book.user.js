@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         크랙 아이템 도감
 // @namespace    crack-commandline
-// @version      1.0.0.0
+// @version      1.0.1.0
 // @description  !아이템으로 인벤토리를 열고 프리셋별 즐겨찾기와 소지품을 관리합니다. (version 관리방식: 데이터스키마버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-idle
@@ -84,7 +84,7 @@
 .cc-ui.cc-item-window .item-toggles button[aria-pressed=true] { color: #e5c886; border-color: #9c8b5e; background: #333a29f5; }
 .cc-ui.cc-item-window .item-toggles button.owned[aria-pressed=true] { color: #b5d2a5; border-color: #758c67; }
 .cc-ui.cc-item-window .list-view { padding: 0; display: block; }
-.cc-ui.cc-item-window .list-view .item-card { display: grid; grid-template-columns: 39px minmax(67px, .9fr) 46px minmax(50px, 1fr) 41px; gap: 7px; align-items: center; min-height: 52px; padding: 5px 7px; border-bottom: 1px solid #6d787b30; background: #778c8b06; }
+.cc-ui.cc-item-window .list-view .item-card { display: grid; grid-template-columns: 39px minmax(67px, min(24%, 160px)) 46px minmax(50px, 1fr) 41px; gap: 7px; align-items: center; min-height: 52px; padding: 5px 7px; border-bottom: 1px solid #6d787b30; background: #778c8b06; }
 .cc-ui.cc-item-window .list-view .item-card:nth-child(even) { background: #7b999310; }
 .cc-ui.cc-item-window .list-view .item-art { width: 37px; }
 .cc-ui.cc-item-window .list-view .item-name { height: auto; margin: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
@@ -161,8 +161,8 @@
   .cc-ui.cc-item-window .view-tools { padding-left: 3px; }
   .cc-ui.cc-item-window .item-toggles button { width: 20px; height: 20px; }
 }`;
-  const ITEM_TEMPLATE = `<section data-item-ui="inventory" class="cc-ui ui-window cc-item-window" role="dialog" aria-modal="false" hidden aria-label="인벤토리">
-      <header class="item-header" data-item-ui="drag-handle"><h1><svg viewBox="0 0 24 24"><path d="M4 8h16v13H4zM8 8V4h8v4M4 12h16M9 10v4m6-4v4"/></svg>인벤토리<i data-item-ui="dirty" hidden></i></h1><div><button data-item-ui="save" class="icon-button" title="저장" aria-label="저장" data-icon="save"></button><button data-item-ui="close" class="icon-button" title="닫기" aria-label="닫기" data-icon="close"></button></div></header>
+  const ITEM_TEMPLATE = `<section data-item-ui="inventory" class="cc-ui ui-window cc-item-window" role="dialog" aria-modal="false" hidden data-cc-book-window aria-label="아이템">
+      <header class="item-header" data-item-ui="drag-handle" data-cc-drag-handle><h1><svg viewBox="0 0 24 24"><path d="M4 8h16v13H4zM8 8V4h8v4M4 12h16M9 10v4m6-4v4"/></svg>아이템<i data-item-ui="dirty" hidden></i></h1><div><button data-item-ui="save" class="icon-button" title="저장" aria-label="저장" data-icon="save"></button><button data-item-ui="close" class="icon-button" title="닫기" aria-label="닫기" data-icon="close"></button></div></header>
       <div class="item-toolbar">
         <div data-item-ui="tabs" class="category-tabs" role="group" aria-label="아이템 분류"></div>
         <div class="view-tools"><button data-item-ui="subcategory" title="소분류 선택" aria-label="소분류 선택" aria-expanded="false" disabled data-icon="down"></button><button data-item-ui="filter-favorite" title="즐겨찾기 필터" aria-label="즐겨찾기 필터" aria-pressed="false" data-icon="star"></button><button data-item-ui="filter-owned" title="소지중 필터" aria-label="소지중 필터" aria-pressed="false" data-icon="bag"></button><button data-item-ui="view-mode" title="목록 보기" aria-label="목록 보기" data-icon="list"></button></div>
@@ -213,7 +213,6 @@
   let activeDetail = null;
   let hoverTimer;
   let toastTimer;
-  let drag;
   let busy = false;
   let ready = false;
   let events;
@@ -391,11 +390,11 @@
       event.stopPropagation();
       if (event.key !== 'Escape') return;
       event.preventDefault();
-      if (!$('notice').hidden) $('notice').hidden = true;
-      else if (!$('detail').hidden || !$('preset-menu').hidden || !$('subcategory-menu').hidden) { hideMenus(); hideDetail(); }
-      else requestClose();
+      handleEscape();
     });
-    setupDrag(); document.body.append(ui);
+    ui.addEventListener('cc-book-escape', handleEscape);
+    ui.addEventListener('cc-book-close-request', requestClose);
+    document.body.append(ui);
   }
 
   function render() {
@@ -576,7 +575,7 @@
     const save = async () => { if (await saveChanges() && closeAfter) closeBook(); };
     if (!empty.length) { void save(); return; }
     showNotice('빈 프리셋', '빈 프리셋은 저장되지 않으며, 새로고침하면 사라집니다.', empty.join(' · '), [
-      ['취소', '', () => {}], ['저장', 'primary', () => void save()],
+      ['취소', '', () => ui.dispatchEvent(new Event('cc-book-close-cancelled'))], ['저장', 'primary', () => void save()],
     ]);
   }
 
@@ -648,7 +647,7 @@
   }
 
   function showDetail(name, x, y) {
-    if (drag || !ready || ui.hidden) return;
+    if (!ready || ui.hidden) return;
     const item = itemByName.get(name); if (!item) return;
     activeDetail = name;
     $('detail-art').replaceChildren(art(item)); $('detail-name').textContent = name;
@@ -694,16 +693,23 @@
     panel.append(footer); $('notice').replaceChildren(panel); $('notice').hidden = false;
   }
 
+  function handleEscape() {
+    if (!$('notice').hidden) $('notice').querySelector('button')?.click();
+    else if (!$('detail').hidden || !$('preset-menu').hidden || !$('subcategory-menu').hidden) { hideMenus(); hideDetail(); }
+    else requestClose();
+  }
+
   function requestClose() {
     if (!drafts.size) { closeBook(); return; }
-    const actions = [['돌아가기', '', () => {}], ['저장하지 않고 닫기', 'danger', closeBook]];
+    const actions = [['돌아가기', '', () => ui.dispatchEvent(new Event('cc-book-close-cancelled'))], ['저장하지 않고 닫기', 'danger', closeBook]];
     if (!busy && ready) actions.push(['저장 후 닫기', 'primary', () => requestSave(true)]);
     showNotice('저장하지 않은 변경사항', '프리셋과 즐겨찾기·소지중 변경사항이 저장되지 않았습니다.', '', actions);
   }
 
   function closeBook() {
-    drag = null; hideMenus(); hideDetail(); $('notice').hidden = true; $('toast').hidden = true;
+    hideMenus(); hideDetail(); $('notice').hidden = true; $('toast').hidden = true;
     ui.hidden = true; events?.abort(); restoreFocus();
+    ui.dispatchEvent(new Event('cc-book-closed'));
   }
 
   function restoreFocus() {
@@ -724,26 +730,6 @@
     ui.style.left = `${Math.max(left + 8, Math.min(Number.isFinite(x) ? x : left + width - box.width - (narrow ? 8 : 24), left + width - box.width - 8))}px`;
     ui.style.top = `${Math.max(top + 8, Math.min(Number.isFinite(y) ? y : top + (narrow ? 12 : 74), top + height - box.height - 8))}px`;
     hideDetail();
-  }
-
-  function setupDrag() {
-    const header = $('drag-handle');
-    header.addEventListener('pointerdown', event => {
-      if (event.target.closest('button') || (event.pointerType === 'mouse' && event.button !== 0)) return;
-      const box = ui.getBoundingClientRect();
-      drag = { id: event.pointerId, x: event.clientX - box.left, y: event.clientY - box.top };
-      header.setPointerCapture(event.pointerId); hideDetail(); hideMenus(); event.preventDefault();
-    });
-    header.addEventListener('pointermove', event => {
-      if (!drag || drag.id !== event.pointerId) return;
-      const viewport = window.visualViewport, box = ui.getBoundingClientRect();
-      const left = viewport?.offsetLeft ?? 0, top = viewport?.offsetTop ?? 0;
-      const right = left + (viewport?.width ?? window.innerWidth), bottom = top + (viewport?.height ?? window.innerHeight);
-      ui.style.left = `${Math.max(left, Math.min(event.clientX - drag.x, right - box.width))}px`;
-      ui.style.top = `${Math.max(top, Math.min(event.clientY - drag.y, bottom - 30))}px`;
-    });
-    const finish = event => { if (header.hasPointerCapture(event.pointerId)) header.releasePointerCapture(event.pointerId); drag = null; };
-    header.addEventListener('pointerup', finish); header.addEventListener('pointercancel', finish);
   }
 
   function clearReadCache() {

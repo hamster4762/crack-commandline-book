@@ -30,6 +30,15 @@
 }
 
 .cc-ui *, .cc-ui *::before, .cc-ui *::after { box-sizing: border-box; }
+/* 도감 창의 이동·크기 조절. 데이터 저장이나 명령어 등록과는 무관하다. */
+.cc-ui.ui-window[data-cc-book-window] { overflow: hidden; }
+@media (min-width: 641px) and (pointer: fine) {
+  .cc-ui.ui-window[data-cc-book-window] { resize: both; }
+  .cc-ui [data-cc-drag-handle] { cursor: move; touch-action: none; user-select: none; }
+}
+@media (max-width: 640px), (pointer: coarse) {
+  .cc-ui.ui-window[data-cc-book-window] { resize: none; }
+}
 .cc-ui :is(button, input, textarea, select) { font: inherit; }
 .cc-ui :is(button, select, summary) { cursor: pointer; }
 .cc-ui button { color: inherit; background: none; border: 0; }
@@ -460,6 +469,7 @@ dialog.cc-ui.cc-sample-window { width: min(640px, calc(100vw - 28px)); }
   box-shadow: inset 0 1px #e7d4a81c, inset 0 0 0 1px #10171d66, 0 1px 2px #0004;
 }
 .cc-ui .icon-button.framed:hover { border-color: #baa16d; color: #ffe0a6; filter: brightness(1.13); }
+.cc-ui .icon-button.framed[aria-pressed=true] { border-color: #bda674; color: #f3d296; background: linear-gradient(#625538, #3b382d); }
 .cc-ui .icon-button.framed:active { box-shadow: var(--recess); }
 .cc-ui .icon-button.framed svg { width: 19px; height: 19px; stroke-width: 2; }
 .cc-ui .select-input {
