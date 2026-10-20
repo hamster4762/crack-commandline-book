@@ -337,6 +337,7 @@
   let cacheDatabase;
   let busy = false;
   let noticeTimer;
+  let lastTextScale;
   const MAX_STRING_BYTES = 10000000;
 
   function svgElement(tag, attributes = {}) {
@@ -390,6 +391,7 @@
     pointers.clear(); drag = null; pinch = null;
     $('map-canvas').classList.remove('is-dragging');
     map = next;
+    lastTextScale = undefined;
     selected = null;
     hover = null;
     $('map-detail').hidden = true;
@@ -528,11 +530,15 @@
     $('map-camera').setAttribute('transform', `translate(${pan.x} ${pan.y}) scale(${zoom})`);
     // 축소할 때는 함께 줄이고, 확대할 때만 보정하여 규모별 글자 크기의 상한을 유지한다.
     const textScale = Math.min(1, 1 / screenScale());
-    for (const { node, p, bottom } of regionLabels.values()) {
-      node.setAttribute('transform', `translate(${p.x} ${p.y + bottom + 3 * textScale}) scale(${textScale})`);
-    }
-    for (const node of $('map-distances').children) {
-      node.setAttribute('transform', `translate(${node.dataset.x} ${node.dataset.y}) scale(${textScale})`);
+    // 이동만 할 때는 글자 크기가 같으므로 전체 라벨을 다시 쓰지 않는다.
+    if (textScale !== lastTextScale) {
+      lastTextScale = textScale;
+      for (const { node, p, bottom } of regionLabels.values()) {
+        node.setAttribute('transform', `translate(${p.x} ${p.y + bottom + 3 * textScale}) scale(${textScale})`);
+      }
+      for (const node of $('map-distances').children) {
+        node.setAttribute('transform', `translate(${node.dataset.x} ${node.dataset.y}) scale(${textScale})`);
+      }
     }
     $('zoom-value').textContent = `${Math.round(zoom * 100)}%`;
     $('zoom-in').disabled = zoom >= 3.5;
@@ -559,6 +565,10 @@
   }
 
   function setupInteraction() {
+    ui.addEventListener('pointerdown', event => {
+      // 지도 조작은 채팅 포커스를 유지한다. 실제 입력·파일 선택·설명 복사는 허용한다.
+      if (event.target !== ui && !event.target.closest('input, textarea, select, .file-field, .map-detail')) event.preventDefault();
+    });
     $('custom-background').addEventListener('error', () => showNotice('배경 이미지를 표시할 수 없습니다. 이미지 파일을 확인하세요.', true));
     $('expand-sidebar').addEventListener('click', () => {
       const expanded = $('sidebar').classList.toggle('is-expanded');
@@ -888,7 +898,8 @@
     ui.style.maxHeight = `${available}px`;
     ui.style.minWidth = `${Math.min(328, Math.max(0, width - 16))}px`;
     ui.style.minHeight = `${Math.min(220, available)}px`;
-    const currentHeight = Number.parseFloat(ui.style.height) || Math.min(700, Math.max(220, height - (narrow ? 110 : 98)));
+    const currentHeight = narrow ? Math.min(480, Math.max(240, height - 165)) :
+      Number.parseFloat(ui.style.height) || Math.min(700, Math.max(220, height - 98));
     ui.style.height = `${Math.min(currentHeight, available)}px`;
     const box = ui.getBoundingClientRect();
     const x = Number.parseFloat(ui.style.left), y = Number.parseFloat(ui.style.top);

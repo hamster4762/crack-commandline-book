@@ -75,16 +75,16 @@
 .cc-ui .cc-skill-detail { user-select: text; cursor: text; }
 .cc-ui .cc-skill-detail p { margin: 8px 0 0; color: var(--text); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
 .cc-ui .cc-skill-list {
-  flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; margin: 0 4px;
+  flex: 1; min-height: 0; overflow: auto; overflow-anchor: none; overscroll-behavior: contain; margin: 0 4px;
   scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: #9b875977 #111920; background: #11192177; box-shadow: inset 0 2px 5px #0004;
 }
 .cc-ui .cc-skill-row {
   display: grid; grid-template-columns: 42px minmax(100px, min(24%, 180px)) 66px minmax(70px, 1fr) 28px;
   align-items: center; gap: 7px; min-height: 49px; padding: 5px 7px; border-bottom: 1px solid #56606948;
   background: linear-gradient(90deg, #46515c12, #222e360a); box-shadow: inset 0 1px #b8c7c403; cursor: pointer;
-  content-visibility: auto; contain-intrinsic-size: auto 49px;
+  height: 49px;
 }
-.cc-ui .cc-skill-row:nth-child(2n) { background: #7e8c9910; }
+.cc-ui .cc-skill-row[data-even=true] { background: #7e8c9910; }
 .cc-ui .cc-skill-row:hover { background: #c4ae7f12; }
 .cc-ui .cc-skill-name { min-width: 0; color: #e9e0cc; font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 1px #000; }
 .cc-ui .cc-skill-level { font: 10px/1.3 "Malgun Gothic", sans-serif; color: #c9b78e; white-space: nowrap; }
@@ -108,13 +108,14 @@
 .cc-ui .cc-skill-favorite svg { width: 19px; height: 19px; }
 .cc-ui .cc-skill-favorite[aria-pressed=true] { color: #e8c16d; }
 .cc-ui .cc-skill-favorite[aria-pressed=true] svg { fill: #c9a35244; filter: drop-shadow(0 0 3px #d4b66c29); }
-.cc-ui .cc-skill-list[data-view=grid] {
-  display: grid; grid-template-columns: repeat(auto-fill, 64px); justify-content: space-between; grid-auto-rows: max-content; align-content: start; gap: 4px; padding: 6px;
+.cc-ui .cc-skill-list[data-view=grid] { padding: 6px; }
+.cc-ui .cc-skill-list[data-view=grid] .cc-skill-rows {
+  display: grid; grid-template-columns: repeat(auto-fill, 64px); justify-content: space-between; grid-auto-rows: max-content; align-content: start; gap: 4px;
 }
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-row {
   position: relative; grid-template-columns: minmax(0, 1fr) 17px; grid-template-rows: 47px 12px 20px;
   justify-items: center; gap: 0; padding: 5px 4px 3px; min-height: 90px; border: 1px solid #736b5742; border-radius: 2px;
-  background: linear-gradient(#74818a10, #10182033); contain-intrinsic-size: auto 90px;
+  background: linear-gradient(#74818a10, #10182033); height: 90px;
 }
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-art { width: 42px; height: 42px; grid-row: 1; grid-column: 1 / -1; }
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-art > svg { width: 33px; height: 33px; stroke-width: 1.65; }
@@ -126,7 +127,6 @@
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-favorite svg { width: 14px; height: 14px; }
 .cc-ui .cc-skill-list[data-view=grid] .cc-skill-description { display: none; }
 .cc-ui .cc-skill-list[data-reorder=true] .cc-skill-row { cursor: grab; user-select: none; -webkit-user-select: none; }
-.cc-ui .cc-skill-list.is-reordering .cc-skill-row { content-visibility: visible; }
 .cc-ui .cc-skill-row.is-dragging { outline: 1px solid #e6c68c; outline-offset: -1px; background: #c6a96b26 !important; box-shadow: inset 3px 0 #d2b478; cursor: grabbing; }
 .cc-ui .cc-skill-empty { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 135px; color: var(--dim); font-size: 12px; }
 .cc-ui .cc-skill-empty svg { width: 25px; height: 25px; color: #a68d5e80; }
@@ -164,14 +164,15 @@
 
 @media (max-width: 640px) {
   .cc-ui.ui-window.cc-skill-window { left: 8px; top: 48px; width: calc(100vw - 16px); min-width: 0; height: min(510px, calc(100dvh - 165px)); }
-  .cc-ui .cc-skill-row { grid-template-columns: 34px minmax(65px, min(28%, 140px)) 49px minmax(50px, 1fr) 23px; gap: 4px; padding: 4px 5px; min-height: 44px; }
+  .cc-ui .cc-skill-row { grid-template-columns: 34px minmax(65px, min(28%, 140px)) 49px minmax(50px, 1fr) 23px; gap: 4px; padding: 4px 5px; min-height: 44px; height: 44px; }
   .cc-ui .cc-skill-art { width: 29px; height: 29px; }
   .cc-ui .cc-skill-art > svg { width: 22px; height: 22px; }
   .cc-ui .cc-skill-name { font-size: 11px; }
   .cc-ui .cc-skill-level { font-size: 9px; }
   .cc-ui .cc-skill-description { font-size: 10px; }
   .cc-ui .cc-skill-favorite { width: 23px; }
-  .cc-ui .cc-skill-list[data-view=grid] { gap: 3px; padding: 4px; }
+  .cc-ui .cc-skill-list[data-view=grid] { padding: 4px; }
+  .cc-ui .cc-skill-list[data-view=grid] .cc-skill-rows { gap: 3px; }
   .cc-ui .cc-skill-list[data-view=grid] .cc-skill-row { grid-template-rows: 47px 12px 20px; grid-template-columns: minmax(0, 1fr) 17px; min-height: 90px; padding: 4px 2px 2px; }
   .cc-ui .cc-skill-list[data-view=grid] .cc-skill-art { width: 42px; height: 42px; }
   .cc-ui .cc-skill-list[data-view=grid] .cc-skill-art > svg { width: 33px; height: 33px; }
@@ -210,6 +211,9 @@
   let drag;
   let suppressSkillClick = false;
   let statusTimer;
+  let visibleSkills = [];
+  let skillRangeKey = '';
+  let skillFrame = 0;
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -340,6 +344,11 @@
     const list = element('div', 'cc-skill-list');
     list.setAttribute('role', 'list');
     list.setAttribute('aria-label', '스킬 목록');
+    const topSpace = element('div'), rows = element('div', 'cc-skill-rows'), bottomSpace = element('div');
+    topSpace.setAttribute('aria-hidden', 'true'); bottomSpace.setAttribute('aria-hidden', 'true');
+    list.append(topSpace, rows, bottomSpace);
+    const listResize = new ResizeObserver(scheduleSkillRange);
+    listResize.observe(list);
 
     const footer = element('footer', 'cc-skill-footer');
     const presetButton = element('button', 'combobox-trigger cc-skill-preset-button');
@@ -366,7 +375,7 @@
     root.append(stylesheet, sprite, header, toolbar, status, list, footer, categoryMenu, help, presetMenu, detail, notice);
     document.body.append(root);
     ui = { root, dirty, save, close, categoryButton, subcategory, favoriteButton, viewButton, helpButton,
-      categoryMenu, help, status, list, presetButton, presetLabel, presetMenu, detail, notice };
+      categoryMenu, help, status, list, topSpace, rows, bottomSpace, presetButton, presetLabel, presetMenu, detail, notice };
     root.addEventListener('click', handleClick);
     root.addEventListener('pointerdown', handlePointerDown);
     root.addEventListener('pointermove', handlePointerMove);
@@ -377,7 +386,7 @@
     root.addEventListener('keydown', handleKeyDown);
     root.addEventListener('cc-book-escape', handleEscape);
     root.addEventListener('cc-book-close-request', requestClose);
-    list.addEventListener('scroll', () => { detail.hidden = true; }, { passive: true });
+    list.addEventListener('scroll', () => { detail.hidden = true; scheduleSkillRange(); }, { passive: true });
     subcategory.addEventListener('change', () => {
       selectedSubcategory = subcategory.value;
       renderSkills();
@@ -475,6 +484,7 @@
     dismissMenus();
     ui.notice.hidden = true;
     setStatus('');
+    cancelAnimationFrame(skillFrame); skillFrame = 0;
     ui.root.hidden = true;
     events?.abort();
     if (ui.root.contains(document.activeElement)) restoreFocus();
@@ -592,17 +602,45 @@
 
   function renderSkills() {
     const favorites = knownNames(selectedNames());
-    const favoriteSet = new Set(favorites);
     const source = favoriteOnly ? favorites.map(name => skillsByName.get(name)) : allSkills;
     const skills = source.filter(skill => selectedCategory === catalog.filters[0].name ||
       (skill.category.name === selectedCategory && (!selectedSubcategory || skill.subcategory.name === selectedSubcategory)));
     ui.list.dataset.view = view;
     ui.list.dataset.reorder = String(favoriteOnly);
+    visibleSkills = skills;
+    renderSkillRange(true);
+    ui.presetLabel.textContent = selectedPreset || catalog.defaultPreset;
+    ui.presetButton.title = selectedPreset || catalog.defaultPreset;
+    renderDirty();
+  }
+
+  // 아이콘과 행은 보이는 범위에서만 생성한다. 즐겨찾기 순서는 데이터 배열에서 관리한다.
+  function scheduleSkillRange() {
+    if (skillFrame || !ui || ui.root.hidden) return;
+    skillFrame = requestAnimationFrame(() => { skillFrame = 0; renderSkillRange(); });
+  }
+
+  function renderSkillRange(force = false) {
+    if (!ui || ui.root.hidden) return;
+    const list = ui.list, style = getComputedStyle(list), narrow = window.innerWidth <= 640;
+    const gap = view === 'grid' ? (narrow ? 3 : 4) : 0;
+    const columns = view === 'grid' ? Math.max(1, Math.floor((list.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) + gap) / (64 + gap))) : 1;
+    const height = view === 'grid' ? 90 : narrow ? 44 : 49, stride = height + gap;
+    const rowCount = Math.ceil(visibleSkills.length / columns);
+    const first = Math.min(Math.max(0, rowCount - 1), Math.max(0, Math.floor((list.scrollTop - parseFloat(style.paddingTop)) / stride) - 3));
+    const last = Math.min(rowCount, Math.ceil((list.scrollTop + list.clientHeight) / stride) + 3);
+    const key = `${first}:${last}:${columns}:${height}`;
+    if (!force && skillRangeKey === key) return;
+    skillRangeKey = key;
+    const favoriteSet = new Set(knownNames(selectedNames()));
     const fragment = document.createDocumentFragment();
-    for (const skill of skills) {
+    for (let index = first * columns; index < Math.min(visibleSkills.length, last * columns); index++) {
+      const skill = visibleSkills[index];
       const row = element('div', 'cc-skill-row');
       row.setAttribute('role', 'listitem');
       row.dataset.skillName = skill.name;
+      row.dataset.even = String(index % 2 === 1);
+      row.classList.toggle('is-dragging', !!drag?.active && drag.name === skill.name);
       const name = element('span', 'cc-skill-name', skill.name);
       const level = element('span', 'cc-skill-level', skill.level);
       const description = element('span', 'cc-skill-description', skill.description);
@@ -615,16 +653,14 @@
       row.append(skillIcon(skill), name, level, description, favorite);
       fragment.append(row);
     }
-    if (!skills.length) {
+    if (!visibleSkills.length) {
       const empty = element('div', 'cc-skill-empty');
-      empty.append(icon(favoriteOnly ? 'star' : 'book'),
-        element('span', '', favoriteOnly ? '표시할 즐겨찾기가 없습니다.' : '표시할 스킬이 없습니다.'));
+      empty.append(icon(favoriteOnly ? 'star' : 'book'), element('span', '', favoriteOnly ? '표시할 즐겨찾기가 없습니다.' : '표시할 스킬이 없습니다.'));
       fragment.append(empty);
     }
-    ui.list.replaceChildren(fragment);
-    ui.presetLabel.textContent = selectedPreset || catalog.defaultPreset;
-    ui.presetButton.title = selectedPreset || catalog.defaultPreset;
-    renderDirty();
+    ui.topSpace.style.height = `${first * stride}px`;
+    ui.bottomSpace.style.height = `${Math.max(0, (rowCount - last) * stride)}px`;
+    ui.rows.replaceChildren(fragment);
   }
 
   function renderPresetMenu() {
@@ -879,7 +915,8 @@
       if (index < 0) value.push(skillName);
       else value.splice(index, 1);
       editPreset(selectedPreset, value);
-      renderSkills();
+      if (favoriteOnly) renderSkills();
+      else button.setAttribute('aria-pressed', String(index < 0));
       return;
     }
     if (button.dataset.category) {
@@ -906,6 +943,7 @@
       case 'view':
         cancelDrag();
         view = view === 'list' ? 'grid' : 'list';
+        ui.list.scrollTop = 0;
         renderToolbar();
         renderSkills();
         break;
@@ -939,7 +977,7 @@
     const row = target.closest('.cc-skill-row');
     if (!row || target.closest('button') || busy || !favoriteOnly || event.button !== 0) return;
     cancelDrag();
-    drag = { row, pointerId: event.pointerId, x: event.clientX, y: event.clientY, active: false };
+    drag = { name: row.dataset.skillName, pointerId: event.pointerId, x: event.clientX, y: event.clientY, active: false };
     drag.timer = setTimeout(() => {
       if (!drag) return;
       drag.active = true;
@@ -960,28 +998,36 @@
     if (event.clientY < bounds.top + 24) ui.list.scrollTop -= 12;
     else if (event.clientY > bounds.bottom - 24) ui.list.scrollTop += 12;
     const target = document.elementFromPoint(event.clientX, event.clientY)?.closest('.cc-skill-row');
-    if (!target || target === drag.row || target.parentElement !== ui.list) return;
+    if (!target || target.dataset.skillName === drag.name || target.parentElement !== ui.rows) return;
     const rect = target.getBoundingClientRect();
     const after = view === 'grid' ? event.clientX > rect.left + rect.width / 2 : event.clientY > rect.top + rect.height / 2;
-    ui.list.insertBefore(drag.row, after ? target.nextSibling : target);
+    const from = visibleSkills.findIndex(skill => skill.name === drag.name);
+    let to = visibleSkills.findIndex(skill => skill.name === target.dataset.skillName) + (after ? 1 : 0);
+    if (from < to) to--;
+    if (from === to) return;
+    const [skill] = visibleSkills.splice(from, 1);
+    visibleSkills.splice(to, 0, skill);
+    renderSkillRange(true);
   }
 
   function finishDrag(event) {
     if (!drag || event.pointerId !== drag.pointerId) return;
-    if (drag.active) {
+    const reordered = drag.active;
+    if (reordered) {
       suppressSkillClick = true;
-      const ordered = [...ui.list.querySelectorAll('[data-skill-name]')].map(row => row.dataset.skillName);
+      const ordered = visibleSkills.map(skill => skill.name);
       const visible = new Set(ordered);
       let index = 0;
       editPreset(selectedPreset, knownNames(selectedNames()).map(name => visible.has(name) ? ordered[index++] : name));
     }
     clearDrag();
+    if (reordered) renderSkills();
   }
 
   function clearDrag() {
     if (!drag) return;
     clearTimeout(drag.timer);
-    drag.row.classList.remove('is-dragging');
+    ui.rows.querySelector('.is-dragging')?.classList.remove('is-dragging');
     if (ui.root.hasPointerCapture?.(drag.pointerId)) ui.root.releasePointerCapture(drag.pointerId);
     ui.list.classList.remove('is-reordering');
     drag = undefined;

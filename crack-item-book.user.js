@@ -57,8 +57,8 @@
 .cc-ui.cc-item-window .item-toolbar button:disabled { opacity: .25; }
 .cc-ui.cc-item-window .inventory-meta { display: flex; justify-content: space-between; align-items: center; flex: 0 0 24px; padding: 2px 10px; color: #b9b39d; font-size: 10px; background: #080f162e; }
 .cc-ui.cc-item-window [data-item-ui="item-count"] { color: #84958e; font: 10px Consolas, 'Malgun Gothic', sans-serif; }
-.cc-ui.cc-item-window .item-items { flex: 1; min-height: 0; overflow-y: auto; scrollbar-gutter: stable; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #8f805655 #101a21; margin: 0 3px; padding: 8px 6px; background: radial-gradient(ellipse at 50% 0%, #43514a16, transparent), #0d171db3; box-shadow: inset 0 2px 6px #0006; }
-.cc-ui.cc-item-window .grid-view { display: grid; grid-template-columns: repeat(auto-fill, 50px); align-content: start; justify-content: space-between; gap: 8px 5px; }
+.cc-ui.cc-item-window .item-items { flex: 1; min-height: 0; overflow-y: auto; overflow-anchor: none; scrollbar-gutter: stable; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #8f805655 #101a21; margin: 0 3px; padding: 8px 6px; background: radial-gradient(ellipse at 50% 0%, #43514a16, transparent), #0d171db3; box-shadow: inset 0 2px 6px #0006; }
+.cc-ui.cc-item-window .grid-view .item-rows { display: grid; grid-template-columns: repeat(auto-fill, 50px); align-content: start; justify-content: space-between; gap: 8px 5px; }
 .cc-ui.cc-item-window .grid-view .item-art { width: 48px; margin-inline: auto; }
 .cc-ui.cc-item-window .item-card { min-width: 0; position: relative; cursor: pointer; outline: none; }
 .cc-ui.cc-item-window .item-card:focus-visible { outline: 1px solid #ead3a0; outline-offset: 2px; }
@@ -85,7 +85,7 @@
 .cc-ui.cc-item-window .item-toggles button.owned[aria-pressed=true] { color: #b5d2a5; border-color: #758c67; }
 .cc-ui.cc-item-window .list-view { padding: 0; display: block; }
 .cc-ui.cc-item-window .list-view .item-card { display: grid; grid-template-columns: 39px minmax(67px, min(24%, 160px)) 46px minmax(50px, 1fr) 41px; gap: 7px; align-items: center; min-height: 52px; padding: 5px 7px; border-bottom: 1px solid #6d787b30; background: #778c8b06; }
-.cc-ui.cc-item-window .list-view .item-card:nth-child(even) { background: #7b999310; }
+.cc-ui.cc-item-window .list-view .item-card[data-even=true] { background: #7b999310; }
 .cc-ui.cc-item-window .list-view .item-art { width: 37px; }
 .cc-ui.cc-item-window .list-view .item-name { height: auto; margin: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
 .cc-ui.cc-item-window .item-subcategory { color: #b8ad8c; font-size: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -132,8 +132,9 @@
 .cc-ui.cc-item-window { z-index: 2147483600; }
 .cc-ui.cc-item-window[hidden], .cc-ui.cc-item-window [hidden] { display: none !important; }
 
-.cc-ui.cc-item-window .grid-view .item-card { height: 81px; content-visibility: auto; contain-intrinsic-size: auto 81px; }
-.cc-ui.cc-item-window .list-view .item-card { content-visibility: auto; contain-intrinsic-size: auto 52px; }
+.cc-ui.cc-item-window .grid-view .item-card { height: 81px; }
+.cc-ui.cc-item-window .list-view .item-card { height: 52px; }
+.cc-ui.cc-item-window .item-spacer { pointer-events: none; }
 .cc-ui.cc-item-window .item-detail { overflow: auto; }
 .cc-ui.cc-item-window .preset-edit { display: flex; align-items: center; gap: 3px; width: 100%; }
 .cc-ui.cc-item-window .preset-edit .text-input { flex: 1; min-width: 0; height: 29px; }
@@ -217,6 +218,9 @@
   let ready = false;
   let events;
   let returnFocus;
+  let visibleItems = [];
+  let itemRangeKey = '';
+  let itemFrame = 0;
 
   function element(tag, className = '', text) {
     const node = document.createElement(tag);
@@ -345,6 +349,13 @@
     ui = host.firstElementChild;
     const style = element('style'); style.textContent = ITEM_CSS; ui.append(style);
     ui.querySelectorAll('[data-icon]').forEach(node => node.replaceChildren(icon(node.dataset.icon)));
+    for (const name of ['top-space', 'rows', 'bottom-space']) {
+      const node = element('div', name === 'rows' ? 'item-rows' : 'item-spacer');
+      node.dataset.itemUi = name;
+      $('items').append(node);
+    }
+    const listResize = new ResizeObserver(scheduleItemRange);
+    listResize.observe($('items'));
     const groups = [{ label: '전체', icon: 'all', categories: [] }, ...catalog.groups];
     for (const [index, group] of groups.entries()) {
       const button = iconButton(group.icon, group.label, () => {
@@ -357,14 +368,14 @@
     $('subcategory').addEventListener('click', renderSubcategories);
     $('filter-favorite').addEventListener('click', () => { favoriteOnly = !favoriteOnly; hideDetail(); render(); });
     $('filter-owned').addEventListener('click', () => { ownedOnly = !ownedOnly; hideDetail(); render(); });
-    $('view-mode').addEventListener('click', () => { listView = !listView; hideDetail(); render(); });
+    $('view-mode').addEventListener('click', () => { listView = !listView; $('items').scrollTop = 0; hideDetail(); render(); });
     $('preset-toggle').addEventListener('click', () => {
       const show = $('preset-menu').hidden; hideMenus(); hideDetail(); renderPresets();
       $('preset-menu').hidden = !show; $('preset-toggle').setAttribute('aria-expanded', String(show));
     });
     $('add-preset').addEventListener('click', addPreset);
     $('close-detail').addEventListener('click', hideDetail);
-    $('items').addEventListener('scroll', hideDetail, { passive: true });
+    $('items').addEventListener('scroll', () => { hideDetail(); scheduleItemRange(); }, { passive: true });
     $('items').addEventListener('click', handleItemClick);
     $('items').addEventListener('keydown', event => {
       const card = event.target.closest('[data-item-name]');
@@ -384,7 +395,8 @@
     ui.addEventListener('pointerdown', event => {
       if (!event.target.closest('.item-card, .item-detail')) hideDetail();
       if (!event.target.closest('.item-popover, [data-item-ui="preset-toggle"], [data-item-ui="subcategory"]')) hideMenus();
-      if (event.pointerType === 'mouse' && event.target.closest('button')) event.preventDefault();
+      // 보기·선택은 채팅 포커스를 유지한다. 입력과 설명 복사는 기본 동작을 허용한다.
+      if (event.target !== ui && !event.target.closest('input, textarea, select, .item-detail')) event.preventDefault();
     });
     ui.addEventListener('keydown', event => {
       event.stopPropagation();
@@ -407,22 +419,8 @@
     $('item-count').textContent = `${visible.length} / ${items.length}`;
     $('items').className = `item-items ${listView ? 'list-view' : 'grid-view'}`;
     $('empty').hidden = visible.length > 0 || !ready;
-    const fragment = document.createDocumentFragment();
-    for (const item of visible) {
-      const card = element('article', 'item-card'); card.tabIndex = 0; card.dataset.itemName = item.name;
-      card.setAttribute('aria-label', `${item.name}, ${item.grade}`);
-      const image = art(item), name = element('span', 'item-name', item.name);
-      name.classList.add(`grade-text-${catalog.grades.indexOf(item.grade) + 1}`);
-      const toggles = element('div', 'item-toggles');
-      for (const [key, drawing, title, active] of [['bookmark', 'star', '즐겨찾기', favorite.has(item.name)], ['inventory', 'bag', '소지중', owned.has(item.name)]]) {
-        const button = iconButton(drawing, `${item.name} ${title}`); button.dataset.toggle = key;
-        button.setAttribute('aria-pressed', String(active)); if (key === 'inventory') button.classList.add('owned'); toggles.append(button);
-      }
-      card.append(image, name, element('span', 'item-subcategory', item.subcategory), element('span', 'item-description', item.description));
-      if (listView) card.append(toggles); else image.append(toggles);
-      fragment.append(card);
-    }
-    $('items').replaceChildren(fragment);
+    visibleItems = visible;
+    renderItemRange(true);
     $('preset-name').textContent = selectedPreset || catalog.defaultPreset;
     $('preset-toggle').title = selectedPreset || catalog.defaultPreset;
     $('tabs').querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.tab) === tab)));
@@ -431,6 +429,46 @@
     $('view-mode').replaceChildren(icon(listView ? 'all' : 'list'));
     $('view-mode').title = listView ? '썸네일 보기' : '목록 보기'; $('view-mode').setAttribute('aria-label', $('view-mode').title);
     renderDirty(); setControls();
+  }
+
+  // 화면 위아래 3행만 여유로 만들고, 나머지는 빈 높이로 스크롤 위치를 유지한다.
+  function scheduleItemRange() {
+    if (itemFrame || !ui || ui.hidden) return;
+    itemFrame = requestAnimationFrame(() => { itemFrame = 0; renderItemRange(); });
+  }
+
+  function renderItemRange(force = false) {
+    if (!ui || ui.hidden) return;
+    const list = $('items'), style = getComputedStyle(list);
+    const columns = listView ? 1 : Math.max(1, Math.floor((list.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) + 5) / 55));
+    const height = listView ? 52 : 81, gap = listView ? 0 : 8, stride = height + gap;
+    const rows = Math.ceil(visibleItems.length / columns);
+    const first = Math.min(Math.max(0, rows - 1), Math.max(0, Math.floor((list.scrollTop - parseFloat(style.paddingTop)) / stride) - 3));
+    const last = Math.min(rows, Math.ceil((list.scrollTop + list.clientHeight) / stride) + 3);
+    const key = `${first}:${last}:${columns}:${listView}`;
+    if (!force && key === itemRangeKey) return;
+    itemRangeKey = key;
+    const value = normalizePreset(valueFor(), true), favorite = new Set(value.bookmark), owned = new Set(value.inventory);
+    const fragment = document.createDocumentFragment();
+    for (let index = first * columns; index < Math.min(visibleItems.length, last * columns); index++) {
+      const item = visibleItems[index];
+      const card = element('article', 'item-card'); card.tabIndex = 0; card.dataset.itemName = item.name;
+      card.dataset.even = String(index % 2 === 1);
+      card.setAttribute('aria-label', `${item.name}, ${item.grade}`);
+      const image = art(item), name = element('span', 'item-name', item.name);
+      name.classList.add(`grade-text-${catalog.grades.indexOf(item.grade) + 1}`);
+      const toggles = element('div', 'item-toggles');
+      for (const [key, drawing, title, active] of [['bookmark', 'star', '즐겨찾기', favorite.has(item.name)], ['inventory', 'bag', '소지중', owned.has(item.name)]]) {
+        const button = iconButton(drawing, `${item.name} ${title}`); button.dataset.toggle = key;
+        button.disabled = busy || !ready; button.setAttribute('aria-pressed', String(active)); if (key === 'inventory') button.classList.add('owned'); toggles.append(button);
+      }
+      card.append(image, name, element('span', 'item-subcategory', item.subcategory), element('span', 'item-description', item.description));
+      if (listView) card.append(toggles); else image.append(toggles);
+      fragment.append(card);
+    }
+    $('top-space').style.height = `${first * stride}px`;
+    $('bottom-space').style.height = `${Math.max(0, (rows - last) * stride)}px`;
+    $('rows').replaceChildren(fragment);
   }
 
   function art(item) {
@@ -708,6 +746,7 @@
 
   function closeBook() {
     hideMenus(); hideDetail(); $('notice').hidden = true; $('toast').hidden = true;
+    cancelAnimationFrame(itemFrame); itemFrame = 0;
     ui.hidden = true; events?.abort(); restoreFocus();
     ui.dispatchEvent(new Event('cc-book-closed'));
   }
