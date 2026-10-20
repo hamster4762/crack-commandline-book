@@ -7053,7 +7053,159 @@
       "description": "마시면 찰과상과 얕은 상처가 빠르게 아물어 가벼운 부상 뒤 활동을 이어가기 좋다.",
       "category": "소모품",
       "subcategory": "회복약",
-      "icon": "dummy.svg"
+      "icon": "consumable-healing-01.svg"
+    },
+    {
+      "name": "상처연고",
+      "grade": "일반",
+      "description": "얕은 상처에 바르면 얇은 보호막이 생겨 살갗이 쓸리고 다시 벌어지는 것을 줄인다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-02.svg"
+    },
+    {
+      "name": "멍풀 고약",
+      "grade": "일반",
+      "description": "멍들고 부은 부위에 붙이면 열기와 욱신거림이 천천히 가라앉는다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-03.svg"
+    },
+    {
+      "name": "진정의 약액",
+      "grade": "일반",
+      "description": "마시면 상처에서 오는 통증이 누그러지며, 통증이 줄어도 다친 부위는 조심해서 움직여야 한다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-04.svg"
+    },
+    {
+      "name": "중급 회복포션",
+      "grade": "고급",
+      "description": "마시면 깊게 베인 살이 빠르게 맞붙고 출혈이 줄어들어 붕대와 함께 치료하기 좋다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-05.svg"
+    },
+    {
+      "name": "응혈의 물약",
+      "grade": "고급",
+      "description": "열린 상처에 부으면 피가 엉겨 얇은 마개처럼 굳어 급한 출혈을 막는다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-06.svg"
+    },
+    {
+      "name": "접골의 연고",
+      "grade": "고급",
+      "description": "부러진 뼈를 맞추어 고정한 뒤 바르면 뼈가 붙는 과정이 빨라진다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-07.svg"
+    },
+    {
+      "name": "숨결의 향유",
+      "grade": "고급",
+      "description": "따뜻하게 데워 향을 들이마시면 먼지로 거칠어진 목과 숨길의 자극이 가라앉는다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-08.svg"
+    },
+    {
+      "name": "서리꽃 밤",
+      "grade": "희귀",
+      "description": "추위에 상한 살갗에 바르면 은은한 온기가 퍼져 얼어 손상된 조직이 천천히 회복된다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-09.svg"
+    },
+    {
+      "name": "은엽 치유액",
+      "grade": "희귀",
+      "description": "상처에 적시면 작은 흙과 이물질이 액체 위로 떠오르고 씻긴 살이 부드럽게 아문다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-10.svg"
+    },
+    {
+      "name": "상급 회복포션",
+      "grade": "희귀",
+      "description": "마시면 심한 출혈과 골절, 크게 찢어진 근육이 빠르게 회복되며 치료 중인 부위에서 강한 열이 난다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-11.svg"
+    },
+    {
+      "name": "회복의 수액",
+      "grade": "희귀",
+      "description": "거칠게 닳거나 벗겨진 피부에 바르면 투명한 막이 생겨 그 아래에 새 살이 자란다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-12.svg"
+    },
+    {
+      "name": "봉합의 점액",
+      "grade": "희귀",
+      "description": "잘린 살과 힘줄의 단면을 맞대 바르면 점액이 이어 붙이며, 서로 맞는 부분을 정확히 대야 한다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-13.svg"
+    },
+    {
+      "name": "성화의 연고",
+      "grade": "희귀",
+      "description": "부패하거나 오염된 상처의 죽은 조직을 미약한 신성력으로 씻어내고 살아 있는 살의 회복을 돕는다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-14.svg"
+    },
+    {
+      "name": "노래꾼의 꿀약",
+      "grade": "고급",
+      "description": "천천히 삼키면 영창과 노래로 상한 목이 가라앉고 쉰 목소리가 돌아오기 쉬워진다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-15.svg"
+    },
+    {
+      "name": "생혈의 묘약",
+      "grade": "영웅",
+      "description": "살아 있는 대상에게 먹이면 잃은 피가 몸 안에서 천천히 보충되며, 혈액을 만드는 동안 심한 허기와 갈증이 따른다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-16.svg"
+    },
+    {
+      "name": "여명의 회복주",
+      "grade": "영웅",
+      "description": "마시고 쉬면 오래된 근육 손상과 누적된 육체 피로가 함께 풀려 장거리 강행군 뒤 회복에 좋다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-17.svg"
+    },
+    {
+      "name": "심장의 고동수",
+      "grade": "영웅",
+      "description": "쇠약해져 심장이 멎어가는 생존자에게 먹이면 맥박이 안정되어 심한 부상의 치료를 견딜 여유를 준다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-18.svg"
+    },
+    {
+      "name": "재생의 영약",
+      "grade": "전설",
+      "description": "마신 뒤 충분한 음식과 휴식을 취하는 동안 잃은 손가락과 팔다리가 새로 자라며, 재생할 부분이 클수록 회복에 오래 걸린다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-19.svg"
+    },
+    {
+      "name": "불사조의 눈물",
+      "grade": "전설",
+      "description": "살아 있는 대상의 치명상에 닿으면 생명의 열기가 퍼져 망가진 장기와 깊은 화상이 함께 회복된다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "consumable-healing-20.svg"
     },
     {
       "name": "하급 마나포션",
@@ -7061,7 +7213,279 @@
       "description": "마시면 소모한 마력이 조금 되돌아와 간단한 주문을 다시 시전할 힘을 보탠다.",
       "category": "소모품",
       "subcategory": "마나약",
-      "icon": "dummy.svg"
+      "icon": "consumable-mana-01.svg"
+    },
+    {
+      "name": "마나정",
+      "grade": "일반",
+      "description": "입안에서 서서히 녹으며 적은 마력을 고르게 공급해 걷거나 작업하는 중에도 섭취하기 쉽다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-02.svg"
+    },
+    {
+      "name": "마나향",
+      "grade": "일반",
+      "description": "향을 피워 가까이 두면 들이마시는 호흡을 따라 흩어진 체내 마력이 정돈되어 쉬는 동안 회복이 수월해진다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-03.svg"
+    },
+    {
+      "name": "중급 마나포션",
+      "grade": "고급",
+      "description": "마시면 짧은 휴식 동안 마력이 고르게 차올라 여러 주문으로 소진한 힘을 보충한다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-04.svg"
+    },
+    {
+      "name": "청명 마나수",
+      "grade": "고급",
+      "description": "마력을 보충하면서 과도한 시전 뒤 머리에 남는 묵직함을 가라앉혀 집중을 되찾기 좋다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-05.svg"
+    },
+    {
+      "name": "안정의 팅크",
+      "grade": "고급",
+      "description": "혀 밑에 떨어뜨리면 체내에서 요동치는 마력이 잦아들어 남은 힘을 안정적으로 끌어낼 수 있다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-06.svg"
+    },
+    {
+      "name": "마력염",
+      "grade": "고급",
+      "description": "음료에 녹여 마시면 마력이 보충되는 가벼운 결정으로, 수분을 함께 섭취하며 조금씩 나누어 쓰기 좋다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-07.svg"
+    },
+    {
+      "name": "한기의 마나액",
+      "grade": "희귀",
+      "description": "달아오른 마력 통로를 차분히 식히며 힘을 채워 화염 주문을 거듭 시전한 뒤 회복하기 좋다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-08.svg"
+    },
+    {
+      "name": "달샘의 마나수",
+      "grade": "희귀",
+      "description": "조용히 머물며 마시면 체내 마력이 깊이 가라앉았다가 맑은 흐름으로 되차오르며, 격한 움직임은 회복을 흐트러뜨린다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-09.svg"
+    },
+    {
+      "name": "응축 마나액",
+      "grade": "희귀",
+      "description": "적은 양에 많은 마력이 담겨 빠르게 힘을 보충하며, 급하게 들이켜면 마력 통로가 따갑게 타오른다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-10.svg"
+    },
+    {
+      "name": "공명 마나주",
+      "grade": "희귀",
+      "description": "함께 잔을 나눈 시전자들의 마력 회복 박자가 맞아 서로 곁에서 휴식할 때 회복이 고르게 이어진다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-11.svg"
+    },
+    {
+      "name": "별안개 마나향",
+      "grade": "영웅",
+      "description": "태운 향이 주변에 흩어진 마력을 머금어 들이마시는 시전자에게 전하며, 마력이 희박한 곳에서는 모이는 힘이 적다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-12.svg"
+    },
+    {
+      "name": "순환의 영약",
+      "grade": "영웅",
+      "description": "마력 과용으로 막히고 뒤엉킨 체내 흐름이 풀리며 몸에 남은 힘이 다시 순환하기 시작한다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-13.svg"
+    },
+    {
+      "name": "은빛 마나이슬",
+      "grade": "영웅",
+      "description": "영체와 마력으로 이루어진 존재에게 스며들면 흩어진 형체가 다시 모여 자신의 모습과 힘을 회복한다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-14.svg"
+    },
+    {
+      "name": "별샘의 영약",
+      "grade": "전설",
+      "description": "마신 이의 체력을 마력으로 바꾸는 흐름이 한동안 이어져 빠르게 힘을 채우며, 몸이 지칠수록 공급도 약해진다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "consumable-mana-15.svg"
+    },
+    {
+      "name": "각성의 물약",
+      "grade": "일반",
+      "description": "마시면 졸음이 옅어지고 감각이 또렷해지며, 효과가 가라앉으면 미뤄둔 피로가 느껴진다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-01.svg"
+    },
+    {
+      "name": "지구력 환약",
+      "grade": "고급",
+      "description": "천천히 씹어 먹으면 근육에 힘이 고르게 돌아 오래 걷고 버티는 일이 수월해진다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-02.svg"
+    },
+    {
+      "name": "거인의 힘포션",
+      "grade": "희귀",
+      "description": "마시면 근육이 단단히 부풀어 무거운 물체를 들고 밀 힘이 강해지며, 힘을 과신하면 관절에 무리가 간다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-03.svg"
+    },
+    {
+      "name": "질풍의 물약",
+      "grade": "희귀",
+      "description": "마시면 몸을 움직이기 시작할 때의 둔함이 줄어 빠르게 달리고 방향을 바꾸기 쉬워진다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-04.svg"
+    },
+    {
+      "name": "돌피부 연고",
+      "grade": "희귀",
+      "description": "바른 피부가 거칠고 단단해져 가벼운 베기와 타격에 잘 견디며, 두껍게 바른 부분은 잘 굽혀지지 않는다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-05.svg"
+    },
+    {
+      "name": "고양이눈 영액",
+      "grade": "희귀",
+      "description": "눈꺼풀에 바르면 희미한 빛 속 사물의 윤곽이 선명해지고 갑자기 밝은 빛을 보면 눈이 부시다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-06.svg"
+    },
+    {
+      "name": "사냥매의 묘약",
+      "grade": "희귀",
+      "description": "마시면 먼 곳의 작은 움직임이 또렷해져 높은 곳과 탁 트인 지형을 살피기 좋다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-07.svg"
+    },
+    {
+      "name": "청음의 물약",
+      "grade": "고급",
+      "description": "마시면 작은 소리의 차이가 잘 들려 발걸음과 속삭임을 구별하기 쉬우며 큰 소음도 더 거슬리게 들린다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-08.svg"
+    },
+    {
+      "name": "서리수호의 약주",
+      "grade": "고급",
+      "description": "몸속에 온기가 돌고 찬바람에 손발이 굳는 것을 줄여 추운 곳에서 활동하기 좋다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-09.svg"
+    },
+    {
+      "name": "화염수호 연고",
+      "grade": "희귀",
+      "description": "바른 곳에 얇은 열막이 생겨 불길과 뜨거운 표면의 열이 살에 전해지는 것을 늦춘다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-10.svg"
+    },
+    {
+      "name": "물숨의 물약",
+      "grade": "희귀",
+      "description": "마시면 목 안쪽에 작은 마력막이 생겨 맑은 물속에서 호흡할 수 있으며, 효과가 약해지면 숨결에 거품이 잦아든다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-11.svg"
+    },
+    {
+      "name": "거미손 연고",
+      "grade": "희귀",
+      "description": "손바닥과 발바닥에 바르면 마른 표면에 달라붙고 힘을 빼면 떨어져 벽과 기둥을 짚기 좋다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-12.svg"
+    },
+    {
+      "name": "깃털의 물약",
+      "grade": "영웅",
+      "description": "마신 이의 몸이 가벼워져 뛰고 매달리기 쉬워지며, 바람과 밀치는 힘에도 쉽게 흔들린다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-13.svg"
+    },
+    {
+      "name": "철의 의지 팅크",
+      "grade": "희귀",
+      "description": "마시면 공포로 흐트러지는 생각을 붙잡고 호흡을 고르게 이어가도록 도와 위압적인 존재 앞에서 버티기 좋다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-14.svg"
+    },
+    {
+      "name": "정밀의 묘약",
+      "grade": "고급",
+      "description": "손끝의 작은 떨림이 가라앉아 바느질과 조준, 섬세한 시약 작업을 하기 좋다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-15.svg"
+    },
+    {
+      "name": "용기의 약주",
+      "grade": "고급",
+      "description": "마시면 위축된 마음이 풀려 대담하게 행동하기 쉬워지며 위험을 가볍게 판단할 수 있다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-16.svg"
+    },
+    {
+      "name": "영혼접촉 영유",
+      "grade": "영웅",
+      "description": "손과 무기에 바르면 표면이 영체와 맞닿아 형체 없는 존재를 만지거나 밀 수 있다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-17.svg"
+    },
+    {
+      "name": "변성의 물약",
+      "grade": "희귀",
+      "description": "마신 뒤 목에 손을 대어 음역을 잡으면 목소리의 높이와 울림이 달라지며 효과가 사라지면 원래 목소리로 돌아온다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-18.svg"
+    },
+    {
+      "name": "수호자의 묘약",
+      "grade": "영웅",
+      "description": "마시면 몸에 닿는 충격이 넓게 퍼져 한 곳에 힘이 몰리는 것을 줄인다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-19.svg"
+    },
+    {
+      "name": "용혈의 투지약",
+      "grade": "전설",
+      "description": "마시면 몸을 둘러싼 뜨거운 마력이 힘과 지구력을 크게 보태며, 격한 활동이 이어질수록 열이 쌓여 몸을 식혀야 한다.",
+      "category": "소모품",
+      "subcategory": "강화약",
+      "icon": "consumable-boost-20.svg"
     },
     {
       "name": "하급 해독포션",
@@ -7069,7 +7493,279 @@
       "description": "마시면 약한 식물성 독으로 인한 메스꺼움과 어지럼이 가라앉고 몸이 독을 밀어내도록 돕는다.",
       "category": "소모품",
       "subcategory": "해독약",
-      "icon": "dummy.svg"
+      "icon": "consumable-antidote-01.svg"
+    },
+    {
+      "name": "흡독환",
+      "grade": "일반",
+      "description": "삼키면 뱃속에 남은 독성 물질을 마력의 찌꺼기로 뭉쳐 몸 밖으로 배출하기 쉽게 한다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-02.svg"
+    },
+    {
+      "name": "해독 연고",
+      "grade": "일반",
+      "description": "독초에 닿아 붉게 부은 피부에 바르면 남은 자극이 가라앉고 독성 수액이 밖으로 배어 나온다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-03.svg"
+    },
+    {
+      "name": "독기정화 향",
+      "grade": "고급",
+      "description": "연기를 가까이 쐬면 옷과 피부에 밴 독성 기운이 향의 재에 달라붙어 떨어진다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-04.svg"
+    },
+    {
+      "name": "독침의 해독액",
+      "grade": "고급",
+      "description": "독침이 박혔던 상처에 떨어뜨리면 주변에 남은 독액이 표면으로 떠올라 닦아낼 수 있다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-05.svg"
+    },
+    {
+      "name": "마비의 해독포션",
+      "grade": "고급",
+      "description": "마시면 독으로 둔해진 신경이 서서히 감각을 되찾고 굳었던 팔다리가 풀린다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-06.svg"
+    },
+    {
+      "name": "몽독 해독제",
+      "grade": "고급",
+      "description": "먹으면 잠을 부르는 마수의 독이 누그러져 가라앉던 의식을 되찾기 쉬워진다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-07.svg"
+    },
+    {
+      "name": "균독의 물약",
+      "grade": "고급",
+      "description": "독버섯의 독기에 반응해 이를 무해한 덩어리로 굳히며, 먹은 뒤 몸이 찌꺼기를 내보내는 동안 갈증이 난다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-08.svg"
+    },
+    {
+      "name": "동혈 해독제",
+      "grade": "희귀",
+      "description": "마시면 피와 근육을 차갑게 굳히는 마수의 독이 풀리며 몸속에서 천천히 온기가 돌아온다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-09.svg"
+    },
+    {
+      "name": "화혈 해독제",
+      "grade": "희귀",
+      "description": "마시면 독으로 치솟은 체내의 열이 땀과 입김으로 빠져나와 타는 듯한 통증이 줄어든다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-10.svg"
+    },
+    {
+      "name": "석혈 해독액",
+      "grade": "영웅",
+      "description": "마시면 독 때문에 돌처럼 굳어가는 살의 진행이 멎고 굳은 부분이 천천히 부드러워진다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-11.svg"
+    },
+    {
+      "name": "복합 해독포션",
+      "grade": "희귀",
+      "description": "체내에 섞인 여러 독의 마력 성질을 분리해 서로 반응하며 심해지는 독성을 가라앉힌다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-12.svg"
+    },
+    {
+      "name": "성은의 해독유",
+      "grade": "영웅",
+      "description": "상처에 바르면 독액에 섞인 부정한 마력이 옅어지고 저주를 머금은 마수독의 작용이 약해진다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-13.svg"
+    },
+    {
+      "name": "흡독의 진주",
+      "grade": "영웅",
+      "description": "입안에서 녹는 동안 몸속 독기가 검은 침으로 모여 나오며, 진주가 다 녹으면 흡수가 끝난다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-14.svg"
+    },
+    {
+      "name": "만독의 영약",
+      "grade": "전설",
+      "description": "마시면 몸 안에 퍼진 여러 생물성 독과 연금독이 중화되며, 중독으로 상한 장기는 별도로 회복해야 한다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "consumable-antidote-15.svg"
+    },
+    {
+      "name": "가시독",
+      "grade": "일반",
+      "description": "상처에 스며들면 주변 살이 붓고 따끔거리며 움직일 때 통증이 심해지는 독이다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-01.svg"
+    },
+    {
+      "name": "쐐기 수액",
+      "grade": "일반",
+      "description": "맨살에 닿으면 가려움과 열감이 생기고 씻어내기 전까지 닿은 부위가 예민해진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-02.svg"
+    },
+    {
+      "name": "쓴뿌리 독액",
+      "grade": "일반",
+      "description": "삼키면 속이 뒤틀리고 구역질이 나며 탈수와 쇠약이 이어질 수 있다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-03.svg"
+    },
+    {
+      "name": "침묵초 독액",
+      "grade": "고급",
+      "description": "삼키면 목소리가 쉬고 말을 이어가기 힘들어지며, 독이 풀릴 때까지 영창에도 지장을 준다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-04.svg"
+    },
+    {
+      "name": "몽련의 독",
+      "grade": "고급",
+      "description": "체내에 들어가면 눈꺼풀이 무거워지고 깊은 졸음이 밀려오며, 격한 자극은 잠을 깨울 수 있다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-05.svg"
+    },
+    {
+      "name": "마비독",
+      "grade": "고급",
+      "description": "상처로 들어가면 닿은 곳에서부터 팔다리 감각이 둔해지고 움직임이 느려진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-06.svg"
+    },
+    {
+      "name": "현기독",
+      "grade": "고급",
+      "description": "체내에 스며들면 수평 감각이 흐트러져 바닥이 기우는 듯 느끼고 몸을 가누기 어려워진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-07.svg"
+    },
+    {
+      "name": "출혈독",
+      "grade": "고급",
+      "description": "상처에 닿으면 피가 엉기는 것을 방해해 작은 상처도 오래 피가 흐르게 한다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-08.svg"
+    },
+    {
+      "name": "회색숨 독무",
+      "grade": "희귀",
+      "description": "들이마시면 숨길이 거칠어지고 기침이 이어지며, 떠도는 독무는 바람을 따라 흩어진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-09.svg"
+    },
+    {
+      "name": "오한독",
+      "grade": "희귀",
+      "description": "중독된 몸에서 온기가 빠르게 빠져나가 손이 떨리고 근육이 뻣뻣해진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-10.svg"
+    },
+    {
+      "name": "화맥독",
+      "grade": "희귀",
+      "description": "피에 스며들면 몸 안에서 열기가 치솟아 심한 갈증과 작열통을 일으킨다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-11.svg"
+    },
+    {
+      "name": "암야의 독액",
+      "grade": "희귀",
+      "description": "체내에 들어가면 눈앞에 검은 안개가 낀 듯 시야가 흐려지고 밝기 변화를 구분하기 어려워진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-12.svg"
+    },
+    {
+      "name": "환몽독",
+      "grade": "희귀",
+      "description": "중독자가 실제 소리와 비슷한 환청을 듣고 가까운 그림자를 움직이는 것으로 착각하게 한다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-13.svg"
+    },
+    {
+      "name": "갈증의 독",
+      "grade": "희귀",
+      "description": "체내 수분이 마력에 붙잡혀 심한 갈증과 근육 경련이 나타나며, 물을 마셔도 갈증이 쉽게 가라앉지 않는다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-14.svg"
+    },
+    {
+      "name": "재생억제 독액",
+      "grade": "희귀",
+      "description": "상처에 닿으면 그 부위의 자연 치유와 재생 마력이 둔해져 살이 맞붙는 속도가 느려진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-15.svg"
+    },
+    {
+      "name": "석혈독",
+      "grade": "영웅",
+      "description": "상처에서부터 피부와 근육이 서서히 돌처럼 굳어지며, 굳어가는 동안 움직이면 갈라지는 통증이 난다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-16.svg"
+    },
+    {
+      "name": "마력혼탁 독액",
+      "grade": "영웅",
+      "description": "중독자의 체내 마력 흐름을 뒤엉키게 하여 정밀한 주문과 마력 제어를 어렵게 만든다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-17.svg"
+    },
+    {
+      "name": "망각초의 이슬",
+      "grade": "영웅",
+      "description": "삼키면 중독 중 새로 겪은 일을 기억으로 굳히기 어려워져 바로 전의 대화와 행동이 흐릿해진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-18.svg"
+    },
+    {
+      "name": "망자수액",
+      "grade": "영웅",
+      "description": "살아 있는 살에 스며들면 그 부위에서 생명의 기운이 약해져 생명 기운을 쫓는 언데드가 알아차리기 어려워진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-19.svg"
+    },
+    {
+      "name": "용잠의 독",
+      "grade": "전설",
+      "description": "거대한 마수에게도 작용하는 깊은 졸음을 일으키며, 몸집이 클수록 잠에 빠지기까지 천천히 퍼진다.",
+      "category": "소모품",
+      "subcategory": "독약",
+      "icon": "consumable-poison-20.svg"
     },
     {
       "name": "파열 폭탄",
@@ -7077,7 +7773,519 @@
       "description": "불이 도화선을 따라 들어가면 외피가 터져 가까운 곳에 강한 충격과 파편을 흩뿌린다.",
       "category": "소모품",
       "subcategory": "폭탄",
-      "icon": "dummy.svg"
+      "icon": "consumable-bomb-01.svg"
+    },
+    {
+      "name": "폭음탄",
+      "grade": "일반",
+      "description": "터지는 순간 날카로운 굉음이 울려 소리에 민감한 생물을 놀라게 하고 주변의 다른 소리를 덮는다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-02.svg"
+    },
+    {
+      "name": "분진 폭탄",
+      "grade": "일반",
+      "description": "터지면 미세한 흙먼지가 퍼져 시야를 흐리고, 지나간 사람과 물체에 먼지가 묻는다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-03.svg"
+    },
+    {
+      "name": "화염 폭탄",
+      "grade": "고급",
+      "description": "봉인이 깨지면 안쪽의 연금 불꽃이 한꺼번에 퍼져 주변의 불붙기 쉬운 물건을 태운다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-04.svg"
+    },
+    {
+      "name": "섬광탄",
+      "grade": "고급",
+      "description": "외피가 터지며 강한 백색광이 번쩍여 바라본 이의 눈을 잠시 멀게 한다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-05.svg"
+    },
+    {
+      "name": "서리 폭탄",
+      "grade": "희귀",
+      "description": "터진 자리를 중심으로 냉기가 퍼져 주변 물기와 젖은 표면이 얇게 얼어붙는다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-06.svg"
+    },
+    {
+      "name": "충격 폭탄",
+      "grade": "희귀",
+      "description": "파열하는 힘이 넓게 퍼져 가까운 느슨한 물체를 밀어내며, 벽에 막히면 압력이 되튈 수 있다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-07.svg"
+    },
+    {
+      "name": "수압 폭탄",
+      "grade": "희귀",
+      "description": "물속에서 외피가 깨지면 강한 물결이 사방으로 퍼져 가까운 물체를 흔들고 부유물을 밀어낸다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-08.svg"
+    },
+    {
+      "name": "풍뢰탄",
+      "grade": "희귀",
+      "description": "봉인이 터지면 짧은 돌풍과 굉음이 함께 퍼져 가벼운 장애물과 날리는 물건을 흩어놓는다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-09.svg"
+    },
+    {
+      "name": "수지 파열탄",
+      "grade": "고급",
+      "description": "터지며 끈끈한 수지 덩어리가 사방에 달라붙고 식으면서 단단해진다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-10.svg"
+    },
+    {
+      "name": "쇄빙탄",
+      "grade": "희귀",
+      "description": "얼음에 닿아 터지면 마력의 떨림이 얼음 틈을 따라 퍼져 넓은 균열을 만든다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-11.svg"
+    },
+    {
+      "name": "진동 파쇄탄",
+      "grade": "희귀",
+      "description": "고정한 뒤 봉인을 끊으면 접촉면에 충격이 집중되어 돌과 모르타르의 갈라진 부분을 벌린다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-12.svg"
+    },
+    {
+      "name": "뇌광 폭탄",
+      "grade": "희귀",
+      "description": "터지며 가까운 금속과 젖은 표면을 따라 전격이 번지고, 주변의 마른 절연물에서는 흐름이 약해진다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-13.svg"
+    },
+    {
+      "name": "백연 폭탄",
+      "grade": "고급",
+      "description": "터지는 순간 두꺼운 흰 연기가 퍼져 주변 윤곽을 가리며, 열린 곳에서는 바람을 따라 빠르게 밀려간다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-14.svg"
+    },
+    {
+      "name": "마력교란탄",
+      "grade": "영웅",
+      "description": "파열할 때 불규칙한 마력 파동이 번져 주변에서 유지하던 작은 주문과 마법진의 흐름을 흔든다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-15.svg"
+    },
+    {
+      "name": "영혼파쇄탄",
+      "grade": "영웅",
+      "description": "신성력의 충격이 원형으로 퍼져 가까운 영체의 형체를 흐트러뜨리고 언데드의 결속을 약하게 한다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-16.svg"
+    },
+    {
+      "name": "중압탄",
+      "grade": "영웅",
+      "description": "터진 자리의 작은 마력핵이 주변 무생물을 안쪽으로 끌어당기다가 힘이 흩어지면 끌림이 멎는다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-17.svg"
+    },
+    {
+      "name": "반향 폭탄",
+      "grade": "희귀",
+      "description": "첫 파열 뒤 벽에 부딪힌 울림이 빛으로 돌아와 가까운 빈 공간과 통로의 모양을 잠깐 드러낸다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-18.svg"
+    },
+    {
+      "name": "태양불씨 폭탄",
+      "grade": "전설",
+      "description": "봉인이 터지면 응축한 밝은 불꽃이 주변을 태우며, 남은 불길은 마력이 다할 때까지 젖은 표면에서도 타오른다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-19.svg"
+    },
+    {
+      "name": "빙하의 심장탄",
+      "grade": "전설",
+      "description": "터진 자리에서 물을 따라 두꺼운 얼음이 빠르게 자라며, 흐르는 물에서는 얼음 조각이 떨어져 아래쪽으로 떠내려간다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "consumable-bomb-20.svg"
+    },
+    {
+      "name": "분필가루 주머니",
+      "grade": "일반",
+      "description": "터뜨려 뿌리면 마른 가루가 표면의 굴곡과 젖은 자국에 달라붙어 발자국과 물체의 윤곽을 드러낸다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-01.svg"
+    },
+    {
+      "name": "염료병",
+      "grade": "일반",
+      "description": "깨지면 짙은 색물이 퍼져 닿은 천과 목재를 물들이며 물에 흘려보내 흐름을 표시할 수도 있다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-02.svg"
+    },
+    {
+      "name": "악취낭",
+      "grade": "일반",
+      "description": "찢어지면 고약한 냄새가 퍼져 다른 냄새를 덮고 냄새에 민감한 짐승의 관심을 끈다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-03.svg"
+    },
+    {
+      "name": "구슬 주머니",
+      "grade": "일반",
+      "description": "풀어 던지면 작은 구슬들이 사방으로 굴러가며, 굴러 모이는 방향으로 바닥의 경사를 가늠할 수 있다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-04.svg"
+    },
+    {
+      "name": "기름병",
+      "grade": "일반",
+      "description": "깨진 자리의 표면이 미끄러워지고 기름이 밴 물건에 불이 옮겨붙기 쉬워진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-05.svg"
+    },
+    {
+      "name": "장막분",
+      "grade": "고급",
+      "description": "허공에 뿌리면 천천히 가라앉는 얇은 분말막이 생겨 안을 지나는 바람과 물체의 움직임이 드러난다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-06.svg"
+    },
+    {
+      "name": "연막병",
+      "grade": "고급",
+      "description": "마개를 빼거나 병을 깨면 짙은 연기가 계속 흘러나오다가 안의 연금액이 소진되면 멎는다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-07.svg"
+    },
+    {
+      "name": "결속의 수지병",
+      "grade": "고급",
+      "description": "깨지면 점성이 강한 수지가 퍼져 젖지 않은 물체를 붙잡으며, 굳기 전에는 늘어난 실처럼 이어진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-08.svg"
+    },
+    {
+      "name": "거품병",
+      "grade": "고급",
+      "description": "내용물이 공기에 닿으면 부드러운 거품이 부풀어 작은 틈과 빈 곳을 메우며, 무거운 힘으로 누르면 꺼진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-09.svg"
+    },
+    {
+      "name": "빙결병",
+      "grade": "희귀",
+      "description": "깨진 자리의 물기가 얼어 넓게 퍼지고, 물이 고인 곳에서는 얇은 빙판이 생긴다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-10.svg"
+    },
+    {
+      "name": "반딧불 가루",
+      "grade": "고급",
+      "description": "뿌리면 작은 빛점이 천천히 가라앉아 닿은 표면에 붙으며, 문지르면 빛이 옅어져 자국을 바꿀 수 있다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-11.svg"
+    },
+    {
+      "name": "향적의 향낭",
+      "grade": "고급",
+      "description": "터진 자리와 닿은 물건에 독특한 향이 오래 남아 향을 아는 사람이 지나간 흔적을 따라가기 좋다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-12.svg"
+    },
+    {
+      "name": "영혼의 은분",
+      "grade": "희귀",
+      "description": "뿌리면 가까운 영체에 가루가 달라붙어 움직이는 윤곽이 반짝이며, 남은 가루가 바닥에 쌓여 지나간 자리도 드러난다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-13.svg"
+    },
+    {
+      "name": "울음열매",
+      "grade": "고급",
+      "description": "껍질이 터지면 날카로운 울음 같은 소리가 나며 속살이 마를 때까지 불규칙하게 이어진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-14.svg"
+    },
+    {
+      "name": "황혼의 병",
+      "grade": "희귀",
+      "description": "내용물을 쏟으면 빛을 흡수하는 얇은 안개가 낮게 퍼져 그 안의 윤곽이 어둡게 가려진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-15.svg"
+    },
+    {
+      "name": "무취의 안개병",
+      "grade": "희귀",
+      "description": "퍼진 안개가 가까운 표면에 밴 냄새를 머금으며, 안개가 걷힐 때 모인 냄새도 함께 옅어진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-16.svg"
+    },
+    {
+      "name": "물의 씨앗",
+      "grade": "희귀",
+      "description": "깨진 껍질 안에서 작은 물통을 채울 만한 맑은 물이 흘러나오며 물이 다 나오면 빈 껍질만 남는다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-17.svg"
+    },
+    {
+      "name": "순풍의 깃",
+      "grade": "희귀",
+      "description": "찢어 던지면 깃이 향한 쪽으로 한동안 바람이 불어 가벼운 먼지와 연기, 돛을 밀어낸다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-18.svg"
+    },
+    {
+      "name": "가시덩굴 종자",
+      "grade": "희귀",
+      "description": "물기 있는 흙에 던지면 덩굴이 빠르게 자라 가까운 물체를 감으며, 자라난 덩굴은 평범한 식물로 남는다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-19.svg"
+    },
+    {
+      "name": "흔적꽃가루",
+      "grade": "희귀",
+      "description": "뿌린 가루가 최근 살갗이 닿아 온기가 남은 곳에 밝게 달라붙어 손자국과 맨발 흔적을 살피기 좋다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-20.svg"
+    },
+    {
+      "name": "고요의 모래",
+      "grade": "희귀",
+      "description": "뿌려 쌓인 자리에서 나는 작은 충돌음과 마찰음이 가라앉으며 모래를 흩으면 효과도 옅어진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-21.svg"
+    },
+    {
+      "name": "중압의 진흙추",
+      "grade": "영웅",
+      "description": "무생물에 부딪히면 달라붙어 그 물건의 무게를 크게 늘리며, 추의 마른 금이 끝까지 번지면 가루가 되어 떨어진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-22.svg"
+    },
+    {
+      "name": "인연의 실타래",
+      "grade": "영웅",
+      "description": "던져 풀리면 가는 마력실이 가까운 돌기들을 서로 이어 그물처럼 걸리며, 팽팽히 당겨진 실은 큰 힘에 끊어진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-23.svg"
+    },
+    {
+      "name": "해방의 가루",
+      "grade": "영웅",
+      "description": "접착된 곳에 뿌리면 수지와 마법 접착막이 부드러워져 붙은 면을 떼어내기 쉬워진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-24.svg"
+    },
+    {
+      "name": "거울의 이슬",
+      "grade": "영웅",
+      "description": "표면에 뿌리면 얇은 반사막이 고르게 펴져 주변 풍경과 빛을 거울처럼 비추며, 막이 마르면 흐려져 벗겨진다.",
+      "category": "소모품",
+      "subcategory": "투척물",
+      "icon": "consumable-throwable-25.svg"
+    },
+    {
+      "name": "사냥 올가미",
+      "grade": "일반",
+      "description": "고리를 건드린 물체에 줄이 조여들도록 매어두는 소모용 끈으로, 잡힌 뒤에는 매듭이 세게 죄어진다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-01.svg"
+    },
+    {
+      "name": "쇠가시 주머니",
+      "grade": "일반",
+      "description": "어느 방향으로 떨어져도 뾰족한 끝이 위를 향하는 쇳조각을 흩뿌려 바닥을 밟거나 밀고 지나가기 어렵게 한다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-02.svg"
+    },
+    {
+      "name": "경보기 실",
+      "grade": "일반",
+      "description": "팽팽히 걸어 작은 방울과 연결하면 실을 밀거나 끊는 움직임에 방울이 울린다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-03.svg"
+    },
+    {
+      "name": "끈끈이 판",
+      "grade": "일반",
+      "description": "점성 수지를 바른 얇은 판으로 닿은 가벼운 물체와 작은 생물을 붙잡는다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-04.svg"
+    },
+    {
+      "name": "접철 발판덫",
+      "grade": "고급",
+      "description": "누르면 접힌 금속판이 튀어 올라 걸린 물체를 죄며, 작동한 판은 잠금부가 깊이 휘어 다시 펴기 어렵다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-05.svg"
+    },
+    {
+      "name": "포획 그물덫",
+      "grade": "고급",
+      "description": "고정줄이 풀리면 접혀 있던 그물이 펼쳐져 가운데의 물체를 감싸 매단 줄 쪽으로 조인다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-06.svg"
+    },
+    {
+      "name": "미늘 사냥줄",
+      "grade": "고급",
+      "description": "표면의 작은 갈고리가 천과 털에 걸려 당길수록 깊이 얽히며, 수풀에 걸어도 쉽게 풀리지 않는다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-07.svg"
+    },
+    {
+      "name": "낙하 걸쇠",
+      "grade": "고급",
+      "description": "물체를 매달아두고 연결한 가는 끈을 끊으면 걸쇠가 벌어져 매단 짐이 떨어진다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-08.svg"
+    },
+    {
+      "name": "인광 경계선",
+      "grade": "고급",
+      "description": "바닥에 풀어놓은 줄이 끊기면 안의 가루가 빛나 누가 경계를 건드린 위치를 표시한다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-09.svg"
+    },
+    {
+      "name": "냉기의 봉인판",
+      "grade": "희귀",
+      "description": "눌리면 표면의 룬이 깨지고 발판 주변 물기가 얼어 걸린 물체를 바닥에 붙든다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-10.svg"
+    },
+    {
+      "name": "침묵의 매듭패",
+      "grade": "희귀",
+      "description": "걸어둔 끈이 당겨지면 패가 타들어가며 주변 소리가 밖으로 전해지는 것을 한동안 줄인다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-11.svg"
+    },
+    {
+      "name": "마력감응 매듭",
+      "grade": "희귀",
+      "description": "근처에서 주문이 발동해 마력이 흔들리면 매듭이 풀려 연결해둔 작은 걸쇠를 당긴다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-12.svg"
+    },
+    {
+      "name": "그림자 올가미",
+      "grade": "희귀",
+      "description": "고리 위에 드리운 생물의 그림자를 붙들어 움직임을 방해하며, 그림자가 사라지거나 고리가 찢어지면 풀린다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-13.svg"
+    },
+    {
+      "name": "향적 발판",
+      "grade": "고급",
+      "description": "밟고 지나간 발과 신발에 짙은 향이 옮아 묻으며 발판의 향료가 소진될 때까지 작동한다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-14.svg"
+    },
+    {
+      "name": "빛포자 주머니",
+      "grade": "희귀",
+      "description": "눌리면 가벼운 포자가 퍼져 닿은 옷과 털에 달라붙고 어두워질수록 밝게 빛난다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-15.svg"
+    },
+    {
+      "name": "속박의 종자",
+      "grade": "희귀",
+      "description": "묻어둔 흙이 세게 눌리면 짧은 뿌리가 한꺼번에 자라 발목과 가까운 돌기를 뒤엉켜 감싼다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-16.svg"
+    },
+    {
+      "name": "환영의 미끼패",
+      "grade": "희귀",
+      "description": "작은 물건을 대어 모습을 새긴 뒤 놓아두면 그 물건의 빛 영상이 패 위에 떠올라 흔들리며, 패가 부서지면 사라진다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-17.svg"
+    },
+    {
+      "name": "하중전이 덫",
+      "grade": "영웅",
+      "description": "두 발판을 잇고 봉인을 풀면 한쪽을 누른 무게가 반대쪽으로 옮아 그쪽 발판을 내리누르며, 연결선이 끊기면 원래대로 돌아온다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-18.svg"
+    },
+    {
+      "name": "부유의 덫",
+      "grade": "영웅",
+      "description": "밟으면 원형 봉인이 풀려 발판 위의 물체를 조금 들어 올리며, 더 무거운 짐이 겹치면 힘이 흩어져 내려온다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-19.svg"
+    },
+    {
+      "name": "망자사슬 덫",
+      "grade": "영웅",
+      "description": "언데드의 기운이 고리 안에 들어오면 신성한 사슬이 뻗어 그 결속을 붙들며, 사슬이 끊어지면 봉인이 재가 되어 소모된다.",
+      "category": "소모품",
+      "subcategory": "함정도구",
+      "icon": "consumable-trap-20.svg"
     },
     {
       "name": "매직 애로우 주문서",
@@ -7085,7 +8293,439 @@
       "description": "펼쳐 목표를 겨누고 문장을 읽으면 작은 마력 화살이 곧게 날아가 닿은 곳을 찌른다.",
       "category": "소모품",
       "subcategory": "마법주문서",
-      "icon": "dummy.svg"
+      "icon": "consumable-scroll-01.svg"
+    },
+    {
+      "name": "등화 주문서",
+      "grade": "고급",
+      "description": "글을 읽으면 종이 위에 작은 빛덩이가 떠올라 곁을 따라다니며, 종이의 글빛이 다 사라지면 꺼진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-02.svg"
+    },
+    {
+      "name": "발화 주문서",
+      "grade": "고급",
+      "description": "문양을 물체에 대고 읽으면 닿은 자리에 불씨가 생겨 마른 천과 목재에 불을 붙인다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-03.svg"
+    },
+    {
+      "name": "돌풍 주문서",
+      "grade": "고급",
+      "description": "펼친 면이 향한 쪽으로 강한 바람이 한 차례 불어 느슨한 짐과 연기를 밀어낸다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-04.svg"
+    },
+    {
+      "name": "안개 주문서",
+      "grade": "고급",
+      "description": "글을 읽으면 발밑에서 안개가 피어나 가까운 풍경을 가리며 바람을 따라 흘러간다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-05.svg"
+    },
+    {
+      "name": "정수 주문서",
+      "grade": "고급",
+      "description": "물 위에서 펼쳐 읽으면 떠다니는 흙과 생물성 오염물이 한 덩어리로 모여 수면에 뜬다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-06.svg"
+    },
+    {
+      "name": "잠금 주문서",
+      "grade": "희귀",
+      "description": "닫힌 문에 붙여 읽으면 문짝과 문틀이 마력으로 붙들려 문을 밀고 당기기 어려워진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-07.svg"
+    },
+    {
+      "name": "노크 주문서",
+      "grade": "희귀",
+      "description": "단순한 기계식 잠금장치에 대고 읽으면 안쪽 걸쇠와 맞물림이 풀려 잠금이 열린다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-08.svg"
+    },
+    {
+      "name": "침묵 주문서",
+      "grade": "희귀",
+      "description": "펼쳐둔 종이를 중심으로 작은 방만 한 공간의 소리가 크게 줄어들며, 종이가 찢어지면 장막이 걷힌다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-09.svg"
+    },
+    {
+      "name": "페더 폴 주문서",
+      "grade": "희귀",
+      "description": "목표를 향해 읽으면 몸이나 짐이 공기에 부드럽게 받쳐져 떨어지는 속도가 느려진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-10.svg"
+    },
+    {
+      "name": "수중호흡 주문서",
+      "grade": "희귀",
+      "description": "읽고 생긴 문양을 목에 대면 물속에서 숨 쉴 마력막이 생기며 문양이 옅어질수록 호흡이 무거워진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-11.svg"
+    },
+    {
+      "name": "부유 주문서",
+      "grade": "희귀",
+      "description": "작은 무생물에 대고 읽으면 눈앞의 손짓을 따라 떠올라 움직이며, 종이가 다 타면 땅으로 내려온다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-12.svg"
+    },
+    {
+      "name": "중력반전 주문서",
+      "grade": "영웅",
+      "description": "바닥에 펼쳐 읽으면 그 위의 좁은 공간에서 물체들이 위로 떨어지며, 종이가 닫히면 원래 방향으로 무게가 돌아온다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-13.svg"
+    },
+    {
+      "name": "환영 주문서",
+      "grade": "희귀",
+      "description": "문장을 읽으며 떠올린 작은 풍경이 종이 앞에 빛 영상으로 나타나고 종이를 기울여 방향을 바꿀 수 있다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-14.svg"
+    },
+    {
+      "name": "통역 주문서",
+      "grade": "희귀",
+      "description": "문장을 읽으면 가까이서 들리는 말의 뜻이 익숙한 언어로 느껴지며 글빛이 흐려지면 통역도 옅어진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-15.svg"
+    },
+    {
+      "name": "마력감지 주문서",
+      "grade": "고급",
+      "description": "펼쳐 읽으면 가까운 물건과 바닥에 흐르는 마력이 옅은 빛선으로 드러나 한 차례 주변 흐름을 살필 수 있다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-16.svg"
+    },
+    {
+      "name": "영체접촉 주문서",
+      "grade": "희귀",
+      "description": "글자를 손과 도구에 옮겨 새기면 그 표면이 영체에 닿게 되며, 문자가 닳거나 씻기면 효과가 풀린다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-17.svg"
+    },
+    {
+      "name": "벽통과 주문서",
+      "grade": "영웅",
+      "description": "얇은 무생물 벽에 붙여 읽으면 사람 하나가 지날 만한 마력 틈이 잠시 열리고, 글이 타들어갈수록 틈이 좁아진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-18.svg"
+    },
+    {
+      "name": "석교 주문서",
+      "grade": "영웅",
+      "description": "두 바위 사이를 겨누고 읽으면 주변의 느슨한 돌이 모여 좁은 다리를 이루며, 다리를 만들 돌이 부족하면 중간이 비어 남는다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-19.svg"
+    },
+    {
+      "name": "축소 주문서",
+      "grade": "영웅",
+      "description": "작은 무생물에 글을 대고 읽으면 물건과 그 무게가 함께 줄며, 남은 문양을 문지르면 원래 크기로 돌아온다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-20.svg"
+    },
+    {
+      "name": "확대 주문서",
+      "grade": "영웅",
+      "description": "무생물에 글을 옮겨 읽으면 크기와 무게가 함께 늘어나며, 문양의 빛이 사라지면 본래 모습으로 줄어든다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-21.svg"
+    },
+    {
+      "name": "구속 주문서",
+      "grade": "희귀",
+      "description": "가까운 목표를 향해 읽으면 빛의 끈이 뻗어 팔다리를 감고, 끈을 강하게 당기거나 끊으면 풀린다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-22.svg"
+    },
+    {
+      "name": "스톤 스킨 주문서",
+      "grade": "희귀",
+      "description": "몸에 문양을 대고 읽으면 피부가 단단해져 가벼운 무기의 날을 받아내며 관절 움직임은 다소 뻣뻣해진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-23.svg"
+    },
+    {
+      "name": "디스펠 주문서",
+      "grade": "영웅",
+      "description": "눈에 드러난 마법 효과를 겨누어 읽으면 바깥쪽 마력 결속이 풀리며, 강하게 겹친 마법일수록 해체되는 범위가 좁아진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-24.svg"
+    },
+    {
+      "name": "전언 주문서",
+      "grade": "고급",
+      "description": "짧은 말을 불어넣어 접으면 빛새가 되어 눈에 보이는 상대에게 날아가 그 말을 한 번 울린 뒤 사라진다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-25.svg"
+    },
+    {
+      "name": "환상의 길 주문서",
+      "grade": "영웅",
+      "description": "손가락으로 그은 방향을 따라 바닥에 길과 발자국의 빛 영상이 펼쳐져 다른 이에게 보이는 경로를 만들 수 있다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-26.svg"
+    },
+    {
+      "name": "생명유예 주문서",
+      "grade": "전설",
+      "description": "생존자의 가슴에 붙여 읽으면 치명상에서 피와 생명 기운이 새는 속도가 크게 늦어져 치료할 여유를 준다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-27.svg"
+    },
+    {
+      "name": "귀환 주문서",
+      "grade": "전설",
+      "description": "종이를 둘로 나눠 한쪽을 목적지에 고정하고 나머지 글을 읽으면 몸이 고정한 종이 앞으로 옮겨지며 두 조각은 함께 재가 된다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-28.svg"
+    },
+    {
+      "name": "차원문 주문서",
+      "grade": "전설",
+      "description": "직접 가본 가까운 장소를 떠올려 읽으면 그곳으로 이어지는 문이 열리며, 타들어가는 종이가 끝나기 전까지 통과할 수 있다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-29.svg"
+    },
+    {
+      "name": "새벽의 축문",
+      "grade": "신화",
+      "description": "새벽의 여신이 남긴 글을 읽으면 몸이 남고 영혼이 가까이 머문 최근의 망자가 숨을 되찾으며, 타오르는 글자에서 새벽빛이 퍼져 치명상을 아물게 한다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "consumable-scroll-30.svg"
+    },
+    {
+      "name": "점화 룬성냥",
+      "grade": "일반",
+      "description": "긁으면 마력 불꽃이 붙어 짧은 심지를 태우며 젖은 부싯깃도 천천히 말려 점화한다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-01.svg"
+    },
+    {
+      "name": "등화 심지",
+      "grade": "고급",
+      "description": "마력을 넣어 켜면 그릇에 기름을 붓지 않아도 밝게 타오르며 심지가 다 타면 꺼진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-02.svg"
+    },
+    {
+      "name": "온석 조각",
+      "grade": "고급",
+      "description": "금 간 부분을 꺾으면 은은한 열기가 퍼져 품과 작은 공간을 덥히고 식은 뒤에는 부스러진 돌만 남는다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-03.svg"
+    },
+    {
+      "name": "마법 종이등",
+      "grade": "고급",
+      "description": "종이를 접어 마력을 불어넣으면 빛을 내며 떠오르고, 가장자리가 서서히 타들어가 끝내 재가 된다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-04.svg"
+    },
+    {
+      "name": "밀봉부",
+      "grade": "고급",
+      "description": "닫힌 용기 입구에 붙이면 얇은 막이 생겨 액체와 냄새를 가두며, 떼어내면 부적과 막이 함께 부스러진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-05.svg"
+    },
+    {
+      "name": "월광 진주",
+      "grade": "희귀",
+      "description": "깨뜨리면 부드러운 달빛이 가까운 표면에 머물러 작은 표식과 윤곽을 비추다가 가루가 될수록 옅어진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-06.svg"
+    },
+    {
+      "name": "결속부",
+      "grade": "희귀",
+      "description": "묶을 물건에 붙여 찢으면 종이가 긴 끈으로 풀려나 주변을 감싸며, 매듭을 끊으면 끈 전체가 재가 된다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-07.svg"
+    },
+    {
+      "name": "물의 룬주머니",
+      "grade": "희귀",
+      "description": "마른 룬을 물에 적시면 안쪽에 작은 물통만큼의 물이 모이고, 모서리를 찢으면 모인 물이 한꺼번에 쏟아진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-08.svg"
+    },
+    {
+      "name": "허공못",
+      "grade": "희귀",
+      "description": "허공을 향해 비틀어 박으면 빈 공간에 고정되어 끈과 작은 짐을 걸 수 있으며, 표면에 번지는 금이 끝에 닿으면 부서진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-09.svg"
+    },
+    {
+      "name": "공명의 쌍조각",
+      "grade": "희귀",
+      "description": "같은 건물 안에 둔 한 조각을 부러뜨리면 짝조각이 맑게 울리며 함께 갈라져 한 번의 신호를 전한다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-10.svg"
+    },
+    {
+      "name": "차원의 열쇠",
+      "grade": "전설",
+      "description": "잠긴 공간문의 틈에 넣고 꺾으면 봉인의 겉층이 갈라져 한 사람이 통과할 틈이 열리며 부서진 열쇠빛이 사라지면 닫힌다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-11.svg"
+    },
+    {
+      "name": "그림자 종이",
+      "grade": "희귀",
+      "description": "그림자를 받아 접어두었다가 펼치면 저장한 윤곽이 가까운 면에 드리워지며, 빛을 오래 받으면 종이가 하얗게 바래 소모된다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-12.svg"
+    },
+    {
+      "name": "방랑자의 표식",
+      "grade": "고급",
+      "description": "바닥에 붙이고 껍질을 벗기면 어둠 속에서 작은 빛이 나며, 밟거나 문지르면 가루로 흩어져 흔적을 지울 수 있다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-13.svg"
+    },
+    {
+      "name": "몽수정",
+      "grade": "영웅",
+      "description": "잠에서 막 깬 이가 쥐면 기억하는 꿈 한 장면이 담기며, 부수면 그 장면이 주변에 빛 영상으로 펼쳐진 뒤 흩어진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-14.svg"
+    },
+    {
+      "name": "망령의 동전",
+      "grade": "영웅",
+      "description": "의사 있는 영체에게 내밀면 동전이 천천히 닳는 동안 그 영체의 말을 살아 있는 이도 들을 수 있다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-15.svg"
+    },
+    {
+      "name": "부유석 파편",
+      "grade": "희귀",
+      "description": "물건에 매고 꺾으면 돌에 남은 부유력이 짐을 떠받치며, 파편의 빛이 다 꺼지면 힘이 사라진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-16.svg"
+    },
+    {
+      "name": "유리 사역마",
+      "grade": "영웅",
+      "description": "봉인을 깨면 작은 유리새가 깨어나 손짓한 쪽으로 날며, 남겨둔 눈구슬을 통해 앞의 풍경을 볼 수 있고 몸이 부서지면 시야도 끊긴다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-17.svg"
+    },
+    {
+      "name": "반영의 거울조각",
+      "grade": "영웅",
+      "description": "날아오는 단순한 빛 주문을 향해 깨뜨리면 조각들 사이에 반사면이 생겨 주문을 비껴 보내고 곧 녹아 사라진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-18.svg"
+    },
+    {
+      "name": "은신의 면사",
+      "grade": "영웅",
+      "description": "얼굴과 몸에 둘러 펼치면 주변 빛이 휘어 몸의 윤곽이 사라지며, 움직일수록 천이 풀려나와 투명한 조각으로 흩어진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-19.svg"
+    },
+    {
+      "name": "성역의 초",
+      "grade": "영웅",
+      "description": "켜진 초 주변에 작은 신성 영역이 생겨 언데드와 저주의 기운이 약해지며, 촛농이 다 녹으면 영역이 걷힌다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-20.svg"
+    },
+    {
+      "name": "순례자의 문턱",
+      "grade": "전설",
+      "description": "한쪽 나무패를 목적지에 두고 짝패를 바닥에 놓아 넘으면 그곳으로 옮겨지며, 통과한 뒤 두 나무패가 함께 가루가 된다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-21.svg"
+    },
+    {
+      "name": "해빙의 성석",
+      "grade": "영웅",
+      "description": "얼음에 대어 깨면 따뜻한 빛이 닿은 얼음부터 녹여 물길을 만들고, 돌빛이 꺼질 때까지 차가운 물속에서도 열기가 이어진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-22.svg"
+    },
+    {
+      "name": "인연의 불씨",
+      "grade": "희귀",
+      "description": "함께 나눈 두 불씨를 천에 싸두면 한쪽이 물에 꺼질 때 다른 쪽도 차갑게 식고 검은 자국을 남긴다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-23.svg"
+    },
+    {
+      "name": "허공의 사다리",
+      "grade": "영웅",
+      "description": "접힌 종이띠를 펼치면 빛의 발판들이 세로로 이어지며, 아래쪽 종이가 타는 순서대로 발판도 사라진다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-24.svg"
+    },
+    {
+      "name": "지맥의 못",
+      "grade": "전설",
+      "description": "갈라진 땅에 박으면 주변 암반이 서로 맞물려 움직임을 버티며, 힘을 쓸수록 못이 갈라져 끝내 가루가 된다.",
+      "category": "소모품",
+      "subcategory": "일회용마도구",
+      "icon": "consumable-single-use-25.svg"
     },
     {
       "name": "건빵",
@@ -7093,15 +8733,751 @@
       "description": "수분이 적고 단단해 오래 보관하기 좋으며 물과 국물에 적시면 부드러워진다.",
       "category": "소모품",
       "subcategory": "음식",
-      "icon": "dummy.svg"
+      "icon": "consumable-food-01.svg"
     },
     {
-      "name": "사냥 화살",
+      "name": "육포",
       "grade": "일반",
-      "description": "넓은 촉이 가죽과 살을 베고 들어가며 빼낼 때 상처가 더 벌어지기 쉽다.",
+      "description": "얇게 말린 고기로 가볍고 상하기 더디며 오래 씹으면 짙은 짠맛과 육즙이 배어 나온다.",
       "category": "소모품",
-      "subcategory": "화살",
-      "icon": "dummy.svg"
+      "subcategory": "음식",
+      "icon": "consumable-food-02.svg"
+    },
+    {
+      "name": "말린 과일",
+      "grade": "일반",
+      "description": "말려 단맛을 모은 과일로 그대로 먹거나 물에 담가 불려 먹을 수 있다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-03.svg"
+    },
+    {
+      "name": "곡물떡",
+      "grade": "일반",
+      "description": "찐 곡물을 단단히 뭉쳐 만든 휴대식으로 배를 든든하게 채우고 얇게 잘라 나누기 좋다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-04.svg"
+    },
+    {
+      "name": "숙성 치즈",
+      "grade": "일반",
+      "description": "굳힌 겉껍질 안에 진한 맛과 기름기가 남아 적은 양으로도 식사를 풍성하게 한다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-05.svg"
+    },
+    {
+      "name": "소금절임 생선",
+      "grade": "일반",
+      "description": "짙게 절여 보관하는 생선으로 물에 담그면 짠기가 빠지고 마른 살이 부드러워진다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-06.svg"
+    },
+    {
+      "name": "훈제 버섯",
+      "grade": "일반",
+      "description": "먹을 수 있는 버섯을 연기에 말려 향이 짙으며 물을 부으면 갓이 펴져 국물 맛을 낸다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-07.svg"
+    },
+    {
+      "name": "꿀사탕",
+      "grade": "일반",
+      "description": "꿀을 굳힌 사탕으로 입안에서 천천히 녹고 따뜻해지면 끈끈하게 달라붙는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-08.svg"
+    },
+    {
+      "name": "해초쌈",
+      "grade": "일반",
+      "description": "넓은 식용 해초를 말아 만든 음식으로 젖은 잎이 잘 찢어지지 않고 안의 재료를 감싼다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-09.svg"
+    },
+    {
+      "name": "화덕빵",
+      "grade": "일반",
+      "description": "두꺼운 껍질이 속의 수분을 가두어 부드러움을 지키며 속을 파내 그릇처럼 쓸 수 있다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-10.svg"
+    },
+    {
+      "name": "견과꿀 강정",
+      "grade": "고급",
+      "description": "견과를 단단한 꿀막으로 묶어 부스러짐이 적고 오래 씹으면 고소한 기름기가 나온다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-11.svg"
+    },
+    {
+      "name": "병사의 압축식",
+      "grade": "고급",
+      "description": "곡물과 말린 채소를 눌러 만든 양식으로 물을 먹이면 크게 불어나 여러 사람의 죽으로 나누기 좋다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-12.svg"
+    },
+    {
+      "name": "마수고기 스튜",
+      "grade": "고급",
+      "description": "질긴 마수의 살을 부드럽게 익힌 진한 요리로 식어도 기름이 쉽게 굳지 않아 차갑게 먹기에도 알맞다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-13.svg"
+    },
+    {
+      "name": "동굴이끼 빵",
+      "grade": "고급",
+      "description": "식용 동굴이끼를 섞은 빵으로 어둡고 서늘한 곳에서 신선함이 오래 유지되며 은은한 흙향이 난다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-14.svg"
+    },
+    {
+      "name": "바다포도 절임",
+      "grade": "고급",
+      "description": "작은 물주머니 같은 해초 열매가 씹을 때 터져 짭짤한 수분이 나오며 얇은 껍질은 잘 달라붙는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-15.svg"
+    },
+    {
+      "name": "불씨꿀",
+      "grade": "희귀",
+      "description": "떠낸 꿀이 천천히 온기를 내어 차가운 음식을 데우며 얇게 바를수록 빨리 식는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-16.svg"
+    },
+    {
+      "name": "설원열매 잼",
+      "grade": "희귀",
+      "description": "차가울수록 되직하고 끈끈해지며 따뜻해지면 묽게 풀려 빵과 말린 음식에 바르기 좋다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-17.svg"
+    },
+    {
+      "name": "월광 젤리",
+      "grade": "희귀",
+      "description": "빛을 머금은 투명한 젤리로 어둠 속에서 은은히 빛나고 잘게 나누어도 조각마다 빛이 남는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-18.svg"
+    },
+    {
+      "name": "구름 머랭",
+      "grade": "희귀",
+      "description": "손을 놓으면 공중에 느리게 떠오르는 가벼운 과자로 물에 젖거나 입안에 들어가면 부드럽게 녹는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-19.svg"
+    },
+    {
+      "name": "숨결엿",
+      "grade": "희귀",
+      "description": "입안에서 녹는 동안 내쉬는 숨이 옅은 색안개로 보여 호흡과 바람의 흐름을 눈으로 살필 수 있다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-20.svg"
+    },
+    {
+      "name": "별소금 과자",
+      "grade": "희귀",
+      "description": "부스러기가 습기에 닿으면 반짝이는 작은 결정이 남으며 물에 완전히 녹이면 빛도 사라진다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-21.svg"
+    },
+    {
+      "name": "고요의 푸딩",
+      "grade": "희귀",
+      "description": "흔들고 잘라도 부드러운 덩어리가 천천히 본래 모양으로 모이며 입안의 온기에 닿으면 평범한 푸딩처럼 풀어진다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-22.svg"
+    },
+    {
+      "name": "성찬빵",
+      "grade": "영웅",
+      "description": "신성한 의식에서 나눈 빵으로 먹으면 부정한 기운에 쇠약해진 몸에 온기가 돌고 작은 상처가 서서히 아문다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-23.svg"
+    },
+    {
+      "name": "정령의 과실",
+      "grade": "영웅",
+      "description": "정령과 함께 나누어 먹으면 먹는 동안 서로 느끼는 향과 온기, 가까운 자연의 감촉을 나눌 수 있다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-24.svg"
+    },
+    {
+      "name": "황금사과",
+      "grade": "전설",
+      "description": "베어낸 과육이 공기에 닿으면 다시 차올라 여러 번 나누어 먹을 수 있으며 씨가 검게 변하면 과육의 재생이 멎는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-25.svg"
+    },
+    {
+      "name": "여행자의 고기파이",
+      "grade": "일반",
+      "description": "바삭한 파이 껍질 안에 잘게 썬 고기와 채소, 진한 육즙을 가둔 여관의 든든한 한 접시로 칼을 대면 뜨거운 향이 퍼진다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-26.svg"
+    },
+    {
+      "name": "양파 치즈수프",
+      "grade": "일반",
+      "description": "부드럽게 익힌 양파 국물에 빵과 치즈를 덮은 요리로 윗면은 고소하게 굳고 아래는 국물을 머금어 부드럽다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-27.svg"
+    },
+    {
+      "name": "허브 양고기 꼬치",
+      "grade": "일반",
+      "description": "향초를 곁들인 양고기를 꼬치째 구워 겉은 바삭하고 속은 촉촉하며, 여관에서는 빵과 절임채소를 함께 낸다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-28.svg"
+    },
+    {
+      "name": "사냥꾼의 모둠구이",
+      "grade": "고급",
+      "description": "그날 구한 사슴과 산새 같은 사냥고기를 부위마다 다르게 구워 내는 한 접시로 고기별 질김과 익는 속도를 읽는 솜씨가 맛을 좌우한다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-29.svg"
+    },
+    {
+      "name": "꿀버터 전병",
+      "grade": "일반",
+      "description": "얇게 구운 전병에 꿀과 버터를 곁들인 아침 메뉴로 따뜻할 때 접으면 속까지 달고 고소한 향이 배어난다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-30.svg"
+    },
+    {
+      "name": "버섯 크림리소토",
+      "grade": "고급",
+      "description": "쌀알의 씹는 맛을 살리면서 버섯 국물과 크림을 부드럽게 엉기게 한 요리로 불과 수분을 맞추는 숙련이 필요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-31.svg"
+    },
+    {
+      "name": "뿌리채소 솥찜",
+      "grade": "일반",
+      "description": "제철 뿌리채소를 한 솥에 익혀 재료마다 다른 단맛이 배어든 소박한 요리로 값싼 여관의 저녁 식사에 자주 오른다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-32.svg"
+    },
+    {
+      "name": "항구의 해산물 차우더",
+      "grade": "고급",
+      "description": "조개와 생선, 감자를 넣은 걸쭉한 수프로 해산물의 짠맛을 살리고 살이 질겨지지 않게 익히는 것이 중요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-33.svg"
+    },
+    {
+      "name": "검은빵과 소시지",
+      "grade": "일반",
+      "description": "시큼한 검은빵에 구운 소시지와 절임양배추를 곁들인 접시로, 맥주를 내는 여관에서 흔히 주문하는 든든한 안주다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-34.svg"
+    },
+    {
+      "name": "붉은과실 타르트",
+      "grade": "고급",
+      "description": "잘 부서지는 얇은 반죽 위에 새콤한 과실을 얹은 후식으로 과즙이 새어 바닥을 눅눅하게 만들지 않도록 굽는 솜씨가 필요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-35.svg"
+    },
+    {
+      "name": "용암도마뱀 스테이크",
+      "grade": "희귀",
+      "description": "화산동굴 마수의 고기를 구운 별미로 살에 남은 열기가 접시를 오래 데우며, 체내의 열독을 먼저 안정시키는 숙련된 손질이 필요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-36.svg"
+    },
+    {
+      "name": "유리전갈 튀김",
+      "grade": "희귀",
+      "description": "사막 마수의 투명한 껍질을 바삭하게 살린 요리로 살은 담백하며, 껍질에 스민 마력독을 정화할 수 있는 전문 요리사가 다룬다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-37.svg"
+    },
+    {
+      "name": "월하독버섯 파이",
+      "grade": "희귀",
+      "description": "달빛에 따라 독성이 달라지는 버섯을 쓴 파이로 정화된 버섯은 깊은 흙향을 내며, 채집 시기와 마력 상태를 읽는 솜씨가 필요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-38.svg"
+    },
+    {
+      "name": "설원마수 수육",
+      "grade": "고급",
+      "description": "냉기를 품은 마수의 살을 부드럽게 익힌 설원 요리로, 고기에서 냉기가 풀리는 속도를 맞추지 못하면 겉이 익어도 속이 돌처럼 굳는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-39.svg"
+    },
+    {
+      "name": "심해등어 찜",
+      "grade": "희귀",
+      "description": "깊은 바다에서 나는 발광 마수어의 촉촉한 살을 살린 요리로, 살 속 인광독을 분리해 안정시키는 특수한 손질이 필요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-40.svg"
+    },
+    {
+      "name": "돌껍질게 그라탱",
+      "grade": "고급",
+      "description": "바위처럼 단단한 껍질 안의 연한 게살에 치즈를 입힌 해안 별미로, 껍질의 광물 가루가 살에 섞이지 않도록 발라내는 솜씨가 중요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-41.svg"
+    },
+    {
+      "name": "동굴숙성 치즈퐁뒤",
+      "grade": "고급",
+      "description": "일정한 습기와 지열을 지닌 동굴에서 익힌 치즈를 녹인 요리로, 산미와 기름이 갈라지지 않는 매끄러운 질감을 내기 어렵다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-42.svg"
+    },
+    {
+      "name": "정령꽃 설탕공예",
+      "grade": "희귀",
+      "description": "정령영역의 식용 꽃을 얇은 설탕결에 가둔 후식으로 빛의 방향에 따라 꽃빛이 바뀌며, 꽃의 마력을 흐트러뜨리지 않는 섬세한 작업이 필요하다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-43.svg"
+    },
+    {
+      "name": "비룡알 수플레",
+      "grade": "희귀",
+      "description": "스스로 열을 내는 비룡알로 부풀린 가벼운 후식으로 속이 따뜻하고 탄력 있으며, 알의 열기와 화덕의 불을 함께 조절해야 모양이 살아난다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-44.svg"
+    },
+    {
+      "name": "바실리스크 꼬리찜",
+      "grade": "영웅",
+      "description": "석화독을 정화한 바실리스크 꼬리를 연하게 익힌 진미로 깊은 감칠맛이 나며, 독이 남으면 먹는 이의 입과 목이 굳어 정화술과 손질에 모두 능한 요리사가 맡는다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "consumable-food-45.svg"
+    },
+    {
+      "name": "샘물",
+      "grade": "일반",
+      "description": "맑게 길어 마시는 물로 갈증을 풀고 마른 음식과 가루를 적셔 쓰기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-01.svg"
+    },
+    {
+      "name": "보리차",
+      "grade": "일반",
+      "description": "볶은 보리의 구수한 향이 나는 차로 뜨겁게 마시거나 식혀 물처럼 나눠 마실 수 있다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-02.svg"
+    },
+    {
+      "name": "박하차",
+      "grade": "일반",
+      "description": "맑고 서늘한 향이 입안에 오래 남아 기름진 음식 뒤에 마시기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-03.svg"
+    },
+    {
+      "name": "맥주",
+      "grade": "일반",
+      "description": "곡물을 발효한 술로 잔을 흔들면 거품이 나고 마신 양에 따라 취기가 오른다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-04.svg"
+    },
+    {
+      "name": "과실주",
+      "grade": "일반",
+      "description": "익은 과일의 단맛과 신맛이 남은 술로 색과 향이 짙고 천에 묻으면 얼룩이 남기 쉽다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-05.svg"
+    },
+    {
+      "name": "벌꿀술",
+      "grade": "고급",
+      "description": "꿀을 발효한 향기로운 술로 차게 마시면 단맛이 가볍고 따뜻하게 데우면 향이 짙게 퍼진다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-06.svg"
+    },
+    {
+      "name": "발효유",
+      "grade": "일반",
+      "description": "걸쭉하고 새콤한 유음료로 잘 흔들어 마시며 따뜻한 곳에 두면 맛이 빠르게 변한다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-07.svg"
+    },
+    {
+      "name": "염차",
+      "grade": "일반",
+      "description": "소금과 식용 잎을 우린 짭짤한 차로 땀을 많이 흘리는 지역에서 물과 함께 나누어 마신다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-08.svg"
+    },
+    {
+      "name": "숲열매 즙",
+      "grade": "일반",
+      "description": "식용 열매를 눌러 만든 진한 즙으로 열매 껍질의 색이 짙어 종이와 천에도 잘 배어난다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-09.svg"
+    },
+    {
+      "name": "향신 밀크",
+      "grade": "고급",
+      "description": "우유에 향신료 향을 입힌 부드러운 음료로 데우면 달고 따뜻한 향이 멀리 퍼진다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-10.svg"
+    },
+    {
+      "name": "황금 홍차",
+      "grade": "고급",
+      "description": "찻잎을 오래 비비고 말려 짙은 향을 낸 차로 작은 잔에 천천히 따라 음미하기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-11.svg"
+    },
+    {
+      "name": "꿀생강차",
+      "grade": "고급",
+      "description": "달고 알싸한 온기가 입과 목에 남아 찬바람을 쐰 뒤 몸을 덥히며 마시기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-12.svg"
+    },
+    {
+      "name": "별빛차",
+      "grade": "희귀",
+      "description": "잔을 저으며 짧은 풍경을 떠올리면 표면에 빛무늬가 나타나고, 차를 마시거나 흔들면 흐트러진다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-13.svg"
+    },
+    {
+      "name": "서리주",
+      "grade": "희귀",
+      "description": "공기에 닿은 술 표면에 얇은 서리가 생겨 시원함을 유지하며 따르고 남긴 자리에도 작은 얼음꽃이 핀다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-14.svg"
+    },
+    {
+      "name": "불꽃럼",
+      "grade": "희귀",
+      "description": "마시면 짧은 입김에 불꽃이 섞여 나오며, 입안의 알싸한 열기가 가라앉으면 불꽃도 멎는다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-15.svg"
+    },
+    {
+      "name": "고요의 차",
+      "grade": "희귀",
+      "description": "따뜻하게 마시면 흥분한 생각이 가라앉고 숨이 고르게 돌아 대화와 명상에 집중하기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-16.svg"
+    },
+    {
+      "name": "달빛수",
+      "grade": "희귀",
+      "description": "옅은 빛을 머금은 음료로 마시면 입안이 서늘해지며, 흘린 물이 마르는 동안 젖은 자리가 은은히 빛난다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-17.svg"
+    },
+    {
+      "name": "구름술",
+      "grade": "희귀",
+      "description": "마신 뒤 내쉬는 숨이 작고 가벼운 안개 덩어리로 맺혀 얼굴 앞에 잠깐 머물다가 흩어진다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-18.svg"
+    },
+    {
+      "name": "몽회의 차",
+      "grade": "영웅",
+      "description": "같은 주전자에서 차를 나누어 마시고 함께 잠들면 꿈에 공통의 작은 정원이 나타나 서로 만나 대화할 수 있다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-19.svg"
+    },
+    {
+      "name": "유영차",
+      "grade": "영웅",
+      "description": "마시면 피부 가까이에 얇은 공기층이 머물러 물에 쉽게 뜨며, 몸을 세게 문지른 곳은 공기층이 풀린다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-20.svg"
+    },
+    {
+      "name": "사과 사이더",
+      "grade": "일반",
+      "description": "사과를 발효한 산뜻한 술로 가벼운 거품과 과실향이 나며 치즈와 고기파이에 곁들이기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-21.svg"
+    },
+    {
+      "name": "숲열매 에일",
+      "grade": "일반",
+      "description": "곡물 술에 먹을 수 있는 숲열매의 향을 입혀 쓴맛과 새콤한 맛이 어우러지며 여관에서 큰 잔으로 내기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-22.svg"
+    },
+    {
+      "name": "향신 포도주",
+      "grade": "고급",
+      "description": "포도주에 향신료 향을 입혀 따뜻하게 내는 술로 추운 밤 여관의 난롯가에서 마시며 향을 날리지 않는 온도 조절이 맛을 좌우한다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-23.svg"
+    },
+    {
+      "name": "구운사과 차",
+      "grade": "일반",
+      "description": "구운 사과의 단맛과 껍질 향이 우러난 부드러운 차로 술을 마시지 않는 손님에게 전병과 함께 내기 좋다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-24.svg"
+    },
+    {
+      "name": "설원의 버터차",
+      "grade": "고급",
+      "description": "진한 차에 버터와 소금의 맛이 고르게 섞인 산악 음료로, 기름이 겉돌지 않는 부드러운 질감은 오래 차를 다룬 이의 솜씨를 보여준다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-25.svg"
+    },
+    {
+      "name": "모래달꽃 냉차",
+      "grade": "고급",
+      "description": "사막 오아시스의 식용 모래달꽃을 우린 차로 서늘한 향이 남으며, 마른 꽃이 가진 쓴 수액을 걷어내는 전통 손질이 필요하다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-26.svg"
+    },
+    {
+      "name": "몽련 화차",
+      "grade": "희귀",
+      "description": "잠을 부르는 마력독을 정화한 몽련꽃의 차로 은은한 단향이 나며, 정화가 덜 되면 마신 이가 깊은 잠에 빠져 숙련된 차 장인이 다룬다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-27.svg"
+    },
+    {
+      "name": "화룡초 브랜디",
+      "grade": "희귀",
+      "description": "화산지대의 화룡초 향을 입힌 증류주로 입안에 긴 온기가 남으며, 자극적인 마력독과 향을 분리하는 숙련된 증류 기술이 필요하다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-28.svg"
+    },
+    {
+      "name": "진주해초주",
+      "grade": "고급",
+      "description": "조수에 따라 맛이 변하는 해초를 발효한 섬의 술로 옅은 바다향이 나며, 염분과 발효의 변화를 읽는 해안 양조사의 솜씨가 드러난다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-29.svg"
+    },
+    {
+      "name": "정령수 수액주",
+      "grade": "희귀",
+      "description": "정령영역의 나무 수액으로 빚어 잔을 돌릴 때마다 꽃과 나무 향이 번갈아 나며, 발효 중 요동치는 마력을 고르게 잡는 양조 기술이 필요하다.",
+      "category": "소모품",
+      "subcategory": "음료",
+      "icon": "consumable-drink-30.svg"
+    },
+    {
+      "name": "순응의 비약",
+      "grade": "희귀",
+      "description": "마시고 한 환경에서 충분히 쉬면 몸이 그곳의 더위와 추위에 적응하기 쉬워져 오래 머무는 동안 체온을 지키는 힘이 커진다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-01.svg"
+    },
+    {
+      "name": "맑은피의 비약",
+      "grade": "희귀",
+      "description": "마실 때 함께 접한 특정 마수독에 몸이 익숙해져 이후 같은 독에 중독될 때 증상이 약하게 나타난다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-02.svg"
+    },
+    {
+      "name": "깊은숨의 비약",
+      "grade": "희귀",
+      "description": "마시면 폐가 깊이 펴져 한 번 들이쉰 숨으로 오래 움직이고 긴 영창을 이어가기 쉬워진다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-03.svg"
+    },
+    {
+      "name": "밤눈의 비약",
+      "grade": "희귀",
+      "description": "마신 뒤 눈이 희미한 빛을 잘 모으게 되어 달빛과 약한 등불 아래에서도 사물의 경계가 선명해진다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-04.svg"
+    },
+    {
+      "name": "감응의 비약",
+      "grade": "영웅",
+      "description": "마시면 피부와 눈이 가까운 마력 흐름에 민감해져 마법이 움직일 때 가벼운 압박과 잔광으로 느낀다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-05.svg"
+    },
+    {
+      "name": "물결감각 비약",
+      "grade": "희귀",
+      "description": "마시면 피부로 느끼는 수압과 물살의 작은 차이가 또렷해져 물속에서 다가오는 움직임을 알아차리기 쉽다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-06.svg"
+    },
+    {
+      "name": "혼령의 비약",
+      "grade": "영웅",
+      "description": "마시면 주변 영체의 형체가 보이고 영체들도 마신 이의 생명 기운을 또렷하게 알아차리게 된다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-07.svg"
+    },
+    {
+      "name": "정령혈의 비약",
+      "grade": "영웅",
+      "description": "마실 때 교감한 정령의 성질이 체내에 깃들어 그 정령이 다루는 불과 냉기 같은 한 성질에 몸이 강해진다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-08.svg"
+    },
+    {
+      "name": "야수형상의 비약",
+      "grade": "영웅",
+      "description": "마신 뒤 직접 본 작은 짐승의 모습을 떠올리면 그 형체로 변하고, 본래 몸을 의식해 불러오면 돌아온다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-09.svg"
+    },
+    {
+      "name": "그림자혈의 비약",
+      "grade": "영웅",
+      "description": "마시면 몸을 짙은 그림자처럼 납작하게 풀어 가까운 틈을 지날 수 있으며 밝은 빛을 받으면 형체가 빠르게 돌아온다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-10.svg"
+    },
+    {
+      "name": "수목의 비약",
+      "grade": "영웅",
+      "description": "마신 뒤 흙 위에 오래 멈춰 서면 발끝에서 가는 뿌리가 나와 물과 양분을 빨아들이고, 걸음을 떼면 뿌리가 말라 떨어진다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-11.svg"
+    },
+    {
+      "name": "금석의 골수약",
+      "grade": "영웅",
+      "description": "마시면 뼈가 단단하고 무거워져 큰 하중을 버티기 쉬워지며 몸 전체의 무게도 늘어난다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-12.svg"
+    },
+    {
+      "name": "용심의 비약",
+      "grade": "전설",
+      "description": "마시면 가슴 안에 뜨거운 마력핵이 깃들어 숨에 불꽃을 실을 수 있으며 열을 오래 쌓아두면 몸이 달아오른다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-13.svg"
+    },
+    {
+      "name": "진명의 영약",
+      "grade": "전설",
+      "description": "자신의 이름을 말하며 마시면 그 이름과 자아의 감각이 깊이 뿌리내려 외부 마법으로 정체성이 흐려질 때 본래 자신을 붙들기 쉽다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-14.svg"
+    },
+    {
+      "name": "청춘의 영약",
+      "grade": "전설",
+      "description": "마시면 나이 들어 쇠약해진 몸이 성숙한 젊은 시절의 상태로 돌아가며 기억과 인격은 이어진다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-15.svg"
+    },
+    {
+      "name": "엘릭서",
+      "grade": "전설",
+      "description": "생존 중인 대상이 마시면 치명상과 장기손상을 포함한 대부분의 육체손상이 회복되고 몸에 남은 독기가 정화된다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-16.svg"
+    },
+    {
+      "name": "별길의 비약",
+      "grade": "전설",
+      "description": "마신 뒤 몸을 쉬게 하면 의식이 옅은 빛의 형상으로 나와 가까운 열린 길을 돌아볼 수 있으며, 그동안 육체는 잠든 채 남는다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-17.svg"
+    },
+    {
+      "name": "불사조의 심장비약",
+      "grade": "신화",
+      "description": "불사조의 생명 불씨를 삼켜 가슴에 품으며, 몸이 치명상을 입으면 한 번 불타 재가 된 뒤 살아 있는 몸으로 되태어나 불씨를 소모한다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-18.svg"
+    },
+    {
+      "name": "영생의 수",
+      "grade": "신화",
+      "description": "생명의 신이 내린 물을 마시면 몸의 노화가 멎어 자연 수명에 얽매이지 않으며, 부상과 질병에는 평소처럼 몸을 돌봐야 한다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "consumable-elixir-19.svg"
     },
     {
       "name": "첫숨의 이슬",
@@ -7109,7 +9485,487 @@
       "description": "생명의 여신이 내린 이슬을 삼키면 다음 한 번의 깊은 날숨에 생명의 힘이 깃들어 숨을 불어넣은 작은 생존자의 꺼져가는 생기를 되살린다.",
       "category": "소모품",
       "subcategory": "비약",
-      "icon": "dummy.svg"
+      "icon": "consumable-elixir-20.svg"
+    },
+    {
+      "name": "사냥 화살",
+      "grade": "일반",
+      "description": "넓은 촉이 가죽과 살을 베고 들어가며 빼낼 때 상처가 더 벌어지기 쉽다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-01.svg"
+    },
+    {
+      "name": "표적 화살",
+      "grade": "일반",
+      "description": "단순하고 튼튼한 촉이 밀짚과 연습 표적에 잘 박혀 반복해서 활을 익히기 좋다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-02.svg"
+    },
+    {
+      "name": "전장 화살",
+      "grade": "일반",
+      "description": "가늘고 단단한 촉이 사슬고리와 갑옷의 이음새를 찌르기 좋으며 곧은 화살대가 먼 거리에서도 자세를 유지한다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-03.svg"
+    },
+    {
+      "name": "새잡이 화살",
+      "grade": "일반",
+      "description": "둥글고 무딘 촉이 작은 표적을 충격으로 맞혀 깃털과 가죽이 크게 찢어지는 것을 줄인다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-04.svg"
+    },
+    {
+      "name": "어로 화살",
+      "grade": "고급",
+      "description": "넓은 미늘이 물고기의 미끄러운 몸에 걸리고 물에 들어갈 때 촉이 덜 흔들리도록 균형을 잡았다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-05.svg"
+    },
+    {
+      "name": "전령 화살",
+      "grade": "고급",
+      "description": "촉 뒤의 작은 통에 접은 문서를 넣어 쏠 수 있으며 통의 덮개가 비와 물보라를 막는다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-06.svg"
+    },
+    {
+      "name": "효시",
+      "grade": "고급",
+      "description": "날아갈 때 속 빈 촉에서 날카로운 소리가 나 방향과 발사 순간을 멀리 알릴 수 있다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-07.svg"
+    },
+    {
+      "name": "화공 화살",
+      "grade": "고급",
+      "description": "촉 가까이의 불씨가 비행 중에도 살아 있어 꽂힌 곳의 마른 천과 목재로 불이 옮겨붙는다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-08.svg"
+    },
+    {
+      "name": "인광 화살",
+      "grade": "희귀",
+      "description": "표적에 박히면 촉에서 빛가루가 번져 닿은 자리와 그 아래로 떨어진 흔적이 어둠 속에 빛난다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-09.svg"
+    },
+    {
+      "name": "결속 화살",
+      "grade": "희귀",
+      "description": "쏠 때 매어둔 가는 마력실이 뒤로 이어져 표적에 박힌 곳과 발사 지점을 연결하며 팽팽한 실은 무거운 하중에 끊어진다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-10.svg"
+    },
+    {
+      "name": "서리 화살",
+      "grade": "희귀",
+      "description": "촉이 닿은 곳에 냉기가 퍼져 표면의 물기를 얼리고 주변이 젖어 있으면 얼음이 옆으로 번진다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-11.svg"
+    },
+    {
+      "name": "뇌광 화살",
+      "grade": "희귀",
+      "description": "박힌 촉에서 짧은 전격이 흘러 금속과 젖은 표면을 따라 퍼진다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-12.svg"
+    },
+    {
+      "name": "수지 화살",
+      "grade": "고급",
+      "description": "촉의 봉인이 깨지면 끈끈한 수지가 좁게 퍼져 맞닿은 물체를 붙이며 식으면 단단해진다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-13.svg"
+    },
+    {
+      "name": "향적 화살",
+      "grade": "고급",
+      "description": "촉이 닿은 곳에 독특한 향이 묻어 같은 향을 아는 이와 짐승이 흔적을 따라가기 좋다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-14.svg"
+    },
+    {
+      "name": "환영 화살",
+      "grade": "희귀",
+      "description": "날아가는 동안 좌우에 빛의 잔상이 나란히 생겨 실제 화살의 궤적을 구별하기 어렵게 한다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-15.svg"
+    },
+    {
+      "name": "침묵 화살",
+      "grade": "희귀",
+      "description": "촉이 부딪힐 때의 울림이 흡수되어 단단한 표면을 맞혀도 충돌음이 작다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-16.svg"
+    },
+    {
+      "name": "파마의 화살",
+      "grade": "영웅",
+      "description": "촉에 담긴 신성력이 언데드와 영체에 닿으면 빛으로 번져 형체와 재생의 결속을 약하게 한다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-17.svg"
+    },
+    {
+      "name": "거미줄 화살",
+      "grade": "영웅",
+      "description": "촉이 박히면 짧은 마력실이 주변 돌기 쪽으로 뻗어 작은 그물을 이루고 닿는 물체를 얽는다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-18.svg"
+    },
+    {
+      "name": "바람길 화살",
+      "grade": "영웅",
+      "description": "비행 경로를 따라 좁은 바람 통로가 생겨 연기와 안개가 갈라지며 화살이 멎으면 바람도 잦아든다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-19.svg"
+    },
+    {
+      "name": "여명의 화살",
+      "grade": "전설",
+      "description": "촉이 부서지는 곳에서 햇빛과 같은 밝은 빛이 퍼져 주변의 마법 어둠이 걷히고 빛을 두려워하는 언데드가 물러선다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "consumable-arrow-20.svg"
+    },
+    {
+      "name": "보병 볼트",
+      "grade": "일반",
+      "description": "짧고 굵은 화살대와 무거운 촉을 갖춘 표준 석궁 탄약으로 가까운 표적을 곧게 찌른다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-01.svg"
+    },
+    {
+      "name": "사냥 볼트",
+      "grade": "일반",
+      "description": "날이 넓고 미늘이 깊어 살에 단단히 걸리며 표적이 움직이면 상처도 함께 벌어지기 쉽다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-02.svg"
+    },
+    {
+      "name": "훈련 볼트",
+      "grade": "일반",
+      "description": "끝을 부드러운 덮개로 감싸 표적에 남는 손상을 줄였으며 강한 석궁에서는 큰 타박상을 낼 수 있다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-03.svg"
+    },
+    {
+      "name": "중석궁 볼트",
+      "grade": "고급",
+      "description": "무거운 활대의 힘을 받아도 휘지 않도록 굵게 만들어 두꺼운 목재와 질긴 가죽에 깊이 박힌다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-04.svg"
+    },
+    {
+      "name": "갈고리 볼트",
+      "grade": "고급",
+      "description": "촉이 박힌 뒤 옆의 갈고리가 벌어져 연결한 줄을 당겨도 쉽게 빠지지 않는다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-05.svg"
+    },
+    {
+      "name": "철갑 볼트",
+      "grade": "고급",
+      "description": "가늘고 단단하게 보강한 촉이 갑옷의 틈과 얇은 금속부에 힘을 집중한다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-06.svg"
+    },
+    {
+      "name": "유리촉 볼트",
+      "grade": "고급",
+      "description": "작은 유리통에 액체를 담을 수 있고 충돌하면 통이 깨져 닿은 곳에 내용물이 묻는다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-07.svg"
+    },
+    {
+      "name": "균열 볼트",
+      "grade": "고급",
+      "description": "겹친 촉이 박히며 양옆으로 벌어져 목재의 결을 따라 틈을 넓힌다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-08.svg"
+    },
+    {
+      "name": "버팀 볼트",
+      "grade": "희귀",
+      "description": "돌과 목재에 박힌 촉이 안쪽으로 뿌리를 뻗어 굳고 뒤쪽 고리는 줄과 작은 발판을 걸 버팀점이 된다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-09.svg"
+    },
+    {
+      "name": "쐐기 볼트",
+      "grade": "희귀",
+      "description": "움직이는 두 면의 틈에 박히면 촉이 틈 모양에 맞춰 넓어져 문과 기계부의 움직임을 붙든다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-10.svg"
+    },
+    {
+      "name": "반향 볼트",
+      "grade": "희귀",
+      "description": "박힌 곳에서 일정한 두드림이 나며 그 울림이 벽과 지형을 따라 돌아와 위치를 소리로 찾기 좋다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-11.svg"
+    },
+    {
+      "name": "마력단절 볼트",
+      "grade": "영웅",
+      "description": "룬선과 마법진에 박히면 닿은 부분의 마력이 흩어져 그 선을 통해 이어지던 작용이 끊긴다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-12.svg"
+    },
+    {
+      "name": "결빙 볼트",
+      "grade": "희귀",
+      "description": "촉이 물과 진흙에 박히면 그 둘레가 두껍게 얼어 잠금부와 고정점처럼 쓸 수 있다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-13.svg"
+    },
+    {
+      "name": "모래 볼트",
+      "grade": "희귀",
+      "description": "충돌하면 곱고 마른 마법모래가 퍼져 좁은 홈에 채워지며, 물을 먹으면 돌처럼 단단히 뭉친다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-14.svg"
+    },
+    {
+      "name": "중량 볼트",
+      "grade": "희귀",
+      "description": "표적에 박힌 뒤 촉이 무거워져 작은 물체를 아래로 끌어내리며 촉의 빛이 사라지면 평소 무게로 돌아온다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-15.svg"
+    },
+    {
+      "name": "미끼 볼트",
+      "grade": "희귀",
+      "description": "촉에 짧은 소리를 들려주고 쏘면 박힌 자리에서 그 소리가 불규칙하게 반복되다가 마력이 소진되면 멎는다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-16.svg"
+    },
+    {
+      "name": "영혼고정 볼트",
+      "grade": "영웅",
+      "description": "영체를 지나 벽에 박히면 지나친 영체의 잔상을 벽 쪽으로 붙들며 볼트가 빠지면 구속이 풀린다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-17.svg"
+    },
+    {
+      "name": "그림자못 볼트",
+      "grade": "영웅",
+      "description": "생물의 그림자에 박히면 그 그림자가 바닥에 고정되어 움직임을 방해하며 빛의 방향을 바꿔 그림자가 벗어나면 풀린다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-18.svg"
+    },
+    {
+      "name": "파성 볼트",
+      "grade": "전설",
+      "description": "문과 벽의 결합부에 박히면 강한 마력 진동이 경첩과 이음매를 벌려 무너뜨리기 쉽게 한다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-19.svg"
+    },
+    {
+      "name": "해방의 볼트",
+      "grade": "전설",
+      "description": "마법 결박에 박히면 촉에서 빛이 번져 접촉한 결박의 한 줄을 풀며, 촉은 힘을 쓴 뒤 부스러진다.",
+      "category": "소모품",
+      "subcategory": "볼트",
+      "icon": "consumable-bolt-20.svg"
+    },
+    {
+      "name": "점토 슬링탄",
+      "grade": "일반",
+      "description": "슬링에 넣어 던지는 단단한 점토탄으로 충돌하면 잘게 깨져 가루와 흔적을 남긴다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-01.svg"
+    },
+    {
+      "name": "납 슬링탄",
+      "grade": "일반",
+      "description": "작고 무거운 슬링용 탄환으로 부드러운 금속이 충돌한 면의 자국을 남겨 회수한 뒤 닿은 곳을 살필 수 있다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-02.svg"
+    },
+    {
+      "name": "석환",
+      "grade": "일반",
+      "description": "투석기에 싣는 둥근 돌탄으로 떨어진 뒤에도 지면의 경사를 따라 굴러간다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-03.svg"
+    },
+    {
+      "name": "사슬탄",
+      "grade": "고급",
+      "description": "발사틀에서 함께 쏘는 두 쇠추 사이에 사슬이 이어져 날아가며 팽팽한 줄과 돛대 같은 돌기를 휘감는다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-04.svg"
+    },
+    {
+      "name": "산탄낭",
+      "grade": "고급",
+      "description": "투석기와 발사틀에 넣는 탄낭으로 비행 중 벌어져 작은 돌들을 넓게 흩뿌린다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-05.svg"
+    },
+    {
+      "name": "물낭탄",
+      "grade": "고급",
+      "description": "발사틀에 싣는 질긴 물주머니로 충돌하면 터져 넓은 면을 적시며 담은 액체의 성질에 따라 자국이 남는다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-06.svg"
+    },
+    {
+      "name": "인광 슬링탄",
+      "grade": "고급",
+      "description": "던져 맞히면 표면에서 빛이 새어 나와 작은 조명과 위치 표식으로 쓸 수 있다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-07.svg"
+    },
+    {
+      "name": "뇌전 구슬탄",
+      "grade": "희귀",
+      "description": "마력을 튕겨 쏘는 발사관에 넣는 구슬로 충돌하면 짧은 전격이 주변의 전도성 물체를 따라 퍼진다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-08.svg"
+    },
+    {
+      "name": "서리핵탄",
+      "grade": "희귀",
+      "description": "투석기로 날려 외피가 깨지면 안의 냉기핵이 바닥에 남아 가까운 물기를 서서히 얼리다가 가루가 된다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-09.svg"
+    },
+    {
+      "name": "흡음탄",
+      "grade": "희귀",
+      "description": "발사틀로 쏜 탄이 박히면 안의 검은 솜이 부풀어 가까운 충돌음과 진동음을 빨아들이며 솜이 굳으면 멎는다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-10.svg"
+    },
+    {
+      "name": "접착 쇄환",
+      "grade": "희귀",
+      "description": "서로 연결한 작은 고리들을 발사하면 맞은 돌기 둘레로 감기며 접촉한 고리 면이 달라붙어 조여든다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-11.svg"
+    },
+    {
+      "name": "환영탄",
+      "grade": "희귀",
+      "description": "슬링으로 날리면 뒤에 작은 빛의 공들이 이어져 보이며 충돌할 때 여러 방향으로 흩어져 눈길을 분산한다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-12.svg"
+    },
+    {
+      "name": "공명 포석",
+      "grade": "희귀",
+      "description": "투석기에 싣는 룬돌로 착지한 뒤 땅을 향해 낮은 울림을 내어 가까운 공동과 큰 균열에서 메아리를 돌려받는다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-13.svg"
+    },
+    {
+      "name": "분진표식탄",
+      "grade": "고급",
+      "description": "발사틀에서 쏜 탄이 깨지면 미세한 색가루가 퍼져 닿은 발과 바퀴가 지나간 자리에 연속한 흔적이 남는다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-14.svg"
+    },
+    {
+      "name": "안개 봉인탄",
+      "grade": "희귀",
+      "description": "마력 발사관에서 쏜 탄이 열리면 바닥을 따라 차가운 안개가 흘러나오며 바람에 밀려 지형의 낮은 곳에 모인다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-15.svg"
+    },
+    {
+      "name": "자력탄",
+      "grade": "희귀",
+      "description": "슬링에서 날아간 탄이 금속에 닿으면 강하게 달라붙어 탄과 연결한 줄로 그 물건을 당길 수 있다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-16.svg"
+    },
+    {
+      "name": "영혼추탄",
+      "grade": "영웅",
+      "description": "마력 발사관에서 쏜 탄이 영체를 스치면 그 영체에 무게감이 생겨 공중 움직임이 느려지고 낮은 곳으로 내려앉는다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-17.svg"
+    },
+    {
+      "name": "차원균열탄",
+      "grade": "전설",
+      "description": "공간문 가장자리에 맞히면 닿은 곳이 주름지듯 뒤틀려 통로가 어긋나며, 탄의 마력이 흩어지면 틈이 다시 정렬된다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-18.svg"
+    },
+    {
+      "name": "수호벽탄",
+      "grade": "영웅",
+      "description": "투석기로 날려 땅에 박으면 주변 흙과 자갈이 탄을 중심으로 쌓여 작은 둑을 만들고, 마력이 다하면 느슨한 흙으로 풀린다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-19.svg"
+    },
+    {
+      "name": "귀향의 탄환",
+      "grade": "전설",
+      "description": "슬링에서 날린 탄이 손으로 들 만한 작은 무생물에 닿으면 그 물건과 함께 발사자의 발앞으로 옮겨지며 탄은 가루로 흩어진다.",
+      "category": "소모품",
+      "subcategory": "특수탄약",
+      "icon": "consumable-ammo-20.svg"
     },
     {
       "name": "약초 낫",
