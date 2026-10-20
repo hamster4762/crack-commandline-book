@@ -1,0 +1,675 @@
+{
+  "defaultPreset": "기본",
+  "newPresetPrefix": "새 프리셋",
+  "groups": [
+    {
+      "label": "장비",
+      "icon": "equipment",
+      "categories": [
+        "무기",
+        "방어구",
+        "장신구"
+      ]
+    },
+    {
+      "label": "마도구",
+      "icon": "magic",
+      "categories": [
+        "마도구"
+      ]
+    },
+    {
+      "label": "소모품",
+      "icon": "potion",
+      "categories": [
+        "소모품"
+      ]
+    },
+    {
+      "label": "제작",
+      "icon": "crafting",
+      "categories": [
+        "도구",
+        "제작품"
+      ]
+    },
+    {
+      "label": "재료",
+      "icon": "material",
+      "categories": [
+        "재료",
+        "귀중품"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "name": "무기",
+      "subcategories": [
+        "한손검",
+        "양손검",
+        "단검",
+        "세검",
+        "창",
+        "도끼",
+        "둔기",
+        "봉",
+        "활",
+        "석궁",
+        "투척무기",
+        "지팡이",
+        "마법서",
+        "마법구"
+      ]
+    },
+    {
+      "name": "방어구",
+      "subcategories": [
+        "투구",
+        "갑옷",
+        "로브",
+        "의복",
+        "장갑",
+        "신발",
+        "망토",
+        "방패"
+      ]
+    },
+    {
+      "name": "장신구",
+      "subcategories": [
+        "반지",
+        "목걸이",
+        "팔찌",
+        "귀걸이",
+        "브로치",
+        "부적",
+        "벨트",
+        "머리장식"
+      ]
+    },
+    {
+      "name": "마도구",
+      "subcategories": [
+        "마력저장구",
+        "마법증폭구",
+        "주문발동구",
+        "통신구",
+        "탐지구",
+        "기록구",
+        "이동구",
+        "공간도구",
+        "결계장치",
+        "소환매개체",
+        "마도장치"
+      ]
+    },
+    {
+      "name": "소모품",
+      "subcategories": [
+        "회복약",
+        "마나약",
+        "강화약",
+        "해독약",
+        "독약",
+        "폭탄",
+        "투척물",
+        "함정도구",
+        "마법주문서",
+        "일회용마도구",
+        "음식",
+        "음료",
+        "비약",
+        "화살",
+        "볼트",
+        "특수탄약"
+      ]
+    },
+    {
+      "name": "도구",
+      "subcategories": [
+        "채집도구",
+        "채굴도구",
+        "해체도구",
+        "연금도구",
+        "제작도구",
+        "수리도구",
+        "탐험도구",
+        "야영도구",
+        "항해도구",
+        "생활도구",
+        "조리도구",
+        "의료도구"
+      ]
+    },
+    {
+      "name": "제작품",
+      "subcategories": [
+        "합금",
+        "정제재료",
+        "가공목재",
+        "가공가죽",
+        "연금촉매",
+        "마력결정",
+        "룬석",
+        "마도부품",
+        "골렘부품"
+      ]
+    },
+    {
+      "name": "재료",
+      "subcategories": [
+        "광석",
+        "금속",
+        "원석",
+        "마석",
+        "약초",
+        "꽃",
+        "뿌리",
+        "버섯",
+        "목재",
+        "가죽",
+        "뼈",
+        "뿔",
+        "발톱",
+        "비늘",
+        "혈액",
+        "독샘",
+        "장기",
+        "마수핵",
+        "정령재료",
+        "신성재료",
+        "주술재료"
+      ]
+    },
+    {
+      "name": "귀중품",
+      "subcategories": [
+        "보석",
+        "귀금속",
+        "골동품",
+        "예술품",
+        "수집품",
+        "고대유물",
+        "문헌",
+        "서적",
+        "지도"
+      ]
+    }
+  ],
+  "grades": [
+    "일반",
+    "고급",
+    "희귀",
+    "영웅",
+    "전설",
+    "신화",
+    "불명"
+  ],
+  "items": [
+    {
+      "name": "철제 아밍소드",
+      "grade": "일반",
+      "description": "한 손으로 베거나 찌르는 곧은 검으로 방패와 함께 다루기 좋으며 두꺼운 판금은 베어내기 어렵다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "신의 불씨검",
+      "grade": "신화",
+      "description": "불의 신이 남긴 불씨를 품어 칼날이 닿은 무생물에 불을 붙이며, 젖은 돌조차 타오르게 하지만 검을 거두면 평범한 불꽃으로 돌아간다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "새벽의 성검",
+      "grade": "전설",
+      "description": "칼날을 높이 들고 마력을 바치면 안개를 밝히는 빛이 퍼지며, 이 검으로 벤 언데드의 상처는 재생이 억제된다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "화염의 검",
+      "grade": "영웅",
+      "description": "마력을 주입하면 검날에 불꽃이 일어나며, 베인 대상에게 심한 화상을 남긴다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "사냥용 단궁",
+      "grade": "일반",
+      "description": "짧은 목제 활로 숲속에서 다루기 편하지만 긴 활보다 먼 거리의 무거운 표적을 꿰뚫기 어렵다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "겨울신의 쇄빙도끼",
+      "grade": "신화",
+      "description": "겨울의 신이 남긴 날이 닿으면 비마법 얼음이 크게 갈라지며, 갈라진 빙하가 무너지거나 해류에 떠밀릴 수 있다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "별지기의 투구",
+      "grade": "신화",
+      "description": "하늘의 신이 내린 투구로 밤하늘을 올려다보면 구름에 가린 별자리도 비쳐 보여 방향과 계절을 읽을 수 있다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "산신의 돌갑주",
+      "grade": "신화",
+      "description": "산의 신이 내린 갑옷으로 맨땅에 서서 움직임을 멈추면 몸 전체가 단단한 바위처럼 굳으며, 다시 움직일 때 보호의 굳기가 풀린다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "견습 마법사 로브",
+      "grade": "일반",
+      "description": "소매와 품이 넉넉해 시전 동작을 하기 편하며 안주머니에 작은 시약을 나누어 넣을 수 있다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "가죽 여행화",
+      "grade": "일반",
+      "description": "유연한 가죽과 두꺼운 밑창이 긴 보행에 알맞으며 닳은 밑창을 갈아 오래 신을 수 있다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "나무 원방패",
+      "grade": "일반",
+      "description": "가벼운 나무판을 둥글게 맞추고 가죽을 덮어 베기와 가벼운 투사체를 받아낸다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "새벽여신의 망토",
+      "grade": "신화",
+      "description": "새벽의 여신이 내린 망토를 부상자에게 덮고 동틀 때까지 곁을 지키면 남아 있는 생명의 불씨가 유지되어 구조를 기다릴 수 있다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "촛불 반지",
+      "grade": "희귀",
+      "description": "돌출된 수정에 마력을 보내면 촛불만 한 온기 없는 빛이 생겨 손 가까이의 글자와 물건을 비춘다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "바다어머니의 진주",
+      "grade": "신화",
+      "description": "바다의 여신이 남긴 진주를 목에 걸면 바닷물 속에서도 공기를 마시듯 숨쉬고 물고기의 움직임으로 가까운 흐름의 변화를 느낄 수 있다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "구조자의 팔찌",
+      "grade": "전설",
+      "description": "손목에 묶은 줄을 통해 착용자의 마력이 이어져 줄의 해진 곳이 보강되며, 구조 중 줄을 놓으면 보강도 풀린다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "정령합창의 귀걸이",
+      "grade": "전설",
+      "description": "주변 정령들의 기분과 움직임이 여러 갈래의 선율로 들려 거센 변화가 다가오는 방향을 살필 수 있다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "철제 옷깃핀",
+      "grade": "일반",
+      "description": "두꺼운 천을 관통하는 굵은 핀으로 망토와 옷깃을 단단히 여밀 수 있다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "봄여신의 화관",
+      "grade": "신화",
+      "description": "봄의 여신이 남긴 화관에서 살아 있는 꽃이 피어나며, 떨어진 꽃잎을 시든 작은 식물에 대면 물과 양분을 받아들일 생기가 돌아온다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "마력샘의 심장",
+      "grade": "신화",
+      "description": "마력의 신이 남긴 심장을 그릇에 안치하면 비워진 저장부에 맑은 마력이 샘물처럼 서서히 차오른다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "겹주머니 지갑",
+      "grade": "고급",
+      "description": "겉으로 같은 입구를 안쪽 고리의 방향에 따라 두 개의 작은 수납공간으로 나눠 쓸 수 있다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "감응침",
+      "grade": "일반",
+      "description": "마력이 흐르는 물건에 끝을 대면 바늘이 약하게 빛나 간단한 마력 통로의 연결을 확인할 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "감응 마력등",
+      "grade": "일반",
+      "description": "연결한 마력선에 힘이 흐르는 동안 불이 켜져 장치가 작동 중인지 한눈에 볼 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "성역의 종",
+      "grade": "전설",
+      "description": "종을 울리며 신성력을 보내면 둘레에 결계가 생겨 그 안의 언데드 결속과 저주의 기운이 약해지고, 울림을 이어가는 동안 경계가 유지된다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "느린 시간의 궤",
+      "grade": "전설",
+      "description": "뚜껑을 잠그고 마력을 공급하면 안에 넣은 무생물의 부패와 숙성이 매우 느려지며, 뚜껑을 열면 평소의 속도로 돌아온다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "하급 회복포션",
+      "grade": "일반",
+      "description": "마시면 찰과상과 얕은 상처가 빠르게 아물어 가벼운 부상 뒤 활동을 이어가기 좋다.",
+      "category": "소모품",
+      "subcategory": "회복약",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "하급 마나포션",
+      "grade": "일반",
+      "description": "마시면 소모한 마력이 조금 되돌아와 간단한 주문을 다시 시전할 힘을 보탠다.",
+      "category": "소모품",
+      "subcategory": "마나약",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "하급 해독포션",
+      "grade": "일반",
+      "description": "마시면 약한 식물성 독으로 인한 메스꺼움과 어지럼이 가라앉고 몸이 독을 밀어내도록 돕는다.",
+      "category": "소모품",
+      "subcategory": "해독약",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "파열 폭탄",
+      "grade": "일반",
+      "description": "불이 도화선을 따라 들어가면 외피가 터져 가까운 곳에 강한 충격과 파편을 흩뿌린다.",
+      "category": "소모품",
+      "subcategory": "폭탄",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "매직 애로우 주문서",
+      "grade": "일반",
+      "description": "펼쳐 목표를 겨누고 문장을 읽으면 작은 마력 화살이 곧게 날아가 닿은 곳을 찌른다.",
+      "category": "소모품",
+      "subcategory": "마법주문서",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "건빵",
+      "grade": "일반",
+      "description": "수분이 적고 단단해 오래 보관하기 좋으며 물과 국물에 적시면 부드러워진다.",
+      "category": "소모품",
+      "subcategory": "음식",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "사냥 화살",
+      "grade": "일반",
+      "description": "넓은 촉이 가죽과 살을 베고 들어가며 빼낼 때 상처가 더 벌어지기 쉽다.",
+      "category": "소모품",
+      "subcategory": "화살",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "첫숨의 이슬",
+      "grade": "신화",
+      "description": "생명의 여신이 내린 이슬을 삼키면 다음 한 번의 깊은 날숨에 생명의 힘이 깃들어 숨을 불어넣은 작은 생존자의 꺼져가는 생기를 되살린다.",
+      "category": "소모품",
+      "subcategory": "비약",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "약초 낫",
+      "grade": "일반",
+      "description": "짧게 굽은 날로 풀줄기와 잎을 모아 베기 좋으며 작은 줄기를 손으로 당겨 상하게 하는 일을 줄인다.",
+      "category": "도구",
+      "subcategory": "채집도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "광부의 곡괭이",
+      "grade": "일반",
+      "description": "한쪽의 뾰족한 끝으로 암반을 찍고 다른 쪽의 납작한 날로 벌어진 조각을 떼어낸다.",
+      "category": "도구",
+      "subcategory": "채굴도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "유리 증류기",
+      "grade": "일반",
+      "description": "재료에서 나온 증기가 긴 관을 지나 식어 모이는 유리 기구로 증발하기 쉬운 성분을 따로 받기 좋다.",
+      "category": "도구",
+      "subcategory": "연금도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "여행자 천막",
+      "grade": "일반",
+      "description": "천과 기둥, 줄을 맞춰 세우는 작은 잠자리로 천의 기울기를 바꾸어 바람과 비가 흐를 방향을 잡는다.",
+      "category": "도구",
+      "subcategory": "야영도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "왕진 가방",
+      "grade": "일반",
+      "description": "붕대와 약병, 작은 기구를 나눠 담고 펼친 안감을 깨끗한 작업면으로 쓸 수 있다.",
+      "category": "도구",
+      "subcategory": "의료도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "항해 측각기",
+      "grade": "고급",
+      "description": "수평선과 별 사이의 각도를 눈금으로 읽어 해도와 대조할 때 배의 위치를 가늠하기 좋다.",
+      "category": "도구",
+      "subcategory": "항해도구",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "미스릴 광석",
+      "grade": "희귀",
+      "description": "가벼운 암석을 따라 은빛 맥이 뻗어 있으며 무게에 비해 에너지를 매끄럽게 통과시킨다.",
+      "category": "재료",
+      "subcategory": "광석",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "은엽초",
+      "grade": "일반",
+      "description": "잎을 찧으면 끈기 있는 즙이 흘러나와 표면에 점착성과 보습성을 부여한다.",
+      "category": "재료",
+      "subcategory": "약초",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "갓송이",
+      "grade": "일반",
+      "description": "두툼한 육질과 풍부한 수분을 지녀 구울 경우 진한 감칠맛과 향을 뿜어낸다.",
+      "category": "재료",
+      "subcategory": "버섯",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "태고거수의 뿔",
+      "grade": "전설",
+      "description": "마력을 보내면 낮은 울림이 땅을 따라 멀리 퍼져 지반 공명 장치와 거대한 의식 나팔로 가공한다.",
+      "category": "재료",
+      "subcategory": "뿔",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "까마귀 검은깃",
+      "grade": "일반",
+      "description": "짙은 검은 깃이 잉크를 잘 머금어 점술용 깃펜과 의식 장식의 원재료가 된다.",
+      "category": "재료",
+      "subcategory": "주술재료",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "고룡 가죽",
+      "grade": "전설",
+      "description": "마력이 흐르는 결을 따라 힘이 넓게 분산되는 두꺼운 원피로 대형 결계의 바탕과 무거운 방호 장비로 가공한다.",
+      "category": "재료",
+      "subcategory": "가죽",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "불사조의 심혈",
+      "grade": "전설",
+      "description": "불사조의 가슴에서 얻은 붉은 피로 재와 마력을 만나면 따뜻한 생명 기운이 피어나 재생 의식의 촉매가 된다.",
+      "category": "재료",
+      "subcategory": "혈액",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "공허의 원석",
+      "grade": "불명",
+      "description": "형체가 분명하지 않으며 주변의 빛과 공간을 불규칙하게 일그러뜨린다.",
+      "category": "재료",
+      "subcategory": "원석",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "청동",
+      "grade": "일반",
+      "description": "구리와 주석을 섞어 주조성이 뛰어나며, 미세한 틀의 무늬가 정밀하게 살아나고 마찰에 견디는 성질이 있어 장식, 종, 마찰 부품에 쓰인다.",
+      "category": "제작품",
+      "subcategory": "합금",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "점화의 룬석",
+      "grade": "일반",
+      "description": "마력이 닿으면 부싯돌 없이도 순식간에 붉은 불꽃을 피워 올리는 화로 점화용 룬석이다.",
+      "category": "제작품",
+      "subcategory": "룬석",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "에테르 유도관",
+      "grade": "일반",
+      "description": "정제된 마력이 손실 없이 흐르도록 안쪽 벽면에 매끄러운 은빛 결을 다듬은 마도 장치 배선용 관이다.",
+      "category": "제작품",
+      "subcategory": "마도부품",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "건조 참나무 판재",
+      "grade": "일반",
+      "description": "수분이 제거되어 변형이나 뒤틀림에 견디는 높은 구조적 안정성을 가져 가구와 수레에 쓰인다.",
+      "category": "제작품",
+      "subcategory": "가공목재",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "무두 소가죽",
+      "grade": "일반",
+      "description": "무두질을 거쳐 질기고 당김에 견디는 넓은 면적의 가죽으로 신발과 가방의 기본재로 쓰인다.",
+      "category": "제작품",
+      "subcategory": "가공가죽",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "석제 어깨축",
+      "grade": "일반",
+      "description": "거친 화강암을 둥글게 깎아내어 팔이 모든 방향으로 부드럽고 묵직하게 회전하도록 만든 골렘의 기초 관절구다.",
+      "category": "제작품",
+      "subcategory": "골렘부품",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "투명 루비",
+      "grade": "일반",
+      "description": "붉은 빛이 도는 작은 보석으로 빛을 비추면 중심에 미세한 별무늬가 비친다.",
+      "category": "귀중품",
+      "subcategory": "보석",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "청동 촛대",
+      "grade": "일반",
+      "description": "오래되어 손때가 묻은 청동 촛대들로 묵직하며 바닥에 안정적으로 선다.",
+      "category": "귀중품",
+      "subcategory": "골동품",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "왕국 수도 상세도",
+      "grade": "일반",
+      "description": "수도의 성문과 주요 거리, 상점의 위치가 간략하게 그려진 종이 지도이다.",
+      "category": "귀중품",
+      "subcategory": "지도",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "목공 조각상",
+      "grade": "일반",
+      "description": "나무를 깎아 만든 작은 새 조각상으로 소박하고 매끄러운 결이 살아 있다.",
+      "category": "귀중품",
+      "subcategory": "예술품",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "농경과 삶의 지혜",
+      "grade": "일반",
+      "description": "계절에 따른 작물 재배법과 생활 상식을 알기 쉽게 엮은 보급형 책이다.",
+      "category": "귀중품",
+      "subcategory": "서적",
+      "icon": "dummy.svg"
+    },
+    {
+      "name": "고대 석판 조각",
+      "grade": "일반",
+      "description": "알아볼 수 없는 상형문자가 몇 자 새겨진 거친 돌멩이 조각이다.",
+      "category": "귀중품",
+      "subcategory": "고대유물",
+      "icon": "dummy.svg"
+    }
+  ]
+}
