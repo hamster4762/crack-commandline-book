@@ -213,23 +213,111 @@
       "description": "한 손으로 베거나 찌르는 곧은 검으로 방패와 함께 다루기 좋으며 두꺼운 판금은 베어내기 어렵다.",
       "category": "무기",
       "subcategory": "한손검",
-      "icon": "dummy.svg"
+      "icon": "sword-01.svg"
     },
     {
-      "name": "신의 불씨검",
-      "grade": "신화",
-      "description": "불의 신이 남긴 불씨를 품어 칼날이 닿은 무생물에 불을 붙이며, 젖은 돌조차 타오르게 하지만 검을 거두면 평범한 불꽃으로 돌아간다.",
+      "name": "기병용 사브르",
+      "grade": "일반",
+      "description": "휘어진 외날이 기마 상태에서 스쳐 지나가며 베는 동작에 알맞다.",
       "category": "무기",
       "subcategory": "한손검",
-      "icon": "dummy.svg"
+      "icon": "sword-02.svg"
     },
     {
-      "name": "새벽의 성검",
-      "grade": "전설",
-      "description": "칼날을 높이 들고 마력을 바치면 안개를 밝히는 빛이 퍼지며, 이 검으로 벤 언데드의 상처는 재생이 억제된다.",
+      "name": "선원용 커틀러스",
+      "grade": "일반",
+      "description": "짧고 넓은 날과 손을 감싸는 손잡이를 갖춰 배 위의 좁은 공간에서 베기에 알맞다.",
       "category": "무기",
       "subcategory": "한손검",
-      "icon": "dummy.svg"
+      "icon": "sword-03.svg"
+    },
+    {
+      "name": "팔시온",
+      "grade": "일반",
+      "description": "앞쪽에 무게가 실린 외날검으로 두꺼운 천과 가죽을 베기 좋지만 연속해서 방향을 바꾸기는 어렵다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-04.svg"
+    },
+    {
+      "name": "호위용 사이드소드",
+      "grade": "고급",
+      "description": "날과 칼끝의 균형이 정교하여 베기와 찌르기를 빠르게 바꿀 수 있고 복잡한 가드가 손을 보호한다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-05.svg"
+    },
+    {
+      "name": "기사의 송곳검",
+      "grade": "고급",
+      "description": "단단하고 가느다란 칼끝으로 갑옷의 관절과 이음새를 정밀하게 찌른다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-06.svg"
+    },
+    {
+      "name": "접이검",
+      "grade": "고급",
+      "description": "날을 손잡이 쪽으로 접어 짧게 보관하며 펼친 뒤 잠금쇠를 채워야 검으로 사용할 수 있다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-07.svg"
+    },
+    {
+      "name": "갈고리검",
+      "grade": "고급",
+      "description": "칼등의 얕은 갈고리로 무기나 옷자락을 걸 수 있으나 무리하게 당기면 날이 비틀릴 수 있다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-08.svg"
+    },
+    {
+      "name": "수류검",
+      "grade": "희귀",
+      "description": "검에 마력을 흘리면 날 주변의 물이 갈라져 수중에서도 부드럽게 휘두를 수 있다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-09.svg"
+    },
+    {
+      "name": "등화의 검",
+      "grade": "희귀",
+      "description": "손잡이의 룬을 문지르면 칼등이 열기 없는 빛을 내어 주변을 밝히며, 켜둔 동안 사용자의 마력을 조금씩 소모한다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-10.svg"
+    },
+    {
+      "name": "메아리의 검",
+      "grade": "희귀",
+      "description": "칼끝을 벽이나 바닥에 대면 내부의 빈 공간에서 돌아오는 울림이 손잡이에 전해진다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-11.svg"
+    },
+    {
+      "name": "정화의 칼날",
+      "grade": "희귀",
+      "description": "칼날에 마력을 흘려 묻어 있는 독성 액체를 무해한 찌꺼기로 굳힌다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-12.svg"
+    },
+    {
+      "name": "자력의 검",
+      "grade": "희귀",
+      "description": "손잡이를 쥐고 마력을 보내면 날에 닿은 못이나 열쇠 같은 작은 철제 물건이 달라붙는다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-13.svg"
+    },
+    {
+      "name": "서리문의 검",
+      "grade": "희귀",
+      "description": "마력을 실은 칼끝으로 물기 있는 표면을 그으면 자국을 따라 얇은 얼음막이 생긴다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-14.svg"
     },
     {
       "name": "화염의 검",
@@ -237,15 +325,839 @@
       "description": "마력을 주입하면 검날에 불꽃이 일어나며, 베인 대상에게 심한 화상을 남긴다.",
       "category": "무기",
       "subcategory": "한손검",
-      "icon": "dummy.svg"
+      "icon": "sword-15.svg"
     },
     {
-      "name": "사냥용 단궁",
-      "grade": "일반",
-      "description": "짧은 목제 활로 숲속에서 다루기 편하지만 긴 활보다 먼 거리의 무거운 표적을 꿰뚫기 어렵다.",
+      "name": "해방의 검",
+      "grade": "영웅",
+      "description": "마력을 실은 날이 닿으면 밧줄과 끈의 매듭이 풀리고 결박이 끊어지며, 마법으로 봉인된 결박에는 효과가 없다.",
       "category": "무기",
-      "subcategory": "활",
-      "icon": "dummy.svg"
+      "subcategory": "한손검",
+      "icon": "sword-16.svg"
+    },
+    {
+      "name": "맹세의 호위검",
+      "grade": "영웅",
+      "description": "눈앞의 한 사람을 지키겠다고 지정하면 그 사람에게 날아드는 투사체 쪽으로 검을 쥔 손이 이끌려 받아치기를 돕는다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-17.svg"
+    },
+    {
+      "name": "영혼의 칼날",
+      "grade": "영웅",
+      "description": "칼날에 마력을 흘리면 실체 없는 영체에도 날이 닿아 상처를 입힐 수 있다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-18.svg"
+    },
+    {
+      "name": "새벽의 성검",
+      "grade": "전설",
+      "description": "칼날을 높이 들고 마력을 바치면 안개를 밝히는 빛이 퍼지며, 이 검으로 벤 언데드의 상처는 재생이 억제된다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-19.svg"
+    },
+    {
+      "name": "신의 불씨검",
+      "grade": "신화",
+      "description": "불의 신이 남긴 불씨를 품어 칼날이 닿은 무생물에 불을 붙이며, 젖은 돌조차 타오르게 하지만 검을 거두면 평범한 불꽃으로 돌아간다.",
+      "category": "무기",
+      "subcategory": "한손검",
+      "icon": "sword-20.svg"
+    },
+    {
+      "name": "철제 대검",
+      "grade": "일반",
+      "description": "두 손으로 휘둘러 넓고 무거운 날로 베는 검이며 충분한 공간과 체력이 필요하다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-01.svg"
+    },
+    {
+      "name": "롱소드",
+      "grade": "일반",
+      "description": "긴 손잡이를 양손으로 잡아 베기와 찌르기를 함께 구사하며 한 손으로 오래 다루기는 부담스럽다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-02.svg"
+    },
+    {
+      "name": "파상날 대검",
+      "grade": "고급",
+      "description": "물결치는 날이 맞댄 무기에 마찰을 일으켜 상대의 검이나 창대를 밀어내기 좋다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-03.svg"
+    },
+    {
+      "name": "돌파의 대검",
+      "grade": "고급",
+      "description": "긴 날의 뿌리를 가죽으로 감아 짧게 잡을 수 있으며, 창대를 옆으로 밀어내며 접근하는 데 적합하다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-04.svg"
+    },
+    {
+      "name": "기사의 롱소드",
+      "grade": "고급",
+      "description": "날의 일부를 안전하게 쥘 수 있어 양손 간격을 좁혀 갑옷 틈을 정밀하게 찌르기 좋다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-05.svg"
+    },
+    {
+      "name": "중날 참마도",
+      "grade": "고급",
+      "description": "넓고 두꺼운 날로 굵은 자루와 목재를 찍어 자르기 좋지만 허공에서 멈추거나 되돌리기 어렵다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-06.svg"
+    },
+    {
+      "name": "여행자의 대검",
+      "grade": "고급",
+      "description": "손잡이를 분리해 운반할 수 있으며, 조립한 뒤 결합부를 잠가 사용한다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-07.svg"
+    },
+    {
+      "name": "경량의 룬검",
+      "grade": "희귀",
+      "description": "손잡이를 쥐고 마력을 보내는 동안 검의 무게가 줄어 휴대와 회수가 편해지지만 타격의 관성도 함께 줄어든다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-08.svg"
+    },
+    {
+      "name": "중압의 대검",
+      "grade": "희귀",
+      "description": "두 손으로 휘두르며 마력을 보내면 날이 무거워져 강하게 내리칠 수 있지만 빗나간 검을 거두기도 어려워진다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-09.svg"
+    },
+    {
+      "name": "설원의 대검",
+      "grade": "희귀",
+      "description": "마력을 실은 날이 닿으면 쌓인 눈이 양옆으로 밀려나 사람이 걸을 길이 생긴다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-10.svg"
+    },
+    {
+      "name": "정결의 대검",
+      "grade": "희귀",
+      "description": "검을 세워 마력을 흘리면 날에 붙은 흙과 점액이 떨어져 나와 검날이 깨끗해진다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-11.svg"
+    },
+    {
+      "name": "반격의 대검",
+      "grade": "희귀",
+      "description": "검으로 받아낸 한 번의 충격 일부를 저장했다가 다음 타격에 실으며, 검이 감당하기 어려운 충격을 받으면 파손될 수 있다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-12.svg"
+    },
+    {
+      "name": "개척자의 대검",
+      "grade": "희귀",
+      "description": "날에 마력을 흘리면 식물 섬유가 쉽게 갈라져 질긴 뿌리와 덩굴을 베기 수월해진다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-13.svg"
+    },
+    {
+      "name": "질풍의 대검",
+      "grade": "영웅",
+      "description": "크게 휘두르며 마력을 쏟으면 검 앞에 돌풍이 일어나 연기와 독성 기체를 밀어내며, 밀려난 기체는 주변으로 퍼진다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-14.svg"
+    },
+    {
+      "name": "서약의 결투검",
+      "grade": "영웅",
+      "description": "땅에 원을 그리고 두 사람이 자발적으로 결투를 받아들이면, 둘 중 누구든 원을 벗어나려 할 때 이 검이 무거워진다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-15.svg"
+    },
+    {
+      "name": "파성 대검",
+      "grade": "영웅",
+      "description": "마력을 모은 날을 석벽에 대고 누르면 모르타르와 석재 이음매가 벌어져 벽을 허물기 쉬워진다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-16.svg"
+    },
+    {
+      "name": "귀환의 대검",
+      "grade": "영웅",
+      "description": "눈에 보이는 검을 향해 빈 두 손을 내밀면 검이 자루부터 날아오며, 단단히 박혀 있거나 다른 이가 붙잡고 있으면 돌아오지 않는다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-17.svg"
+    },
+    {
+      "name": "용살자의 대검",
+      "grade": "전설",
+      "description": "상처 낸 용족의 피가 칼날에 묻으면 그 용의 비늘을 약화시키고 검으로 입힌 상처의 재생을 억제한다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-18.svg"
+    },
+    {
+      "name": "황혼의 단죄검",
+      "grade": "전설",
+      "description": "실처럼 드러난 사령술의 지배 연결을 베어 망자를 조종하던 힘을 끊는다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-19.svg"
+    },
+    {
+      "name": "산맥신의 쐐기검",
+      "grade": "신화",
+      "description": "대지의 신에게 받은 검을 바위 틈에 꽂으면 자연 균열을 따라 암반이 크게 벌어지며, 갈라지는 방향을 세밀하게 조절하기 어려워 붕괴에 주의해야 한다.",
+      "category": "무기",
+      "subcategory": "양손검",
+      "icon": "greatsword-20.svg"
+    },
+    {
+      "name": "허리 단검",
+      "grade": "일반",
+      "description": "짧은 양날로 가까이에서 찌르는 무기이며 밧줄 절단에도 쓰지만 두꺼운 갑옷에는 약하다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-01.svg"
+    },
+    {
+      "name": "부츠 나이프",
+      "grade": "일반",
+      "description": "장화 안에 감춰 지닐 만큼 짧고 납작한 단검으로 가까운 거리의 찌르기에 적합하다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-02.svg"
+    },
+    {
+      "name": "곡날 단검",
+      "grade": "일반",
+      "description": "안쪽으로 굽은 날이 잡아당기며 베기에 알맞지만 깊숙한 틈을 곧게 찌르기에는 불편하다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-03.svg"
+    },
+    {
+      "name": "삼각날 스틸레토",
+      "grade": "고급",
+      "description": "좁고 단단한 칼끝으로 갑옷 틈을 찌르며 날 옆면이 둔하여 끈이나 천을 자르는 데는 적합하지 않다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-04.svg"
+    },
+    {
+      "name": "패링 대거",
+      "grade": "고급",
+      "description": "넓은 가드로 상대의 가벼운 검을 받아 흘리는 보조 단검이며 무거운 무기를 정면으로 막으면 손목을 다칠 수 있다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-05.svg"
+    },
+    {
+      "name": "소드브레이커",
+      "grade": "고급",
+      "description": "칼등에 깊고 좁은 홈이 있어 상대의 가느다란 검날을 걸고 비틀어 자세를 무너뜨린다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-06.svg"
+    },
+    {
+      "name": "푸시 대거",
+      "grade": "고급",
+      "description": "손가락 사이로 짧은 날을 내밀어 주먹처럼 찌르며 사거리가 매우 짧고 세밀한 작업에는 부적합하다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-07.svg"
+    },
+    {
+      "name": "소매 단검",
+      "grade": "고급",
+      "description": "소매 안 고정장치에서 단검을 빼낼 수 있으며 손목을 꺾어 잠금을 풀어야 하므로 구속된 상태에서는 꺼내기 어렵다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-08.svg"
+    },
+    {
+      "name": "암영의 단검",
+      "grade": "희귀",
+      "description": "마력을 보내면 날 표면의 반짝임이 사라져 어두운 곳에서 칼날이 눈에 덜 띈다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-09.svg"
+    },
+    {
+      "name": "침묵의 단검",
+      "grade": "희귀",
+      "description": "칼날이 작은 물체에 부딪힐 때 생기는 소리를 흡수해 조용히 자르거나 비집는 작업에 적합하다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-10.svg"
+    },
+    {
+      "name": "온기의 단검",
+      "grade": "희귀",
+      "description": "칼날이 은은한 온기를 내어 밀랍과 수지를 부드럽게 녹이므로 봉투나 접착된 작은 부품을 떼어내기 좋다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-11.svg"
+    },
+    {
+      "name": "혈흔의 단검",
+      "grade": "희귀",
+      "description": "칼날에 피를 묻혀두면 같은 개체의 혈흔이 가까이 있을 때 손잡이가 따뜻해진다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-12.svg"
+    },
+    {
+      "name": "귀로의 단검",
+      "grade": "희귀",
+      "description": "자루에 묶은 끈을 따라 칼이 천천히 미끄러져 돌아오며 끈이 끊기거나 칼이 깊이 박히면 멈춘다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-13.svg"
+    },
+    {
+      "name": "마비의 단검",
+      "grade": "희귀",
+      "description": "마력을 실은 칼끝에 찔린 부위는 잠시 감각이 둔해진다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-14.svg"
+    },
+    {
+      "name": "거울빛의 단검",
+      "grade": "영웅",
+      "description": "광택 있는 날에 비친 시각적 환영의 모습이 일그러져 환영이 씌워진 부분을 알아볼 수 있다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-15.svg"
+    },
+    {
+      "name": "봉합의 단검",
+      "grade": "영웅",
+      "description": "날의 옆면을 얕은 상처 가장자리에 대면 살갗이 맞붙어 출혈이 멎는다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-16.svg"
+    },
+    {
+      "name": "틈새의 단검",
+      "grade": "영웅",
+      "description": "마력 장벽에 날을 대고 지속해서 마력을 보내면 칼날 폭만 한 틈을 벌리며 장벽이 강할수록 소모가 커지고 날을 빼면 닫힌다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-17.svg"
+    },
+    {
+      "name": "영혼닻 단검",
+      "grade": "영웅",
+      "description": "영체가 드리운 그림자에 칼을 박으면 그 영체가 칼 주변에 붙들리며, 칼을 뽑으면 구속이 풀린다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-18.svg"
+    },
+    {
+      "name": "계약 파쇄자",
+      "grade": "전설",
+      "description": "계약 당사자 두 사람이 자발적으로 흘린 피를 날에 묻히면 두 사람을 묶는 마법계약 하나를 끊을 수 있다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-19.svg"
+    },
+    {
+      "name": "운명의 실칼",
+      "grade": "신화",
+      "description": "운명을 짜는 신이 남긴 단검으로 사용자를 붙든 예정된 죽음 하나를 끊어 운명을 바꾸며, 한 번 쓰면 날이 사라진다.",
+      "category": "무기",
+      "subcategory": "단검",
+      "icon": "dagger-20.svg"
+    },
+    {
+      "name": "결투용 레이피어",
+      "grade": "일반",
+      "description": "길고 가는 검날로 찌르는 데 특화되어 두꺼운 날을 지닌 무기와 세게 맞부딪치기에는 불리하다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-01.svg"
+    },
+    {
+      "name": "궁정용 스몰소드",
+      "grade": "일반",
+      "description": "가볍고 짧은 찌르기 검으로 일상복에 차기 편하지만 전장용 갑옷을 상대하기에는 적합하지 않다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-02.svg"
+    },
+    {
+      "name": "수련용 세검",
+      "grade": "일반",
+      "description": "끝을 둥글게 덮어 찌르기 수련에 쓰며 강하게 찌르면 보호복을 입어도 타박상을 남길 수 있다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-03.svg"
+    },
+    {
+      "name": "바스켓힐트 세검",
+      "grade": "고급",
+      "description": "손 전체를 감싸는 가드가 손가락을 보호하며 긴 날은 유지되어 좁은 실내에서는 움직임이 제한된다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-04.svg"
+    },
+    {
+      "name": "유연한 레이피어",
+      "grade": "고급",
+      "description": "유연하게 휘었다가 원래 모습으로 돌아오는 날이 가벼운 충격을 흘려내며 빠른 찌르기에 적합하다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-05.svg"
+    },
+    {
+      "name": "송곳 세검",
+      "grade": "고급",
+      "description": "끝부분을 단단하게 보강한 가는 날로 장갑의 손가락 틈과 갑옷 관절을 정밀하게 찌른다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-06.svg"
+    },
+    {
+      "name": "조율 세검",
+      "grade": "고급",
+      "description": "손잡이 끝의 추를 조절해 사용자의 손에 맞는 균형을 잡지만 싸우는 중에는 조정하기 어렵다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-07.svg"
+    },
+    {
+      "name": "꽃무늬 의장검",
+      "grade": "고급",
+      "description": "정교한 가드와 조각으로 격식 있는 자리에 어울리며 장식이 많아 옷자락에 걸리기 쉽다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-08.svg"
+    },
+    {
+      "name": "순풍의 세검",
+      "grade": "희귀",
+      "description": "찌르는 순간 칼끝의 공기저항이 줄어 날이 흔들리지 않고 곧게 뻗는다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-09.svg"
+    },
+    {
+      "name": "공명의 세검",
+      "grade": "희귀",
+      "description": "검끝을 문이나 바닥에 대면 반대편의 발걸음과 큰 움직임이 진동으로 전해진다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-10.svg"
+    },
+    {
+      "name": "이슬의 세검",
+      "grade": "희귀",
+      "description": "칼끝에 공기 중 수분이 물방울로 모이며, 맺히는 양으로 주변의 습도를 가늠할 수 있다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-11.svg"
+    },
+    {
+      "name": "척도의 세검",
+      "grade": "희귀",
+      "description": "날을 따라 빛의 눈금이 나타나며, 검을 곧게 놓아 길이를 재거나 수평을 살필 수 있다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-12.svg"
+    },
+    {
+      "name": "별점의 세검",
+      "grade": "희귀",
+      "description": "마력을 보낸 칼끝이 닿은 자리에 희미한 빛점이 남아 표시한 위치를 눈으로 확인할 수 있다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-13.svg"
+    },
+    {
+      "name": "한기의 세검",
+      "grade": "희귀",
+      "description": "마력을 흘리면 가느다란 날이 차가워져 닿은 액체의 표면을 얇게 얼린다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-14.svg"
+    },
+    {
+      "name": "광휘의 세검",
+      "grade": "영웅",
+      "description": "마력을 보내며 휘두르면 날이 지난 자리에 반투명한 빛의 선이 잠시 남아 시야를 어지럽힌다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-15.svg"
+    },
+    {
+      "name": "정령의 예식검",
+      "grade": "영웅",
+      "description": "칼끝으로 그린 인사 문양이 가까운 정령에게 보이는 빛으로 나타나 교류의 뜻을 전한다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-16.svg"
+    },
+    {
+      "name": "간파의 세검",
+      "grade": "영웅",
+      "description": "가까이 보이는 갑옷을 겨누면 벌어진 이음새와 노출된 틈을 향해 칼끝이 가늘게 빛난다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-17.svg"
+    },
+    {
+      "name": "환영의 세검",
+      "grade": "영웅",
+      "description": "마력을 쓰며 찌르면 직전 동작의 빛 잔상이 남아 상대가 실제 칼날의 궤적을 구별하기 어려워진다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-18.svg"
+    },
+    {
+      "name": "진실의 결투검",
+      "grade": "전설",
+      "description": "검날을 사이에 두고 자발적으로 선서한 사람이 그 선서에 관해 고의로 거짓을 말하면 맑은 쇳소리가 울린다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-19.svg"
+    },
+    {
+      "name": "달빛의 예식검",
+      "grade": "전설",
+      "description": "달빛 아래에서 날을 대상에게 대면 외형을 바꾸는 마법으로 감춘 본래 모습이 검의 반사면에 드러난다.",
+      "category": "무기",
+      "subcategory": "세검",
+      "icon": "rapier-20.svg"
+    },
+    {
+      "name": "보병용 장창",
+      "grade": "일반",
+      "description": "긴 자루 끝의 창날로 적의 접근을 막으며 좁은 통로나 밀착한 상대에게는 돌리기 어렵다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-01.svg"
+    },
+    {
+      "name": "기병용 랜스",
+      "grade": "일반",
+      "description": "말의 돌진에 맞춰 겨드랑이에 끼고 찌르는 무거운 창으로 보행 중에는 다루기 불편하다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-02.svg"
+    },
+    {
+      "name": "짧은 전투창",
+      "grade": "일반",
+      "description": "한 손이나 양손으로 잡아 가까운 거리에서 찌르며 긴 장창보다 사거리가 짧다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-03.svg"
+    },
+    {
+      "name": "삼지창",
+      "grade": "일반",
+      "description": "갈라진 창끝으로 상대 무기나 미끄러운 대상을 걸기 좋지만 단일 창날보다 깊이 찌르는 힘이 분산된다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-04.svg"
+    },
+    {
+      "name": "날개창",
+      "grade": "고급",
+      "description": "창날 아래의 가로 돌기가 너무 깊이 박히는 것을 막고 상대 무기를 밀어낼 수 있다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-05.svg"
+    },
+    {
+      "name": "갈고리 전투창",
+      "grade": "고급",
+      "description": "창끝 옆 갈고리로 방패 가장자리나 장비를 잡아당기며 무거운 상대를 끌면 사용자도 균형을 잃기 쉽다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-06.svg"
+    },
+    {
+      "name": "여행자의 분절창",
+      "grade": "고급",
+      "description": "자루를 짧게 분리해 운반하고 나사부를 단단히 결합해 쓰며 결합부가 느슨하면 충격에 꺾일 수 있다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-07.svg"
+    },
+    {
+      "name": "월도",
+      "grade": "고급",
+      "description": "긴 자루에 넓고 굽은 날을 달아 베기와 찌르기를 겸하지만 실내에서는 휘두를 공간이 부족하기 쉽다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-08.svg"
+    },
+    {
+      "name": "물길창",
+      "grade": "희귀",
+      "description": "창날에 마력을 보내면 날 주변의 물살이 갈라져 수중에서 찌르기 쉬워진다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-09.svg"
+    },
+    {
+      "name": "대지의 닻창",
+      "grade": "희귀",
+      "description": "자루 끝을 흙에 박아 마력을 보내면 땅이 창을 단단히 붙들어 말뚝과 버팀대로 쓸 수 있다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-10.svg"
+    },
+    {
+      "name": "낙뢰의 창",
+      "grade": "희귀",
+      "description": "땅에 꽂으면 가까이 흐르는 공중 방전을 창끝으로 끌어들여 지면으로 흘리며, 창 주변도 감전될 위험이 있다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-11.svg"
+    },
+    {
+      "name": "등불의 창",
+      "grade": "희귀",
+      "description": "창끝에서 나오는 빛이 연기에 덜 흩어져 연기 속 가까운 사물의 윤곽을 비춘다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-12.svg"
+    },
+    {
+      "name": "사막지기의 창",
+      "grade": "희귀",
+      "description": "창을 꽂고 마력을 유지하면 발치의 마른 모래가 단단해지며, 물에 젖거나 창을 뽑으면 원래대로 풀린다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-13.svg"
+    },
+    {
+      "name": "먼울림 창",
+      "grade": "희귀",
+      "description": "자루를 두드린 진동이 창끝에 닿은 물체로 전달되어 접촉한 곳에 두드리는 신호를 보낼 수 있다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-14.svg"
+    },
+    {
+      "name": "수호의 창",
+      "grade": "영웅",
+      "description": "창끝으로 땅에 선을 긋고 자루를 세워 마력을 유지하면 그 선을 지나는 화살과 작은 투사체의 속도가 느려진다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-15.svg"
+    },
+    {
+      "name": "영혼 결속창",
+      "grade": "영웅",
+      "description": "마력을 주입한 창날이 영체에 박히면 실체 없는 움직임도 붙들 수 있지만 사용자가 버티는 힘을 넘으면 끌려간다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-16.svg"
+    },
+    {
+      "name": "빛사슬의 창",
+      "grade": "영웅",
+      "description": "손잡이에 마력을 보내면 자루 끝에서 빛의 사슬이 뻗어 눈앞의 단단한 지점에 걸리며 사슬이 버티는 동안 창을 다른 용도로 휘두르기 어렵다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-17.svg"
+    },
+    {
+      "name": "용염의 파수창",
+      "grade": "영웅",
+      "description": "창날을 돌리며 마력을 쏟으면 정면의 화염이 양옆으로 갈라지며, 불길을 가른 통로에도 뜨거운 열기는 남는다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-18.svg"
+    },
+    {
+      "name": "폭풍의 길잡이창",
+      "grade": "전설",
+      "description": "창끝을 향한 방향으로 주변 바람을 모아 불게 하여 돛을 밀거나 역풍 속에 짧은 바람길을 만든다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-19.svg"
+    },
+    {
+      "name": "바다신의 삼지창",
+      "grade": "신화",
+      "description": "바다의 신이 내린 창을 해저에 꽂으면 주변 바닷물을 갈라 공기가 드나드는 통로를 만들며 창을 뽑으면 바다가 돌아와 통로가 닫힌다.",
+      "category": "무기",
+      "subcategory": "창",
+      "icon": "spear-20.svg"
+    },
+    {
+      "name": "손도끼",
+      "grade": "일반",
+      "description": "짧은 자루와 한쪽 날로 가까이에서 찍어 베는 도끼이며 긴 무기와 맞설 때 사거리가 부족하다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-01.svg"
+    },
+    {
+      "name": "전투도끼",
+      "grade": "일반",
+      "description": "벌목도끼보다 얇은 날을 써 옷과 가죽을 깊이 베지만 단단한 장작을 반복해 찍으면 날이 상하기 쉽다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-02.svg"
+    },
+    {
+      "name": "양손 전투도끼",
+      "grade": "일반",
+      "description": "긴 자루를 두 손으로 잡아 강하게 내려치며 빗나간 뒤 자세를 바로잡는 데 큰 움직임이 필요하다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-03.svg"
+    },
+    {
+      "name": "수염도끼",
+      "grade": "고급",
+      "description": "날 아래로 뻗은 턱을 방패나 자루에 걸어 당기며 상대가 단단히 버티면 손잡이에 큰 부담이 걸린다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-04.svg"
+    },
+    {
+      "name": "장병 폴액스",
+      "grade": "고급",
+      "description": "긴 자루에 도끼날·망치·찌르개를 함께 달아 갑옷 상대에 맞춰 타격면을 바꿀 수 있지만 매우 무겁다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-05.svg"
+    },
+    {
+      "name": "쌍날 도끼",
+      "grade": "고급",
+      "description": "양쪽 날의 형태가 달라 좁게 찍기와 넓게 베기를 골라 쓰며 돌려 잡을 공간이 필요하다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-06.svg"
+    },
+    {
+      "name": "등반 전투도끼",
+      "grade": "고급",
+      "description": "등쪽의 짧은 픽으로 얼음과 나무에 걸 수 있지만 낡은 암반이나 얇은 얼음에 박으면 빠질 수 있다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-07.svg"
+    },
+    {
+      "name": "용병의 도끼",
+      "grade": "고급",
+      "description": "자루 내부의 탄성 층이 타격할 때 손으로 전해지는 진동을 덜어 오래 휘두르기 편하다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-08.svg"
+    },
+    {
+      "name": "수목지기의 도끼",
+      "grade": "희귀",
+      "description": "마력을 흘린 날로 살아 있는 가지를 자르면 절단면이 수지로 덮여 수액 손실과 오염이 줄어든다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-09.svg"
+    },
+    {
+      "name": "쇄빙 도끼",
+      "grade": "희귀",
+      "description": "날을 얼음에 대고 마력을 보내면 자연 균열이 벌어져 적은 힘으로도 얼음을 쪼갤 수 있다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-10.svg"
+    },
+    {
+      "name": "결박 파쇄도끼",
+      "grade": "희귀",
+      "description": "마력을 실은 날이 팽팽한 비마법 섬유를 손쉽게 갈라 그물과 밧줄을 끊기 좋다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-11.svg"
+    },
+    {
+      "name": "수액의 도끼",
+      "grade": "희귀",
+      "description": "마력을 보내면 날이 닿은 나무 표면에 단단히 달라붙고 손잡이를 비틀면 떨어진다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-12.svg"
+    },
+    {
+      "name": "균형의 도끼",
+      "grade": "희귀",
+      "description": "손잡이에 마력을 보내면 떨어지거나 튕겨난 도끼가 자루를 아래로 향하도록 자세를 바로잡는다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-13.svg"
+    },
+    {
+      "name": "잔불 도끼",
+      "grade": "희귀",
+      "description": "마력을 실은 날로 마른 목재를 찍으면 절단면에 불씨가 남아 서서히 타오른다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-14.svg"
+    },
+    {
+      "name": "산림의 파수도끼",
+      "grade": "영웅",
+      "description": "나무에 날을 대고 기다리면 그 나무의 큰 상처와 속 빈 부분이 진동으로 손잡이에 전해진다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-15.svg"
+    },
+    {
+      "name": "파갑 도끼",
+      "grade": "영웅",
+      "description": "마력을 모아 찍으면 닿은 갑각이나 비늘의 겹침이 벌어져 속살을 드러내기 쉬워진다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-16.svg"
+    },
+    {
+      "name": "결빙의 도끼",
+      "grade": "영웅",
+      "description": "마력을 실은 날로 식물을 자르면 절단면 주변의 수분이 얼어 붙잡거나 디디기 좋은 단단한 표면이 생긴다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-17.svg"
+    },
+    {
+      "name": "전장의 닻도끼",
+      "grade": "영웅",
+      "description": "날을 단단한 지면에 박고 손잡이를 붙잡으면 마력이 버팀힘을 보태며 땅 자체가 무너지면 고정도 풀린다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-18.svg"
+    },
+    {
+      "name": "거목의 유산도끼",
+      "grade": "전설",
+      "description": "살아 있는 나무에 날을 대고 마력을 바치면 갈라지거나 찢어진 조직이 천천히 맞붙는다.",
+      "category": "무기",
+      "subcategory": "도끼",
+      "icon": "axe-19.svg"
     },
     {
       "name": "겨울신의 쇄빙도끼",
@@ -253,7 +1165,1439 @@
       "description": "겨울의 신이 남긴 날이 닿으면 비마법 얼음이 크게 갈라지며, 갈라진 빙하가 무너지거나 해류에 떠밀릴 수 있다.",
       "category": "무기",
       "subcategory": "도끼",
-      "icon": "dummy.svg"
+      "icon": "axe-20.svg"
+    },
+    {
+      "name": "나무 곤봉",
+      "grade": "일반",
+      "description": "단단한 목재를 손에 맞게 깎은 무기로 충격을 주지만 금속날을 오래 받아내면 깎이거나 부러진다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-01.svg"
+    },
+    {
+      "name": "철퇴",
+      "grade": "일반",
+      "description": "짧은 자루 끝의 무거운 쇳덩이로 타격하며 날이 없어도 머리와 뼈에 치명상을 줄 수 있다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-02.svg"
+    },
+    {
+      "name": "전투망치",
+      "grade": "일반",
+      "description": "작은 망치 머리로 충격을 좁은 부위에 집중하며 갑옷을 입은 적에게도 타박상을 입힐 수 있다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-03.svg"
+    },
+    {
+      "name": "플랜지 메이스",
+      "grade": "고급",
+      "description": "철퇴 머리의 돌출된 면이 단단한 표면에 충격을 모으며 무게 때문에 빠른 연속 공격에는 힘이 든다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-04.svg"
+    },
+    {
+      "name": "사슬 철퇴",
+      "grade": "고급",
+      "description": "사슬 끝 추로 방패 둘레를 돌아 타격할 수 있지만 궤적을 잘못 잡으면 사용자도 맞을 수 있다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-05.svg"
+    },
+    {
+      "name": "장병 전투망치",
+      "grade": "고급",
+      "description": "긴 자루로 강한 충격을 내는 무기이며 좁은 곳에서 방향을 바꾸거나 밀착한 적을 상대하기 어렵다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-06.svg"
+    },
+    {
+      "name": "갈고리 곤봉",
+      "grade": "고급",
+      "description": "둥근 머리 아래의 갈고리로 옷과 방패를 걸어 균형을 무너뜨리며 맨살을 걸면 심한 상처를 낼 수 있다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-07.svg"
+    },
+    {
+      "name": "가죽머리 철퇴",
+      "grade": "고급",
+      "description": "머리를 두꺼운 가죽으로 감아 표면 파손을 줄이지만 힘껏 휘두르면 뼈가 부러질 만큼 위험하다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-08.svg"
+    },
+    {
+      "name": "공명의 망치",
+      "grade": "희귀",
+      "description": "돌과 금속을 가볍게 두드리면 내부의 큰 균열이 특유의 떨림으로 손잡이에 전해진다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-09.svg"
+    },
+    {
+      "name": "반동의 철퇴",
+      "grade": "희귀",
+      "description": "마력을 흘려 타격하면 머리가 튕겨 되돌아와 회수가 쉬우며 반동을 제어하지 못하면 사용자를 향해 돌아온다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-10.svg"
+    },
+    {
+      "name": "물보라 망치",
+      "grade": "희귀",
+      "description": "마력을 보내며 휘두르면 머리에 고인 물이 작은 물보라로 흩뿌려진다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-11.svg"
+    },
+    {
+      "name": "무음 곤봉",
+      "grade": "희귀",
+      "description": "머리가 물체에 부딪힐 때의 충돌음을 흡수해 타격 소리가 작다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-12.svg"
+    },
+    {
+      "name": "녹비늘 망치",
+      "grade": "희귀",
+      "description": "녹슨 철을 가볍게 두드리면 부식된 겉층이 떨어져 나와 남은 금속 표면이 드러난다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-13.svg"
+    },
+    {
+      "name": "균형추 메이스",
+      "grade": "희귀",
+      "description": "손잡이의 표식을 돌리면 머리 안의 추가 움직여 무게중심과 타격 감각을 바꿀 수 있다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-14.svg"
+    },
+    {
+      "name": "파사의 철퇴",
+      "grade": "영웅",
+      "description": "신성력을 실어 언데드를 때리면 맞은 부위의 사령술 결속이 약해져 몸을 유지하거나 움직이기 어려워진다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-15.svg"
+    },
+    {
+      "name": "벽울림의 망치",
+      "grade": "영웅",
+      "description": "마력을 모아 벽을 두드리면 벽 바로 뒤에 맞닿은 물체에도 둔한 충격이 전해진다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-16.svg"
+    },
+    {
+      "name": "정적의 메이스",
+      "grade": "영웅",
+      "description": "마력을 흘린 머리를 움직이는 기계부에 대면 진동을 억누르며 장치가 멈추려는 힘을 사용자의 팔로 감당해야 한다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-17.svg"
+    },
+    {
+      "name": "돌숨의 망치",
+      "grade": "영웅",
+      "description": "돌바닥을 두드리면 주변 바닥 아래의 큰 빈 공간에서 낮은 울림이 돌아와 공동의 위치를 가늠할 수 있다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-18.svg"
+    },
+    {
+      "name": "공성 파쇄추",
+      "grade": "전설",
+      "description": "마력을 충분히 모아 경첩이나 빗장을 직접 때리면 결합부가 깨져 단단한 성문도 뜯어내기 쉬워진다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-19.svg"
+    },
+    {
+      "name": "대장장이신의 망치",
+      "grade": "신화",
+      "description": "대장장이 신의 불꽃을 품어 갈라진 금속을 두드리면 양쪽 단면이 맞붙으며, 잃어버린 부분을 메우려면 보충할 금속이 필요하다.",
+      "category": "무기",
+      "subcategory": "둔기",
+      "icon": "mace-20.svg"
+    },
+    {
+      "name": "참나무 육척봉",
+      "grade": "일반",
+      "description": "두 손으로 잡는 긴 목봉으로 찌르기와 후려치기를 겸하며 금속날에 반복해서 맞으면 갈라진다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-01.svg"
+    },
+    {
+      "name": "짧은 호신봉",
+      "grade": "일반",
+      "description": "한 손으로 다루기 쉬운 짧은 봉이며 긴 창과 검을 상대로는 접근해야 타격할 수 있다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-02.svg"
+    },
+    {
+      "name": "철환 목봉",
+      "grade": "일반",
+      "description": "목봉의 양끝에 철환을 둘러 끝부분의 마모를 줄였으며 완전히 금속으로 된 봉보다 운반이 쉽다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-03.svg"
+    },
+    {
+      "name": "철봉",
+      "grade": "고급",
+      "description": "내부가 빈 금속봉으로 단단함과 무게를 절충했지만 큰 힘으로 눌리면 찌그러져 형태를 잃을 수 있다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-04.svg"
+    },
+    {
+      "name": "삼절곤",
+      "grade": "고급",
+      "description": "짧은 봉 세 개를 사슬로 이어 방어물 옆을 돌아 때릴 수 있지만 숙련되지 않으면 자신에게 튀기 쉽다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-05.svg"
+    },
+    {
+      "name": "분절 쌍봉",
+      "grade": "고급",
+      "description": "하나의 긴 봉을 두 개로 나누어 쓸 수 있으며 연결부를 잠가야 긴 봉으로 안정되게 다룰 수 있다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-06.svg"
+    },
+    {
+      "name": "갈고리 장봉",
+      "grade": "고급",
+      "description": "끝의 작은 갈고리로 옷자락과 물건을 걸어 끌며 낚아 올리는 무게가 클수록 자루가 휘거나 부러지기 쉽다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-07.svg"
+    },
+    {
+      "name": "누비 수련봉",
+      "grade": "고급",
+      "description": "양끝을 두꺼운 섬유로 감아 접촉 충격을 줄이며 머리나 관절을 세게 치면 여전히 위험하다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-08.svg"
+    },
+    {
+      "name": "탄력의 장봉",
+      "grade": "희귀",
+      "description": "마력을 보내면 자루가 탄력 있게 휘어 모서리와 장애물 둘레로 봉끝을 돌릴 수 있다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-09.svg"
+    },
+    {
+      "name": "신축 장봉",
+      "grade": "희귀",
+      "description": "손잡이를 돌리며 마력을 보내면 자루가 늘어나거나 줄어들며 길어질수록 휘기 쉬워지고 버티는 무게가 줄어든다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-10.svg"
+    },
+    {
+      "name": "버팀의 장봉",
+      "grade": "희귀",
+      "description": "양끝을 단단한 두 면 사이에 대면 마력으로 길이를 고정하며 면이 부서지거나 미끄러지면 지지력을 잃는다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-11.svg"
+    },
+    {
+      "name": "잔물결 봉",
+      "grade": "희귀",
+      "description": "한쪽 끝을 물에 담그면 물속의 큰 움직임에서 생긴 진동이 반대쪽 끝으로 전해진다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-12.svg"
+    },
+    {
+      "name": "티끌의 장봉",
+      "grade": "희귀",
+      "description": "봉을 돌리며 마력을 보내면 가까이 떠다니는 마른 먼지가 끝으로 모여든다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-13.svg"
+    },
+    {
+      "name": "설원행자의 봉",
+      "grade": "희귀",
+      "description": "봉끝을 눈에 대고 마력을 보내면 닿은 주변이 넓게 굳어 눈길을 짚고 몸을 지탱하기 좋아진다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-14.svg"
+    },
+    {
+      "name": "순풍의 장봉",
+      "grade": "영웅",
+      "description": "봉을 세우고 마력을 유지하면 바람이 양옆으로 갈라져 뒤에 선 사람 하나를 가릴 만한 바람막이가 생긴다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-15.svg"
+    },
+    {
+      "name": "균형의 장봉",
+      "grade": "영웅",
+      "description": "사용자의 몸이 기울어지면 양끝의 무게가 반대쪽으로 옮겨가 좁은 발판에서 균형을 잡도록 돕는다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-16.svg"
+    },
+    {
+      "name": "영혼의 장봉",
+      "grade": "영웅",
+      "description": "마력을 흘린 봉끝이 영체에 닿아 그 몸을 밀거나 받칠 수 있다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-17.svg"
+    },
+    {
+      "name": "뿌리의 장봉",
+      "grade": "영웅",
+      "description": "흙에 꽂아 물과 마력을 주면 밑동에서 뿌리가 천천히 뻗어 땅에 단단히 고정된다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-18.svg"
+    },
+    {
+      "name": "숲지기의 생장봉",
+      "grade": "전설",
+      "description": "살아 있는 나무에 봉을 대고 마력을 바치면 가지가 천천히 뻗고 휘게 할 수 있으며 나무에 필요한 물과 양분은 따로 공급해야 한다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-19.svg"
+    },
+    {
+      "name": "순례자의 장봉",
+      "grade": "전설",
+      "description": "봉을 짚고 걸으면 다리에 쌓이는 피로가 줄어 장거리 이동과 오래 서서 버티기가 수월해진다.",
+      "category": "무기",
+      "subcategory": "봉",
+      "icon": "staff-20.svg"
+    },
+    {
+      "name": "사냥용 단궁",
+      "grade": "일반",
+      "description": "짧은 목제 활로 숲속에서 다루기 편하지만 긴 활보다 먼 거리의 무거운 표적을 꿰뚫기 어렵다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-01.svg"
+    },
+    {
+      "name": "전장용 장궁",
+      "grade": "일반",
+      "description": "긴 활대에서 강한 힘을 내는 활이며 충분한 공간과 활을 당길 근력이 필요하다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-02.svg"
+    },
+    {
+      "name": "견습 궁수의 활",
+      "grade": "일반",
+      "description": "힘을 적게 들여 당길 수 있어 자세를 익히기 좋지만 먼 거리의 단단한 표적에는 적합하지 않다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-03.svg"
+    },
+    {
+      "name": "복합각궁",
+      "grade": "고급",
+      "description": "뿔과 힘줄을 겹쳐 작은 크기로도 강한 탄성을 내며 습기에 오래 노출되면 접착층이 약해질 수 있다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-04.svg"
+    },
+    {
+      "name": "기마용 반곡궁",
+      "grade": "고급",
+      "description": "짧고 끝이 굽은 활대가 안장 위에서 걸리적거리지 않아 말을 타고 방향을 바꾸며 쏘기 좋다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-05.svg"
+    },
+    {
+      "name": "바다사냥꾼의 활",
+      "grade": "고급",
+      "description": "활대와 시위를 방습 처리해 바닷바람에 잘 견디지만 바닷물에 잠긴 뒤에는 씻고 말려야 한다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-06.svg"
+    },
+    {
+      "name": "여행자의 조립궁",
+      "grade": "고급",
+      "description": "활대를 분리해 작은 짐으로 꾸릴 수 있고 다시 결합한 뒤 시위를 걸어야 발사할 수 있다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-07.svg"
+    },
+    {
+      "name": "조율의 활",
+      "grade": "고급",
+      "description": "시위를 걸기 전 활대 결합부를 조정해 당기는 힘을 바꾸며 강하게 맞출수록 사용자에게 더 큰 근력이 필요하다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-08.svg"
+    },
+    {
+      "name": "안개등의 활",
+      "grade": "희귀",
+      "description": "마력을 보내 쏜 화살이 공중에 짧은 빛의 궤적을 남겨 날아간 방향을 표시하며, 주변에서도 궤적을 볼 수 있다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-09.svg"
+    },
+    {
+      "name": "풍향의 활",
+      "grade": "희귀",
+      "description": "활대의 실장식이 조준한 방향 가까이의 바람을 따라 기울어 바람의 흐름을 살피기 좋다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-10.svg"
+    },
+    {
+      "name": "여울의 활",
+      "grade": "희귀",
+      "description": "마력을 실어 쏜 화살이 수면에 들어갈 때 방향이 덜 꺾여 얕은 물속의 표적을 겨누기 쉽다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-11.svg"
+    },
+    {
+      "name": "무광 활",
+      "grade": "희귀",
+      "description": "마력을 보내면 활대와 시위의 빛 반사가 줄어 수풀과 그늘에 숨어 활을 겨누기 좋다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-12.svg"
+    },
+    {
+      "name": "고요한 시위",
+      "grade": "희귀",
+      "description": "활을 당긴 손의 작은 떨림을 억누르므로 활을 겨눈 자세를 안정적으로 유지할 수 있다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-13.svg"
+    },
+    {
+      "name": "서리막이 활",
+      "grade": "희귀",
+      "description": "마력을 흘리면 시위에 맺힌 물기와 서리가 밀려나 습하거나 추운 날에도 시위를 손질하기 수월하다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-14.svg"
+    },
+    {
+      "name": "곡선의 활",
+      "grade": "영웅",
+      "description": "쏘는 순간 눈으로 지정한 지점 쪽으로 화살의 궤적을 완만하게 휘게 할 수 있다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-15.svg"
+    },
+    {
+      "name": "결속의 덩굴활",
+      "grade": "영웅",
+      "description": "나무 화살에 마력을 실어 쏘면 박힌 지점에서 짧은 덩굴이 자라 주변을 감으며 마른 돌바닥에서는 쉽게 말라 끊어진다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-16.svg"
+    },
+    {
+      "name": "영혼사냥꾼의 활",
+      "grade": "영웅",
+      "description": "당긴 시위에 마력을 실으면 발사한 실물 화살이 실체 없는 영체에도 닿아 상처를 낸다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-17.svg"
+    },
+    {
+      "name": "광휘의 활",
+      "grade": "영웅",
+      "description": "마력을 화살 모양으로 만들어 쏠 수 있어 탄약이 필요 없지만 단단한 갑옷을 뚫기 어렵고 연속 발사는 사용자를 빠르게 지치게 한다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-18.svg"
+    },
+    {
+      "name": "먼길의 약속궁",
+      "grade": "전설",
+      "description": "사용자가 직접 묶어둔 표식끈이 시야 안에 있으면 화살이 그 끈을 향해 궤적을 고치며, 강풍과 장애물에 가로막힐 수 있다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-19.svg"
+    },
+    {
+      "name": "별사냥 여신의 활",
+      "grade": "신화",
+      "description": "사냥의 여신이 남긴 활로 밤하늘 아래 마력의 화살을 쏘아 눈에 보이는 영체의 형체를 흩뜨린다.",
+      "category": "무기",
+      "subcategory": "활",
+      "icon": "bow-20.svg"
+    },
+    {
+      "name": "손석궁",
+      "grade": "일반",
+      "description": "한 손에 들 수 있는 작은 석궁으로 가까운 표적을 겨누며 장전에는 다른 손이 필요하다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-01.svg"
+    },
+    {
+      "name": "보병 석궁",
+      "grade": "일반",
+      "description": "시위를 걸고 방아쇠로 볼트를 발사하여 당긴 상태를 유지하기 쉽지만 한 발마다 다시 장전해야 한다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-02.svg"
+    },
+    {
+      "name": "사냥 석궁",
+      "grade": "일반",
+      "description": "비교적 가볍게 만들어 짐승을 기다리며 겨누기 좋지만 두꺼운 전장용 갑옷을 꿰뚫기에는 힘이 부족하다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-03.svg"
+    },
+    {
+      "name": "윈치 중석궁",
+      "grade": "고급",
+      "description": "도르래로 강한 시위를 당겨 무거운 볼트를 쏘며 위력이 큰 대신 장전과 운반이 느리다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-04.svg"
+    },
+    {
+      "name": "지렛대 석궁",
+      "grade": "고급",
+      "description": "접이식 지렛대로 시위를 당겨 적은 힘으로 장전할 수 있으며, 지렛대를 펼칠 공간이 필요하다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-05.svg"
+    },
+    {
+      "name": "연발 석궁",
+      "grade": "고급",
+      "description": "볼트함에서 탄약을 내려 연속 장전할 수 있으며 간단한 볼트를 써서 사거리와 관통력이 중석궁보다 떨어진다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-06.svg"
+    },
+    {
+      "name": "성벽 파수석궁",
+      "grade": "고급",
+      "description": "받침대에 고정해 굵은 볼트를 안정적으로 쏘지만 사람이 들고 빠르게 이동하기에는 무겁다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-07.svg"
+    },
+    {
+      "name": "해양 석궁",
+      "grade": "고급",
+      "description": "방청 처리한 금속부와 배수구가 바닷물에 의한 부식과 작동부의 물고임을 줄인다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-08.svg"
+    },
+    {
+      "name": "정렬의 룬석궁",
+      "grade": "희귀",
+      "description": "장전한 볼트가 레일 중앙에 가지런히 맞춰져 탄약을 비뚤게 놓는 실수를 줄인다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-09.svg"
+    },
+    {
+      "name": "마력장전 석궁",
+      "grade": "희귀",
+      "description": "손잡이에 마력을 보내면 시위를 뒤로 당기는 힘이 보태져 무거운 석궁도 수월하게 장전할 수 있다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-10.svg"
+    },
+    {
+      "name": "정조준 석궁",
+      "grade": "희귀",
+      "description": "마력을 흘리면 받침대의 작은 진동이 가라앉아 조준점을 안정적으로 유지하기 좋다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-11.svg"
+    },
+    {
+      "name": "잔불의 석궁",
+      "grade": "희귀",
+      "description": "장전한 볼트의 촉에 작은 불씨를 붙여 발사하므로 마른 천과 목재에 불을 옮기기 좋다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-12.svg"
+    },
+    {
+      "name": "겨울 파수석궁",
+      "grade": "희귀",
+      "description": "마력을 보내면 방아쇠와 레일의 성에가 녹아 혹한 속에서 작동부가 얼어붙는 일을 줄인다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-13.svg"
+    },
+    {
+      "name": "빛실의 석궁",
+      "grade": "희귀",
+      "description": "발사한 볼트 뒤에 가늘고 연약한 마력실이 남아 날아간 경로를 눈으로 확인할 수 있다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-14.svg"
+    },
+    {
+      "name": "인내의 석궁",
+      "grade": "영웅",
+      "description": "당긴 시위에 마력을 넣으면 탄성을 잃지 않은 채 팽팽하게 보존되며, 발사하는 순간 보존효과가 풀린다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-15.svg"
+    },
+    {
+      "name": "격퇴의 석궁",
+      "grade": "영웅",
+      "description": "볼트가 맞은 지점에 마력이 넓게 퍼져 표적을 뒤로 밀어내는 충격을 더한다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-16.svg"
+    },
+    {
+      "name": "사슬작살 석궁",
+      "grade": "영웅",
+      "description": "작살형 볼트에 빛의 사슬을 연결해 발사하고 감아들일 수 있으며 무거운 물체를 끌면 석궁과 사용자가 함께 끌려갈 수 있다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-17.svg"
+    },
+    {
+      "name": "영혼의 닻석궁",
+      "grade": "영웅",
+      "description": "마력을 실은 볼트가 영체를 통과한 뒤 단단한 벽에 박히면 그 영체를 벽 가까이에 붙들며 볼트가 빠지면 구속이 풀린다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-18.svg"
+    },
+    {
+      "name": "수성장의 유산석궁",
+      "grade": "전설",
+      "description": "거치한 석궁에 마력을 바치면 발사 직전 눈앞의 비마법 안개가 가늘게 갈라져 표적을 볼 조준 통로가 생긴다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-19.svg"
+    },
+    {
+      "name": "맹세의 파수석궁",
+      "grade": "전설",
+      "description": "직접 장전하고 지정한 문을 겨누어 두면 문을 부수고 들어오는 물체에 한 발을 발사하며, 침입자의 신원과 관계없이 작동한다.",
+      "category": "무기",
+      "subcategory": "석궁",
+      "icon": "crossbow-20.svg"
+    },
+    {
+      "name": "투척 단검",
+      "grade": "일반",
+      "description": "손잡이와 날의 무게를 던지기에 맞춘 단검으로, 손에서 안정적으로 회전해 칼끝이 표적을 향하기 쉽다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-01.svg"
+    },
+    {
+      "name": "투창",
+      "grade": "일반",
+      "description": "던지기 알맞게 가볍게 만든 창이며 근접전에도 쓸 수 있지만 무거운 장창과 맞부딪치면 불리하다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-02.svg"
+    },
+    {
+      "name": "슬링",
+      "grade": "일반",
+      "description": "주머니에 돌을 담아 끈을 돌려 던지는 무기로 탄환은 별도로 필요하고 좁은 곳에서는 회전이 어렵다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-03.svg"
+    },
+    {
+      "name": "투척도끼",
+      "grade": "일반",
+      "description": "짧은 자루 끝의 도끼날을 회전시켜 던지며 맞는 거리와 각도를 익혀야 날이 제대로 박힌다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-04.svg"
+    },
+    {
+      "name": "차크람",
+      "grade": "고급",
+      "description": "바깥 둘레에 날이 선 고리로 회전시켜 던지며 부딪힌 뒤에는 예측하기 어렵게 튀어 회수에 주의해야 한다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-05.svg"
+    },
+    {
+      "name": "볼라",
+      "grade": "고급",
+      "description": "여러 개의 추를 끈으로 이어 던지면 팔다리나 날개 둘레에 끈이 감겨 움직임을 방해한다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-06.svg"
+    },
+    {
+      "name": "투척 그물",
+      "grade": "고급",
+      "description": "가장자리의 추가 그물을 펼쳐 가까운 대상을 덮으며 무거운 적과 날카로운 발톱에는 쉽게 벗겨지거나 찢어진다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-07.svg"
+    },
+    {
+      "name": "줄작살",
+      "grade": "고급",
+      "description": "끈이 연결된 작살을 던져 표적에 박고 끌어당기며 고정이 약하면 빠지고 표적이 무거우면 던진 쪽이 끌려간다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-08.svg"
+    },
+    {
+      "name": "부메랑",
+      "grade": "고급",
+      "description": "휘어진 목봉을 회전시켜 던지며 빈 공간에서는 휘어 돌아오지만 물체에 맞은 뒤에는 돌아오지 않는다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-09.svg"
+    },
+    {
+      "name": "귀환 단검",
+      "grade": "희귀",
+      "description": "사용자가 빈손을 내밀고 부르면 단검이 자루부터 돌아오며 벽에 가로막히거나 단단히 붙들리면 멈춘다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-10.svg"
+    },
+    {
+      "name": "표식의 투창",
+      "grade": "희귀",
+      "description": "날에 마력을 실어 던지면 박힌 자리에서 작은 빛이 나므로 도달 지점과 표적의 움직임을 눈으로 확인하기 좋다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-11.svg"
+    },
+    {
+      "name": "무음 투척륜",
+      "grade": "희귀",
+      "description": "날아가는 고리의 바람 가르는 소리가 줄어 투척 방향을 소리로 알아채기 어렵다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-12.svg"
+    },
+    {
+      "name": "빙결 작살",
+      "grade": "희귀",
+      "description": "얼음에 박힌 날 주위가 다시 얼어 고정력을 높이며 얼음 자체가 깨지거나 녹으면 빠진다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-13.svg"
+    },
+    {
+      "name": "표류의 투창",
+      "grade": "희귀",
+      "description": "물에 떨어지면 창끝이 위로 향한 채 수면으로 떠올라 눈에 잘 띄고 회수하기 쉽다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-14.svg"
+    },
+    {
+      "name": "눈부심의 차크람",
+      "grade": "희귀",
+      "description": "마력을 넣고 던지면 회전하는 날에서 강한 반짝임이 일어나 바라보는 이의 눈을 어지럽힌다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-15.svg"
+    },
+    {
+      "name": "결속의 볼라",
+      "grade": "영웅",
+      "description": "던진 끈이 팔다리에 걸리면 스스로 매듭을 짓고 조여 대상을 묶는다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-16.svg"
+    },
+    {
+      "name": "전향의 투척봉",
+      "grade": "영웅",
+      "description": "던질 때 눈으로 고른 방향을 향해 비행 도중 한 번 궤적을 꺾을 수 있다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-17.svg"
+    },
+    {
+      "name": "영혼의 그물",
+      "grade": "영웅",
+      "description": "마력을 불어넣어 펼친 그물이 영체를 감쌀 수 있으며 그물코보다 작게 흩어지는 영체나 날카로운 실체 무기에 취약하다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-18.svg"
+    },
+    {
+      "name": "귀풍의 투창",
+      "grade": "전설",
+      "description": "던진 창이 트인 허공을 따라 사용자 곁으로 돌아오며, 무거운 표적에 깊이 박히면 빼내기 전까지 돌아오지 않는다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-19.svg"
+    },
+    {
+      "name": "천둥신의 투척추",
+      "grade": "신화",
+      "description": "천둥의 신이 내린 추를 던지면 처음 부딪힌 곳에 벼락이 떨어지며, 번지는 전류와 화재가 아군에게도 위험하다.",
+      "category": "무기",
+      "subcategory": "투척무기",
+      "icon": "thrown-20.svg"
+    },
+    {
+      "name": "견습 시전봉",
+      "grade": "일반",
+      "description": "끝의 표식으로 주문을 겨눌 방향과 손동작을 맞추는 목제 지팡이로 견습 마법사의 시전 연습에 쓰인다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-01.svg"
+    },
+    {
+      "name": "학도 마법사의 단장",
+      "grade": "일반",
+      "description": "한 손에 들고 짧은 동작으로 시전하기 편한 가벼운 지팡이로, 실내 수련과 여행 중 휴대에 알맞다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-02.svg"
+    },
+    {
+      "name": "철테 전투지팡이",
+      "grade": "고급",
+      "description": "양끝을 금속으로 보강해 시전 도중 접근한 상대를 후려치거나 가벼운 공격을 받아 흘리기 좋다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-03.svg"
+    },
+    {
+      "name": "여행자의 분절장",
+      "grade": "고급",
+      "description": "짧게 분리해 운반할 수 있으며, 결합부를 맞춰 조립하면 이어진 마력 통로를 통해 주문을 시전할 수 있다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-04.svg"
+    },
+    {
+      "name": "수정의 초점장",
+      "grade": "고급",
+      "description": "끝의 수정이 사용자의 마력을 한 방향으로 모아 주문을 정밀하게 겨누도록 돕는다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-05.svg"
+    },
+    {
+      "name": "쌍극의 지팡이",
+      "grade": "고급",
+      "description": "서로 다른 시전 감각을 가진 두 끝의 초점을 돌려 골라 쓰므로 주문과 손에 맞는 쪽으로 바꾸기 좋다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-06.svg"
+    },
+    {
+      "name": "화염의 지팡이",
+      "grade": "희귀",
+      "description": "사용자가 시전하는 화염 주문의 불길을 가늘게 모아 좁은 지점을 겨누기 쉽게 한다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-07.svg"
+    },
+    {
+      "name": "물결의 지팡이",
+      "grade": "희귀",
+      "description": "사용자가 마법으로 조종하는 물이 지팡이 끝을 따라 흐르도록 도와 물줄기의 방향을 세밀하게 바꿀 수 있다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-08.svg"
+    },
+    {
+      "name": "뇌광의 지팡이",
+      "grade": "희귀",
+      "description": "끝을 땅에 대고 전격 주문을 쓰면 되흐르는 전류를 지면으로 흘리며, 주변이 젖어 있으면 전류가 번질 위험이 있다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-09.svg"
+    },
+    {
+      "name": "서리의 지팡이",
+      "grade": "희귀",
+      "description": "사용자가 시전하는 냉기 주문이 넓게 흩어지는 것을 줄여 좁은 부분을 집중적으로 얼린다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-10.svg"
+    },
+    {
+      "name": "정령의 지팡이",
+      "grade": "희귀",
+      "description": "사용자가 정령에게 전하려는 감정과 의도가 끝의 마력 무늬로 나타나 정령과 뜻을 주고받기 쉬워진다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-11.svg"
+    },
+    {
+      "name": "신성의 지팡이",
+      "grade": "희귀",
+      "description": "사용자의 신성력을 끝으로 모아 접촉한 대상에게 안정적으로 전달한다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-12.svg"
+    },
+    {
+      "name": "묵언의 지팡이",
+      "grade": "영웅",
+      "description": "사용자가 이미 익힌 짧은 영창을 지팡이의 마력 진동으로 대신해 입을 열지 않고 시전하도록 돕는다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-13.svg"
+    },
+    {
+      "name": "갈래의 지팡이",
+      "grade": "영웅",
+      "description": "하나의 단순한 투사 주문을 두 갈래로 나누어 서로 다른 방향으로 보내며, 나뉜 주문은 각각 위력이 약해진다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-14.svg"
+    },
+    {
+      "name": "잔향의 지팡이",
+      "grade": "영웅",
+      "description": "사용자가 시전하고 남은 흩어진 마력 일부를 모아 다음 주문에 보탠다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-15.svg"
+    },
+    {
+      "name": "부유의 지팡이",
+      "grade": "영웅",
+      "description": "바닥에 세우고 마력을 보내면 끝에 맞닿은 작은 돌조각을 띄워 원하는 방향으로 움직일 수 있다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-16.svg"
+    },
+    {
+      "name": "역류의 수호장",
+      "grade": "영웅",
+      "description": "시전이 흐트러져 마력이 되돌아올 때 지팡이 끝을 땅에 대면 역류하는 마력이 지면으로 빠져나가 부상을 줄인다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-17.svg"
+    },
+    {
+      "name": "거목심장 지팡이",
+      "grade": "전설",
+      "description": "사용자가 시전한 식물 마법을 살아서 연결된 뿌리와 줄기를 따라 전달하여, 맞닿은 나무의 먼 가지까지 효과를 이어 보낸다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-18.svg"
+    },
+    {
+      "name": "별길 지팡이",
+      "grade": "전설",
+      "description": "맑은 밤 별을 초점에 비추면 사용자가 시전하는 빛 주문이 멀리까지 곧게 뻗는다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-19.svg"
+    },
+    {
+      "name": "태초의 화염장",
+      "grade": "신화",
+      "description": "불의 신이 남긴 지팡이로 화염 주문을 시전하면 평범한 물에도 꺼지지 않는 불꽃이 되며, 유지하는 동안 사용자의 마력이 계속 소모된다.",
+      "category": "무기",
+      "subcategory": "지팡이",
+      "icon": "wand-20.svg"
+    },
+    {
+      "name": "견습 주문집",
+      "grade": "일반",
+      "description": "간단한 주문의 영창과 손동작을 큰 글씨와 그림으로 엮어 시전 중에도 펼쳐볼 수 있다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-01.svg"
+    },
+    {
+      "name": "전투 마도서",
+      "grade": "고급",
+      "description": "한 손으로 펼친 페이지가 단단히 고정되어 이동하거나 몸을 돌리면서도 주문을 읽기 좋다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-02.svg"
+    },
+    {
+      "name": "방수 마도서",
+      "grade": "고급",
+      "description": "종이와 잉크를 방수 처리해 비와 물보라 속에서도 주문이 번지지 않고 페이지가 잘 펼쳐진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-03.svg"
+    },
+    {
+      "name": "견습생의 주문해설서",
+      "grade": "고급",
+      "description": "영창의 호흡과 마력 흐름을 색으로 구분하여 주문을 익히거나 시전할 때 실수를 줄인다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-04.svg"
+    },
+    {
+      "name": "오색갈피 마도서",
+      "grade": "고급",
+      "description": "손가락으로 색갈피를 누르면 지정한 주문 페이지가 펼쳐지므로 시전 중 주문을 빠르게 바꿔 읽을 수 있다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-05.svg"
+    },
+    {
+      "name": "불씨의 마법서",
+      "grade": "희귀",
+      "description": "펼친 불꽃 문양에 마력을 보내면 손바닥만 한 불꽃이 눈앞에 떠올라 빛과 열을 낸다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-06.svg"
+    },
+    {
+      "name": "수막의 마법서",
+      "grade": "희귀",
+      "description": "물을 묻힌 페이지에 마력을 보내면 책 앞에 얇은 물막이 생겨 날리는 먼지와 작은 불씨를 받아낸다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-07.svg"
+    },
+    {
+      "name": "서리문자 마도서",
+      "grade": "희귀",
+      "description": "적힌 문장을 손으로 짚으며 마력을 보내면 책이 닿은 액체 표면에 얇은 얼음이 생긴다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-08.svg"
+    },
+    {
+      "name": "뇌광의 마도서",
+      "grade": "희귀",
+      "description": "문양에 마력을 넣으면 책 가까이에 짧은 전기 불꽃이 튀며 주변이 젖어 있으면 사용자에게도 전류가 흐를 수 있다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-09.svg"
+    },
+    {
+      "name": "암영의 서",
+      "grade": "희귀",
+      "description": "책을 펼쳐 마력을 유지하면 주변의 빛이 어두워져 사람과 물건의 윤곽이 흐릿해진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-10.svg"
+    },
+    {
+      "name": "속삭임의 서",
+      "grade": "희귀",
+      "description": "책에 입술을 대고 영창하면 목소리가 입가에서만 들릴 만큼 작아져 조용히 시전하기 좋다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-11.svg"
+    },
+    {
+      "name": "모래손의 서",
+      "grade": "희귀",
+      "description": "마른 모래 위에 펼치고 마력을 보내면 모래가 작은 손 모양으로 뭉쳐 가벼운 물건을 쥐며 젖으면 무너진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-12.svg"
+    },
+    {
+      "name": "광침의 서",
+      "grade": "희귀",
+      "description": "페이지의 점을 짚어 마력을 보내면 가느다란 빛줄기가 앞쪽으로 뻗어 표면에 점을 비추거나 상대의 눈을 부시게 한다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-13.svg"
+    },
+    {
+      "name": "봉문의 서",
+      "grade": "영웅",
+      "description": "책을 문에 대고 지정한 문장을 읽으면 마력이 문짝을 문틀에 붙들며 문 자체를 부수거나 사용자의 마력이 끊기면 열 수 있다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-14.svg"
+    },
+    {
+      "name": "환영의 거울서",
+      "grade": "영웅",
+      "description": "빛으로 된 환영을 페이지에 비추면 그 모습을 작은 빛 영상으로 다시 투영하며, 책을 덮으면 영상이 사라진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-15.svg"
+    },
+    {
+      "name": "영혼의 문답서",
+      "grade": "영웅",
+      "description": "눈앞의 의사소통이 가능한 영체에게 질문을 적어 보여주면 영체가 전한 답이 페이지에 글로 나타난다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-16.svg"
+    },
+    {
+      "name": "석문의 서",
+      "grade": "영웅",
+      "description": "책을 돌에 대고 마력을 흘리면 원하는 글자와 얕은 홈이 표면에 새겨진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-17.svg"
+    },
+    {
+      "name": "결박의 서",
+      "grade": "영웅",
+      "description": "영창을 끝내면 눈에 보이는 두 고정점 사이에 마력 사슬을 잇고 소형 생물의 이동을 막으며 무거운 충격을 받으면 끊어진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-18.svg"
+    },
+    {
+      "name": "여명 예식서",
+      "grade": "전설",
+      "description": "펼친 책에 신성력을 바치면 주변을 덮은 마법의 어둠과 시각적 환영이 옅어진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-19.svg"
+    },
+    {
+      "name": "태초 언어의 서",
+      "grade": "신화",
+      "description": "언어의 신이 남긴 책에 소리·고유색·냄새 중 하나를 적고 마력을 바치면 책에 닿은 손바닥만 한 무생물에서 그 성질이 잠시 사라진다.",
+      "category": "무기",
+      "subcategory": "마법서",
+      "icon": "spellbook-20.svg"
+    },
+    {
+      "name": "유리 시전구",
+      "grade": "일반",
+      "description": "손에 쥔 투명한 구를 초점으로 삼아 마력을 집중하고 주문을 겨눌 방향을 맞춘다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-01.svg"
+    },
+    {
+      "name": "황동환 마법구",
+      "grade": "고급",
+      "description": "구 둘레의 가동 고리를 시전할 방향에 맞춰놓으면 주문을 준비하는 동안 손의 자세와 각도를 유지하기 쉽다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-02.svg"
+    },
+    {
+      "name": "손목형 마법구",
+      "grade": "고급",
+      "description": "손목 받침에 고정해 떨어뜨릴 위험을 줄이지만 그 손으로 정교한 작업을 하거나 무기를 잡기 어렵다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-03.svg"
+    },
+    {
+      "name": "다면 수정구",
+      "grade": "고급",
+      "description": "면마다 서로 다른 각도의 초점이 있어 구를 돌려가며 주문을 보낼 방향을 골라 쓸 수 있다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-04.svg"
+    },
+    {
+      "name": "물결의 마법구",
+      "grade": "고급",
+      "description": "물에 뜨면 초점이 위를 향하도록 균형을 맞춘 구로, 잔잔한 물 위에 띄워두고 시전 받침으로 쓸 수 있다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-05.svg"
+    },
+    {
+      "name": "잔불의 오브",
+      "grade": "희귀",
+      "description": "구에 마력을 흘리면 눈에 보이는 가까운 곳으로 작은 화염탄을 쏠 수 있다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-06.svg"
+    },
+    {
+      "name": "물방울의 오브",
+      "grade": "희귀",
+      "description": "구에 부은 물이 공중의 작은 물덩이로 떠오르며, 구를 움직여 물덩이의 위치와 모양을 바꿀 수 있다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-07.svg"
+    },
+    {
+      "name": "서릿결의 오브",
+      "grade": "희귀",
+      "description": "마력을 보내면 구 가까이의 젖은 표면에 냉기가 흘러 얇은 얼음이 생긴다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-08.svg"
+    },
+    {
+      "name": "뇌전의 오브",
+      "grade": "희귀",
+      "description": "사용자가 넣은 마력을 구 안에 모아두었다가 가까운 곳으로 작은 전격을 방출한다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-09.svg"
+    },
+    {
+      "name": "선풍의 오브",
+      "grade": "희귀",
+      "description": "구에 마력을 보내면 둘레에 작은 소용돌이가 생겨 먼지와 얇은 연기를 밀어낸다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-10.svg"
+    },
+    {
+      "name": "오색의 오브",
+      "grade": "희귀",
+      "description": "마력을 보내면 원하는 빛깔의 빛을 내며, 밝기와 색을 바꾸어 조명이나 신호로 쓸 수 있다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-11.svg"
+    },
+    {
+      "name": "그늘의 오브",
+      "grade": "희귀",
+      "description": "손에 쥐고 마력을 유지하면 구 주변의 빛이 약해져 가까이 있는 사람과 물건이 어둑하게 가려진다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-12.svg"
+    },
+    {
+      "name": "점착의 마법구",
+      "grade": "영웅",
+      "description": "마력을 넣은 구가 닿은 무생물 표면에 달라붙어 시전 초점이 되며, 사용자가 구를 볼 수 있는 동안 그곳을 기준으로 주문을 시전할 수 있다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-13.svg"
+    },
+    {
+      "name": "분광의 오브",
+      "grade": "영웅",
+      "description": "사용자가 쏘는 빛 주문을 넓게 퍼뜨리거나 가늘게 모을 수 있으며, 넓게 퍼뜨릴수록 한 지점에 닿는 위력은 약해진다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-14.svg"
+    },
+    {
+      "name": "유영의 오브",
+      "grade": "영웅",
+      "description": "마력을 보내면 구가 사용자 팔이 닿는 거리 안에서 손짓을 따라 떠다니며 주문의 초점이 된다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-15.svg"
+    },
+    {
+      "name": "충격의 오브",
+      "grade": "영웅",
+      "description": "마력을 모아 전방에 짧은 압력파를 내보내 가까운 작은 물체를 밀쳐낸다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-16.svg"
+    },
+    {
+      "name": "영혼의 초점구",
+      "grade": "영웅",
+      "description": "사용자의 공격 주문에 영체와 접촉하는 성질을 더해 눈에 보이는 영체를 겨눌 수 있게 한다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-17.svg"
+    },
+    {
+      "name": "고요한 물의 오브",
+      "grade": "영웅",
+      "description": "구가 닿은 수면 주변의 잔물결이 가라앉아 거울처럼 고요해지므로 수면 반사를 이용한 시전에 적합하다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-18.svg"
+    },
+    {
+      "name": "조율자의 성구",
+      "grade": "전설",
+      "description": "구를 함께 잡은 이들이 자발적으로 보낸 마력을 모아 한 사람의 주문에 보태며, 서로 성질이 충돌하는 마력을 섞으면 시전이 흐트러진다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-19.svg"
+    },
+    {
+      "name": "창공신의 눈",
+      "grade": "신화",
+      "description": "하늘의 신이 남긴 구에 마력을 바치면 눈앞의 비마법 구름이 벌어져 햇빛이나 별빛이 지상에 닿는다.",
+      "category": "무기",
+      "subcategory": "마법구",
+      "icon": "orb-20.svg"
+    },
+    {
+      "name": "누비 두건",
+      "grade": "일반",
+      "description": "여러 겹의 천 사이에 솜을 넣어 머리를 감싸며, 가벼운 충격을 줄이고 금속 투구의 안감으로도 쓰인다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-01.svg"
+    },
+    {
+      "name": "가죽 전투모",
+      "grade": "일반",
+      "description": "단단하게 굳힌 가죽으로 정수리와 관자놀이를 덮어 스치는 칼날과 잔가지로부터 머리를 보호한다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-02.svg"
+    },
+    {
+      "name": "쇠테 모자",
+      "grade": "일반",
+      "description": "챙이 넓은 철제 모자로 위에서 떨어지는 자갈과 빗물을 옆으로 흘려보낸다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-03.svg"
+    },
+    {
+      "name": "코가리개 투구",
+      "grade": "일반",
+      "description": "얼굴을 드러낸 채 코 앞에 쇠막대가 내려와 시야를 넓게 확보하면서 정면의 베기를 받아낸다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-04.svg"
+    },
+    {
+      "name": "사슬 두건",
+      "grade": "고급",
+      "description": "촘촘한 쇠고리가 머리와 목덜미를 감싸 베기를 막으며, 강한 타격의 충격은 안쪽까지 전해진다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-05.svg"
+    },
+    {
+      "name": "전면 철투구",
+      "grade": "고급",
+      "description": "얼굴까지 두꺼운 철판으로 감싸 보호하며, 좁은 눈구멍 탓에 주변을 살피기 어렵다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-06.svg"
+    },
+    {
+      "name": "기사의 면갑투구",
+      "grade": "고급",
+      "description": "면갑을 올려 시야와 통풍을 확보하고 교전할 때 내려 얼굴을 보호할 수 있다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-07.svg"
+    },
+    {
+      "name": "광부의 투구",
+      "grade": "고급",
+      "description": "두꺼운 정수리 덮개와 가죽 목받침을 갖추고 앞쪽 고리에 작은 등불을 고정할 수 있다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-08.svg"
+    },
+    {
+      "name": "사막순례자의 투구",
+      "grade": "희귀",
+      "description": "얼굴 앞에 약한 바람막이 생겨 날리는 모래를 밀어내므로 사막 바람 속에서도 눈을 뜨기 편하다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-09.svg"
+    },
+    {
+      "name": "잿바람 투구",
+      "grade": "희귀",
+      "description": "안쪽 천에 닿은 재와 그을음이 바깥으로 밀려나며, 막힌 천을 털어내지 않고도 숨쉬기 수월하다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-10.svg"
+    },
+    {
+      "name": "밤눈의 투구",
+      "grade": "희귀",
+      "description": "면갑 안쪽으로 들어오는 희미한 빛을 모아 달빛과 등불이 약한 곳에서도 윤곽을 선명하게 보여준다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-11.svg"
+    },
+    {
+      "name": "반향 투구",
+      "grade": "희귀",
+      "description": "측면의 룬에 마력을 보내면 짧은 울림이 나가고 돌아온 메아리가 안쪽에 들려 가까운 벽과 통로의 방향을 가늠할 수 있다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-12.svg"
+    },
+    {
+      "name": "서리숨 투구",
+      "grade": "희귀",
+      "description": "안으로 들어오는 찬 공기가 은은하게 데워지고 입김이 면갑에 얼어붙는 일이 줄어든다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-13.svg"
+    },
+    {
+      "name": "해맞이 투구",
+      "grade": "희귀",
+      "description": "눈앞의 수정판이 강한 빛에 반응해 어두워져 눈부심을 줄이며, 빛이 약해지면 다시 맑아진다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-14.svg"
+    },
+    {
+      "name": "잔광의 투구",
+      "grade": "희귀",
+      "description": "눈앞에서 움직이는 마법의 잔광이 얼룩처럼 도드라져 최근 주문이 지나간 곳을 살피기 좋다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-15.svg"
+    },
+    {
+      "name": "돌격수의 투구",
+      "grade": "영웅",
+      "description": "정면에서 받은 충격이 투구 전체로 분산되어 머리와 목이 심하게 꺾이는 것을 줄여준다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-16.svg"
+    },
+    {
+      "name": "심해의 투구",
+      "grade": "영웅",
+      "description": "투구 안의 공기를 유지하며 주변 수압을 분산해 깊은 물에서도 머리를 보호하고, 오래 머물려면 숨 쉴 공기를 따로 공급해야 한다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-17.svg"
+    },
+    {
+      "name": "간파의 투구",
+      "grade": "영웅",
+      "description": "면갑으로 바라본 시각적 환영의 가장자리가 흔들려 보여 실제 풍경 위에 덧씌운 부분을 구별하기 쉽다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-18.svg"
+    },
+    {
+      "name": "파수왕의 투구",
+      "grade": "전설",
+      "description": "투구를 쓰고 지킨 장소의 익숙한 소리를 기억해두었다가 그곳에서 낯선 발걸음이나 문 여는 소리가 나면 조용한 울림으로 알린다.",
+      "category": "방어구",
+      "subcategory": "투구",
+      "icon": "helmet-19.svg"
     },
     {
       "name": "별지기의 투구",
@@ -261,7 +2605,159 @@
       "description": "하늘의 신이 내린 투구로 밤하늘을 올려다보면 구름에 가린 별자리도 비쳐 보여 방향과 계절을 읽을 수 있다.",
       "category": "방어구",
       "subcategory": "투구",
-      "icon": "dummy.svg"
+      "icon": "helmet-20.svg"
+    },
+    {
+      "name": "누비 갑옷",
+      "grade": "일반",
+      "description": "두껍게 누빈 천이 타격을 완충하며, 금속 갑옷 아래에 받쳐 입으면 쓸림과 압박을 덜어준다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-01.svg"
+    },
+    {
+      "name": "경화가죽 갑옷",
+      "grade": "일반",
+      "description": "굳힌 가죽판이 가슴과 등을 덮어 가벼운 베기를 막고 몸을 숙이는 동작에도 비교적 잘 따른다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-02.svg"
+    },
+    {
+      "name": "사슬 갑옷",
+      "grade": "일반",
+      "description": "이어진 쇠고리가 몸을 감싸 칼날을 받아내며, 뾰족한 찌르기와 무거운 타격에는 취약하다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-03.svg"
+    },
+    {
+      "name": "비늘 갑옷",
+      "grade": "일반",
+      "description": "작은 금속판을 비늘처럼 포개 아래로 흐르는 베기를 흘려내며, 판 사이에 흙이 끼면 움직임이 뻣뻣해진다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-04.svg"
+    },
+    {
+      "name": "철편 조끼",
+      "grade": "고급",
+      "description": "두꺼운 천 안에 작은 철판을 촘촘히 고정해 몸통을 보호하며 겉으로 금속판이 드러나지 않는다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-05.svg"
+    },
+    {
+      "name": "찰갑",
+      "grade": "고급",
+      "description": "얇은 금속 조각을 끈으로 엮어 굽힘에 잘 따르며 손상된 조각을 풀어 갈아 끼우기 쉽다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-06.svg"
+    },
+    {
+      "name": "기사 판금갑",
+      "grade": "고급",
+      "description": "몸에 맞춘 철판과 관절 구조가 전신을 감싸 베기와 찌르기에 강하며, 무게와 열기가 오래 움직일수록 부담이 된다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-07.svg"
+    },
+    {
+      "name": "기마 흉갑",
+      "grade": "고급",
+      "description": "가슴의 곡면이 정면에서 맞은 무기를 옆으로 흘리고 허리 아래가 벌어져 안장에 앉기 편하다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-08.svg"
+    },
+    {
+      "name": "해풍의 사슬갑",
+      "grade": "희귀",
+      "description": "쇠고리에 물기가 오래 머물지 않아 비와 물보라 속에서도 녹과 축축함이 덜하다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-09.svg"
+    },
+    {
+      "name": "경량의 룬갑",
+      "grade": "희귀",
+      "description": "안쪽 룬에 마력을 보내면 몸을 누르는 무게가 줄어 오래 걷거나 일어서기 수월해진다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-10.svg"
+    },
+    {
+      "name": "인내의 흉갑",
+      "grade": "희귀",
+      "description": "가슴에 받은 충격이 넓은 판 전체로 퍼져 한 지점에 힘이 몰리는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-11.svg"
+    },
+    {
+      "name": "가시덤불 갑옷",
+      "grade": "희귀",
+      "description": "표면을 스치는 가시와 덩굴이 옆으로 미끄러져 숲과 밀림에서 걸려 넘어지는 일을 줄여준다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-12.svg"
+    },
+    {
+      "name": "서리수호 갑옷",
+      "grade": "희귀",
+      "description": "몸 가까이에 온기를 가두고 금속판의 냉기가 안으로 전해지는 것을 줄여 설원에서 체온을 지키기 좋다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-13.svg"
+    },
+    {
+      "name": "침묵의 갑옷",
+      "grade": "희귀",
+      "description": "맞부딪히는 금속판의 울림이 가라앉아 몸을 굽히거나 걸을 때 쇳소리가 작다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-14.svg"
+    },
+    {
+      "name": "부유의 비늘갑",
+      "grade": "희귀",
+      "description": "물에 잠기면 판 사이에 작은 공기층이 생겨 수면으로 떠오르는 힘을 보태며, 잠수할 때는 가슴의 룬을 눌러 효과를 거둔다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-15.svg"
+    },
+    {
+      "name": "화염수호 갑주",
+      "grade": "영웅",
+      "description": "불길에 닿은 열이 바깥판을 따라 퍼져 안쪽이 달아오르는 것을 늦추며, 불 속에 오래 머물면 열이 쌓인다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-16.svg"
+    },
+    {
+      "name": "지혈의 갑옷",
+      "grade": "영웅",
+      "description": "착용자의 몸통에서 출혈이 나면 안감이 상처 쪽을 부드럽게 압박해 피가 흐르는 양을 줄인다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-17.svg"
+    },
+    {
+      "name": "영체수호 갑주",
+      "grade": "영웅",
+      "description": "마력을 흘리면 갑옷을 통과하려는 영체의 손과 무기가 표면에 걸려 실물처럼 막힌다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-18.svg"
+    },
+    {
+      "name": "서약기사의 갑주",
+      "grade": "전설",
+      "description": "지키겠다고 맹세한 사람 앞을 몸으로 가로막으면 갑옷이 바닥을 단단히 딛도록 힘을 보태 거센 충격에도 버티기 쉬워진다.",
+      "category": "방어구",
+      "subcategory": "갑옷",
+      "icon": "armor-19.svg"
     },
     {
       "name": "산신의 돌갑주",
@@ -269,7 +2765,7 @@
       "description": "산의 신이 내린 갑옷으로 맨땅에 서서 움직임을 멈추면 몸 전체가 단단한 바위처럼 굳으며, 다시 움직일 때 보호의 굳기가 풀린다.",
       "category": "방어구",
       "subcategory": "갑옷",
-      "icon": "dummy.svg"
+      "icon": "armor-20.svg"
     },
     {
       "name": "견습 마법사 로브",
@@ -277,7 +2773,479 @@
       "description": "소매와 품이 넉넉해 시전 동작을 하기 편하며 안주머니에 작은 시약을 나누어 넣을 수 있다.",
       "category": "방어구",
       "subcategory": "로브",
-      "icon": "dummy.svg"
+      "icon": "robe-01.svg"
+    },
+    {
+      "name": "모직 겨울 로브",
+      "grade": "일반",
+      "description": "두꺼운 모직이 몸을 길게 덮어 보온에 좋으며 물에 흠뻑 젖으면 무겁고 잘 마르지 않는다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-02.svg"
+    },
+    {
+      "name": "사막용 면로브",
+      "grade": "일반",
+      "description": "바람이 통하는 옅은색 천이 햇볕을 가리고 뜨거운 공기 속에서도 땀이 마르기 좋다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-03.svg"
+    },
+    {
+      "name": "수도자의 로브",
+      "grade": "일반",
+      "description": "튼튼한 거친 천에 덧단을 대어 일상 노동에 잘 견디며 허리끈으로 옷자락을 걷어 고정할 수 있다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-04.svg"
+    },
+    {
+      "name": "연금 작업로브",
+      "grade": "고급",
+      "description": "앞섶을 두껍게 덧대 작은 불똥과 시약 방울을 막으며, 오염된 겉단을 떼어 따로 씻을 수 있다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-05.svg"
+    },
+    {
+      "name": "술사의 로브",
+      "grade": "고급",
+      "description": "팔을 뻗는 곳에 주름을 넉넉히 잡고 소매 안쪽에 지지끈을 넣어 긴 시전 자세를 유지하기 편하다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-06.svg"
+    },
+    {
+      "name": "방랑자의 로브",
+      "grade": "고급",
+      "description": "아래쪽 옷자락을 분리해 짧게 입을 수 있고 떼어낸 천은 덮개로 활용하기 좋다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-07.svg"
+    },
+    {
+      "name": "의식 자수로브",
+      "grade": "고급",
+      "description": "마력 흐름의 순서를 수놓아 복잡한 의식에서 손을 댈 위치와 자세를 맞추기 쉽다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-08.svg"
+    },
+    {
+      "name": "이슬방울 로브",
+      "grade": "희귀",
+      "description": "표면에 닿은 빗물이 방울져 흘러내려 천이 젖지 않고 진흙도 쉽게 털린다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-09.svg"
+    },
+    {
+      "name": "정결의 로브",
+      "grade": "희귀",
+      "description": "옷깃의 룬을 쓸면 표면의 마른 먼지가 떨어져 나와 사막과 오래된 유적에서 손질하기 좋다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-10.svg"
+    },
+    {
+      "name": "온기의 로브",
+      "grade": "희귀",
+      "description": "안감에 저장된 체온이 천천히 되돌아와 추운 곳에서 몸을 따뜻하게 감싼다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-11.svg"
+    },
+    {
+      "name": "등화의 로브",
+      "grade": "희귀",
+      "description": "소매 가장자리의 자수에 마력을 보내면 아래쪽으로 부드러운 빛이 나와 손에 든 물건을 비춘다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-12.svg"
+    },
+    {
+      "name": "약사의 로브",
+      "grade": "희귀",
+      "description": "안주머니의 온도가 서늘하고 일정하게 유지되어 담아둔 시약이 열에 변질되는 것을 늦춘다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-13.svg"
+    },
+    {
+      "name": "방전의 로브",
+      "grade": "희귀",
+      "description": "천에 쌓인 작은 전하가 옷단을 따라 빠져나가 건조한 곳에서 시약과 먼지를 다루기 편하다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-14.svg"
+    },
+    {
+      "name": "그늘색 로브",
+      "grade": "희귀",
+      "description": "멈춰 서 있으면 천의 색이 주변의 옅고 짙은 색조를 따라 천천히 바뀌어 배경에 섞여 보인다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-15.svg"
+    },
+    {
+      "name": "공명의 로브",
+      "grade": "영웅",
+      "description": "옷깃에서 영창의 일정한 울림이 되돌아와 목소리의 떨림을 줄이고 주문의 호흡을 이어가기 쉽게 한다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-16.svg"
+    },
+    {
+      "name": "마력방호 로브",
+      "grade": "영웅",
+      "description": "시전 중 되돌아온 마력 일부가 자수선을 따라 옷단으로 빠져나가며, 룬이 찢어진 부분에서는 열이 날 수 있다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-17.svg"
+    },
+    {
+      "name": "마력감응 로브",
+      "grade": "영웅",
+      "description": "주변에서 마력이 강하게 흐르는 방향으로 자수선이 빛나므로 의식장과 마력 통로의 흐름을 살필 수 있다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-18.svg"
+    },
+    {
+      "name": "대현자의 순환로브",
+      "grade": "전설",
+      "description": "사용자가 주문을 멈출 때 남는 마력을 자수선에 모았다가 다음 시전에 되돌려주어 마력 낭비를 줄인다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-19.svg"
+    },
+    {
+      "name": "별밤의 로브",
+      "grade": "신화",
+      "description": "밤의 여신이 내린 로브를 펼쳐 두르면 안쪽에 머리 위 밤하늘이 비치며, 그 안에서 쉬는 이들은 햇볕과 주변 소음에서 벗어나 고요히 잠들 수 있다.",
+      "category": "방어구",
+      "subcategory": "로브",
+      "icon": "robe-20.svg"
+    },
+    {
+      "name": "삼베 작업복",
+      "grade": "일반",
+      "description": "질기고 바람이 잘 통하는 천으로 만든 일상복이며 해진 곳을 기워 오래 입기 좋다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-01.svg"
+    },
+    {
+      "name": "아마포 속옷",
+      "grade": "일반",
+      "description": "땀을 흡수하고 피부와 겉옷 사이의 마찰을 줄여 갑옷 아래 받쳐 입기 좋다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-02.svg"
+    },
+    {
+      "name": "농부의 덧바지",
+      "grade": "일반",
+      "description": "무릎과 엉덩이에 천을 덧대 땅에 앉거나 무릎을 꿇는 일을 오래 해도 쉽게 닳지 않는다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-03.svg"
+    },
+    {
+      "name": "어부의 방수덧옷",
+      "grade": "일반",
+      "description": "기름을 먹인 천이 물보라와 비를 튕겨내며 땀이 잘 빠지지 않아 오래 입으면 안쪽이 축축해진다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-04.svg"
+    },
+    {
+      "name": "귀족의 예복",
+      "grade": "고급",
+      "description": "정교한 재단과 절제된 장식이 격식을 갖춰주며 허리 안쪽에 작은 문서주머니가 숨겨져 있다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-05.svg"
+    },
+    {
+      "name": "행상인의 조끼",
+      "grade": "고급",
+      "description": "크기가 다른 안주머니와 여밈끈이 있어 동전과 영수증, 작은 물품을 나눠 보관하기 좋다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-06.svg"
+    },
+    {
+      "name": "사냥꾼의 숲옷",
+      "grade": "고급",
+      "description": "무광 천과 소매 고정끈이 잔가지에 걸리거나 햇빛을 반사하는 일을 줄인다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-07.svg"
+    },
+    {
+      "name": "등반가의 활동복",
+      "grade": "고급",
+      "description": "팔꿈치와 무릎이 잘 굽혀지고 허리에 안전줄을 걸 고리가 있어 가파른 길을 오르기 편하다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-08.svg"
+    },
+    {
+      "name": "산들바람 셔츠",
+      "grade": "희귀",
+      "description": "물기를 먹으면 천 사이로 미약한 바람이 통해 젖은 옷이 빠르게 마른다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-09.svg"
+    },
+    {
+      "name": "청결의 앞치마",
+      "grade": "희귀",
+      "description": "끈 매듭을 당기면 표면의 기름때와 음식물이 떨어져 나와 조리와 작업 중 손질하기 쉽다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-10.svg"
+    },
+    {
+      "name": "사계절 내의",
+      "grade": "희귀",
+      "description": "더울 때는 열을 밖으로 내보내고 추울 때는 체온을 가두어 일상적인 기온 변화에 적응하기 좋다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-11.svg"
+    },
+    {
+      "name": "연회 예복",
+      "grade": "희귀",
+      "description": "옷깃을 펴서 쓸어내리면 구겨진 천이 고르게 펴져 짐 속에 넣었다가도 단정하게 입을 수 있다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-12.svg"
+    },
+    {
+      "name": "수호의 내의",
+      "grade": "희귀",
+      "description": "강하게 눌린 부분의 천이 잠깐 두꺼워져 갑옷 안쪽의 마찰과 가벼운 타박상을 줄인다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-13.svg"
+    },
+    {
+      "name": "재단사의 겉옷",
+      "grade": "희귀",
+      "description": "입고 허리끈을 묶으면 어깨와 품이 착용자의 체형에 맞게 조절되어 남의 옷도 자연스럽게 입을 수 있다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-14.svg"
+    },
+    {
+      "name": "탐문관의 장의",
+      "grade": "희귀",
+      "description": "안감에 묻은 먼지와 작은 얼룩이 원래 자리에 고정되어 이동 중에도 채집한 흔적을 비교하기 좋다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-15.svg"
+    },
+    {
+      "name": "가면극의 의상",
+      "grade": "영웅",
+      "description": "미리 접어 넣은 천 조각을 따라 옷의 색과 무늬가 바뀌며, 재단과 길이는 원래 형태를 유지한다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-16.svg"
+    },
+    {
+      "name": "보호의 내의",
+      "grade": "영웅",
+      "description": "다친 곳의 움직임을 따라 안감이 팽팽해져 붕대처럼 몸을 받치고 이동 중 상처가 벌어지는 일을 줄인다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-17.svg"
+    },
+    {
+      "name": "온정의 겉옷",
+      "grade": "영웅",
+      "description": "한쪽 자락을 맞댄 이에게 착용자의 온기가 천천히 전해져 추위에 떨고 있는 사람을 함께 데울 수 있다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-18.svg"
+    },
+    {
+      "name": "해방의 죄수복",
+      "grade": "영웅",
+      "description": "착용자의 몸과 옷 사이로 비누막 같은 미끄러운 마력이 흘러 젖은 밧줄과 좁은 틈에서 몸을 빼내기 쉽다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-19.svg"
+    },
+    {
+      "name": "천의 얼굴",
+      "grade": "전설",
+      "description": "천 조각을 대어 본 복식의 겉모습을 기억했다가 옷깃을 여미면 천의 재단과 표면 장식이 그 모습으로 바뀐다.",
+      "category": "방어구",
+      "subcategory": "의복",
+      "icon": "clothes-20.svg"
+    },
+    {
+      "name": "천 작업장갑",
+      "grade": "일반",
+      "description": "손바닥에 두꺼운 천을 덧대 가벼운 마찰과 먼지로부터 손을 보호한다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-01.svg"
+    },
+    {
+      "name": "가죽 전투장갑",
+      "grade": "일반",
+      "description": "손등과 손가락을 질긴 가죽으로 감싸 무기를 쥘 때 쓸림과 얕은 베기를 줄인다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-02.svg"
+    },
+    {
+      "name": "손가락 없는 장갑",
+      "grade": "일반",
+      "description": "손바닥을 보호하면서 손끝을 드러내 작은 부품과 시약을 집기 쉽다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-03.svg"
+    },
+    {
+      "name": "양모 벙어리장갑",
+      "grade": "일반",
+      "description": "손가락을 한데 감싸 온기를 보존하며 작은 물건을 정밀하게 다루기는 불편하다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-04.svg"
+    },
+    {
+      "name": "철판 건틀릿",
+      "grade": "고급",
+      "description": "맞물린 금속판이 손가락 움직임을 따라 구부러져 손을 감싼 채 무기를 단단히 쥘 수 있다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-05.svg"
+    },
+    {
+      "name": "궁수의 장갑",
+      "grade": "고급",
+      "description": "시위를 당기는 손가락과 손목을 보강해 반복해서 활을 당길 때 살이 쓸리는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-06.svg"
+    },
+    {
+      "name": "매사냥 장갑",
+      "grade": "고급",
+      "description": "두꺼운 가죽이 팔목까지 이어져 맹금의 발톱을 받치며 작은 짐승을 다룰 때도 유용하다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-07.svg"
+    },
+    {
+      "name": "등반가의 장갑",
+      "grade": "고급",
+      "description": "손바닥의 거친 덧가죽이 밧줄을 붙잡기 좋고 미끄러지는 줄에 손이 데는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-08.svg"
+    },
+    {
+      "name": "내열 장갑",
+      "grade": "희귀",
+      "description": "손에 닿은 열이 안쪽으로 전해지는 것을 늦춰 뜨거운 솥과 달궈진 도구를 잠시 옮길 수 있다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-09.svg"
+    },
+    {
+      "name": "서리수호 장갑",
+      "grade": "희귀",
+      "description": "손끝까지 온기가 고르게 퍼져 눈과 얼음을 만지면서도 손이 굳는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-10.svg"
+    },
+    {
+      "name": "방수의 장갑",
+      "grade": "희귀",
+      "description": "손바닥에 닿은 얇은 물기를 밖으로 밀어내어 젖은 물건을 잡기 쉽게 한다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-11.svg"
+    },
+    {
+      "name": "거미의 장갑",
+      "grade": "희귀",
+      "description": "손바닥에 마력을 보내면 닿은 마른 표면에 달라붙으며, 손가락을 펴면 접착이 풀린다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-12.svg"
+    },
+    {
+      "name": "감응의 장갑",
+      "grade": "희귀",
+      "description": "손끝에 닿은 작은 떨림이 또렷하게 느껴져 기계부의 맞물림과 가느다란 줄의 움직임을 살피기 좋다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-13.svg"
+    },
+    {
+      "name": "유리공의 장갑",
+      "grade": "희귀",
+      "description": "잡은 유리와 도자기에 손의 압력이 고르게 퍼져 얇은 그릇과 약병을 깨뜨리지 않고 다루기 쉽다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-14.svg"
+    },
+    {
+      "name": "서기관의 장갑",
+      "grade": "희귀",
+      "description": "양손을 문지르면 장갑에 묻은 잉크와 염료가 마른 가루로 떨어져 나간다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-15.svg"
+    },
+    {
+      "name": "유령손의 장갑",
+      "grade": "영웅",
+      "description": "마력을 흘리면 영체를 손으로 붙잡거나 밀 수 있어 형체 없는 존재를 직접 다룰 수 있다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-16.svg"
+    },
+    {
+      "name": "역장의 장갑",
+      "grade": "영웅",
+      "description": "두 손을 펼치고 마력을 보내면 손바닥 앞에 작은 힘의 판이 생겨 날카로운 물체를 직접 만지지 않고 받칠 수 있다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-17.svg"
+    },
+    {
+      "name": "형상의 기억장갑",
+      "grade": "영웅",
+      "description": "손으로 쥐어본 작은 물체의 굴곡을 기억해 다시 잡았을 때 어긋난 모양과 빠진 부분을 촉감으로 전한다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-18.svg"
+    },
+    {
+      "name": "장인의 화합장갑",
+      "grade": "전설",
+      "description": "두 손으로 맞댄 나무와 가죽의 접합면을 마력으로 밀착시켜 천천히 이어 붙이며, 재질이 부스러지거나 썩은 곳은 먼저 손질해야 한다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-19.svg"
+    },
+    {
+      "name": "거인의 장갑",
+      "grade": "전설",
+      "description": "두 손으로 단단히 붙잡은 물체를 놓치지 않도록 악력이 크게 보강되며, 무거운 물체에 끌리면 착용자의 몸도 함께 움직인다.",
+      "category": "방어구",
+      "subcategory": "장갑",
+      "icon": "gloves-20.svg"
     },
     {
       "name": "가죽 여행화",
@@ -285,15 +3253,311 @@
       "description": "유연한 가죽과 두꺼운 밑창이 긴 보행에 알맞으며 닳은 밑창을 갈아 오래 신을 수 있다.",
       "category": "방어구",
       "subcategory": "신발",
-      "icon": "dummy.svg"
+      "icon": "boots-01.svg"
     },
     {
-      "name": "나무 원방패",
+      "name": "짚신",
       "grade": "일반",
-      "description": "가벼운 나무판을 둥글게 맞추고 가죽을 덮어 베기와 가벼운 투사체를 받아낸다.",
+      "description": "풀과 짚을 엮어 가볍고 통풍이 잘되며 젖으면 쉽게 닳아 여분을 챙겨 다니기 좋다.",
       "category": "방어구",
-      "subcategory": "방패",
-      "icon": "dummy.svg"
+      "subcategory": "신발",
+      "icon": "boots-02.svg"
+    },
+    {
+      "name": "양털 설원장화",
+      "grade": "일반",
+      "description": "안쪽의 양털과 긴 목이 발을 따뜻하게 감싸고 눈이 발목 안으로 들어오는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-03.svg"
+    },
+    {
+      "name": "선원용 갑판화",
+      "grade": "일반",
+      "description": "물기를 빼는 홈과 거친 밑창이 젖은 나무 갑판에서 미끄러짐을 줄인다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-04.svg"
+    },
+    {
+      "name": "쇠징 전투장화",
+      "grade": "고급",
+      "description": "두꺼운 밑창에 쇠징을 박아 흙과 자갈을 단단히 디디며 돌바닥에서는 발소리가 크게 울린다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-05.svg"
+    },
+    {
+      "name": "빙벽 장화",
+      "grade": "고급",
+      "description": "발끝과 밑창의 짧은 못이 얼음과 바위 틈을 물어 가파른 곳에서 발을 고정하기 좋다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-06.svg"
+    },
+    {
+      "name": "늪지 보행화",
+      "grade": "고급",
+      "description": "넓게 퍼진 밑창이 무게를 분산해 진흙과 얕은 습지에 발이 깊이 빠지는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-07.svg"
+    },
+    {
+      "name": "무희의 신발",
+      "grade": "고급",
+      "description": "얇고 탄력 있는 밑창이 바닥의 감촉을 잘 전해 좁은 곳에서 발을 돌리고 자세를 바꾸기 쉽다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-08.svg"
+    },
+    {
+      "name": "무음 장화",
+      "grade": "희귀",
+      "description": "밑창이 닿을 때의 충격음이 가라앉아 단단한 바닥을 조용히 걸을 수 있다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-09.svg"
+    },
+    {
+      "name": "사막행자의 신발",
+      "grade": "희귀",
+      "description": "발밑 모래가 디딜 때만 단단해져 사막의 비탈에서도 발이 덜 묻힌다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-10.svg"
+    },
+    {
+      "name": "수면보행화",
+      "grade": "희귀",
+      "description": "수면을 발로 디디면 잠깐 굳은 듯 받쳐주며, 뛰어오른 파도나 거센 물살에서는 균형을 잡기 어렵다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-11.svg"
+    },
+    {
+      "name": "진창행자의 장화",
+      "grade": "희귀",
+      "description": "발을 들 때 밑창에 달라붙은 진흙이 떨어져 나와 무겁게 뭉치는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-12.svg"
+    },
+    {
+      "name": "온기의 신발",
+      "grade": "희귀",
+      "description": "밑창 안쪽에 은은한 온기가 돌아 차가운 바닥에 오래 서 있어도 발이 시리지 않는다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-13.svg"
+    },
+    {
+      "name": "파수병의 장화",
+      "grade": "희귀",
+      "description": "발이 옆으로 꺾일 때 목 부분이 순간적으로 단단해져 발목을 받쳐준다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-14.svg"
+    },
+    {
+      "name": "활주의 신발",
+      "grade": "희귀",
+      "description": "발등의 매듭을 바꾸면 밑창이 거칠어지거나 매끄러워져 잘 붙는 걸음과 미끄러지는 이동을 골라 쓸 수 있다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-15.svg"
+    },
+    {
+      "name": "도약 장화",
+      "grade": "영웅",
+      "description": "몸을 낮추고 마력을 모아 뛰면 평소보다 훨씬 높이 솟으며, 착지할 자리와 자세는 직접 골라야 한다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-16.svg"
+    },
+    {
+      "name": "깃털걸음 신발",
+      "grade": "영웅",
+      "description": "두 발로 착지할 때 밑창에서 마력이 퍼져 낙하 충격을 줄이며, 너무 높은 곳에서는 충격을 다 받아내기 어렵다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-17.svg"
+    },
+    {
+      "name": "거미걸음 장화",
+      "grade": "영웅",
+      "description": "발바닥에 마력을 유지하면 단단한 벽과 천장에 달라붙으며, 디딘 표면이 부서지면 발도 떨어진다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-18.svg"
+    },
+    {
+      "name": "바람길 신발",
+      "grade": "전설",
+      "description": "걸음을 내딛을 때 발밑에 짧은 바람 발판이 생겨 허공을 연달아 디딜 수 있으며, 멈춰 서 있으면 발판이 흩어진다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-19.svg"
+    },
+    {
+      "name": "순례신의 샌들",
+      "grade": "신화",
+      "description": "길의 신이 남긴 샌들은 길이 남아 있는 곳을 걸을 때 발을 안전한 디딤점으로 이끌어 끊어진 계단과 무너진 길의 잔해를 건너도록 돕는다.",
+      "category": "방어구",
+      "subcategory": "신발",
+      "icon": "boots-20.svg"
+    },
+    {
+      "name": "모직 여행망토",
+      "grade": "일반",
+      "description": "두꺼운 모직이 바람을 막고 밤에는 몸을 감싸는 담요로 쓸 수 있다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-01.svg"
+    },
+    {
+      "name": "기름천 우비망토",
+      "grade": "일반",
+      "description": "기름을 먹인 천이 비를 튕기며 깊은 두건이 얼굴에 빗물이 들이치는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-02.svg"
+    },
+    {
+      "name": "사냥꾼의 위장망토",
+      "grade": "일반",
+      "description": "흙빛과 잎빛 천 조각이 숲의 윤곽에 섞여 보이며 뒤집어 마른 풀빛 면을 드러낼 수 있다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-03.svg"
+    },
+    {
+      "name": "사막 차양망토",
+      "grade": "일반",
+      "description": "넓고 가벼운 천이 햇볕을 가리고 펼쳐 묶으면 작은 그늘막이 된다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-04.svg"
+    },
+    {
+      "name": "짐꾼의 덧망토",
+      "grade": "고급",
+      "description": "어깨 덧가죽이 짐끈의 압박을 분산하며 등짐을 함께 덮어 비를 피하기 좋다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-05.svg"
+    },
+    {
+      "name": "기수의 망토",
+      "grade": "고급",
+      "description": "뒤쪽 자락이 갈라져 안장 양옆으로 내려가므로 말을 타고 내릴 때 덜 걸린다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-06.svg"
+    },
+    {
+      "name": "설원의 양면망토",
+      "grade": "고급",
+      "description": "바깥은 흰 천, 안쪽은 짙은 모직으로 되어 지형과 날씨에 맞춰 뒤집어 두를 수 있다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-07.svg"
+    },
+    {
+      "name": "야영자의 망토",
+      "grade": "고급",
+      "description": "가장자리 단추를 잠그면 몸을 감싸는 주머니가 되어 바닥의 찬바람을 막아준다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-08.svg"
+    },
+    {
+      "name": "그림자 망토",
+      "grade": "희귀",
+      "description": "그늘에서 멈춰 있으면 천의 윤곽이 흐려져 멀리서 사람의 형태를 알아보기 어려워진다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-09.svg"
+    },
+    {
+      "name": "빗방울 망토",
+      "grade": "희귀",
+      "description": "망토를 펼치면 빗물이 가장자리 홈을 따라 한쪽 끝으로 모여 물통에 받아두기 좋다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-10.svg"
+    },
+    {
+      "name": "반딧불 망토",
+      "grade": "희귀",
+      "description": "옷깃을 누르면 등 쪽에 작은 빛점들이 나타나 어둠 속에서 뒤따르는 이에게 위치를 알려준다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-11.svg"
+    },
+    {
+      "name": "사막바람 망토",
+      "grade": "희귀",
+      "description": "자락 둘레에 약한 바람이 돌아 날리는 먼지와 가벼운 재가 몸 안쪽으로 들어오는 것을 줄인다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-12.svg"
+    },
+    {
+      "name": "무취의 망토",
+      "grade": "희귀",
+      "description": "몸에서 흘러나오는 냄새가 천 안쪽에 머물러 동물에게 냄새로 들키기 어려워지며, 벗어 펼치면 모인 냄새가 빠져나온다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-13.svg"
+    },
+    {
+      "name": "잔불의 망토",
+      "grade": "희귀",
+      "description": "표면에 닿은 작은 불티가 식으며 떨어져 나가 모닥불과 대장간에서 옷을 지키기 좋다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-14.svg"
+    },
+    {
+      "name": "바람날개 망토",
+      "grade": "영웅",
+      "description": "양끝을 잡고 펼치면 바람을 크게 받아 낙하를 늦추며, 강풍 속에서는 떠밀리는 방향을 제어하기 어렵다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-15.svg"
+    },
+    {
+      "name": "잠행의 망토",
+      "grade": "영웅",
+      "description": "옷깃에 마력을 보내면 몸 주변의 빛이 휘어 착용자가 투명해지며, 빠르게 움직이거나 무언가와 부딪히면 윤곽이 일렁인다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-16.svg"
+    },
+    {
+      "name": "물결의 망토",
+      "grade": "영웅",
+      "description": "물 위에 넓게 펼치면 자락이 단단한 테두리를 이루어 누운 사람 하나를 떠받치는 작은 뗏목이 된다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-17.svg"
+    },
+    {
+      "name": "침묵의 장막망토",
+      "grade": "영웅",
+      "description": "망토를 둥글게 펼쳐 감싼 공간의 소리가 안팎으로 잘 전해지지 않아 조용한 대화와 휴식에 알맞다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-18.svg"
+    },
+    {
+      "name": "안개길 망토",
+      "grade": "전설",
+      "description": "안개 속에서 자락을 끌면 지나온 자리에 옅은 빛의 길이 남아 뒤따르는 이들이 같은 경로를 찾을 수 있으며 바람에 안개가 걷히면 길도 사라진다.",
+      "category": "방어구",
+      "subcategory": "망토",
+      "icon": "cloak-19.svg"
     },
     {
       "name": "새벽여신의 망토",
@@ -301,7 +3565,223 @@
       "description": "새벽의 여신이 내린 망토를 부상자에게 덮고 동틀 때까지 곁을 지키면 남아 있는 생명의 불씨가 유지되어 구조를 기다릴 수 있다.",
       "category": "방어구",
       "subcategory": "망토",
-      "icon": "dummy.svg"
+      "icon": "cloak-20.svg"
+    },
+    {
+      "name": "나무 원방패",
+      "grade": "일반",
+      "description": "가벼운 나무판을 둥글게 맞추고 가죽을 덮어 베기와 가벼운 투사체를 받아낸다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-01.svg"
+    },
+    {
+      "name": "철제 버클러",
+      "grade": "일반",
+      "description": "한 손에 쥐는 작은 방패로 상대의 칼을 쳐내기 좋으며 몸 전체를 가리려면 빠른 손놀림이 필요하다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-02.svg"
+    },
+    {
+      "name": "보병 연방패",
+      "grade": "일반",
+      "description": "위가 넓고 아래가 좁아 몸과 다리를 함께 가리며 행군 중에는 등에 메고 이동할 수 있다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-03.svg"
+    },
+    {
+      "name": "가죽 방패",
+      "grade": "일반",
+      "description": "굳힌 가죽을 나무틀에 팽팽히 씌워 가볍고 타격의 울림이 작으며, 무거운 도끼에 찍히면 찢어질 수 있다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-04.svg"
+    },
+    {
+      "name": "기사 히터실드",
+      "grade": "고급",
+      "description": "모서리를 금속으로 보강한 짧은 삼각 방패로 말 위에서도 기울여 공격을 흘리기 좋다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-05.svg"
+    },
+    {
+      "name": "쇠테 원방패",
+      "grade": "고급",
+      "description": "가장자리를 쇠테로 감싸 칼날에 깎이는 것을 줄이고 튀어나온 중심부로 상대를 밀칠 수 있다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-06.svg"
+    },
+    {
+      "name": "거치 파비스",
+      "grade": "고급",
+      "description": "뒤쪽 받침대를 펴서 세우는 큰 방패로 장전 중인 사수와 작은 작업 공간을 가려준다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-07.svg"
+    },
+    {
+      "name": "갈고리 방패",
+      "grade": "고급",
+      "description": "가장자리의 짧은 갈고리로 창대와 무기 손잡이를 걸어 옆으로 밀어낼 수 있다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-08.svg"
+    },
+    {
+      "name": "화염수호 방패",
+      "grade": "희귀",
+      "description": "정면에 닿은 불길이 테두리를 따라 옆으로 흘러 몸에 직접 닿는 화염을 줄인다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-09.svg"
+    },
+    {
+      "name": "거울빛 방패",
+      "grade": "희귀",
+      "description": "면의 각도를 맞추고 마력을 보내면 빛이 모여 반사되어 먼 곳에 신호를 보내거나 눈을 부시게 한다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-10.svg"
+    },
+    {
+      "name": "인내의 방패",
+      "grade": "희귀",
+      "description": "충격을 받을 때 안쪽 손잡이가 탄력 있게 움직여 팔로 전해지는 진동을 덜어준다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-11.svg"
+    },
+    {
+      "name": "대지의 룬방패",
+      "grade": "희귀",
+      "description": "아래 끝을 땅에 대고 마력을 보내면 지면에 달라붙어 바람과 밀침에 버티기 쉬워진다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-12.svg"
+    },
+    {
+      "name": "전장의 메아리",
+      "grade": "희귀",
+      "description": "안쪽 손잡이를 두드린 리듬이 방패 앞면으로 크게 울려 멀리 신호를 보내기 좋다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-13.svg"
+    },
+    {
+      "name": "자력의 방패",
+      "grade": "희귀",
+      "description": "마력을 흘리면 정면에 닿은 작은 철제 투사체가 붙어 전투 뒤 회수하기 쉽다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-14.svg"
+    },
+    {
+      "name": "여울의 방패",
+      "grade": "희귀",
+      "description": "정면으로 흐르는 물살이 양옆으로 갈라져 급류에서 몸을 버티기 쉬우며, 기울여 쥐면 흐름을 받아 이동을 도울 수도 있다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-15.svg"
+    },
+    {
+      "name": "영혼수호 방패",
+      "grade": "영웅",
+      "description": "마력을 흘리면 영체의 손과 무기가 방패 면에 실물처럼 막힌다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-16.svg"
+    },
+    {
+      "name": "결계의 방패",
+      "grade": "영웅",
+      "description": "방패를 세우고 마력을 유지하면 양옆으로 반투명한 판이 펼쳐져 나란히 선 사람들을 가리며, 판이 넓을수록 충격을 버티는 힘이 약해진다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-17.svg"
+    },
+    {
+      "name": "반격의 방패",
+      "grade": "영웅",
+      "description": "받아낸 충격 일부를 모았다가 앞으로 밀어 상대를 밀쳐내며, 큰 충격을 무리하게 받으면 방패가 부서질 수 있다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-18.svg"
+    },
+    {
+      "name": "성문지기의 대방패",
+      "grade": "전설",
+      "description": "좁은 입구에 세우고 버티면 양옆 벽과 힘이 이어져 여러 사람이 미는 압력을 함께 받아내며, 벽과 바닥이 무너지면 연결이 풀린다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-19.svg"
+    },
+    {
+      "name": "대지모신의 방패",
+      "grade": "신화",
+      "description": "대지의 여신이 내린 방패를 흙에 꽂으면 앞쪽 땅이 솟아 큰 흙둑을 이루며, 바위와 건물의 무게가 걸린 곳에서는 지형이 무너질 수 있다.",
+      "category": "방어구",
+      "subcategory": "방패",
+      "icon": "shield-20.svg"
+    },
+    {
+      "name": "황동 반지",
+      "grade": "일반",
+      "description": "닳아도 쉽게 깨지지 않는 소박한 장식으로 안쪽에 이름이나 짧은 문구를 새길 수 있다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-01.svg"
+    },
+    {
+      "name": "매듭 반지",
+      "grade": "일반",
+      "description": "가는 금속줄을 매듭 모양으로 엮어 우정과 약속의 뜻으로 나누어 끼는 반지다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-02.svg"
+    },
+    {
+      "name": "뼈 반지",
+      "grade": "일반",
+      "description": "짐승의 뼈를 다듬고 무늬를 새긴 가벼운 반지로 사냥의 성취를 기념하는 데 쓰인다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-03.svg"
+    },
+    {
+      "name": "약실 반지",
+      "grade": "고급",
+      "description": "작은 뚜껑 안에 마른 약가루나 향료를 조금 넣을 수 있으며 안쪽 밀랍 덮개가 가루가 새는 것을 막는다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-04.svg"
+    },
+    {
+      "name": "비밀인장 반지",
+      "grade": "고급",
+      "description": "인장 면을 안쪽으로 접어 감출 수 있어 평소에는 문양을 드러내지 않고 필요할 때 밀랍에 찍을 수 있다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-05.svg"
+    },
+    {
+      "name": "열쇠지기의 반지",
+      "grade": "고급",
+      "description": "안쪽 홈에 작은 열쇠를 끼워 숨길 수 있으며 반지를 벗겨 열어야 꺼낼 수 있다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-06.svg"
+    },
+    {
+      "name": "혼약 은반지",
+      "grade": "고급",
+      "description": "맞물리는 무늬를 두 반지에 나눠 새겨 함께 놓으면 하나의 문양을 이루도록 만든 정교한 혼약 장식이다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-07.svg"
     },
     {
       "name": "촛불 반지",
@@ -309,7 +3789,255 @@
       "description": "돌출된 수정에 마력을 보내면 촛불만 한 온기 없는 빛이 생겨 손 가까이의 글자와 물건을 비춘다.",
       "category": "장신구",
       "subcategory": "반지",
-      "icon": "dummy.svg"
+      "icon": "ring-08.svg"
+    },
+    {
+      "name": "온기의 반지",
+      "grade": "희귀",
+      "description": "손가락이 차가워지면 은은한 온기가 손으로 퍼져 추운 곳에서 손을 쓰기 편하다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-09.svg"
+    },
+    {
+      "name": "순응의 반지",
+      "grade": "희귀",
+      "description": "끼운 손가락에 맞춰 안쪽 둘레가 조절되며, 반지 면을 누르면 느슨해져 쉽게 뺄 수 있다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-10.svg"
+    },
+    {
+      "name": "먹인장의 반지",
+      "grade": "희귀",
+      "description": "인장 면을 마른 표면에 누르면 얇은 먹자국이 남고, 먹자국은 물로 닦으면 지워진다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-11.svg"
+    },
+    {
+      "name": "마력감응 반지",
+      "grade": "희귀",
+      "description": "손으로 만진 물건에 마력이 흐르면 반지 안쪽이 가볍게 떨려 마법이 작동 중인지 살피기 좋다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-12.svg"
+    },
+    {
+      "name": "결속의 반지",
+      "grade": "희귀",
+      "description": "손가락으로 작은 물건 두 개의 접합부를 누르면 마력막이 붙들며, 접합부를 비틀거나 세게 당기면 떨어진다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-13.svg"
+    },
+    {
+      "name": "물결 반지",
+      "grade": "희귀",
+      "description": "반지를 액체에 담갔다 빼면 표면에 남은 물방울이 조금 전 액체의 잔물결을 되풀이해 흐름을 살필 수 있다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-14.svg"
+    },
+    {
+      "name": "기억의 반지",
+      "grade": "희귀",
+      "description": "손톱으로 면을 긁어 적은 짧은 문구가 안쪽에 빛글씨로 남아 반지를 돌리며 다시 읽을 수 있다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-15.svg"
+    },
+    {
+      "name": "해방의 반지",
+      "grade": "영웅",
+      "description": "마력을 보내면 손에 붙은 물체와 피부 사이가 미끄러워져 접착제와 끈끈한 수액에서 손을 떼기 쉽다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-16.svg"
+    },
+    {
+      "name": "그림자극의 반지",
+      "grade": "영웅",
+      "description": "자기 그림자의 손과 팔 모양을 의지대로 움직여 눈에 띄지 않게 손짓 신호를 보낼 수 있다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-17.svg"
+    },
+    {
+      "name": "깃털의 반지",
+      "grade": "영웅",
+      "description": "손으로 잡은 짐에 마력을 보내면 그 짐의 무게가 줄어들며 손을 떼면 원래 무게로 돌아간다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-18.svg"
+    },
+    {
+      "name": "맹약의 쌍반지",
+      "grade": "전설",
+      "description": "두 착용자가 함께 정한 약속을 각인하면 한쪽이 고의로 그 약속을 어길 때 양쪽 반지에 금이 간다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-19.svg"
+    },
+    {
+      "name": "찰나의 반지",
+      "grade": "신화",
+      "description": "시간의 신이 남긴 반지를 낀 손으로 작은 무생물을 감싸 쥐면 그 물건의 부패와 숙성 같은 시간에 따른 변화가 멈추며, 손을 펴면 다시 변화가 이어진다.",
+      "category": "장신구",
+      "subcategory": "반지",
+      "icon": "ring-20.svg"
+    },
+    {
+      "name": "나무구슬 목걸이",
+      "grade": "일반",
+      "description": "가볍고 따뜻한 촉감의 구슬을 꿰어 만든 장식으로 구슬마다 짧은 글자를 새길 수 있다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-01.svg"
+    },
+    {
+      "name": "조개 목걸이",
+      "grade": "일반",
+      "description": "물에 씻어 다듬은 작은 조개껍데기를 엮어 해안 주민들이 교역과 여행의 기념으로 주고받는다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-02.svg"
+    },
+    {
+      "name": "초상 로켓",
+      "grade": "일반",
+      "description": "여닫는 금속 장식 안에 작은 초상화와 머리카락을 넣어 소중한 이의 흔적을 간직한다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-03.svg"
+    },
+    {
+      "name": "향낭 목걸이",
+      "grade": "일반",
+      "description": "촘촘한 천 주머니에 말린 향초를 넣어 목에 걸며 향이 옅어지면 내용물을 갈아 넣을 수 있다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-04.svg"
+    },
+    {
+      "name": "약병 펜던트",
+      "grade": "고급",
+      "description": "충격을 막는 금속틀 안에 작은 약병을 넣어 한 모금 분량의 액체를 휴대한다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-05.svg"
+    },
+    {
+      "name": "양면 문장목걸이",
+      "grade": "고급",
+      "description": "장식판을 뒤집어 서로 다른 신앙과 가문의 문양을 드러낼 수 있어 교류 자리에서 예를 갖추기 좋다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-06.svg"
+    },
+    {
+      "name": "밀서의 로켓",
+      "grade": "고급",
+      "description": "얇게 접은 종이가 들어가는 이중 덮개를 갖추고, 겉뚜껑만 열면 평범한 초상화가 보인다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-07.svg"
+    },
+    {
+      "name": "직공의 목걸이",
+      "grade": "고급",
+      "description": "장식 안에 짧은 실과 작은 바늘을 따로 담아 옷의 터진 솔기를 바로 꿰맬 수 있다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-08.svg"
+    },
+    {
+      "name": "맑은숨의 목걸이",
+      "grade": "희귀",
+      "description": "목에 닿은 수정이 공기 속 먼지와 꽃가루를 가까이서 가라앉혀 호흡을 편하게 한다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-09.svg"
+    },
+    {
+      "name": "갈증의 수정목걸이",
+      "grade": "희귀",
+      "description": "착용자의 몸에 수분이 부족해지면 푸른 돌이 탁해져 목이 마르기 전에도 상태를 알아차릴 수 있다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-10.svg"
+    },
+    {
+      "name": "평정의 목걸이",
+      "grade": "희귀",
+      "description": "가슴에 닿는 느린 울림이 호흡을 고르게 잡아주어 긴장과 가슴 두근거림을 가라앉히기 좋다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-11.svg"
+    },
+    {
+      "name": "땅울림 목걸이",
+      "grade": "희귀",
+      "description": "펜던트를 지면에 대면 멀리서 다가오는 큰 발걸음과 수레의 진동이 끈을 통해 손에 전해진다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-12.svg"
+    },
+    {
+      "name": "향기의 길잡이",
+      "grade": "희귀",
+      "description": "향이 밴 천을 안쪽에 넣으면 그 향이 닿는 가까운 방향으로 장식이 기울어져 냄새의 근원을 찾기 좋다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-13.svg"
+    },
+    {
+      "name": "물숨의 목걸이",
+      "grade": "영웅",
+      "description": "물속에서 목 주변에 얇은 마력막이 생겨 물에서 숨 쉴 기운을 끌어내며, 심하게 오염되거나 정체된 물에서는 호흡이 힘들어진다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-14.svg"
+    },
+    {
+      "name": "화음 목걸이",
+      "grade": "희귀",
+      "description": "착용자의 목소리에 일정한 울림이 더해져 넓은 홀에서도 말끝이 또렷하게 들린다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-15.svg"
+    },
+    {
+      "name": "공감의 쌍목걸이",
+      "grade": "영웅",
+      "description": "두 착용자가 동시에 장식을 쥐면 상대의 평온함과 공포 같은 강한 감정이 가슴의 떨림으로 전해진다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-16.svg"
+    },
+    {
+      "name": "영혼등불 목걸이",
+      "grade": "영웅",
+      "description": "장식에 신성력을 보내면 주변의 떠도는 영체가 작은 빛점으로 비쳐 그 위치를 알아볼 수 있다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-17.svg"
+    },
+    {
+      "name": "포옹의 목걸이",
+      "grade": "영웅",
+      "description": "누군가를 품에 안고 마력을 흘리면 두 사람의 체온이 고르게 나뉘어 한쪽의 심한 냉기와 열기를 덜어준다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-18.svg"
+    },
+    {
+      "name": "용언의 목걸이",
+      "grade": "전설",
+      "description": "목걸이에 새긴 용의 언어를 입으로 읽으면 용족에게 의도가 분명히 전해져 말이 통하기 시작하며, 상대의 태도는 대화에 달려 있다.",
+      "category": "장신구",
+      "subcategory": "목걸이",
+      "icon": "necklace-19.svg"
     },
     {
       "name": "바다어머니의 진주",
@@ -317,7 +4045,159 @@
       "description": "바다의 여신이 남긴 진주를 목에 걸면 바닷물 속에서도 공기를 마시듯 숨쉬고 물고기의 움직임으로 가까운 흐름의 변화를 느낄 수 있다.",
       "category": "장신구",
       "subcategory": "목걸이",
-      "icon": "dummy.svg"
+      "icon": "necklace-20.svg"
+    },
+    {
+      "name": "가죽 손목끈",
+      "grade": "일반",
+      "description": "손목에 여러 번 감아 묶는 얇은 가죽끈으로 필요하면 풀어 작은 물건을 매달 수 있다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-01.svg"
+    },
+    {
+      "name": "구리 고리팔찌",
+      "grade": "일반",
+      "description": "통구리를 구부려 만든 장식으로 양끝을 조금 벌리거나 오므려 손목에 맞춘다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-02.svg"
+    },
+    {
+      "name": "씨앗구슬 팔찌",
+      "grade": "일반",
+      "description": "단단한 씨앗껍질을 꿰어 만든 팔찌로 움직일 때 가볍고 마른 소리가 난다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-03.svg"
+    },
+    {
+      "name": "가족매듭 팔찌",
+      "grade": "일반",
+      "description": "가족마다 다른 색실을 엮어 서로의 인연을 표시하며 풀린 부분을 다시 엮어 오래 간직한다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-04.svg"
+    },
+    {
+      "name": "장인의 손목띠",
+      "grade": "고급",
+      "description": "넓은 가죽 안쪽에 얇은 받침을 넣어 무거운 도구를 쓸 때 손목이 지나치게 꺾이는 것을 줄인다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-05.svg"
+    },
+    {
+      "name": "숨은바늘 팔찌",
+      "grade": "고급",
+      "description": "겹친 금속판 안에 가느다란 바늘을 보관하며 덮개를 밀어 빼내 바느질에 쓸 수 있다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-06.svg"
+    },
+    {
+      "name": "묵주 팔찌",
+      "grade": "고급",
+      "description": "크기와 무늬가 다른 구슬을 짚으며 기도 순서를 헤아리는 정교한 종교 장식이다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-07.svg"
+    },
+    {
+      "name": "장부매듭 팔찌",
+      "grade": "고급",
+      "description": "줄을 따라 움직이는 작은 매듭으로 약속한 몫이나 일한 차례를 표시해 계산에 쓸 수 있다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-08.svg"
+    },
+    {
+      "name": "연결의 팔찌",
+      "grade": "희귀",
+      "description": "함께 매어둔 가는 끈이 당겨지면 손목을 또렷하게 두드려 시야 밖에서 보내는 신호를 알아차리기 좋다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-09.svg"
+    },
+    {
+      "name": "맥동의 팔찌",
+      "grade": "희귀",
+      "description": "착용자의 맥박에 맞춰 돌이 깜빡여 손목을 짚지 않고도 맥박의 빠르기와 불규칙함을 살필 수 있다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-10.svg"
+    },
+    {
+      "name": "수호의 소매팔찌",
+      "grade": "희귀",
+      "description": "팔을 물과 진흙에 넣을 때 소맷단에 얇은 막이 생겨 옷 안쪽으로 스며드는 것을 줄인다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-11.svg"
+    },
+    {
+      "name": "잔상의 팔찌",
+      "grade": "희귀",
+      "description": "장식을 누르고 한 짧은 손동작이 빛선으로 저장되어 다시 누르면 손목 위에 그 움직임을 보여준다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-12.svg"
+    },
+    {
+      "name": "가늠의 팔찌",
+      "grade": "희귀",
+      "description": "들고 있는 물건의 무게가 늘수록 안쪽 무늬가 짙어져 비슷해 보이는 짐의 무게를 비교하기 좋다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-13.svg"
+    },
+    {
+      "name": "바람매듭 팔찌",
+      "grade": "희귀",
+      "description": "마력을 보내면 팔찌에 이어 묶은 짧은 끈의 물기가 빠져나가 젖어 꽉 조인 매듭을 풀기 쉬워진다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-14.svg"
+    },
+    {
+      "name": "평정의 손목띠",
+      "grade": "희귀",
+      "description": "팔에 힘을 주고 고정한 자세의 작은 떨림을 줄여 바느질과 세공, 정밀한 시약 작업을 돕는다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-15.svg"
+    },
+    {
+      "name": "동행의 쌍팔찌",
+      "grade": "영웅",
+      "description": "두 착용자가 같은 통로를 지나갈 때 한쪽이 뒤처지면 팔찌가 반대쪽의 방향으로 당겨져 갈림길에서 서로를 찾기 쉽다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-16.svg"
+    },
+    {
+      "name": "조화의 팔찌",
+      "grade": "영웅",
+      "description": "착용자가 두 손으로 든 물체의 하중이 어깨와 허리에 고르게 나뉘어 한쪽 손목에 무리가 몰리지 않는다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-17.svg"
+    },
+    {
+      "name": "저울의 팔찌",
+      "grade": "영웅",
+      "description": "양손에 물건을 하나씩 들면 더 무거운 손 쪽을 가리키는 빛이 팔찌에 나타나 아주 작은 무게 차이도 비교할 수 있다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-18.svg"
+    },
+    {
+      "name": "일심의 팔찌",
+      "grade": "영웅",
+      "description": "같은 짐에 손을 대고 마력을 보낸 착용자들의 팔찌가 같은 리듬으로 떨려 서로 보이지 않는 자리에서도 힘쓰는 순간을 맞추기 좋다.",
+      "category": "장신구",
+      "subcategory": "팔찌",
+      "icon": "bracelet-19.svg"
     },
     {
       "name": "구조자의 팔찌",
@@ -325,7 +4205,159 @@
       "description": "손목에 묶은 줄을 통해 착용자의 마력이 이어져 줄의 해진 곳이 보강되며, 구조 중 줄을 놓으면 보강도 풀린다.",
       "category": "장신구",
       "subcategory": "팔찌",
-      "icon": "dummy.svg"
+      "icon": "bracelet-20.svg"
+    },
+    {
+      "name": "주석 고리귀걸이",
+      "grade": "일반",
+      "description": "값싼 금속을 둥글게 말아 만든 가벼운 장식으로 작은 구슬을 더 달아 꾸밀 수 있다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-01.svg"
+    },
+    {
+      "name": "산호 귀걸이",
+      "grade": "일반",
+      "description": "붉은 산호를 다듬어 바다 여행의 기념으로 지니며 단단한 물체에 부딪히면 끝이 깨지기 쉽다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-02.svg"
+    },
+    {
+      "name": "깃털 귀걸이",
+      "grade": "일반",
+      "description": "작은 새깃을 매달아 고개를 돌릴 때 가볍게 흔들리며 젖으면 말려 손질해야 한다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-03.svg"
+    },
+    {
+      "name": "혼례 은귀걸이",
+      "grade": "고급",
+      "description": "두 가문의 문양을 각각 새겨 혼례 때 교환하는 한 쌍의 정교한 은장식이다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-04.svg"
+    },
+    {
+      "name": "양면 보석귀걸이",
+      "grade": "고급",
+      "description": "보석 면을 돌려 소박한 금속 면을 드러낼 수 있어 복식과 자리에 맞춰 장식을 바꾸기 좋다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-05.svg"
+    },
+    {
+      "name": "잠금쇠 귀걸이",
+      "grade": "고급",
+      "description": "연결부가 안쪽으로 잠겨 옷에 걸려도 쉽게 벌어지지 않으며 귀에 밀착되어 흔들림이 적다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-06.svg"
+    },
+    {
+      "name": "물방울 귀걸이",
+      "grade": "희귀",
+      "description": "귓가에 닿은 작은 마력 흐름이 물기를 밖으로 밀어내어 잠수 뒤 귀에 물이 남는 불편을 줄인다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-07.svg"
+    },
+    {
+      "name": "평온의 귀걸이",
+      "grade": "희귀",
+      "description": "갑자기 터지는 큰 소리가 귓가에서 누그러져 망치질과 천둥소리에 놀라기 어렵다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-08.svg"
+    },
+    {
+      "name": "청음의 귀걸이",
+      "grade": "희귀",
+      "description": "고개를 돌려 향한 쪽의 소리가 또렷해져 시끄러운 장터에서도 한쪽의 말을 듣기 쉽다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-09.svg"
+    },
+    {
+      "name": "메아리의 귀걸이",
+      "grade": "희귀",
+      "description": "한 번 들은 낯선 발음을 작은 울림으로 되풀이해주어 이름과 짧은 구절을 따라 말하기 좋다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-10.svg"
+    },
+    {
+      "name": "파수의 귀걸이",
+      "grade": "희귀",
+      "description": "잠들기 전 정한 익숙한 소리가 가까이서 들리면 귓불에 진동이 와 잠을 깨운다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-11.svg"
+    },
+    {
+      "name": "명료의 귀걸이",
+      "grade": "희귀",
+      "description": "반복해서 돌아오는 메아리가 약해져 동굴과 넓은 석실에서 원래 소리를 구분하기 쉽다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-12.svg"
+    },
+    {
+      "name": "균형의 귀걸이",
+      "grade": "희귀",
+      "description": "몸이 기우는 방향이 귓가의 가벼운 압박으로 느껴져 흔들리는 배와 좁은 발판에서 자세를 잡도록 돕는다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-13.svg"
+    },
+    {
+      "name": "속말의 쌍귀걸이",
+      "grade": "영웅",
+      "description": "한 착용자가 귀걸이에 손을 대고 속삭이면 서로의 모습이 보이는 거리 안에서 다른 착용자의 귓가에만 말이 전해진다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-14.svg"
+    },
+    {
+      "name": "야수교감 귀걸이",
+      "grade": "영웅",
+      "description": "가까운 짐승의 울음에서 경계와 고통, 부름 같은 감정이 구별되어 상태를 살피기 좋아진다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-15.svg"
+    },
+    {
+      "name": "동굴의 귀걸이",
+      "grade": "영웅",
+      "description": "벽에 귀를 대면 돌을 타고 오는 발걸음과 작업 소리가 또렷하게 들리며 흙과 모래가 많은 층에서는 울림이 약하다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-16.svg"
+    },
+    {
+      "name": "숨결의 귀걸이",
+      "grade": "영웅",
+      "description": "조용히 귀를 기울이면 가까운 생물의 숨소리가 강조되어 어둠과 연기 속에서 사람을 찾기 좋다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-17.svg"
+    },
+    {
+      "name": "선율의 귀걸이",
+      "grade": "영웅",
+      "description": "장식을 쥐고 들은 짧은 곡조를 기억해두었다가 혼자 들을 수 있는 울림으로 되풀이한다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-18.svg"
+    },
+    {
+      "name": "통역자의 귀걸이",
+      "grade": "전설",
+      "description": "대화하는 상대의 말뜻이 익숙한 언어의 목소리로 들리며, 낯선 문화의 비유와 전문 용어는 맥락에 따라 오해할 수 있다.",
+      "category": "장신구",
+      "subcategory": "귀걸이",
+      "icon": "earrings-19.svg"
     },
     {
       "name": "정령합창의 귀걸이",
@@ -333,7 +4365,7 @@
       "description": "주변 정령들의 기분과 움직임이 여러 갈래의 선율로 들려 거센 변화가 다가오는 방향을 살필 수 있다.",
       "category": "장신구",
       "subcategory": "귀걸이",
-      "icon": "dummy.svg"
+      "icon": "earrings-20.svg"
     },
     {
       "name": "철제 옷깃핀",
@@ -341,7 +4373,631 @@
       "description": "두꺼운 천을 관통하는 굵은 핀으로 망토와 옷깃을 단단히 여밀 수 있다.",
       "category": "장신구",
       "subcategory": "브로치",
-      "icon": "dummy.svg"
+      "icon": "brooch-01.svg"
+    },
+    {
+      "name": "잎사귀 브로치",
+      "grade": "일반",
+      "description": "잎맥을 새긴 나무 장식으로 가볍고 천을 덜 처지게 하여 얇은 옷에도 달기 좋다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-02.svg"
+    },
+    {
+      "name": "조개꽃 브로치",
+      "grade": "일반",
+      "description": "작은 조개 조각을 꽃 모양으로 맞춰 만든 장식으로 햇빛을 받으면 은은한 색이 돈다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-03.svg"
+    },
+    {
+      "name": "장인의 문장핀",
+      "grade": "일반",
+      "description": "망치와 바늘, 밀 이삭 같은 문양으로 생업을 나타내어 낯선 장터에서도 직종을 알아보기 쉽다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-04.svg"
+    },
+    {
+      "name": "은사슬 브로치",
+      "grade": "고급",
+      "description": "두 개의 핀을 짧은 사슬로 이어 옷깃 양쪽을 잡고 귀중한 장식이 떨어져 잃어버리는 것을 줄인다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-05.svg"
+    },
+    {
+      "name": "집게 브로치",
+      "grade": "고급",
+      "description": "안쪽의 넓은 집게가 천을 물어 핀 구멍을 내지 않고도 망토를 여밀 수 있다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-06.svg"
+    },
+    {
+      "name": "꽃꽂이 브로치",
+      "grade": "고급",
+      "description": "작은 물통과 꽃대 고정틀이 있어 생화를 옷에 달고 다니며 쉽게 시들지 않게 보관한다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-07.svg"
+    },
+    {
+      "name": "향실 브로치",
+      "grade": "고급",
+      "description": "투각 장식 안에 향을 머금은 솜을 넣어 움직일 때마다 은은한 향이 퍼진다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-08.svg"
+    },
+    {
+      "name": "마음빛 브로치",
+      "grade": "희귀",
+      "description": "착용자가 장식에 손을 대면 자신의 현재 기분이 차분한 파랑이나 격한 붉은빛 같은 색조로 나타난다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-09.svg"
+    },
+    {
+      "name": "생화의 브로치",
+      "grade": "희귀",
+      "description": "꽂아둔 작은 생화에 마력이 전해져 꽃잎과 잎이 오랫동안 생기를 유지한다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-10.svg"
+    },
+    {
+      "name": "풍향 브로치",
+      "grade": "희귀",
+      "description": "천에 고정한 장식의 작은 깃이 바람이 불어오는 쪽으로 돌아가 가벼운 기류 변화도 알려준다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-11.svg"
+    },
+    {
+      "name": "새벽이슬 브로치",
+      "grade": "희귀",
+      "description": "밤의 습기가 장식에 물방울로 맺혀 작은 홈에 모이며 새벽에 떼어 기울여 따를 수 있다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-12.svg"
+    },
+    {
+      "name": "이면의 거울핀",
+      "grade": "희귀",
+      "description": "손으로 장식을 기울이면 앞면에 등 뒤 가까운 풍경이 작은 반사 영상으로 나타난다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-13.svg"
+    },
+    {
+      "name": "빛문장의 브로치",
+      "grade": "희귀",
+      "description": "옷깃에 마력을 보내면 브로치의 문양이 주변 천에 빛무늬로 번져 행렬과 공연에서 소속을 드러내기 좋다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-14.svg"
+    },
+    {
+      "name": "실매듭 브로치",
+      "grade": "희귀",
+      "description": "끊어져 풀리는 옷실이 브로치 쪽으로 모여 매달려 이동 중 솔기가 더 크게 벌어지는 것을 줄인다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-15.svg"
+    },
+    {
+      "name": "환대의 브로치",
+      "grade": "영웅",
+      "description": "두 사람이 브로치를 맞대고 서로 손님과 주인임을 받아들이면 함께 머무는 동안 장식에 같은 빛의 꽃문양이 나타난다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-16.svg"
+    },
+    {
+      "name": "중재자의 브로치",
+      "grade": "영웅",
+      "description": "장식을 쥐고 말하면 가까이 모인 사람들이 각각 자기 앞에서 말하는 듯 또렷한 목소리를 들어 작은 목소리로도 회의를 이끌 수 있다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-17.svg"
+    },
+    {
+      "name": "현란의 브로치",
+      "grade": "영웅",
+      "description": "마력을 보내면 장식이 보는 각도마다 다른 빛으로 반짝여 시선을 자연스럽게 끌어당긴다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-18.svg"
+    },
+    {
+      "name": "계승의 문장핀",
+      "grade": "전설",
+      "description": "소유자가 장식을 다음 사람에게 직접 달아주며 이름을 말하면 그 계승 장면이 작은 빛 영상으로 새겨져 역대 전승을 되짚어볼 수 있다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-19.svg"
+    },
+    {
+      "name": "사교가의 브로치",
+      "grade": "전설",
+      "description": "착용자가 직접 소개받아 기억해둔 사람을 다시 바라보면 당시 들은 이름과 소개가 장식 안쪽의 빛글씨로 떠오른다.",
+      "category": "장신구",
+      "subcategory": "브로치",
+      "icon": "brooch-20.svg"
+    },
+    {
+      "name": "평안의 종이부적",
+      "grade": "일반",
+      "description": "무사하기를 바라는 글귀를 적어 천 주머니에 넣고 몸에 지니는 민간신앙의 장식이다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-01.svg"
+    },
+    {
+      "name": "문지기 나무부적",
+      "grade": "일반",
+      "description": "문을 지키는 얼굴을 새긴 작은 나무패로 집을 떠나는 사람에게 안전을 기원하며 건넨다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-02.svg"
+    },
+    {
+      "name": "사냥꾼의 뼈부적",
+      "grade": "일반",
+      "description": "사냥한 짐승의 작은 뼈를 다듬어 몸에 지니며 그 동물에 대한 존중과 사냥의 성취를 나타낸다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-03.svg"
+    },
+    {
+      "name": "가족의 매듭부적",
+      "grade": "일반",
+      "description": "가족들의 옷에서 뽑은 실을 엮어 서로의 무사함을 기원하며 지니는 부적이다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-04.svg"
+    },
+    {
+      "name": "향목 부적",
+      "grade": "고급",
+      "description": "향이 짙은 목재를 깎아 얇은 구멍을 내어 향이 고르게 퍼지게 하며 옷장과 허리춤에 매달기 좋다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-05.svg"
+    },
+    {
+      "name": "밀랍봉인 부적",
+      "grade": "고급",
+      "description": "작은 기도문을 밀랍 먹인 주머니에 봉해 비와 땀에 글씨가 번지는 것을 막는다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-06.svg"
+    },
+    {
+      "name": "방울 부적",
+      "grade": "고급",
+      "description": "작은 금속 방울이 매달려 움직일 때 맑게 울리며 어둠 속에서 일행의 위치를 알리기 좋다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-07.svg"
+    },
+    {
+      "name": "기도석 부적",
+      "grade": "고급",
+      "description": "손가락으로 짚을 홈이 일정하게 새겨져 있어 어둠 속에서도 기도의 차례를 헤아리기 좋다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-08.svg"
+    },
+    {
+      "name": "방충 부적",
+      "grade": "희귀",
+      "description": "부적 둘레에 작은 벌레가 꺼리는 마력 기운이 감돌아 모기와 날벌레가 몸에 달라붙는 일을 줄인다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-09.svg"
+    },
+    {
+      "name": "평온한 꿈의 부적",
+      "grade": "희귀",
+      "description": "잠든 이의 불안이 잦아들도록 고른 마력의 울림을 내어 되풀이되는 악몽을 덜어준다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-10.svg"
+    },
+    {
+      "name": "귀로의 부적",
+      "grade": "희귀",
+      "description": "떠나기 전 문설주에 대어둔 부적이 그 문 가까이 돌아오면 따뜻해져 안개와 어둠 속에서 집을 찾기 좋다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-11.svg"
+    },
+    {
+      "name": "저주감응 부적",
+      "grade": "희귀",
+      "description": "착용자에게 새로운 저주의 기운이 달라붙으면 글자가 붉게 달아올라 이상을 알린다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-12.svg"
+    },
+    {
+      "name": "풍요의 부적",
+      "grade": "희귀",
+      "description": "곡식주머니에 달아두면 안의 습기가 줄어 저장한 곡식에 곰팡이가 피는 것을 늦춘다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-13.svg"
+    },
+    {
+      "name": "망자의 숨결",
+      "grade": "희귀",
+      "description": "움직이는 언데드가 가까워지면 부적이 차가워져 옷 위로도 냉기가 느껴진다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-14.svg"
+    },
+    {
+      "name": "정령친화 부적",
+      "grade": "희귀",
+      "description": "착용자의 움직임이 가까운 작은 정령에게 완만한 마력의 물결로 전해져 갑작스럽게 놀라는 것을 줄인다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-15.svg"
+    },
+    {
+      "name": "파마 부적",
+      "grade": "영웅",
+      "description": "신성력을 흘리면 몸에 붙은 약한 저주의 매듭이 풀리며, 강하게 뿌리내린 저주는 부적이 뜨거워질 뿐 남아 있다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-16.svg"
+    },
+    {
+      "name": "생명장막 부적",
+      "grade": "영웅",
+      "description": "몸에서 새어 나오는 생명의 기운을 안쪽으로 감싸 그 기운을 쫓는 언데드에게 눈에 덜 띄게 한다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-17.svg"
+    },
+    {
+      "name": "액받이 부적",
+      "grade": "영웅",
+      "description": "착용자를 향한 한 줄기의 원한 저주를 부적 쪽으로 옮겨 붙잡으며, 종이가 검게 변하면 떼어 봉인해두어야 한다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-18.svg"
+    },
+    {
+      "name": "성자의 유훈부적",
+      "grade": "전설",
+      "description": "성자가 남긴 기도문이 착용자의 정신을 붙들어 외부 마력에 의해 의지가 꺾이거나 몸을 빼앗기는 데 저항할 힘을 준다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-19.svg"
+    },
+    {
+      "name": "가택신의 부적",
+      "grade": "신화",
+      "description": "집을 지키는 신이 내린 부적을 집주인이 몸에 지니면 집의 문턱에 주인의 뜻이 깃들어 해칠 뜻으로 들어오는 이의 걸음이 무거워진다.",
+      "category": "장신구",
+      "subcategory": "부적",
+      "icon": "amulet-20.svg"
+    },
+    {
+      "name": "가죽 허리띠",
+      "grade": "일반",
+      "description": "허리에 맞춰 구멍과 버클을 조절하고 칼집과 작은 주머니를 매달 수 있다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-01.svg"
+    },
+    {
+      "name": "천 매듭띠",
+      "grade": "일반",
+      "description": "긴 천을 허리에 감아 옷을 여미며 펼치면 붕대나 묶는 끈으로 쓸 수 있다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-02.svg"
+    },
+    {
+      "name": "직공의 연장띠",
+      "grade": "일반",
+      "description": "작은 고리와 주머니를 여럿 달아 작업 중 필요한 도구를 손에 닿는 곳에 나눠 꽂을 수 있다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-03.svg"
+    },
+    {
+      "name": "동전주머니 허리띠",
+      "grade": "일반",
+      "description": "안쪽에 얕은 주머니가 길게 이어져 소액의 동전을 여러 곳에 나눠 숨길 수 있다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-04.svg"
+    },
+    {
+      "name": "검사의 허리띠",
+      "grade": "고급",
+      "description": "대각선 지지끈이 칼집의 무게를 분산해 달릴 때 허리에 부딪히는 것을 줄인다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-05.svg"
+    },
+    {
+      "name": "짐꾼의 허리띠",
+      "grade": "고급",
+      "description": "넓은 등받침과 조임끈이 있어 무거운 짐을 들 때 허리를 곧게 받쳐준다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-06.svg"
+    },
+    {
+      "name": "안전고리 벨트",
+      "grade": "고급",
+      "description": "골반을 감싸는 보강끈과 금속 고리가 있어 줄을 연결하고 몸무게를 나누어 받을 수 있다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-07.svg"
+    },
+    {
+      "name": "밀서의 벨트",
+      "grade": "고급",
+      "description": "겹친 가죽 사이의 긴 틈에 접은 서류를 넣고 버클 뒤에서 여밀 수 있다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-08.svg"
+    },
+    {
+      "name": "수납의 벨트",
+      "grade": "희귀",
+      "description": "벨트에 단 작은 주머니들이 매단 순서를 유지해 몸을 굽혀도 겹치거나 뒤집히지 않는다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-09.svg"
+    },
+    {
+      "name": "평형의 벨트",
+      "grade": "희귀",
+      "description": "벨트에 매단 작은 용기가 기울어져도 입구가 위를 향해 물약과 잉크를 흘리는 일을 줄인다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-10.svg"
+    },
+    {
+      "name": "불굴의 매듭띠",
+      "grade": "희귀",
+      "description": "착용자가 버클의 룬을 누르기 전에는 매듭과 잠금쇠가 저절로 느슨해지지 않는다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-11.svg"
+    },
+    {
+      "name": "장인의 고리띠",
+      "grade": "희귀",
+      "description": "벨트의 고리에 묶은 짧은 줄이 처지지 않고 감겨들어 매달린 도구가 다리에 부딪히는 것을 줄인다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-12.svg"
+    },
+    {
+      "name": "호흡의 허리띠",
+      "grade": "희귀",
+      "description": "깊게 숨을 들이쉬면 조임이 부드러워지고 몸을 굽히면 옷을 다시 잡아주어 활동 중 압박이 덜하다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-13.svg"
+    },
+    {
+      "name": "잠수자의 벨트",
+      "grade": "희귀",
+      "description": "물에 들어가면 허리 아래 옷단이 몸에 붙어 물살에 펄럭이는 것을 줄이며 수면에 나오면 느슨해진다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-14.svg"
+    },
+    {
+      "name": "동행의 짐벨트",
+      "grade": "영웅",
+      "description": "같은 짐에 줄을 건 여러 착용자 사이로 하중이 고르게 나뉘며, 한 사람이 줄을 놓으면 남은 이들에게 무게가 옮겨간다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-15.svg"
+    },
+    {
+      "name": "아공간 벨트",
+      "grade": "영웅",
+      "description": "벨트에 고정된 주머니 안이 작은 배낭만큼 넓어져 도구와 물품을 담을 수 있으며, 입구보다 큰 물건은 통과시키기 어렵다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-16.svg"
+    },
+    {
+      "name": "짐꾼의 마법띠",
+      "grade": "영웅",
+      "description": "연결한 배낭이 걸음과 반대 방향으로 조금씩 움직여 짐이 흔들리며 몸을 끌어당기는 힘을 줄인다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-17.svg"
+    },
+    {
+      "name": "결속의 허리띠",
+      "grade": "영웅",
+      "description": "띠 끝에 마력을 보내면 가죽이 긴 밧줄처럼 늘어나며, 풀린 띠를 다시 감으면 원래 길이로 돌아간다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-18.svg"
+    },
+    {
+      "name": "생명줄 벨트",
+      "grade": "영웅",
+      "description": "발판을 놓치는 순간 매달아둔 안전줄이 팽팽히 당겨져 낙하를 붙들며, 연결한 고정점이 몸무게를 버텨야 한다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-19.svg"
+    },
+    {
+      "name": "거인의 짐벨트",
+      "grade": "전설",
+      "description": "허리에 묶어 몸과 연결한 무거운 짐의 하중을 크게 덜어 운반하기 쉽게 하며, 연결을 풀면 원래 무게가 돌아온다.",
+      "category": "장신구",
+      "subcategory": "벨트",
+      "icon": "belt-20.svg"
+    },
+    {
+      "name": "나무 머리핀",
+      "grade": "일반",
+      "description": "매끈하게 깎은 긴 핀으로 머리카락을 틀어 고정하며 장식 끝에 작은 문양을 새길 수 있다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-01.svg"
+    },
+    {
+      "name": "천 머리띠",
+      "grade": "일반",
+      "description": "이마를 감싸 땀을 흡수하고 머리카락이 눈앞으로 내려오는 것을 막는다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-02.svg"
+    },
+    {
+      "name": "들꽃 화관",
+      "grade": "일반",
+      "description": "줄기가 유연한 들꽃을 엮어 만든 축제 장식으로 꽃이 시들면 새 꽃을 덧엮어 손질한다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-03.svg"
+    },
+    {
+      "name": "깃털 머리장식",
+      "grade": "일반",
+      "description": "빗살 고리에 가벼운 깃털을 꽂아 춤과 의식에서 움직임을 크게 드러낸다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-04.svg"
+    },
+    {
+      "name": "은빗 머리장식",
+      "grade": "고급",
+      "description": "촘촘한 은제 빗살이 머리카락을 고정하며 작은 술장식이 흔들려 풀린 머리 모양을 가려준다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-05.svg"
+    },
+    {
+      "name": "서기관의 머리띠",
+      "grade": "고급",
+      "description": "관자놀이 옆의 얇은 고리에 깃펜을 끼워 양손을 쓰는 중에도 바로 꺼낼 수 있다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-06.svg"
+    },
+    {
+      "name": "혼례 보석관",
+      "grade": "고급",
+      "description": "작은 보석을 흔들리지 않게 물린 가벼운 관으로 긴 의식을 치르는 동안에도 머리를 덜 누른다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-07.svg"
+    },
+    {
+      "name": "향실 머리끈",
+      "grade": "고급",
+      "description": "향을 머금은 실을 엮어 머리를 묶으며 향이 빠지면 매듭 안에 말린 꽃잎을 갈아 넣을 수 있다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-08.svg"
+    },
+    {
+      "name": "집중의 머리띠",
+      "grade": "희귀",
+      "description": "이마에 닿는 고른 떨림이 산만해지는 생각을 가라앉혀 독서와 계산에 오래 집중하기 좋다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-09.svg"
+    },
+    {
+      "name": "산들바람 머리핀",
+      "grade": "희귀",
+      "description": "장식 주변의 바람이 앞머리를 양옆으로 밀어주어 바람 부는 곳에서도 눈앞이 가려지지 않는다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-10.svg"
+    },
+    {
+      "name": "청량의 머리띠",
+      "grade": "희귀",
+      "description": "이마의 열을 바깥으로 천천히 내보내 더운 곳에서 머리가 달아오르는 불편을 줄인다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-11.svg"
+    },
+    {
+      "name": "이슬걷이 머리끈",
+      "grade": "희귀",
+      "description": "머리에서 흐르는 땀이 끈을 따라 뒤쪽으로 모여 얼굴과 눈으로 흘러내리지 않는다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-12.svg"
+    },
+    {
+      "name": "소금꽃 머리핀",
+      "grade": "희귀",
+      "description": "젖은 머리카락의 염분이 장식 끝에 작은 결정으로 모여 바다에서 나온 뒤 손질하기 좋다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-13.svg"
+    },
+    {
+      "name": "달빛 머리빗",
+      "grade": "희귀",
+      "description": "달빛을 받은 빗살이 은은하게 빛나 어둠 속에서 머리를 정리하거나 손 가까이를 비출 수 있다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-14.svg"
+    },
+    {
+      "name": "몽상의 머리띠",
+      "grade": "영웅",
+      "description": "잠에서 깨자마자 장식을 짚으면 마지막으로 기억나는 꿈의 짧은 장면이 작은 빛 영상으로 나타난다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-15.svg"
+    },
+    {
+      "name": "의지의 머리관",
+      "grade": "영웅",
+      "description": "스스로 정한 이름과 짧은 문구가 정신을 흐리는 마법 속에서도 또렷하게 떠올라 자기 의식을 붙드는 데 도움을 준다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-16.svg"
+    },
+    {
+      "name": "물결 머리띠",
+      "grade": "영웅",
+      "description": "물속에서 머리카락이 뒤쪽으로 가지런히 흘러 시야를 가리지 않고 수면에 나오면 엉킴이 부드럽게 풀린다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-17.svg"
+    },
+    {
+      "name": "의식의 조율관",
+      "grade": "영웅",
+      "description": "함께 마력을 보내는 이들의 흐름이 관 둘레의 빛으로 나타나 의식을 이끄는 사람이 빠르고 느린 쪽을 알아볼 수 있다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-18.svg"
+    },
+    {
+      "name": "현자의 기억관",
+      "grade": "전설",
+      "description": "착용자가 직접 본 장면을 떠올리면 당시 기억에 남은 풍경과 대화가 선명해져 흐릿해진 기억을 자세히 되짚을 수 있다.",
+      "category": "장신구",
+      "subcategory": "머리장식",
+      "icon": "headpiece-19.svg"
     },
     {
       "name": "봄여신의 화관",
@@ -349,7 +5005,7 @@
       "description": "봄의 여신이 남긴 화관에서 살아 있는 꽃이 피어나며, 떨어진 꽃잎을 시든 작은 식물에 대면 물과 양분을 받아들일 생기가 돌아온다.",
       "category": "장신구",
       "subcategory": "머리장식",
-      "icon": "dummy.svg"
+      "icon": "headpiece-20.svg"
     },
     {
       "name": "마력샘의 심장",
