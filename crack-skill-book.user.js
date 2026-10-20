@@ -930,6 +930,8 @@
   function handlePointerDown(event) {
     suppressSkillClick = false;
     const target = event.target;
+    // 창 테두리의 기본 동작(브라우저 크기 조절 손잡이)을 막지 않는다.
+    if (target === ui.root) return;
     if (!ui.root.contains(document.activeElement)) returnFocus = document.activeElement;
     // 보기·버튼·드래그는 채팅 포커스를 유지한다. 이름 편집·설명 복사·select만 입력 포커스를 받는다.
     if (!target.closest('input, textarea, select, .cc-skill-detail')) event.preventDefault();
