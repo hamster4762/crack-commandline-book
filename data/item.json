@@ -5008,20 +5008,724 @@
       "icon": "headpiece-20.svg"
     },
     {
+      "name": "견습 마력병",
+      "grade": "일반",
+      "description": "마력을 조금 담아두는 작은 병으로 채운 양에 따라 눈금이 빛나며, 입구를 마도구에 대어 저장한 마력을 옮긴다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-01.svg"
+    },
+    {
+      "name": "봉인 마력통",
+      "grade": "일반",
+      "description": "마력을 넣고 입구를 밀랍으로 봉하면 운반 중 새는 양이 줄어들며 봉인을 열 때 약한 마력의 바람이 흘러나온다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-02.svg"
+    },
+    {
+      "name": "마력의 염주",
+      "grade": "일반",
+      "description": "작은 구슬마다 마력을 나누어 담고 손가락으로 짚은 구슬의 힘을 꺼내 쓸 수 있다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-03.svg"
+    },
+    {
+      "name": "감응 마력석",
+      "grade": "고급",
+      "description": "손바닥으로 쥐고 마력을 넣어두었다가 맨살로 다시 감싸면 착용자의 마력 흐름에 맞춰 천천히 돌려준다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-04.svg"
+    },
+    {
+      "name": "조율 마력통",
+      "grade": "고급",
+      "description": "밸브를 돌린 폭만큼 저장된 마력이 흘러나와 약한 등불부터 무거운 장치까지 공급량을 조절할 수 있다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-05.svg"
+    },
+    {
+      "name": "술사의 마력갑",
+      "grade": "고급",
+      "description": "충전한 저장부를 통째로 빼고 끼우는 상자로 같은 결합구를 단 장치 사이에서 마력원을 바꾸기 쉽다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-06.svg"
+    },
+    {
+      "name": "격실 마력함",
+      "grade": "고급",
+      "description": "안쪽 칸들이 서로 분리되어 성질이 충돌하는 마력을 같은 함에 나눠 담을 수 있다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-07.svg"
+    },
+    {
+      "name": "서리문 마력병",
+      "grade": "고급",
+      "description": "마력이 새는 부분에 푸른 서리가 맺혀 병과 연결부의 금 간 곳을 바로 찾을 수 있다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-08.svg"
+    },
+    {
+      "name": "일광수정",
+      "grade": "희귀",
+      "description": "햇빛을 받으면 마력이 조금씩 쌓이고 감싸둔 천을 풀어 접촉한 장치에 공급할 수 있다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-09.svg"
+    },
+    {
+      "name": "잔향의 마력병",
+      "grade": "희귀",
+      "description": "열린 입구 가까이 흩어지는 주문의 잔여 마력을 빨아들여 저장하며, 한꺼번에 많은 힘이 들어오면 병이 뜨거워진다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-10.svg"
+    },
+    {
+      "name": "축마의 항아리",
+      "grade": "희귀",
+      "description": "입구에 손을 얹어두면 사용자에게서 부담이 적을 만큼의 마력을 조금씩 끌어 모아 오래 머무는 동안 비축한다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-11.svg"
+    },
+    {
+      "name": "역류수호 고리",
+      "grade": "희귀",
+      "description": "연결한 장치로 마력을 내보내되 장치에서 되밀려오는 마력은 고리 바깥으로 흘려 저장부의 오염을 줄인다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-12.svg"
+    },
+    {
+      "name": "조화의 마력구슬",
+      "grade": "희귀",
+      "description": "여러 줄에 연결하면 마력이 부족한 쪽으로 저장한 힘을 먼저 보내 약한 장치들이 함께 꺼지는 것을 늦춘다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-13.svg"
+    },
+    {
+      "name": "봉합의 마력병",
+      "grade": "희귀",
+      "description": "병에 금이 가면 저장한 마력 일부가 틈을 막는 막으로 굳어 내용물이 한꺼번에 새는 것을 막는다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-14.svg"
+    },
+    {
+      "name": "휴면 마력종자",
+      "grade": "희귀",
+      "description": "충전한 종자를 마른 흙에 묻으면 마력이 새는 것을 멈추고 잠들며, 물을 주면 깨어나 연결한 뿌리 모양 도관으로 힘을 내보낸다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-15.svg"
+    },
+    {
+      "name": "봉헌의 마력성배",
+      "grade": "영웅",
+      "description": "잔을 함께 잡은 이들이 자발적으로 보낸 마력을 모아두고 잔 바닥에 손을 댄 사람에게 나누어줄 수 있다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-16.svg"
+    },
+    {
+      "name": "환류의 마력사슬",
+      "grade": "영웅",
+      "description": "충전한 힘을 연결된 장치에 보냈다가 사슬을 당기면 아직 소비되지 않은 마력이 저장추로 돌아온다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-17.svg"
+    },
+    {
+      "name": "폭주봉인 항아리",
+      "grade": "영웅",
+      "description": "열린 입구를 불안정한 마력원에 대면 흘러넘치는 힘을 흡수하며, 감당할 양을 넘으면 표면의 금이 빛나고 내부 압력이 높아진다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-18.svg"
+    },
+    {
+      "name": "서약의 마력금고",
+      "grade": "전설",
+      "description": "함께 손을 대고 열쇠문구를 정한 이들의 마력을 보관하며, 그들이 다시 뜻을 모아 문구를 말하면 봉인이 열린다.",
+      "category": "마도구",
+      "subcategory": "마력저장구",
+      "icon": "magic-storage-19.svg"
+    },
+    {
       "name": "마력샘의 심장",
       "grade": "신화",
       "description": "마력의 신이 남긴 심장을 그릇에 안치하면 비워진 저장부에 맑은 마력이 샘물처럼 서서히 차오른다.",
       "category": "마도구",
       "subcategory": "마력저장구",
-      "icon": "dummy.svg"
+      "icon": "magic-storage-20.svg"
     },
     {
-      "name": "겹주머니 지갑",
-      "grade": "고급",
-      "description": "겉으로 같은 입구를 안쪽 고리의 방향에 따라 두 개의 작은 수납공간으로 나눠 쓸 수 있다.",
+      "name": "견습 초점틀",
+      "grade": "일반",
+      "description": "수정과 시약을 정해진 위치에 놓도록 홈을 낸 틀로 작은 의식의 마력이 흩어지는 것을 줄인다.",
       "category": "마도구",
-      "subcategory": "공간도구",
-      "icon": "dummy.svg"
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-01.svg"
+    },
+    {
+      "name": "초점의 고리",
+      "grade": "일반",
+      "description": "지팡이 끝이나 마력통의 입구를 고정하는 룬고리로 손이 흔들려도 초점의 각도가 유지된다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-02.svg"
+    },
+    {
+      "name": "의식의 룬판",
+      "grade": "일반",
+      "description": "마법진의 기본 선을 새긴 접이판으로 시전 재료의 간격을 일정하게 맞출 수 있다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-03.svg"
+    },
+    {
+      "name": "집광 수정렌즈",
+      "grade": "고급",
+      "description": "통과하는 빛 주문을 좁은 범위로 모아 한 지점에 집중시키며 렌즈를 기울여 초점 위치를 바꿀 수 있다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-04.svg"
+    },
+    {
+      "name": "마력의 그물",
+      "grade": "고급",
+      "description": "한 줄기로 들어온 마력을 그물 전체에 고르게 퍼뜨려 넓은 면에 약한 효과를 펼치기 좋다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-05.svg"
+    },
+    {
+      "name": "공명 음차",
+      "grade": "고급",
+      "description": "주문의 영창에 맞춰 울려 시전자의 호흡과 마력의 맥동을 일정하게 잡아준다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-06.svg"
+    },
+    {
+      "name": "조율사의 초점대",
+      "grade": "고급",
+      "description": "받침 위 초점석을 움직이면 시전 중인 마법의 중심도 그 움직임을 따라 천천히 옮겨간다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-07.svg"
+    },
+    {
+      "name": "맥동의 룬바퀴",
+      "grade": "고급",
+      "description": "돌려둔 바퀴가 일정한 간격으로 마력을 흘려 작은 효과를 여러 번 고르게 발동시키는 데 쓰인다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-08.svg"
+    },
+    {
+      "name": "화염의 집속환",
+      "grade": "희귀",
+      "description": "마법의 불꽃을 안쪽 고리로 끌어 모아 열을 좁은 곳에 집중하며, 고리를 열면 불길이 다시 퍼진다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-09.svg"
+    },
+    {
+      "name": "소용돌이 도관",
+      "grade": "희귀",
+      "description": "통과하는 물 조종 주문에 회전이 더해져 물줄기를 꼬거나 가운데를 비우는 흐름을 만들 수 있다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-10.svg"
+    },
+    {
+      "name": "한기의 초점경",
+      "grade": "희귀",
+      "description": "표면에 닿은 냉기 마법을 거울이 향한 한 점으로 되모아 얼어붙는 위치를 바꾼다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-11.svg"
+    },
+    {
+      "name": "대지공명 말뚝",
+      "grade": "희귀",
+      "description": "땅에 박고 대지 마법을 흘리면 연결된 흙층을 따라 힘이 고르게 퍼지며, 끊어진 지반에서는 흐름도 끊어진다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-12.svg"
+    },
+    {
+      "name": "갈래의 마력뿔",
+      "grade": "희귀",
+      "description": "하나의 단순한 투사 주문을 여러 갈래로 나누고 뿔 끝을 돌려 각각의 방향을 정하며 갈래가 늘수록 힘이 나뉜다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-13.svg"
+    },
+    {
+      "name": "정형의 룬틀",
+      "grade": "희귀",
+      "description": "마법으로 만든 물과 모래가 틀 안에서 마지막 모양을 유지하여 시전자가 잠시 손을 떼고 다른 작업을 할 수 있다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-14.svg"
+    },
+    {
+      "name": "조율의 마력빗",
+      "grade": "희귀",
+      "description": "날 사이로 흐른 마력의 거친 요동이 고르게 펴져 민감한 마법진에 안정적으로 공급된다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-15.svg"
+    },
+    {
+      "name": "연결의 표석",
+      "grade": "영웅",
+      "description": "마력을 흘리는 표석들을 서로 보이는 곳에 이어 놓으면 주문의 작용점이 그 연결을 따라 옮겨가며, 중간 표석이 치워지면 뒤쪽 흐름이 끊긴다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-16.svg"
+    },
+    {
+      "name": "합창의 의식환",
+      "grade": "영웅",
+      "description": "둘레에 선 시전자들의 영창 박자가 맞을 때 각자의 마력이 중앙으로 모여 하나의 큰 의식을 함께 유지한다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-17.svg"
+    },
+    {
+      "name": "유예의 주문환",
+      "grade": "영웅",
+      "description": "완성 직전의 단순한 주문을 고리에 걸어 형태를 붙잡아두었다가 고리를 열어 마무리하며, 붙잡는 동안 마력이 계속 든다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-18.svg"
+    },
+    {
+      "name": "상극의 저울",
+      "grade": "전설",
+      "description": "양쪽 접시에 흘린 서로 충돌하는 마력을 균형에 맞춰 나란히 유지하여 뜨거움과 냉기 같은 다른 효과를 하나의 의식에 함께 실을 수 있다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-19.svg"
+    },
+    {
+      "name": "잔향의 나선",
+      "grade": "전설",
+      "description": "통과한 짧은 주문의 마력 흐름을 기억해 같은 형태로 되풀이하도록 돕고, 반복할 힘은 연결한 마력원에서 계속 끌어온다.",
+      "category": "마도구",
+      "subcategory": "마법증폭구",
+      "icon": "magic-focus-20.svg"
+    },
+    {
+      "name": "점화의 완드",
+      "grade": "고급",
+      "description": "끝에 마력을 조금 보내면 작은 불씨가 맺혀 마른 심지와 부싯깃에 옮길 수 있다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-01.svg"
+    },
+    {
+      "name": "등화수정",
+      "grade": "고급",
+      "description": "손으로 문지르면 부드러운 빛이 켜지고 다시 감싸 쥐면 꺼지는 흔한 마법등으로, 충전한 마력을 소비한다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-02.svg"
+    },
+    {
+      "name": "순풍의 원반",
+      "grade": "고급",
+      "description": "원판에 마력을 보내면 중앙 구멍에서 약한 바람이 불며 판을 돌려 바람의 방향을 바꿀 수 있다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-03.svg"
+    },
+    {
+      "name": "온기의 돌접시",
+      "grade": "고급",
+      "description": "마력을 흘리면 접시 표면이 따뜻해져 위에 놓인 작은 물건을 천천히 데운다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-04.svg"
+    },
+    {
+      "name": "이슬의 구슬",
+      "grade": "고급",
+      "description": "습한 공기 속에 걸어두면 주변 수분이 표면에 방울져 맺히며, 건조한 곳에서는 모이는 물이 적다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-05.svg"
+    },
+    {
+      "name": "광선의 완드",
+      "grade": "희귀",
+      "description": "끝을 겨누고 마력을 보내면 가느다란 빛줄기가 뻗어 표면에 밝은 점을 비춘다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-06.svg"
+    },
+    {
+      "name": "샘의 조가비",
+      "grade": "희귀",
+      "description": "조가비를 벌리고 마력을 흘리면 맑은 물이 조금씩 흘러나오며 닫으면 멈춘다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-07.svg"
+    },
+    {
+      "name": "안개 호리병",
+      "grade": "희귀",
+      "description": "마력을 넣고 마개를 열면 바닥을 따라 짙은 마법 안개가 퍼지며, 바람에 밀려가거나 병을 닫으면 서서히 걷힌다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-08.svg"
+    },
+    {
+      "name": "무지개 유리판",
+      "grade": "희귀",
+      "description": "판 뒤에 마력을 보내면 통과하는 빛의 색이 바뀌어 비추는 면을 원하는 색조로 물들인다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-09.svg"
+    },
+    {
+      "name": "서리의 인장",
+      "grade": "희귀",
+      "description": "마력을 실어 젖은 표면에 찍으면 도장 무늬대로 얇은 얼음이 생긴다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-10.svg"
+    },
+    {
+      "name": "진동추",
+      "grade": "희귀",
+      "description": "접촉시킨 물체에 일정한 떨림을 보내며, 추를 돌려 느린 흔들림부터 빠른 진동까지 조절할 수 있다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-11.svg"
+    },
+    {
+      "name": "결속의 룬패",
+      "grade": "희귀",
+      "description": "마력을 보낸 패를 두 무생물 사이에 끼우면 두 면이 달라붙고, 패의 손잡이를 빼면 접착이 풀린다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-12.svg"
+    },
+    {
+      "name": "활주의 룬판",
+      "grade": "희귀",
+      "description": "표면에 대고 마력을 흘리면 판 넓이만큼의 마른 면이 매끄러워져 물건이 쉽게 미끄러진다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-13.svg"
+    },
+    {
+      "name": "환등의 틀",
+      "grade": "희귀",
+      "description": "틀 안에 넣은 그림을 앞쪽 허공에 빛 영상으로 비추며 틀을 움직이면 영상도 따라간다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-14.svg"
+    },
+    {
+      "name": "향기의 병",
+      "grade": "희귀",
+      "description": "병 안에 넣은 향료의 향이 마력을 따라 입구가 향한 쪽으로 좁게 뻗는다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-15.svg"
+    },
+    {
+      "name": "긴그림자 촛대",
+      "grade": "희귀",
+      "description": "켜진 마법불의 받침을 돌리면 그 불이 만드는 그림자가 한 방향으로 길게 늘어지며 빛이 가려지면 사라진다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-16.svg"
+    },
+    {
+      "name": "역류의 모래시계",
+      "grade": "희귀",
+      "description": "위쪽 모래가 거꾸로 흘러오르도록 마력을 주어 손을 대지 않고도 모래를 다시 채울 수 있다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-17.svg"
+    },
+    {
+      "name": "해방의 골무",
+      "grade": "희귀",
+      "description": "마력을 보낸 끝으로 끈의 매듭을 짚으면 가닥 사이가 느슨해져 당겨 풀기 쉬워진다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-18.svg"
+    },
+    {
+      "name": "메아리의 나팔",
+      "grade": "희귀",
+      "description": "나팔에 마력을 흘려 마지막으로 불어넣은 짧은 소리를 같은 음색으로 다시 울릴 수 있다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-19.svg"
+    },
+    {
+      "name": "역장의 손잡이",
+      "grade": "영웅",
+      "description": "손잡이를 움직이면 눈앞의 작은 무생물을 잡은 투명한 힘이 같은 방향으로 움직이며, 무거운 물건을 잡을수록 유지가 힘들어진다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-20.svg"
+    },
+    {
+      "name": "경량의 받침대",
+      "grade": "영웅",
+      "description": "물건 아래에 대고 마력을 보내면 받침에 닿은 물건의 무게가 줄며 받침을 떼면 원래대로 돌아온다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-21.svg"
+    },
+    {
+      "name": "중압의 인장",
+      "grade": "영웅",
+      "description": "무생물에 찍고 마력을 유지하면 인장 주변을 포함한 그 물건이 무거워지며, 빛나는 인장을 문질러 지우면 효과가 풀린다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-22.svg"
+    },
+    {
+      "name": "영혼등",
+      "grade": "영웅",
+      "description": "등불에 신성력을 보내면 빛이 닿은 영체의 윤곽이 단단해져 실물로 만질 수 있게 된다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-23.svg"
+    },
+    {
+      "name": "수막의 쟁반",
+      "grade": "영웅",
+      "description": "물에 띄우고 마력을 보내면 가장자리에 닿은 수면이 팽팽한 막처럼 굳어 가벼운 물건을 받친다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-24.svg"
+    },
+    {
+      "name": "빛길의 쌍패",
+      "grade": "영웅",
+      "description": "두 패를 마력실로 이으면 한 패에 닿은 빛이 다른 패의 앞면에서 같은 색과 세기로 흘러나오며, 패를 돌려 내보낼 방향을 바꿀 수 있다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-25.svg"
+    },
+    {
+      "name": "상극의 집게",
+      "grade": "영웅",
+      "description": "집게로 함께 집은 두 작은 무생물 사이에서 열이나 냉기를 한쪽으로 옮길 수 있으며, 옮기는 동안 반대쪽 온도도 바뀐다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-26.svg"
+    },
+    {
+      "name": "조형의 인장",
+      "grade": "영웅",
+      "description": "젖은 흙에 누르고 마력을 흘리면 주변 흙이 인장 밑의 모양을 따라 뭉쳐 같은 형태의 홈과 돌기를 만든다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-27.svg"
+    },
+    {
+      "name": "해주의 향로",
+      "grade": "전설",
+      "description": "향에 신성력을 실으면 연기를 쐰 생물의 마법에 의한 석화가 발끝부터 천천히 풀려나며, 굳은 몸이 깨진 부분은 별도로 돌봐야 한다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-28.svg"
+    },
+    {
+      "name": "거인손의 인형",
+      "grade": "전설",
+      "description": "인형의 팔을 움직이며 마력을 보내면 눈앞의 큰 물체를 같은 동작으로 밀고 당기는 힘이 생기고, 힘을 쓸수록 사용자가 빠르게 지친다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-29.svg"
+    },
+    {
+      "name": "조물의 서판",
+      "grade": "신화",
+      "description": "형상의 신이 남긴 판에 단순한 작은 물건을 그려 넣고 재료를 바치면 재료가 그 형태로 빚어져 판 위에 나타난다.",
+      "category": "마도구",
+      "subcategory": "주문발동구",
+      "icon": "magic-cast-30.svg"
+    },
+    {
+      "name": "점멸의 신호패",
+      "grade": "일반",
+      "description": "손끝으로 마력을 보낸 동안 작은 빛이 켜져 손을 가린 채로도 밝고 어두운 신호를 보낼 수 있다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-01.svg"
+    },
+    {
+      "name": "오색 등불",
+      "grade": "일반",
+      "description": "덮개의 룬을 돌려 빛의 색을 바꾸는 작은 마법등으로 멀리서 구분할 표지를 정해둘 수 있다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-02.svg"
+    },
+    {
+      "name": "쌍생의 종",
+      "grade": "고급",
+      "description": "같은 건물 안에 놓인 한 쌍의 종으로 하나를 흔들면 다른 쪽도 같은 박자로 울린다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-03.svg"
+    },
+    {
+      "name": "봉화 말뚝",
+      "grade": "고급",
+      "description": "위쪽에 마력을 보내면 끝에서 가느다란 빛이 곧게 솟아 숲과 언덕 너머에서도 위치를 알리기 좋다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-04.svg"
+    },
+    {
+      "name": "전언의 음판",
+      "grade": "고급",
+      "description": "마력을 보내면 미리 새겨둔 짧은 음절이 울려 글을 읽기 어려운 이에게도 같은 전언을 반복할 수 있다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-05.svg"
+    },
+    {
+      "name": "속삭임의 관",
+      "grade": "고급",
+      "description": "손바닥만 한 관의 양끝에 마력을 보내면 한쪽에 댄 작은 목소리가 반대쪽에서 또렷하게 나온다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-06.svg"
+    },
+    {
+      "name": "공명의 실타래",
+      "grade": "고급",
+      "description": "풀어놓은 마법실의 양끝 방울이 같은 떨림을 주고받아 구부러진 통로에서도 손짓 신호를 전할 수 있다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-07.svg"
+    },
+    {
+      "name": "전언석",
+      "grade": "희귀",
+      "description": "함께 충전한 한 쌍의 돌로 한쪽을 쥐고 말하면 같은 마을 안에 있는 다른 돌에서 목소리가 흘러나온다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-08.svg"
+    },
+    {
+      "name": "쌍생 서판",
+      "grade": "희귀",
+      "description": "같은 도시 안에 둔 짝지은 두 판 중 하나에 글씨를 쓰면 다른 판에도 같은 획이 나타나고 지운 자리도 함께 지워진다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-09.svg"
+    },
+    {
+      "name": "전령의 거울",
+      "grade": "희귀",
+      "description": "마주 대어 짝지은 두 거울에 마력을 공급하면 같은 도시 안에서 각 거울 앞의 얼굴과 손짓이 반대편에 비친다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-10.svg"
+    },
+    {
+      "name": "물의 속삭임",
+      "grade": "희귀",
+      "description": "같은 물줄기에 담근 조개들 사이로 말소리가 전해지며, 물길이 끊기거나 강한 소용돌이를 만나면 소리가 흐트러진다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-11.svg"
+    },
+    {
+      "name": "봉화의 심지",
+      "grade": "희귀",
+      "description": "한 불에서 나누어 켠 등잔 하나에 마력으로 깜빡임을 주면 그 빛을 받은 등잔들도 같은 박자로 깜빡여 신호를 이어 보낸다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-12.svg"
+    },
+    {
+      "name": "침묵의 전언패",
+      "grade": "희귀",
+      "description": "짝을 맞춘 패를 손끝으로 두드리면 가까운 다른 패가 같은 박자로 떨려 소리 없이 짧은 신호를 보낼 수 있다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-13.svg"
+    },
+    {
+      "name": "훈향의 항아리",
+      "grade": "희귀",
+      "description": "뚜껑에 정한 문양을 누르면 안에 담은 향 하나가 입구에서 강하게 퍼져 바람 아래쪽에 있는 이들에게 신호가 된다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-14.svg"
+    },
+    {
+      "name": "밀서의 전언갑",
+      "grade": "희귀",
+      "description": "같은 마을 안에서 짝지은 지갑에 넣은 종이의 잉크 글씨가 반대쪽 지갑 안의 빈 종이에 옮겨 나타나며 원래 글씨는 옅어진다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-15.svg"
+    },
+    {
+      "name": "환영 전령조",
+      "grade": "영웅",
+      "description": "마력으로 만든 작은 새가 사용자가 본 장소를 향해 날아가 도착하면 담아둔 짧은 말을 울리며, 길을 가로막는 벽은 돌아가야 한다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-16.svg"
+    },
+    {
+      "name": "집회의 공명석",
+      "grade": "영웅",
+      "description": "중앙 돌에 말을 걸면 함께 충전해 둔 여러 작은 돌에서 목소리가 울려 넓은 야영지에 같은 전언을 전할 수 있다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-17.svg"
+    },
+    {
+      "name": "꿈의 회랑 베개",
+      "grade": "영웅",
+      "description": "서로 실을 교환해 꿰맨 두 베개를 베고 잠들면 꿈속에 작은 공용 방이 나타나 두 사람이 대화할 수 있다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-18.svg"
+    },
+    {
+      "name": "먼길의 전언수정",
+      "grade": "전설",
+      "description": "같은 결정에서 갈라낸 조각들을 통해 대륙을 사이에 두고도 목소리를 주고받으며, 대화하는 양쪽에서 마력을 공급해야 한다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-19.svg"
+    },
+    {
+      "name": "서약의 봉화대",
+      "grade": "전설",
+      "description": "함께 불을 피우며 연결한 봉화대 중 하나에 긴급한 뜻을 실어 점화하면 나머지 봉화대에도 같은 빛의 불꽃이 일어난다.",
+      "category": "마도구",
+      "subcategory": "통신구",
+      "icon": "magic-signal-20.svg"
     },
     {
       "name": "감응침",
@@ -5029,23 +5733,711 @@
       "description": "마력이 흐르는 물건에 끝을 대면 바늘이 약하게 빛나 간단한 마력 통로의 연결을 확인할 수 있다.",
       "category": "마도구",
       "subcategory": "탐지구",
-      "icon": "dummy.svg"
+      "icon": "magic-detect-01.svg"
     },
     {
-      "name": "감응 마력등",
-      "grade": "일반",
-      "description": "연결한 마력선에 힘이 흐르는 동안 불이 켜져 장치가 작동 중인지 한눈에 볼 수 있다.",
+      "name": "습기의 구슬",
+      "grade": "고급",
+      "description": "축축한 표면 가까이 가져가면 푸르게 변해 겉으로 마른 벽과 바닥의 습기를 살피기 좋다.",
       "category": "마도구",
-      "subcategory": "마도장치",
-      "icon": "dummy.svg"
+      "subcategory": "탐지구",
+      "icon": "magic-detect-02.svg"
     },
     {
-      "name": "성역의 종",
+      "name": "온기의 관측판",
+      "grade": "고급",
+      "description": "판 너머의 따뜻한 물체가 붉은빛으로 보여 어두운 곳에서 열이 남은 흔적을 찾을 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-03.svg"
+    },
+    {
+      "name": "풍향 룬깃",
+      "grade": "고급",
+      "description": "가까운 공기가 흐르는 방향을 따라 깃이 기울어 벽 틈과 막힌 통로의 바람을 확인할 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-04.svg"
+    },
+    {
+      "name": "공명의 탐지추",
+      "grade": "고급",
+      "description": "벽에 댄 줄 끝을 따라 마력을 보내면 안쪽에 큰 빈틈이 있을 때 추가 느리게 흔들린다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-05.svg"
+    },
+    {
+      "name": "마력탐지 나침반",
+      "grade": "희귀",
+      "description": "주변에서 가장 강하게 드러난 마력원 쪽으로 바늘이 돌아가며, 거센 마력이 여럿 겹치면 바늘이 흔들린다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-06.svg"
+    },
+    {
+      "name": "독감별 은접시",
+      "grade": "희귀",
+      "description": "올려놓은 음식과 액체에 생물에게 해로운 독성 성분이 섞여 있으면 표면에 검은 반점이 생긴다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-07.svg"
+    },
+    {
+      "name": "생명의 구슬",
+      "grade": "희귀",
+      "description": "가까운 생물의 생명 기운이 구 안의 작은 빛으로 나타나며 돌을 돌려 빛이 모이는 방향을 살필 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-08.svg"
+    },
+    {
+      "name": "혼령 등롱",
+      "grade": "희귀",
+      "description": "등롱에 신성력을 보내면 가까운 영체가 움직일 때 불꽃이 그 방향으로 기울고 푸르게 변한다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-09.svg"
+    },
+    {
+      "name": "비문 렌즈",
+      "grade": "희귀",
+      "description": "종이에 마른 잉크와 지운 획의 흔적이 짙게 보여 덧쓴 곳과 문질러 지운 부분을 비교하기 좋다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-10.svg"
+    },
+    {
+      "name": "혈흔 등불",
+      "grade": "희귀",
+      "description": "등빛을 받은 마른 혈흔이 붉게 빛나며, 다른 액체가 섞이거나 씻겨나간 곳은 빛이 희미해진다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-11.svg"
+    },
+    {
+      "name": "금속의 길잡이",
+      "grade": "희귀",
+      "description": "실에 매단 추가 가까운 금속 덩어리 쪽으로 기울며 금속이 크고 가까울수록 당김이 강해진다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-12.svg"
+    },
+    {
+      "name": "함정감지 렌즈",
+      "grade": "희귀",
+      "description": "경으로 바라보면 팽팽하게 당겨진 가는 줄이 빛나 문과 바닥에 걸린 작동선을 찾기 쉽다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-13.svg"
+    },
+    {
+      "name": "탁기의 등잔",
+      "grade": "희귀",
+      "description": "주변에 부패에서 생긴 기체가 쌓이면 불꽃이 녹색으로 변해 오래된 우물과 밀폐된 창고의 공기를 살필 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-14.svg"
+    },
+    {
+      "name": "잔영의 돋보기",
+      "grade": "희귀",
+      "description": "마법이 남긴 자국이 획처럼 드러나 같은 시전 방식으로 만들어진 흔적을 비교할 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-15.svg"
+    },
+    {
+      "name": "수맥의 점술틀",
+      "grade": "희귀",
+      "description": "땅에 꽂은 가지들이 아래쪽에서 움직이는 물의 기운을 향해 휘어져 얕은 지하수 흐름을 살필 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-16.svg"
+    },
+    {
+      "name": "기만의 저울",
+      "grade": "영웅",
+      "description": "말하는 이가 손을 대면 그 사람이 자기 말을 거짓이라고 여기면서 말할 때 접시가 떨린다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-17.svg"
+    },
+    {
+      "name": "중첩의 관측경",
+      "grade": "영웅",
+      "description": "한 물건에 겹쳐진 여러 마법이 서로 다른 빛의 층으로 보여 바깥에 덧씌운 효과와 안쪽의 흐름을 나눠 살필 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-18.svg"
+    },
+    {
+      "name": "파편의 이음판",
+      "grade": "영웅",
+      "description": "판 위에 놓은 작은 조각들의 부러진 면이 서로 맞는 쪽으로 돌아가 깨진 물건을 다시 맞춰보기 좋다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-19.svg"
+    },
+    {
+      "name": "시선의 잔영경",
+      "grade": "영웅",
+      "description": "사람의 시선이 오래 머문 무생물을 거울에 비추면 옅은 잔광이 보여 최근 누군가 살펴본 부분을 찾을 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-20.svg"
+    },
+    {
+      "name": "소환의 잔향환",
+      "grade": "영웅",
+      "description": "소환이 일어난 자리에서 고리를 돌리면 남은 마력의 흐름이 밝게 이어져 나타났다가 사라진 출입점을 살필 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-21.svg"
+    },
+    {
+      "name": "차원의 나침반",
+      "grade": "영웅",
+      "description": "가까운 공간 왜곡을 향해 바늘이 돌아가 마법가방의 입구와 숨겨진 공간문을 찾는 데 쓰인다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-22.svg"
+    },
+    {
+      "name": "본연의 거울",
       "grade": "전설",
-      "description": "종을 울리며 신성력을 보내면 둘레에 결계가 생겨 그 안의 언데드 결속과 저주의 기운이 약해지고, 울림을 이어가는 동안 경계가 유지된다.",
+      "description": "변형 마법이 걸린 대상을 비추면 현재 모습과 마법이 걸리기 전 모습이 겹쳐 나타나 변형된 부분을 볼 수 있다.",
       "category": "마도구",
-      "subcategory": "결계장치",
-      "icon": "dummy.svg"
+      "subcategory": "탐지구",
+      "icon": "magic-detect-23.svg"
+    },
+    {
+      "name": "거목의 관측반",
+      "grade": "전설",
+      "description": "살아 있는 나무에 대고 마력을 흘리면 이어진 뿌리 주위의 빈 공간과 물길이 빛선으로 떠오른다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-24.svg"
+    },
+    {
+      "name": "대지의 귀",
+      "grade": "신화",
+      "description": "대지의 신이 남긴 돌을 맨땅에 대면 땅속 큰 균열과 움직이는 암반의 울림이 들려 붕괴가 시작되는 방향을 알아챌 수 있다.",
+      "category": "마도구",
+      "subcategory": "탐지구",
+      "icon": "magic-detect-25.svg"
+    },
+    {
+      "name": "룬칠판",
+      "grade": "일반",
+      "description": "마력이 담긴 막대로 긁으면 빛글씨가 남으며 판의 모서리를 쓸면 모두 지워진다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-01.svg"
+    },
+    {
+      "name": "빛갈피",
+      "grade": "고급",
+      "description": "책갈피를 끼운 페이지의 마지막 줄이 작은 빛글씨로 남아 책을 덮은 뒤에도 어디까지 읽었는지 확인할 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-02.svg"
+    },
+    {
+      "name": "겹겹의 서판",
+      "grade": "고급",
+      "description": "표면을 뒤집듯 쓸어 기록면을 바꾸는 작은 판으로 여러 장의 메모를 한 판에 나눠 적을 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-03.svg"
+    },
+    {
+      "name": "기억의 잉크병",
+      "grade": "고급",
+      "description": "병의 룬을 짚고 쓰면 그 잉크로 적은 마지막 문장이 병 표면에 나타나 필기 실수를 되짚기 좋다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-04.svg"
+    },
+    {
+      "name": "인상의 밀랍",
+      "grade": "고급",
+      "description": "마력을 보낸 밀랍에 작은 물체를 누르면 표면 무늬가 보존되어 떼어낸 뒤에도 촉감으로 비교할 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-05.svg"
+    },
+    {
+      "name": "음성수정",
+      "grade": "희귀",
+      "description": "손에 쥐고 룬을 누르는 동안 가까운 소리가 저장되며, 다시 누르면 같은 순서로 울려 나온다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-06.svg"
+    },
+    {
+      "name": "환등 상자",
+      "grade": "희귀",
+      "description": "뚜껑을 열고 마력을 보내면 상자 앞의 한 장면이 안쪽에 남고, 열어둔 뚜껑에 작은 빛그림으로 띄울 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-07.svg"
+    },
+    {
+      "name": "여정의 구슬",
+      "grade": "희귀",
+      "description": "들고 걸은 방향과 굽은 길이 내부에 선으로 남아 출발한 곳까지 지나온 경로를 되짚을 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-08.svg"
+    },
+    {
+      "name": "필사의 펜꽂이",
+      "grade": "희귀",
+      "description": "꽂아둔 펜이 사용자가 별도 종이에 쓰는 획을 따라 같은 글씨를 적으며 종이와 잉크를 따로 준비해야 한다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-09.svg"
+    },
+    {
+      "name": "봉인의 증표끈",
+      "grade": "희귀",
+      "description": "매듭을 묶고 마력을 보내면 그 모양이 끈에 남아 나중에 풀었다 다시 묶은 곳은 다른 빛으로 나타난다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-10.svg"
+    },
+    {
+      "name": "온기의 기억판",
+      "grade": "희귀",
+      "description": "올려놓은 물건의 온기와 냉기가 무늬로 새겨져 나중에 손으로 짚어 어느 쪽이 더 뜨거웠는지 비교할 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-11.svg"
+    },
+    {
+      "name": "향기의 유리구",
+      "grade": "희귀",
+      "description": "구를 열어 들인 향이 안쪽에 머물고 작은 마개를 열 때마다 조금씩 흘러나온다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-12.svg"
+    },
+    {
+      "name": "그림자의 회상포",
+      "grade": "희귀",
+      "description": "빛을 받은 천 위로 지나간 그림자의 윤곽이 겹겹이 남으며 천을 접으면 마지막 그림자부터 차례로 펼쳐볼 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-13.svg"
+    },
+    {
+      "name": "맹약의 기록지",
+      "grade": "희귀",
+      "description": "두 사람이 함께 만지며 말한 짧은 약속이 종이에 글로 나타나고 각자가 동의한 문장은 같은 빛으로 남는다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-14.svg"
+    },
+    {
+      "name": "감각의 진주",
+      "grade": "영웅",
+      "description": "손에 쥐고 집중한 짧은 순간의 촉감과 냄새를 저장해 다시 쥔 이가 느끼도록 전할 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-15.svg"
+    },
+    {
+      "name": "허공의 깃펜",
+      "grade": "영웅",
+      "description": "마력을 보내며 손을 움직이면 허공에 글과 선이 남고, 틀에 끼워두면 적힌 모양을 빛으로 펼쳐 보인다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-16.svg"
+    },
+    {
+      "name": "잔영의 기억경",
+      "grade": "영웅",
+      "description": "저장한 풍경을 현재 거울에 보이는 풍경 위에 겹쳐 비추어 사라지거나 옮겨진 부분을 비교할 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-17.svg"
+    },
+    {
+      "name": "증언의 서",
+      "grade": "영웅",
+      "description": "말하는 이가 손을 얹고 자발적으로 전한 증언이 목소리와 글로 함께 남으며, 기록을 지운 페이지에는 지운 자국이 뚜렷하게 남는다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-18.svg"
+    },
+    {
+      "name": "회상의 수정",
+      "grade": "전설",
+      "description": "사용자가 직접 겪은 한 장면을 집중해 떠올리면 기억에 남은 광경과 소리가 수정 안에 펼쳐져 다른 이도 볼 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-19.svg"
+    },
+    {
+      "name": "기록신의 흰서판",
+      "grade": "신화",
+      "description": "기록의 신이 남긴 판에 합의한 기록을 새기면 긁거나 태워도 글이 남으며, 새길 때 함께 손을 댄 이들이 모두 동의하면 지울 수 있다.",
+      "category": "마도구",
+      "subcategory": "기록구",
+      "icon": "magic-record-20.svg"
+    },
+    {
+      "name": "부유의 구슬",
+      "grade": "일반",
+      "description": "마력을 넣으면 작은 구가 정해둔 높이에 떠올라 공중에서 제자리 회전하며 손으로 누르면 천천히 내려온다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-01.svg"
+    },
+    {
+      "name": "활주의 받침대",
+      "grade": "고급",
+      "description": "얹은 짐 아래에 얇은 마력층이 생겨 평평한 바닥 위에서 힘을 적게 들이고 밀 수 있다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-02.svg"
+    },
+    {
+      "name": "평형의 썰매",
+      "grade": "고급",
+      "description": "지면의 작은 굴곡을 지날 때 받침이 스스로 기울어져 위에 실은 짐을 수평으로 유지한다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-03.svg"
+    },
+    {
+      "name": "마력도르래",
+      "grade": "고급",
+      "description": "줄을 걸고 손잡이에 마력을 보내면 바퀴가 돌아 짐을 끌어올리며 힘의 방향은 줄을 건 위치에 따라 정해진다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-04.svg"
+    },
+    {
+      "name": "귀환 연",
+      "grade": "고급",
+      "description": "마력을 넣어 날리면 펼친 바람길을 따라 움직이고 줄의 룬을 누르면 바람을 가르며 줄을 당기는 쪽으로 돌아온다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-05.svg"
+    },
+    {
+      "name": "결속의 밧줄",
+      "grade": "희귀",
+      "description": "끝에 손으로 고리를 만든 뒤 명령하면 가까운 돌기와 기둥을 찾아 감기며, 줄을 따라 마력을 보내면 감긴 방향을 바꿀 수 있다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-06.svg"
+    },
+    {
+      "name": "동행의 수레",
+      "grade": "희귀",
+      "description": "손잡이에 손을 대어 주인을 정하면 그 사람의 뒤를 일정한 간격으로 따라오며, 바퀴가 걸린 장애물 앞에서는 멈춰 작은 종을 울린다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-07.svg"
+    },
+    {
+      "name": "부유 손수레",
+      "grade": "희귀",
+      "description": "손잡이를 잡고 마력을 흘리면 짐받이가 허리께까지 떠올라 움직이며, 무겁게 실을수록 뜨는 높이가 낮아진다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-08.svg"
+    },
+    {
+      "name": "여울의 뗏목",
+      "grade": "희귀",
+      "description": "마력을 보낸 노가 흐르는 물을 붙잡아 뗏목을 당기므로 잔잔한 조작만으로 물살을 비껴가거나 거슬러 오를 수 있다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-09.svg"
+    },
+    {
+      "name": "순환의 운반륜",
+      "grade": "희귀",
+      "description": "올려놓은 물건 밑에서 원반이 빙글 돌며 원하는 쪽으로 굴러가 가구와 통을 방향 바꿔 옮기기 좋다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-10.svg"
+    },
+    {
+      "name": "거미발 바퀴",
+      "grade": "희귀",
+      "description": "마력을 흘리는 동안 바퀴 가장자리가 단단한 벽에 붙어 구르며 바퀴축에 매단 짐도 함께 올라간다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-11.svg"
+    },
+    {
+      "name": "천장길의 고리",
+      "grade": "희귀",
+      "description": "천장에 그은 마력선을 따라 고리가 미끄러져 움직이며, 아래에 건 작은 짐을 선의 양끝 사이로 보낼 수 있다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-12.svg"
+    },
+    {
+      "name": "견인의 구슬",
+      "grade": "희귀",
+      "description": "구를 기둥에 묶고 마력을 보내면 아래로 늘어진 줄이 위로 당겨져 매달린 짐을 천천히 들어 올린다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-13.svg"
+    },
+    {
+      "name": "풍낭의 돛틀",
+      "grade": "희귀",
+      "description": "틀에 갇힌 바람이 돛을 원하는 쪽으로 밀며, 틀을 열면 모아둔 바람이 한꺼번에 빠져나온다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-14.svg"
+    },
+    {
+      "name": "깃털닻",
+      "grade": "희귀",
+      "description": "아래로 떨어지는 물체에 연결하면 닻 주위의 공기가 팽팽해져 낙하가 느려지며, 무거운 짐일수록 더 많은 마력이 든다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-15.svg"
+    },
+    {
+      "name": "허공 디딤돌",
+      "grade": "영웅",
+      "description": "원석을 앞으로 굴리면 지나가는 자리마다 잠깐 단단한 빛 발판이 생기고 뒤쪽 발판부터 사라진다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-16.svg"
+    },
+    {
+      "name": "전이의 쌍환",
+      "grade": "영웅",
+      "description": "서로 보이는 곳에 세운 두 고리에 마력을 흘리면 한쪽을 통과한 물체가 다른 고리에서 같은 방향으로 나온다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-17.svg"
+    },
+    {
+      "name": "그림자 교량틀",
+      "grade": "영웅",
+      "description": "가까이 맞닿은 두 그림자에 틀을 걸면 사이의 그늘이 단단해져 디딜 수 있으며, 그림자를 없애는 빛이 들면 다리가 흐트러진다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-18.svg"
+    },
+    {
+      "name": "승천의 관",
+      "grade": "영웅",
+      "description": "수직으로 고정한 긴 관 안에 위아래로 흐르는 힘이 생겨 들어간 사람과 짐을 입구에서 반대쪽 끝으로 천천히 옮긴다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-19.svg"
+    },
+    {
+      "name": "비행 양탄자",
+      "grade": "영웅",
+      "description": "위에 앉아 가장자리에 마력을 보내면 양탄자가 떠올라 손으로 기울인 쪽으로 날며, 무거운 짐과 강풍은 조종을 어렵게 한다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-20.svg"
+    },
+    {
+      "name": "동행의 받침대",
+      "grade": "영웅",
+      "description": "함께 충전한 받침대들이 중심 받침의 움직임을 똑같이 따라 한쪽으로 미끄러져 긴 물체를 비틀림 없이 옮길 수 있다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-21.svg"
+    },
+    {
+      "name": "쌍생의 차원문",
+      "grade": "전설",
+      "description": "같은 의식으로 연결한 두 문틀에 마력을 충분히 공급하면 멀리 떨어진 곳도 문 하나를 건너듯 오갈 수 있다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-22.svg"
+    },
+    {
+      "name": "귀환석",
+      "grade": "전설",
+      "description": "손으로 표식을 맞춘 돌 하나를 목적지에 놓아두면 짝돌을 쥐고 마력을 모아 그 자리로 이동할 수 있으며 목적지의 공간이 막혀 있으면 이동이 시작되지 않는다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-23.svg"
+    },
+    {
+      "name": "미궁의 손잡이",
+      "grade": "전설",
+      "description": "같은 건물 안에서 손잡이를 달아 연결한 문들의 출구를 서로 바꾸며, 손잡이를 원래 방향으로 돌리면 본래 복도로 이어진다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-24.svg"
+    },
+    {
+      "name": "길의 신의 나룻배",
+      "grade": "신화",
+      "description": "길의 신이 남긴 배는 강 건너편이 보이는 나루에서 띄우면 거센 물살 사이에 고요한 물길을 펼쳐 배와 승객을 반대편 나루로 데려간다.",
+      "category": "마도구",
+      "subcategory": "이동구",
+      "icon": "magic-travel-25.svg"
+    },
+    {
+      "name": "겹주머니 지갑",
+      "grade": "고급",
+      "description": "겉으로 같은 입구를 안쪽 고리의 방향에 따라 두 개의 작은 수납공간으로 나눠 쓸 수 있다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-01.svg"
+    },
+    {
+      "name": "접힌 문서함",
+      "grade": "고급",
+      "description": "얇게 접힌 공간 안에 편지와 지도 같은 납작한 물건을 여러 겹 넣어도 함의 두께가 거의 늘지 않는다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-02.svg"
+    },
+    {
+      "name": "확장의 주머니",
+      "grade": "희귀",
+      "description": "마력을 보낸 뒤 입구를 당기면 안쪽이 작은 배낭만큼 넓어지고 놓으면 겉모양만 원래 크기로 줄어든다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-03.svg"
+    },
+    {
+      "name": "선별의 주머니",
+      "grade": "희귀",
+      "description": "입구를 열고 찾는 물건의 이름을 말하면 안에 넣어둔 물건 중 해당하는 것이 손 가까이로 옮겨온다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-04.svg"
+    },
+    {
+      "name": "쌍생의 주머니",
+      "grade": "희귀",
+      "description": "같은 수납공간을 공유하는 두 주머니로 한쪽에 넣은 물건을 다른 쪽 입구에서 꺼낼 수 있다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-05.svg"
+    },
+    {
+      "name": "확장의 고리",
+      "grade": "희귀",
+      "description": "가방 입구에 끼워 마력을 보내면 입구가 천을 찢지 않고 늘어나 안에 들어갈 큰 물건을 통과시키기 쉽다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-06.svg"
+    },
+    {
+      "name": "격실의 아공간함",
+      "grade": "희귀",
+      "description": "손잡이를 돌릴 때마다 서로 분리된 수납칸이 입구에 이어져 물에 젖은 짐과 마른 짐을 나눠 보관한다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-07.svg"
+    },
+    {
+      "name": "응답의 서랍장",
+      "grade": "희귀",
+      "description": "먼 안쪽 칸을 손으로 가리키면 그 서랍이 앞쪽 빈자리로 옮겨와 좁은 창고에서도 꺼내기 편하다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-08.svg"
+    },
+    {
+      "name": "축소의 궤",
+      "grade": "희귀",
+      "description": "무생물 짐을 넣고 옆판을 접으면 상자와 내용물이 함께 작아지며, 잠금쇠를 풀면 원래 크기로 돌아온다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-09.svg"
+    },
+    {
+      "name": "비밀의 수납패",
+      "grade": "희귀",
+      "description": "얇은 무생물을 표면에 대고 밀면 패 안의 납작한 공간으로 들어가며 가장자리를 두드리면 다시 밀려 나온다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-10.svg"
+    },
+    {
+      "name": "운무의 항아리",
+      "grade": "희귀",
+      "description": "열린 입구 가까이의 안개와 연기를 안쪽의 넓은 공간에 모아두며, 밸브를 열어 모은 기체를 천천히 내보낼 수 있다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-11.svg"
+    },
+    {
+      "name": "역전의 궤",
+      "grade": "희귀",
+      "description": "뚜껑에 마력을 보내면 내부의 위아래가 뒤집혀 바닥에 있던 물건이 입구 쪽으로 떨어지며, 밖으로 나오면 평소 방향으로 떨어진다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-12.svg"
+    },
+    {
+      "name": "반전의 보자기",
+      "grade": "영웅",
+      "description": "작은 짐을 싸고 두 모서리를 함께 당기면 매듭을 풀지 않은 채 짐이 겉으로 나오고 바깥면의 작은 물건이 안으로 들어간다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-13.svg"
+    },
+    {
+      "name": "확장의 경계주",
+      "grade": "영웅",
+      "description": "빈 방의 모서리에 말뚝을 세우고 마력을 유지하면 내부의 벽 사이가 넓어지며, 효과를 거두기 전에는 늘어난 자리에 둔 짐을 치워야 한다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-14.svg"
+    },
+    {
+      "name": "그림자 주머니",
+      "grade": "영웅",
+      "description": "손을 자기 그림자에 대어 넣은 작은 물건이 그림자 안에 머무르며, 그림자가 생긴 곳에서 다시 손을 넣어 꺼낼 수 있다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-15.svg"
+    },
+    {
+      "name": "접힌 문턱의 실",
+      "grade": "영웅",
+      "description": "문틀 안에 실을 걸어 마력을 보내면 입구의 폭이 옆으로 접혀 좁아지며, 걸린 실을 풀면 원래 폭으로 펴진다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-16.svg"
+    },
+    {
+      "name": "아공간 가방",
+      "grade": "영웅",
+      "description": "가방 안에 짐수레 한 대에 실을 만한 공간이 펼쳐지고 겉에서 느끼는 무게도 크게 줄며, 입구를 통과할 수 있는 물건을 넣어야 한다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-17.svg"
+    },
+    {
+      "name": "창고지기의 거울",
+      "grade": "전설",
+      "description": "같은 창고에 연결해 둔 거울들로 안을 보며 손을 넣어 물건을 꺼낼 수 있고, 다른 거울에서 잡은 물건의 움직임도 그대로 전해진다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-18.svg"
+    },
+    {
+      "name": "방랑자의 방주머니",
+      "grade": "전설",
+      "description": "바닥에 놓고 입구를 펼치면 작은 방으로 내려가는 계단이 생기며, 안에 사람이 있을 때는 입구가 열린 채 땅에 고정된다.",
+      "category": "마도구",
+      "subcategory": "공간도구",
+      "icon": "magic-space-19.svg"
     },
     {
       "name": "느린 시간의 궤",
@@ -5053,7 +6445,607 @@
       "description": "뚜껑을 잠그고 마력을 공급하면 안에 넣은 무생물의 부패와 숙성이 매우 느려지며, 뚜껑을 열면 평소의 속도로 돌아온다.",
       "category": "마도구",
       "subcategory": "공간도구",
-      "icon": "dummy.svg"
+      "icon": "magic-space-20.svg"
+    },
+    {
+      "name": "경계의 룬줄",
+      "grade": "일반",
+      "description": "바닥에 펼쳐 마력을 보내면 끈을 넘어서는 발과 물체가 닿은 부분에서 작은 빛이 번진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-01.svg"
+    },
+    {
+      "name": "틈새봉인부",
+      "grade": "고급",
+      "description": "틈에 붙이고 마력을 흘리면 얇은 막이 틈을 메워 찬바람이 새는 것을 줄이며, 패를 떼면 막도 벗겨진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-02.svg"
+    },
+    {
+      "name": "정결의 그물",
+      "grade": "고급",
+      "description": "창틀에 펼치면 눈에 보이지 않는 촘촘한 막이 생겨 떠다니는 먼지를 걸러내고 망을 흔들면 모인 먼지가 떨어진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-03.svg"
+    },
+    {
+      "name": "비막이 수호주",
+      "grade": "고급",
+      "description": "땅에 박으면 위쪽에 경사진 작은 막이 생겨 빗물이 가장자리로 흘러내린다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-04.svg"
+    },
+    {
+      "name": "방충 향환",
+      "grade": "고급",
+      "description": "고리를 닫아놓으면 그 안쪽에서 작은 벌레가 꺼리는 향이 감돌며 바람이 강할수록 가장자리 효과가 약해진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-05.svg"
+    },
+    {
+      "name": "순풍의 결계틀",
+      "grade": "고급",
+      "description": "창과 구멍에 끼우면 공기가 룬 화살표가 향한 방향으로만 흐르며 틀을 뒤집어 흐름을 바꿀 수 있다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-06.svg"
+    },
+    {
+      "name": "침묵의 구슬",
+      "grade": "희귀",
+      "description": "마력을 보내면 구 주위의 작은 방만 한 공간에서 소리가 안팎으로 전해지는 것이 크게 줄어든다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-07.svg"
+    },
+    {
+      "name": "향기의 봉인환",
+      "grade": "희귀",
+      "description": "물건 둘레에 놓으면 안에서 나는 냄새가 경계를 넘지 않고 머물며, 테두리를 열면 모여 있던 향이 퍼진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-08.svg"
+    },
+    {
+      "name": "화염수호 장막판",
+      "grade": "희귀",
+      "description": "판 앞에 얇은 막이 펼쳐져 날아드는 불꽃을 갈라내며, 막을 오래 쐰 열기는 뒤쪽에도 전해진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-09.svg"
+    },
+    {
+      "name": "수문 룬석",
+      "grade": "희귀",
+      "description": "물이 흐르는 틈에 박으면 주변의 물이 돌을 피해 돌아가며, 틈을 메우는 데 필요한 마력은 수압이 높을수록 커진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-10.svg"
+    },
+    {
+      "name": "암막의 틀",
+      "grade": "희귀",
+      "description": "틀 안쪽에 어두운 막이 펼쳐져 빛을 가리며 틀을 기울여 그늘을 만들 방향을 바꿀 수 있다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-11.svg"
+    },
+    {
+      "name": "고요의 받침대",
+      "grade": "희귀",
+      "description": "바닥과 물체 사이에 대고 마력을 보내면 두 면 사이로 전해지는 잔진동이 줄어들어 흔들림을 분리할 수 있다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-12.svg"
+    },
+    {
+      "name": "담수의 고리",
+      "grade": "희귀",
+      "description": "고리를 통해 천천히 흐르는 물의 염분이 안쪽 테두리에 결정으로 남아 지나간 물의 짠맛이 옅어진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-13.svg"
+    },
+    {
+      "name": "침묵의 마력함",
+      "grade": "희귀",
+      "description": "뚜껑을 닫으면 내부 마력의 잔광과 기척이 함 안에 머물러 외부의 마력 탐지에서 눈에 덜 띈다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-14.svg"
+    },
+    {
+      "name": "문양의 관문환",
+      "grade": "희귀",
+      "description": "입구에 걸면 얇은 막이 생기고 고리와 같은 룬을 지닌 물건이 닿은 자리만 열려 그 물건을 지닌 이가 통과할 수 있다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-15.svg"
+    },
+    {
+      "name": "봉마의 통",
+      "grade": "영웅",
+      "description": "저주에 물든 물건을 넣고 봉하면 저주의 기운이 바깥으로 퍼지는 것을 억누르며, 안쪽 문양이 검게 번지면 봉인을 보수해야 한다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-16.svg"
+    },
+    {
+      "name": "영혼경계 수호주",
+      "grade": "영웅",
+      "description": "이어 세운 말뚝 사이에 영체가 통과하기 어려운 마력 그물이 생기며, 한 말뚝이 뽑히면 그 옆의 경계가 열린다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-17.svg"
+    },
+    {
+      "name": "인내의 천막",
+      "grade": "영웅",
+      "description": "천막에 닿은 작은 투사체의 힘이 천 전체로 퍼지며, 받아낸 충격이 누적되면 고정줄과 지지대에 부담이 쌓인다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-18.svg"
+    },
+    {
+      "name": "바람장벽 기둥",
+      "grade": "영웅",
+      "description": "두 기둥 사이의 공기가 단단한 벽처럼 굳으며 기둥을 옮기면 벽의 방향과 폭도 함께 바뀐다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-19.svg"
+    },
+    {
+      "name": "격퇴의 북",
+      "grade": "영웅",
+      "description": "북을 치면 둘레에 둥근 압력막이 잠깐 퍼져 가까이 붙은 물체를 바깥으로 밀어내며, 세게 칠수록 넓게 퍼진다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-20.svg"
+    },
+    {
+      "name": "속박의 문틀",
+      "grade": "영웅",
+      "description": "틀 안의 공간에 끈적한 저항이 생겨 통과하는 물체가 느려지며, 무거운 물체를 오래 붙들수록 마력이 빠르게 든다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-21.svg"
+    },
+    {
+      "name": "굴절의 구슬",
+      "grade": "영웅",
+      "description": "구 둘레로 빛이 휘어 바깥에서는 안쪽의 풍경이 옆으로 어긋나 보이며, 구를 옮기면 일그러진 경계도 따라 움직인다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-22.svg"
+    },
+    {
+      "name": "차원봉인 못",
+      "grade": "전설",
+      "description": "공간문 가장자리에 박으면 그 부분의 틈이 닫혀 전이와 소환의 통로가 좁아지며 못을 뽑으면 막힌 틈이 다시 열린다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-23.svg"
+    },
+    {
+      "name": "순환의 장벽석",
+      "grade": "전설",
+      "description": "장벽에 닿은 주문에서 흩어지는 마력 일부를 모아 장벽 유지에 보태며, 모아들이는 힘보다 거센 공격은 장벽을 흔든다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-24.svg"
+    },
+    {
+      "name": "성역의 종",
+      "grade": "전설",
+      "description": "종을 울리며 신성력을 보내면 둘레에 결계가 생겨 그 안의 언데드 결속과 저주의 기운이 약해지고, 울림을 이어가는 동안 경계가 유지된다.",
+      "category": "마도구",
+      "subcategory": "결계장치",
+      "icon": "magic-ward-25.svg"
+    },
+    {
+      "name": "견습 소환고리",
+      "grade": "일반",
+      "description": "작은 소환진의 선을 금속 고리에 새겨 불러낼 존재와 연결할 자리를 일정하게 잡아준다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-01.svg"
+    },
+    {
+      "name": "정령의 초대등",
+      "grade": "고급",
+      "description": "마력의 불빛이 가까운 작은 정령에게 초대의 뜻을 전하며 등잔 앞을 잠시 머무를 자리로 내어준다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-02.svg"
+    },
+    {
+      "name": "계약의 룬패",
+      "grade": "고급",
+      "description": "계약한 존재와 주고받은 마력 문양을 보관해 다음에 부를 때 같은 상대를 향해 의식을 시작하기 쉽다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-03.svg"
+    },
+    {
+      "name": "소환의 경계주",
+      "grade": "고급",
+      "description": "땅에 둥글게 꽂고 실로 이으면 각 말뚝 사이의 마력 흐름이 정렬되어 큰 소환진을 유지하기 편하다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-04.svg"
+    },
+    {
+      "name": "불씨정령의 화로",
+      "grade": "희귀",
+      "description": "마력을 보낸 불씨가 작은 불꽃 정령을 불러들이며, 정령은 내어준 장작과 마력을 먹고 화로 주변에서 불을 다룬다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-05.svg"
+    },
+    {
+      "name": "물방울정령의 잔",
+      "grade": "희귀",
+      "description": "맑은 물에 마력을 흘리면 작은 물 정령이 나타나 물을 손바닥만 한 덩어리로 모아 옮기며, 머무는 동안 잔의 물이 줄어든다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-06.svg"
+    },
+    {
+      "name": "바람정령의 피리",
+      "grade": "희귀",
+      "description": "일정한 곡조를 불면 바람 정령이 소리 가까이 와 기류를 움직이며, 원하는 동작은 몸짓과 교감으로 전해야 한다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-07.svg"
+    },
+    {
+      "name": "흙정령의 토우",
+      "grade": "희귀",
+      "description": "젖은 흙으로 빚은 자리에 작은 흙 정령이 깃들어 토우 모양으로 움직이고 느슨한 흙을 밀고 다진다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-08.svg"
+    },
+    {
+      "name": "그늘정령의 촛불",
+      "grade": "희귀",
+      "description": "불을 등지고 생긴 그림자에 마력을 보내면 작은 그늘 정령이 머물며 주변 그림자의 형태를 천천히 바꾼다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-09.svg"
+    },
+    {
+      "name": "꽃정령의 요람",
+      "grade": "희귀",
+      "description": "살아 있는 꽃을 꽂고 마력을 주면 향을 따라 꽃 정령이 찾아와 가까운 꽃들의 개화와 향기를 고르게 돌본다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-10.svg"
+    },
+    {
+      "name": "계약수의 뿔피리",
+      "grade": "희귀",
+      "description": "자발적으로 계약한 짐승의 털을 넣고 불면 그 짐승이 부름을 느껴 사용자가 있는 방향을 알아차린다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-11.svg"
+    },
+    {
+      "name": "종이사역마의 틀",
+      "grade": "희귀",
+      "description": "틀에 접은 종이에 마력을 보내면 작은 새나 벌레 모양의 사역마가 움직이며, 접힌 몸이 젖거나 찢어지면 움직임이 흐트러진다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-12.svg"
+    },
+    {
+      "name": "밀랍 시종",
+      "grade": "희귀",
+      "description": "마력을 넣으면 작은 밀랍 시종이 단순한 손동작을 따라하며, 열기 가까이에서는 몸이 부드러워져 형태를 잡기 어렵다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-13.svg"
+    },
+    {
+      "name": "거울사역마의 틀",
+      "grade": "영웅",
+      "description": "거울에 비친 작은 동물의 빛 모양을 마력으로 빚어 움직이게 하고, 사용자는 거울을 통해 사역마 앞의 풍경을 볼 수 있다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-14.svg"
+    },
+    {
+      "name": "정령의 빈장갑",
+      "grade": "영웅",
+      "description": "계약한 정령이 장갑 안에 깃들어 손 모양으로 움직이며 가까운 물건을 잡고 옮길 수 있다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-15.svg"
+    },
+    {
+      "name": "수호수의 이름패",
+      "grade": "영웅",
+      "description": "계약한 나무 정령의 이름을 새겨 흙에 꽂으면 정령이 주변 뿌리를 몸처럼 움직여 줄과 지지대를 만들 수 있다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-16.svg"
+    },
+    {
+      "name": "귀환의 계약환",
+      "grade": "영웅",
+      "description": "계약한 사역마에게 고리의 마력을 나눠주면 몸이 흩어졌을 때 의식이 고리로 돌아와 다시 몸을 빚을 기회를 얻는다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-17.svg"
+    },
+    {
+      "name": "정령군체의 벌집",
+      "grade": "영웅",
+      "description": "작은 정령 여럿과 맺은 계약을 벌집 모양 칸에 나눠 담아 한 가지 신호를 동시에 전하고 무리지어 움직이게 할 수 있다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-18.svg"
+    },
+    {
+      "name": "용의 초청인장",
+      "grade": "전설",
+      "description": "자발적으로 이름을 새겨준 용에게 부름을 전하고 용이 응하면 인장 앞에 서로의 모습과 목소리가 마력의 상으로 나타난다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-19.svg"
+    },
+    {
+      "name": "첫계약의 빈잔",
+      "grade": "신화",
+      "description": "계약의 신이 남긴 잔에 인간과 영체가 함께 뜻을 담으면 서로의 말과 감각을 나눌 수 있는 계약이 맺어지며, 한쪽이 거두면 연결도 풀린다.",
+      "category": "마도구",
+      "subcategory": "소환매개체",
+      "icon": "magic-summon-20.svg"
+    },
+    {
+      "name": "감응 마력등",
+      "grade": "일반",
+      "description": "연결한 마력선에 힘이 흐르는 동안 불이 켜져 장치가 작동 중인지 한눈에 볼 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-01.svg"
+    },
+    {
+      "name": "일월 시계판",
+      "grade": "일반",
+      "description": "낮 동안 받은 햇빛이 판 안에 남아 어두워진 뒤에도 낮과 밤의 흐름에 맞춰 눈금이 천천히 움직인다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-02.svg"
+    },
+    {
+      "name": "술사의 누름쇠",
+      "grade": "고급",
+      "description": "손잡이에 마력을 보내면 짧은 쇠막대가 앞으로 나와 누르고 힘을 거두면 다시 들어간다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-03.svg"
+    },
+    {
+      "name": "마력 회전축",
+      "grade": "고급",
+      "description": "마력원에 연결하면 축이 한 방향으로 돌며, 감긴 룬띠를 뒤집으면 반대 방향으로 회전한다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-04.svg"
+    },
+    {
+      "name": "축력 태엽통",
+      "grade": "고급",
+      "description": "마력을 공급하면 안의 태엽이 감겨 장치를 움직일 힘을 모으고 공급을 끊으면 천천히 풀리며 축을 돌린다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-05.svg"
+    },
+    {
+      "name": "마력수호 함",
+      "grade": "고급",
+      "description": "통로에 감당하기 어려운 마력이 몰리면 안쪽 연결판이 들려 흐름을 끊으며, 식은 뒤 손으로 눌러 다시 이을 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-06.svg"
+    },
+    {
+      "name": "계승의 마력함",
+      "grade": "고급",
+      "description": "연결한 마력원 하나가 비면 회전판이 돌아 다음 마력원으로 통로를 바꾸므로 비상용 동력을 이어 쓰기 좋다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-07.svg"
+    },
+    {
+      "name": "햇살의 지레",
+      "grade": "희귀",
+      "description": "지레 끝의 돌이 빛을 받으면 들리고 어두워지면 내려와 빛의 변화에 따라 연결한 장치를 움직인다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-08.svg"
+    },
+    {
+      "name": "한서의 고리",
+      "grade": "희귀",
+      "description": "미리 접촉시켜 기억한 온도보다 뜨거워지면 고리가 벌어지고 식으면 오므라들어 걸쇠와 밸브를 움직일 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-09.svg"
+    },
+    {
+      "name": "저울의 종",
+      "grade": "희귀",
+      "description": "받침의 무게를 기억해두면 위에 얹힌 짐이 늘거나 줄 때 다른 높이의 종소리가 난다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-10.svg"
+    },
+    {
+      "name": "박동의 물레",
+      "grade": "희귀",
+      "description": "손뼉과 북소리의 박자를 따라 물레가 한 칸씩 돌아가며 소리가 멈추면 그 자리에 선다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-11.svg"
+    },
+    {
+      "name": "공명의 쌍손잡이",
+      "grade": "희귀",
+      "description": "함께 충전한 두 손잡이 중 하나를 밀고 당기면 다른 쪽도 같은 방향으로 움직이며, 맞은편의 저항이 손에 전해진다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-12.svg"
+    },
+    {
+      "name": "상반의 경첩",
+      "grade": "희귀",
+      "description": "한 쌍으로 연결한 문 중 하나를 열면 다른 문이 닫히고 닫으면 열리며, 어느 한쪽이 걸리면 두 문 모두 뻣뻣해진다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-13.svg"
+    },
+    {
+      "name": "중압의 누름틀",
+      "grade": "희귀",
+      "description": "안에 물건을 넣고 마력을 흘리면 누름판의 압력이 서서히 커져 고르게 힘을 가하며 밸브를 열면 압력이 풀린다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-14.svg"
+    },
+    {
+      "name": "회귀의 받침대",
+      "grade": "희귀",
+      "description": "물건을 놓은 위치와 기울기를 기억해 밀려난 물건을 천천히 원래 자리로 되돌리며, 자리를 막는 물체가 있으면 그 앞에서 멈춘다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-15.svg"
+    },
+    {
+      "name": "기억의 바퀴",
+      "grade": "희귀",
+      "description": "손으로 돌려본 짧은 회전 순서를 기억하여 마력을 보낼 때 같은 방향과 멈춤을 되풀이한다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-16.svg"
+    },
+    {
+      "name": "안개의 항아리",
+      "grade": "희귀",
+      "description": "안에 넣은 액체를 가는 물안개로 바꾸어 내보내며, 입구의 고리를 조여 퍼지는 폭을 바꿀 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-17.svg"
+    },
+    {
+      "name": "순응의 문살",
+      "grade": "희귀",
+      "description": "마력을 보내면 틀 안의 가는 문살이 주변 물체의 굴곡을 따라 늘어나 큰 틈을 고르게 메운다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-18.svg"
+    },
+    {
+      "name": "문지기의 석상",
+      "grade": "희귀",
+      "description": "눈을 감은 돌인형으로 지정한 문고리를 누군가 잡으면 눈을 뜨고 팔을 움직여 작은 종을 친다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-19.svg"
+    },
+    {
+      "name": "인형술사의 틀",
+      "grade": "영웅",
+      "description": "사용자가 손으로 움직여준 팔다리 동작을 기억하고 마력을 공급하면 같은 순서로 관절을 움직인다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-20.svg"
+    },
+    {
+      "name": "연대의 지주",
+      "grade": "영웅",
+      "description": "같은 마력줄로 연결한 기둥들이 한쪽에 걸린 짐의 하중을 나눠 받으며 한 기둥이 넘어지면 남은 쪽의 부담이 커진다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-21.svg"
+    },
+    {
+      "name": "갈림의 톱니함",
+      "grade": "영웅",
+      "description": "들어오는 회전의 힘을 여러 축으로 나누어 다른 방향으로 내보내며, 막힌 축의 힘은 회전판을 돌려 다른 축에 보낼 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-22.svg"
+    },
+    {
+      "name": "분기의 조종판",
+      "grade": "영웅",
+      "description": "위에 놓은 손잡이 하나를 움직이면 함께 연결한 작은 받침들이 각자 새긴 방향으로 움직여 한 동작을 서로 다른 동작들로 나눈다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-23.svg"
+    },
+    {
+      "name": "유수의 분수대",
+      "grade": "영웅",
+      "description": "중앙 돌을 돌리면 연결한 관 사이의 물길이 바뀌고, 마력을 보내면 낮은 물통의 물도 위쪽 관으로 끌어올릴 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-24.svg"
+    },
+    {
+      "name": "심연의 공기종",
+      "grade": "영웅",
+      "description": "큰 종 모양 틀 안에 공기를 붙잡아 물속으로 내려보내며, 위쪽과 이은 관에 마력을 보내 새 공기를 계속 밀어 넣을 수 있다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-25.svg"
+    },
+    {
+      "name": "낙뢰의 첨탑",
+      "grade": "영웅",
+      "description": "탑끝에 맞은 벼락 일부가 마력으로 바뀌어 바닥의 저장함에 모이며, 벼락이 거세면 미처 바꾸지 못한 전류가 탑 둘레로 번진다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-26.svg"
+    },
+    {
+      "name": "계승의 기관",
+      "grade": "전설",
+      "description": "연결한 기계가 한 차례 움직인 순서를 기억해 같은 구조의 다른 장치에도 이어 보내며, 움직일 힘은 각 장치에 따로 공급해야 한다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-27.svg"
+    },
+    {
+      "name": "운해의 탑",
+      "grade": "전설",
+      "description": "물통에 채운 물을 마력으로 수증기로 바꾸어 높은 곳에 구름을 모으며, 모인 구름은 주변 바람에 따라 이동한다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-28.svg"
+    },
+    {
+      "name": "순풍의 등대",
+      "grade": "전설",
+      "description": "꼭대기 풍향판을 돌리며 마력을 보내면 등대 가까이 불던 바람이 서서히 그 방향으로 돌아 돛과 풍차의 흐름을 바꾼다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-29.svg"
+    },
+    {
+      "name": "별의 추",
+      "grade": "신화",
+      "description": "별의 신이 남긴 추를 허공에 고정하고 마력을 바치면 가까운 물체가 땅 대신 추 쪽으로 무게를 받으며, 추를 거두면 원래 중력으로 돌아간다.",
+      "category": "마도구",
+      "subcategory": "마도장치",
+      "icon": "magic-device-30.svg"
     },
     {
       "name": "하급 회복포션",
