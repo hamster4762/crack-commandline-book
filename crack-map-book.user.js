@@ -326,7 +326,9 @@
   let regionById;
   let regionNodes;
   let regionLabels;
-  let routes;
+  let routesByRegion;
+  let highlightedRegion = null;
+  let pressedRegion = null;
   let zoom = 1;
   let pan = { x: 0, y: 0 };
   let drag;
@@ -335,6 +337,7 @@
   let suppressClick = false;
   let indexPromise;
   let cacheDatabase;
+  let cacheReset;
   let busy = false;
   let noticeTimer;
   let lastTextScale;
@@ -400,7 +403,10 @@
     regionById = new Map(map.regions.map(region => [String(region.id), region]));
     regionNodes = new Map();
     regionLabels = new Map();
-    routes = [];
+    routesByRegion = new Map(map.regions.map(region => [String(region.id), []]));
+    highlightedRegion = null;
+    pressedRegion = null;
+    $('map-canvas').classList.remove('has-selection');
     $('map-canvas').setAttribute('viewBox', `0 0 ${map.width * 12} ${map.height * 12}`);
     $('map-canvas').setAttribute('aria-label', `${map.name} 지도`);
     $('custom-background').setAttribute('width', map.width * 12);
@@ -425,7 +431,9 @@
         const a = point(region), b = point(neighbor);
         const shadow = svgElement('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: 'map-road road-shadow' });
         const line = svgElement('line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: 'map-road' });
-        routes.push({ a: String(region.id), b: String(neighbor.id), line });
+        const route = { a: String(region.id), b: String(neighbor.id), line };
+        routesByRegion.get(route.a).push(route);
+        routesByRegion.get(route.b).push(route);
         $('map-routes').append(shadow, line);
       }
       const type = regionType(region.type);
@@ -471,15 +479,29 @@
 
   function highlight() {
     const active = hover || selected;
-    const neighbors = new Set();
-    const textScale = Math.min(1, 1 / screenScale());
+    if (pressedRegion !== selected) {
+      regionNodes.get(pressedRegion)?.setAttribute('aria-pressed', 'false');
+      regionNodes.get(selected)?.setAttribute('aria-pressed', 'true');
+      pressedRegion = selected;
+    }
+    if (active === highlightedRegion) return;
+    // 강조 변경은 이전·새 지역의 인접 연결만 순회한다.
+    regionNodes.get(highlightedRegion)?.classList.remove('is-selected');
+    regionLabels.get(highlightedRegion)?.node.classList.remove('is-selected');
+    for (const route of routesByRegion.get(highlightedRegion) || []) {
+      route.line.classList.remove('is-highlighted');
+      regionNodes.get(route.a === highlightedRegion ? route.b : route.a).classList.remove('is-neighbor');
+    }
+    highlightedRegion = active;
     $('map-distances').replaceChildren();
     $('map-canvas').classList.toggle('has-selection', active !== null);
-    for (const route of routes) {
-      const lit = route.a === active || route.b === active;
-      route.line.classList.toggle('is-highlighted', lit);
-      if (!lit) continue;
-      neighbors.add(route.a === active ? route.b : route.a);
+    if (active === null) return;
+    regionNodes.get(active).classList.add('is-selected');
+    regionLabels.get(active).node.classList.add('is-selected');
+    const textScale = Math.min(1, 1 / screenScale());
+    for (const route of routesByRegion.get(active)) {
+      route.line.classList.add('is-highlighted');
+      regionNodes.get(route.a === active ? route.b : route.a).classList.add('is-neighbor');
       const a = regionById.get(route.a), b = regionById.get(route.b);
       const pa = point(a), pb = point(b);
       const label = formatTravelTime(Math.hypot(a.x - b.x, a.y - b.y));
@@ -492,12 +514,6 @@
       text.textContent = label;
       group.append(text);
       $('map-distances').append(group);
-    }
-    for (const [id, node] of regionNodes) {
-      node.classList.toggle('is-selected', id === active);
-      node.classList.toggle('is-neighbor', neighbors.has(id));
-      regionLabels.get(id).node.classList.toggle('is-selected', id === active);
-      node.setAttribute('aria-pressed', String(id === selected));
     }
   }
 
@@ -523,6 +539,7 @@
   }
 
   function clearSelection() {
+    if (selected === null && hover === null) return;
     selected = null; hover = null; $('map-detail').hidden = true; highlight();
   }
 
@@ -659,7 +676,6 @@
       event.preventDefault();
       event.stopImmediatePropagation();
     }, true);
-    $('map-canvas').addEventListener('click', () => { if (!suppressClick) clearSelection(); });
     document.addEventListener('click', event => {
       if (ui.hidden) return;
       if (!event.target.closest('.map-menu, #cc-map-map-picker')) { $('map-menu').hidden = true; $('map-picker').setAttribute('aria-expanded', 'false'); }
@@ -996,6 +1012,7 @@
   function ensureIndex() {
     if (indexPromise) return indexPromise;
     indexPromise = (async () => {
+      await cacheReset;
       const [updatedAt, copy] = await Promise.all([book.load('updatedAt'), readCache('meta', 'index')]);
       if (updatedAt !== null && (!Number.isSafeInteger(updatedAt) || updatedAt < 0)) {
         throw new Error('저장된 지도의 updatedAt 형식을 확인하세요.');
@@ -1172,6 +1189,22 @@
   }
 
   function clearReadState() { indexPromise = null; }
+  document.addEventListener('cc-content-data-changed', event => {
+    if (event.detail.id !== 'crack-map-book') return;
+    clearReadState();
+    customMaps.length = 0;
+    if (ui && !ui.hidden) closeBook();
+    if (map?.customName) map = null;
+    cacheReset = openCache().then(database => new Promise((resolve, reject) => {
+      const transaction = database.transaction(['meta', 'maps'], 'readwrite');
+      transaction.objectStore('meta').clear();
+      transaction.objectStore('maps').clear();
+      transaction.oncomplete = resolve;
+      transaction.onabort = () => reject(new Error('지도 사본을 초기화할 수 없습니다.'));
+      transaction.onerror = () => {};
+    }));
+    cacheReset.catch(error => { if (ui) showNotice(error.message, true); });
+  });
   if (window.navigation) window.navigation.addEventListener('navigatesuccess', clearReadState);
   else window.addEventListener('popstate', clearReadState);
   window.addEventListener('pagehide', clearReadState);

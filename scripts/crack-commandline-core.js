@@ -330,29 +330,33 @@
       idToken: account.idToken, refreshToken: account.refreshToken,
       expiresAt: Date.now() + Number(account.expiresIn) * 1000,
       databaseURL: nextConfig.databaseURL };
+    const databaseChanged = config?.databaseURL !== nextConfig.databaseURL;
     writeSetting(CONFIG_KEY, nextConfig);
     writeSetting(SESSION_KEY, nextSession);
     config = nextConfig;
     session = nextSession;
     connectionRevision += 1;
-    remoteCache.clear();
-
-    remoteKeyCache.clear();
+    if (databaseChanged) {
+      remoteCache.clear();
+      remoteKeyCache.clear();
+      await notifyDatabaseChanged();
+    }
   }
 
   function signOut() {
     writeSetting(SESSION_KEY, null);
     session = null;
     connectionRevision += 1;
-    remoteCache.clear();
-
-    remoteKeyCache.clear();
   }
 
-  async function getAccessToken() {
+  function requireFirebaseSession() {
     if (!config || !session || session.databaseURL !== config.databaseURL) {
       throw new CoreError('LOGIN_REQUIRED', '!설정에서 Firebase에 로그인하세요.');
     }
+  }
+
+  async function getAccessToken() {
+    requireFirebaseSession();
     if (session.expiresAt > Date.now() + 60000) return session.idToken;
     if (!tokenRefresh) {
       const current = session;
@@ -460,7 +464,7 @@
     }
     // 관련 경로의 ETag는 추측하지 않는다. 각 경로에서 받은 ETag만 조건부 저장에 사용한다.
     remoteCache.set(context.location, { ...record, databaseURL: context.databaseURL,
-      revision: context.revision, generation: context.generation, conflicted });
+      generation: context.generation, conflicted });
     // 키 목록은 값/ETag 캐시와 분리한다. 저장·조회 응답으로 확인한 경로만 갱신한다.
     for (const [location, keys] of remoteKeyCache) {
       if (location === context.location || location.startsWith(`${context.location}/`)) {
@@ -491,17 +495,20 @@
   }
 
   async function readRemote(id, path = '') {
+    requireFirebaseSession();
+    // 캐시 반환에는 유효한 네트워크용 토큰이 필요하지 않다.
+    const cached = remoteCache.get(path ? `${id}/${path}` : id);
+    if (cached?.databaseURL === config.databaseURL) {
+      cached.conflicted = false;
+      return cloneData(cached.data);
+    }
     const context = await remoteContext(id, path);
-    let record = remoteCache.get(context.location);
-    if (!record || record.databaseURL !== context.databaseURL) {
-      const response = await requestJson('GET', context.url, undefined, { 'X-Firebase-ETag': 'true' });
-      checkResponse(response);
-      checkConnection(context);
-      if (!response.etag) throw new CoreError('ETAG_MISSING', 'Firebase ETag를 읽을 수 없습니다. GM_xmlhttpRequest 설정을 확인하세요.');
-      record = { data: response.data, etag: response.etag };
-      cacheRemoteResult(context, record);
-    } else record.conflicted = false;
+    const response = await requestJson('GET', context.url, undefined, { 'X-Firebase-ETag': 'true' });
+    checkResponse(response);
     checkConnection(context);
+    if (!response.etag) throw new CoreError('ETAG_MISSING', 'Firebase ETag를 읽을 수 없습니다. GM_xmlhttpRequest 설정을 확인하세요.');
+    const record = { data: response.data, etag: response.etag };
+    cacheRemoteResult(context, record);
     return cloneData(record.data);
   }
 
@@ -511,7 +518,7 @@
     if (baseline && !baseline.etag && !baseline.conflicted) {
       throw new CoreError('ETAG_MISSING', '이전 저장 응답에 ETag가 없습니다. 페이지를 새로고침한 뒤 다시 불러오세요.');
     }
-    if (!baseline || baseline.databaseURL !== context.databaseURL || baseline.revision !== context.revision ||
+    if (!baseline || baseline.databaseURL !== context.databaseURL ||
         baseline.generation !== context.generation || baseline.conflicted) {
       throw new CoreError('LOAD_REQUIRED', '저장할 경로를 먼저 불러오세요. 충돌 후에는 해당 경로의 최신본을 확인해야 합니다.');
     }
@@ -544,8 +551,10 @@
     const parts = pathSegments(path);
     let value;
     if (await currentProvider(id) === 'firebase') {
+      requireFirebaseSession();
+      const location = [id, ...parts].join('/');
+      if (remoteKeyCache.has(location)) return [...remoteKeyCache.get(location)];
       const context = await remoteContext(id, path);
-      if (remoteKeyCache.has(context.location)) return [...remoteKeyCache.get(context.location)];
       const response = await requestJson('GET', `${context.url}&shallow=true`);
       checkResponse(response);
       checkConnection(context);
@@ -621,7 +630,19 @@
     }
     const nextLocal = choice === 'firebase' ? remote : local;
     await commitProvider(id, target, nextLocal, local);
+    if (choice !== from) notifyContentDataChanged(id);
     return target;
+  }
+
+  // 사용 데이터가 바뀔 때만 콘텐츠에 알린다. 인증 계정과 토큰은 데이터 식별자가 아니다.
+  function notifyContentDataChanged(id) {
+    document.dispatchEvent(new CustomEvent('cc-content-data-changed', { detail: { id } }));
+  }
+
+  async function notifyDatabaseChanged() {
+    for (const command of commands.values()) {
+      if (command.useDatabse && await currentProvider(command.id) === 'firebase') notifyContentDataChanged(command.id);
+    }
   }
 
   function initialOf(character) {
@@ -953,7 +974,7 @@
         </section>
         <section class="section"><div class="section-heading"><div class="section-title"><span class="section-number">02</span><h2>명령어별 저장소</h2></div><span class="section-meta">등록된 명령어 <span data-command-count>0</span></span></div><div class="command-list" data-command-list></div></section>
       </div>
-      <footer class="window-footer"><span class="shortcut">명령어 <kbd>!설정</kbd></span><button class="button subtle" data-reset-layouts title="도감 창의 위치와 크기를 기본값으로 되돌립니다">창 배치 초기화</button><button class="button primary" data-action="close">완료</button></footer>`;
+      <footer class="window-footer"><button class="button subtle" data-reset-layouts title="도감 창의 위치와 크기를 기본값으로 되돌립니다">창 배치 초기화</button><button class="button primary" data-action="close">완료</button></footer>`;
     dialog.querySelector('[data-config]').value = config ? JSON.stringify(config, null, 2) : '';
     dialog.querySelector('#cc-email').value = session?.email || '';
     dialog.querySelector('[data-reset-layouts]').addEventListener('click', () => {
@@ -1328,12 +1349,18 @@
   // 다른 탭의 로그인/로그아웃을 반영한다. 데이터 다운로드나 주기 작업은 하지 않는다.
   window.addEventListener('storage', event => {
     if (event.key !== CONFIG_KEY && event.key !== SESSION_KEY && event.key !== null) return;
-    config = readStoredConfig();
+    const previousDatabase = config?.databaseURL;
+    const previousUser = session?.uid;
+    if (event.key !== SESSION_KEY) config = readStoredConfig();
     session = readStoredSession();
-    connectionRevision += 1;
-    remoteCache.clear();
-
-    remoteKeyCache.clear();
+    const databaseChanged = previousDatabase !== config?.databaseURL;
+    // 토큰 교체는 데이터 변경도, 진행 중인 DB 요청의 연결 변경도 아니다.
+    if (databaseChanged || previousUser !== session?.uid) connectionRevision += 1;
+    if (databaseChanged) {
+      remoteCache.clear();
+      remoteKeyCache.clear();
+      notifyDatabaseChanged().catch(showError);
+    }
     updateConnectionStatus();
   });
   function resetPageCache() {
