@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         크랙 키앤포커스
 // @namespace    crack-commandline
-// @version      1.0.0.1
+// @version      1.0.0.2
 // @description  !키설정으로 단축키·몰입모드·대사 테마를 설정합니다. 설정과 화자 이미지는 이 브라우저에만 저장합니다.
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -23,7 +23,6 @@
   const page = unsafeWindow;
   const doc = document;
   let suspended = false;
-  let domObserver, themeObserver;
   const EDITOR = '.__chat_input_textarea[contenteditable="true"],textarea.__chat_input_textarea';
   const API_ORIGIN = 'https://crack-api.wrtn.ai';
   const own = node => node?.nodeType === 1 && (node.matches('[data-cc-focus-owned]') || !!node.closest('[data-cc-focus-owned]'));
@@ -184,11 +183,11 @@
     const url = apiUrl(input);
     if (url) {
       observeAuthorization(url, init?.headers || (typeof input === 'object' ? input.headers : undefined));
-      if (messageRoute(url)) restoreParked();
+      if (messageRoute(url)) restoreHighlights();
     }
     return nativeFetch(input, init).then(response => {
       if (messageRoute(url)) {
-        restoreParked();
+        restoreHighlights(); scheduleSync();
         if ((init?.method || input?.method || 'GET').toUpperCase() === 'GET' && response.ok) {
           response.clone().json().then(value => ingestNative(url, value)).catch(() => {});
         } else if (['DELETE', 'PATCH', 'PUT'].includes((init?.method || '').toUpperCase())) invalidateIndex();
@@ -211,9 +210,9 @@
   page.XMLHttpRequest.prototype.send = function (...args) {
     const record = xhrRecords.get(this);
     if (messageRoute(record?.url)) {
-      restoreParked();
+      restoreHighlights();
       this.addEventListener('load', () => {
-        restoreParked();
+        restoreHighlights(); scheduleSync();
         if (this.status < 200 || this.status >= 300) return;
         if (record.method !== 'GET') { if (['DELETE', 'PATCH', 'PUT'].includes(record.method)) invalidateIndex(); return; }
         try { ingestNative(record.url, this.responseType === 'json' ? this.response : JSON.parse(this.responseText)); }
@@ -254,7 +253,6 @@
   let latestMessageId = '';
   let pendingTurn = null;
   let seeking = false;
-  let aroundAbort = null;
   let aroundTimer;
   let latestRefresh = null;
   let lastRefreshAt = 0;
@@ -295,6 +293,7 @@
     const isLatestPage = !url.pathname.endsWith('/around') && !url.searchParams.has('cursor') && url.searchParams.get('sortOrder') !== 'asc';
     if (isLatestPage && messages[0]?._id) latestMessageId = messages[0]._id;
     if (indexComplete) buildTurns();
+    scheduleSync();
   }
   function invalidateIndex() {
     indexComplete = false;
@@ -452,7 +451,6 @@
   async function openSettings() {
     await storageReady;
     if (!doc.body) return;
-    restoreParked();
     ensureUI();
     if (draft) { $('focus-window').focus(); return; }
     try { await readModels(); } catch (error) { showError(error); }
@@ -469,7 +467,6 @@
     if (saving) return;
     waitingId = null; heldModifier = null; previewRevision += 1; hideKeyPopup();
     $('settings-scrim').hidden = true; draft = null; draftPortraits = null; releaseUnusedImages();
-    restoreParked();
     editor()?.focus();
   }
   async function saveSettings() {
@@ -487,9 +484,7 @@
       const next = normalizeSettings(draft);
       await persist(next, draftPortraits);
       settings = next; portraits = new Map(draftPortraits); highlightRevision += 1;
-      const readingTurn = readerPosition;
       restoreHighlights(); updateImmersion(); syncPage();
-      if (readingTurn !== null) await jumpToTurn(readingTurn);
       toast('설정을 이 브라우저에 저장했습니다.');
     } catch (error) { showError(error); }
     finally { saving = false; $('save-preview').disabled = false; releaseUnusedImages(); }
@@ -822,7 +817,7 @@
     highlighted.clear();
   }
   async function emphasizeRoot(root) {
-    if (!immersive || settings.theme === 'none' || !root.isConnected || root.closest('[data-cc-focus-parked]')) return;
+    if (!immersive || settings.theme === 'none' || !root.isConnected) return;
     const runs = paragraphRuns(root);
     const signature = highlightRevision + ':' + runs.map(run => run.map(block => block.text).join('\n')).join('\uFFFF');
     const previous = highlighted.get(root);
@@ -863,26 +858,102 @@
     }
   }
   function editor() { return doc.querySelector(EDITOR); }
-  function nativeScroller() { return doc.querySelector('.stick-to-bottom > div'); }
+  function nativeScroller() { return crackNavigation.scroller(); }
+  // 크랙 내부 검색 상태와 연결하는 곳. 빌드마다 바뀌는 모듈 번호·export 이름은 사용하지 않는다.
+  const crackNavigation = {
+    sessionLabel: 'character-web/feature-chat-search/searchSession',
+    sessionAtom: null,
+    serial: 0,
+    stopWaiting: null,
+    scroller() {
+      const roots = [...doc.querySelectorAll('.stick-to-bottom > div')];
+      return doc.querySelector('button[aria-label="검색 닫기"]')
+        ? roots.find(root => root.querySelector('[data-message-group-id^="search:"]')) || roots[0]
+        : roots[0];
+    },
+    async session() {
+      let input = doc.querySelector('input[aria-label="메시지 검색어"]');
+      if (!input) {
+        doc.querySelector('button[aria-label="메시지 검색"]')?.click();
+        await this.waitFor(() => doc.querySelector('input[aria-label="메시지 검색어"]'));
+        input = doc.querySelector('input[aria-label="메시지 검색어"]');
+      }
+      if (!this.sessionAtom) {
+        const chunks = page.webpackChunk_N_E;
+        if (!Array.isArray(chunks)) throw new Error('크랙의 기록 이동 기능에 연결하지 못했습니다.');
+        const entry = chunks.flatMap(chunk => Object.entries(chunk[1] || {}))
+          .find(([, factory]) => String(factory).includes(this.sessionLabel));
+        if (!entry) throw new Error('크랙의 기록 이동 기능이 변경되었습니다.');
+        let require;
+        const marker = [['cc-key-focus-' + Date.now()], {}, runtime => { require = runtime; }];
+        chunks.push(marker);
+        if (chunks.at(-1) === marker) chunks.pop();
+        this.sessionAtom = Object.values(require?.(entry[0]) || {}).find(value => value?.debugLabel === this.sessionLabel);
+      }
+      let fiber = input?.[Object.keys(input).find(key => key.startsWith('__reactFiber$'))];
+      for (let depth = 0; fiber && depth < 35; depth += 1, fiber = fiber.return) {
+        if (typeof fiber.type !== 'function') continue;
+        for (let hook = fiber.memoizedState; hook; hook = hook.next) {
+          for (const value of hook.memoizedState?.deps || []) {
+            if (value && typeof value.get === 'function' && typeof value.set === 'function' && typeof value.sub === 'function' && this.sessionAtom) {
+              return { store: value, atom: this.sessionAtom };
+            }
+          }
+        }
+      }
+      throw new Error('크랙의 기록 이동 기능에 연결하지 못했습니다.');
+    },
+    waitFor(find) {
+      this.stopWaiting?.();
+      const ready = find();
+      if (ready) return Promise.resolve(ready);
+      // 이동 요청 중에만 감시하고 성공·실패 즉시 해제한다. 유휴 상태에서는 실행하지 않는다.
+      return new Promise((resolve, reject) => {
+        const finish = (value, error) => {
+          observer.disconnect(); page.clearTimeout(timer);
+          if (this.stopWaiting === cancel) this.stopWaiting = null;
+          if (error) reject(error); else resolve(value);
+        };
+        const cancel = () => finish(null);
+        const observer = new page.MutationObserver(() => {
+          const value = find();
+          if (value) finish(value);
+        });
+        const timer = page.setTimeout(() => finish(null, new Error('크랙의 기록 이동을 완료하지 못했습니다.')), 8000);
+        this.stopWaiting = cancel;
+        observer.observe(doc.body, { childList: true, subtree: true });
+      });
+    },
+    groups() { return [...(this.scroller()?.querySelectorAll('[data-message-group-id]') || [])]; },
+    async jump(message) {
+      const serial = ++this.serial;
+      const { store, atom } = await this.session();
+      if (serial !== this.serial || !immersive) return false;
+      restoreHighlights();
+      // 검색의 원래 앵커 경로만 전달한다. around 요청·본문·페이징·DOM은 전부 크랙이 처리한다.
+      // 검색 결과의 기존 항목은 보존한다. 본문 텍스트는 복제하거나 검색어로 보내지 않는다.
+      store.set(atom, { type: 'setSpeakerFilter', filter: 'all' });
+      store.set(atom, { type: 'receiveSearchPage', page: {
+        results: [{ messageId: message.id, role: message.role, createdAt: message.createdAt, highlights: [],
+          snippets: [{ text: '', matches: [], highlightIndex: 0 }] }],
+        nextCursor: store.get(atom).cursors.search, ...store.get(atom).flags,
+        totalScannedMessageCount: store.get(atom).totalScannedMessageCount,
+      } });
+      store.set(atom, { type: 'landAt', key: message.id + ':0' });
+      await this.waitFor(() => this.groups().find(group => group.dataset.messageGroupId === 'search:' + message.id));
+      if (serial !== this.serial || !immersive) return false;
+      await new Promise(resolve => page.requestAnimationFrame(() => page.requestAnimationFrame(resolve)));
+      return true;
+    },
+    latest() {
+      this.serial += 1;
+      this.stopWaiting?.();
+      doc.querySelector('button[aria-label="검색 닫기"]')?.click();
+    },
+  };
   const hiddenLayout = new Set();
   const grownEditors = new Map();
-  const parked = new Map();
-  const offscreen = new Set();
-  const watchedGroups = new Set();
-  let viewportObserver = null;
-  let observerRoot = null;
-  let parkTimer;
   let chronicleHost = null, chronicleUI = null;
-  let readerHost = null, readerUI = null;
-  let readerScroller = null;
-  let readerPosition = null;
-  let readerObserver = null;
-  function clearReaderWindow() {
-    readerObserver?.disconnect(); readerObserver = null;
-    for (const group of [...parked.keys(), ...offscreen]) if (group.getRootNode() === readerUI) {
-      offscreen.delete(group); unparkGroup(group);
-    }
-  }
   let scrollFrame = 0;
   let runtimeStyle;
   function hideLayout(node, hide) {
@@ -899,8 +970,7 @@
     const main = doc.querySelector('main'), input = editor();
     if (!immersive || !main || !input || !chatId) {
       chronicleHost?.remove(); chronicleHost = null; chronicleUI = null;
-      viewportObserver?.disconnect(); watchedGroups.clear(); offscreen.clear(); restoreParked(false);
-      restoreHighlights(); closeReader();
+      restoreHighlights(); cancelSeek();
       for (const [node, height] of grownEditors) { node.removeAttribute('data-cc-focus-grow'); node.style.height = height; }
       grownEditors.clear(); return;
     }
@@ -919,7 +989,6 @@
     if (settings.showSlider) {
       ensureChronicle(); positionOverlays(); startIndex().catch(showError);
     } else { chronicleHost?.remove(); chronicleHost = null; chronicleUI = null; }
-    trackGroups();
   }
   function toggleImmersion() {
     if (!currentChatId() || !editor()) { toast('크랙 채팅방에서 사용할 수 있습니다.'); return; }
@@ -930,49 +999,6 @@
     if (!input || !immersive || !settings.autoGrow) return;
     if (input.tagName === 'TEXTAREA') { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, page.innerHeight * .5) + 'px'; }
     positionOverlays();
-  }
-  function parkGroup(group) {
-    if (!immersive || draft || !group.isConnected || parked.has(group) || !group.childNodes.length || group.contains(doc.activeElement)) return;
-    const recent = [...doc.querySelectorAll('[data-message-group-id]')].slice(0, 4);
-    if (recent.includes(group)) return;
-    const height = group.getBoundingClientRect().height;
-    if (height <= 0) return;
-    const fragment = doc.createDocumentFragment();
-    const minHeight = group.style.minHeight;
-    while (group.firstChild) fragment.append(group.firstChild);
-    group.style.minHeight = height + 'px'; group.dataset.ccFocusParked = '';
-    parked.set(group, { fragment, minHeight });
-  }
-  function unparkGroup(group) {
-    const record = parked.get(group); if (!record) return;
-    group.style.minHeight = record.minHeight; group.removeAttribute('data-cc-focus-parked');
-    group.append(record.fragment); parked.delete(group);
-  }
-  function restoreParked(repark = true) {
-    for (const group of [...parked.keys()]) unparkGroup(group);
-    page.clearTimeout(parkTimer);
-    if (repark && immersive) parkTimer = page.setTimeout(() => { for (const group of offscreen) parkGroup(group); }, 250);
-  }
-  function trackGroups() {
-    const root = nativeScroller();
-    if (!immersive || !root || !page.IntersectionObserver) return;
-    if (!viewportObserver || observerRoot !== root) {
-      viewportObserver?.disconnect(); watchedGroups.clear(); offscreen.clear(); observerRoot = root;
-      viewportObserver = new page.IntersectionObserver(entries => {
-        for (const entry of entries) {
-          const group = entry.target;
-          if (entry.isIntersecting) {
-            offscreen.delete(group); unparkGroup(group);
-            group.querySelectorAll('.wrtn-markdown').forEach(node => emphasizeRoot(node).catch(showError));
-          } else { offscreen.add(group); parkGroup(group); }
-        }
-      }, { root, rootMargin: '125% 0px' });
-    }
-    const groups = new Set(doc.querySelectorAll('[data-message-group-id]'));
-    for (const group of watchedGroups) if (!groups.has(group)) {
-      viewportObserver.unobserve(group); unparkGroup(group); offscreen.delete(group); watchedGroups.delete(group);
-    }
-    for (const group of groups) if (!watchedGroups.has(group)) { watchedGroups.add(group); viewportObserver.observe(group); }
   }
   function ensureChronicle() {
     if (chronicleHost) return;
@@ -999,18 +1025,11 @@
       chronicleHost.style.left = rect.left + 12 + 'px'; chronicleHost.style.top = rect.top + 76 + 'px';
       chronicleHost.style.height = Math.max(140, Math.min(rect.bottom - 110, input.getBoundingClientRect().top - 30) - rect.top - 76) + 'px';
     }
-    if (readerHost) {
-      const scroll = nativeScroller()?.getBoundingClientRect();
-      if (scroll) {
-        readerHost.style.left = scroll.left + 'px'; readerHost.style.top = scroll.top + 'px'; readerHost.style.width = scroll.width + 'px';
-        readerHost.style.height = Math.max(100, Math.min(scroll.bottom, input.getBoundingClientRect().top - 18) - scroll.top) + 'px';
-      }
-    }
   }
   function updateChronicle(status = '') {
     if (!chronicleUI) return;
     const slider = chronicleUI.getElementById('turn-range');
-    const maximum = Math.max(0, turns.length - 1), current = Math.min(maximum, pendingTurn ?? readerPosition ?? maximum);
+    const maximum = Math.max(0, turns.length - 1), current = Math.min(maximum, pendingTurn ?? maximum);
     slider.disabled = !indexComplete || !turns.length; slider.max = String(maximum); slider.value = String(current);
     slider.title = status || (indexComplete ? '' : '기록 연결 중');
     chronicleUI.querySelector('.chronicle-position strong').textContent = indexComplete ? current : '…';
@@ -1020,86 +1039,34 @@
     chronicleUI.querySelector('.chronicle-gem').style.top = percent + '%';
     chronicleHost.dataset.sceneMode = sceneMode();
   }
-  function closeReader() {
-    aroundAbort?.abort(); aroundAbort = null; page.clearTimeout(aroundTimer);
-    clearReaderWindow();
-    readerHost?.remove(); readerHost = null; readerUI = null; readerScroller = null; readerPosition = null; pendingTurn = null; seeking = false;
-    nativeScroller()?.removeAttribute('data-cc-focus-reader-hidden');
-    updateChronicle();
-  }
-  function ensureReader() {
-    if (readerHost) return;
-    readerHost = make('cc-focus-reader'); readerHost.dataset.ccFocusOwned = '';
-    readerHost.style.cssText = 'position:fixed;z-index:800;display:block;';
-    readerUI = readerHost.attachShadow({ mode: 'open' }); addStyle(readerUI);
-    const style = make('style'); style.textContent = ':host{color-scheme:dark}.reader{height:100%;display:flex;flex-direction:column;background:#10171d;color:#c9d2d5;font:13px/1.8 "Malgun Gothic",sans-serif}.reader[data-scene-mode=light]{color-scheme:light;background:#eaeef0;color:#344650}.reader-head{display:flex;gap:12px;align-items:center;justify-content:flex-end;min-height:32px;padding:3px 24px;border-bottom:1px solid #84959b33;font-size:10px}.reader-head button{background:transparent;border:1px solid #84959b66;padding:2px 8px;border-radius:3px}.reader-scroll{overflow-y:auto;min-height:0;flex:1;padding:14px 32px 24px 90px;scrollbar-width:thin}.reader-page{max-width:768px;margin:auto}.reader-message{padding:9px 0;border-bottom:1px solid #84959b1a}.reader-message[data-role=user]{max-width:90%;margin-left:auto;background:#84959b0a;padding:7px 12px}.reader-role{font-size:9px;opacity:.65;letter-spacing:.08em}.reader-message pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;padding:10px;border:1px solid #84959b33}.reader-message a{color:inherit;text-decoration:underline}.reader-message p{line-height:1.8}';
-    const wrap = make('section', 'reader'); wrap.dataset.sceneMode = sceneMode();
-    const header = make('div', 'reader-head'), previous = make('button', '', '‹'), next = make('button', '', '›'), back = make('button', '', '최근 대화로');
-    previous.setAttribute('aria-label', '이전 기록'); next.setAttribute('aria-label', '다음 기록');
-    previous.addEventListener('click', () => jumpToTurn(Math.max(0, (readerPosition || 0) - 10)).catch(showError));
-    next.addEventListener('click', () => jumpToTurn(Math.min(turns.length - 1, (readerPosition || 0) + 10)).catch(showError));
-    back.addEventListener('click', () => { closeReader(); const scroll = nativeScroller(); if (scroll) scroll.scrollTop = scroll.scrollHeight; });
-    header.append(previous, next, back);
-    readerScroller = make('div', 'reader-scroll'); readerScroller.tabIndex = 0; readerScroller.setAttribute('aria-label', '이전 대화 기록');
-    wrap.append(header, readerScroller); readerUI.append(style, wrap); doc.body.append(readerHost);
-    nativeScroller()?.setAttribute('data-cc-focus-reader-hidden', ''); positionOverlays();
-  }
-  async function renderRecordMessage(message, container, generation) {
-    const raw = typeof message.content === 'string' ? message.content : '';
-    const result = settings.theme === 'none' || message.role !== 'assistant' ? { matches: [] } : await findMatches(raw, settings);
-    if (generation !== routeGeneration || !container.isConnected) return;
-    let position = 0;
-    for (const match of result.matches) {
-      appendMarkdown(container, raw.slice(position, match.start)); container.append(makeDialogue(match.fields, settings, portraits)); position = match.end;
-    }
-    appendMarkdown(container, raw.slice(position));
+  function cancelSeek() {
+    crackNavigation.serial += 1;
+    crackNavigation.stopWaiting?.();
+    page.clearTimeout(aroundTimer);
+    pendingTurn = null; seeking = false;
   }
   async function jumpToTurn(turn) {
     if (!immersive || !indexComplete || !turns[turn]) return;
-    seeking = true;
-    if (turn === turns.length - 1) {
-      closeReader(); const scroll = nativeScroller(); if (scroll) scroll.scrollTop = scroll.scrollHeight; updateChronicle(); return;
-    }
-    const native = [...doc.querySelectorAll('[data-message-group-id]')].find(node => node.dataset.messageGroupId.replace(/^search:/, '') === turns[turn].id);
-    if (native) {
-      closeReader(); unparkGroup(native);
-      const scroll = nativeScroller();
-      if (scroll) scroll.scrollTop += native.getBoundingClientRect().top - scroll.getBoundingClientRect().top;
-      pendingTurn = turn; seeking = false; updateChronicle(); return;
-    }
-    aroundAbort?.abort(); const controller = new page.AbortController(); aroundAbort = controller;
-    const generation = routeGeneration; pendingTurn = turn; updateChronicle();
+    const generation = routeGeneration;
+    seeking = true; pendingTurn = turn; updateChronicle();
     try {
-      const data = await readMessages('/' + encodeURIComponent(turns[turn].id) + '/around?before=20&after=20', controller.signal);
-      if (controller.signal.aborted || generation !== routeGeneration || !immersive) return;
-      ensureReader(); readerPosition = turn; pendingTurn = null;
-      const output = make('div', 'reader-page'), anchorId = turns[turn].id;
-      clearReaderWindow();
-      readerScroller.replaceChildren(output);
-      const ordered = data.messages.filter(message => ordinal.has(message._id));
-      const firstTime = Date.parse(ordered[0]?.createdAt), lastTime = Date.parse(ordered.at(-1)?.createdAt);
-      if (Number.isFinite(firstTime) && Number.isFinite(lastTime) && firstTime > lastTime) ordered.reverse();
-      let anchor;
-      for (const message of ordered) {
-        const block = make('article', 'reader-message'); block.dataset.role = message.role;
-        block.append(make('div', 'reader-role', message.role === 'user' ? '나' : '캐릭터'));
-        output.append(block); if (message._id === anchorId) anchor = block;
-        await renderRecordMessage(message, block, generation);
-        if (controller.signal.aborted || generation !== routeGeneration) return;
+      if (turn === turns.length - 1) {
+        crackNavigation.latest();
+        await new Promise(resolve => page.requestAnimationFrame(resolve));
+        const scroll = nativeScroller();
+        if (scroll) scroll.scrollTop = scroll.scrollHeight;
+      } else {
+        const id = turns[turn].id;
+        const existing = crackNavigation.groups().find(group => group.dataset.messageGroupId.replace(/^search:/, '') === id);
+        if (existing) {
+          const scroll = existing.closest('.stick-to-bottom')?.firstElementChild || nativeScroller();
+          if (scroll) scroll.scrollTop += existing.getBoundingClientRect().top - scroll.getBoundingClientRect().top;
+        } else if (!await crackNavigation.jump(turns[turn])) return;
       }
-      if (anchor) readerScroller.scrollTop = anchor.offsetTop - output.offsetTop;
-      if (page.IntersectionObserver) {
-        readerObserver = new page.IntersectionObserver(entries => {
-          for (const entry of entries) {
-            if (!entry.target.isConnected || entry.target.getRootNode() !== readerUI) continue;
-            if (entry.isIntersecting) { offscreen.delete(entry.target); unparkGroup(entry.target); }
-            else { offscreen.add(entry.target); parkGroup(entry.target); }
-          }
-        }, { root: readerScroller, rootMargin: '125% 0px' });
-        output.querySelectorAll('.reader-message').forEach(node => readerObserver.observe(node));
-      }
-      updateChronicle();
-    } finally { if (aroundAbort === controller) { aroundAbort = null; seeking = false; } }
+      if (generation === routeGeneration && immersive && pendingTurn === turn) syncPage();
+    } finally {
+      if (generation === routeGeneration && pendingTurn === turn) { seeking = false; updateChronicle(); }
+    }
   }
   let replaying = false;
   const blockedKeyUps = new Set();
@@ -1131,7 +1098,7 @@
     if (item.id === 'settings') { openSettings().catch(showError); return; }
     if (item.id === 'search') { doc.querySelector('button[aria-label="메시지 검색"]')?.click(); return; }
     if (item.group === 'model') { selectModel(item.id).catch(showError); return; }
-    closeReader(); restoreParked();
+    restoreHighlights();
     if (item.id === 'note') {
       const dialog = [...doc.querySelectorAll('[role=dialog]')].find(node => node.getClientRects().length && /유저\s*노트/.test(node.querySelector('h1,h2,h3')?.textContent || ''));
       const close = dialog?.querySelector('button[aria-label="닫기"]');
@@ -1164,7 +1131,6 @@
       }
       return;
     }
-    restoreParked();
     if (!chatId || event.repeat || event.code === 'Escape' || isBang(eventCombo(event)) || commandInputActive()) return;
     const binding = eventCombo(event);
     const item = configuredActions(settings).find(action => matches(action.binding, binding));
@@ -1189,17 +1155,20 @@
     }
   }, true);
   page.addEventListener('blur', () => { heldModifier = null; blockedKeyUps.clear(); });
-  doc.addEventListener('pointerdown', event => { if (!event.composedPath().includes(uiHost)) restoreParked(); }, true);
+  doc.addEventListener('pointerdown', event => {
+    if (!event.composedPath().includes(uiHost)) { restoreHighlights(); scheduleSync(); }
+  }, true);
   doc.addEventListener('input', event => { if (event.target.matches?.(EDITOR) || event.target.closest?.(EDITOR)) resizeInput(); }, true);
   doc.addEventListener('scroll', event => {
     if (!immersive || event.target !== nativeScroller() || scrollFrame) return;
     scrollFrame = page.requestAnimationFrame(() => {
       scrollFrame = 0;
-      if (readerHost || seeking || !indexComplete) return;
+      if (seeking || !indexComplete) return;
+      scheduleSync();
       const scroll = nativeScroller(), rect = scroll?.getBoundingClientRect();
       if (!rect) return;
       let nearest = null, distance = Infinity;
-      for (const group of doc.querySelectorAll('[data-message-group-id]')) {
+      for (const group of crackNavigation.groups()) {
         const id = group.dataset.messageGroupId.replace(/^search:/, ''), turn = ordinal.get(id);
         if (turn === undefined) continue;
         const bounds = group.getBoundingClientRect(), delta = Math.abs(bounds.top - (rect.top + rect.height * .35));
@@ -1209,6 +1178,10 @@
     });
   }, true);
   page.addEventListener('resize', () => { hideKeyPopup(); resizeInput(); positionOverlays(); });
+  if (page.navigation) page.navigation.addEventListener('navigatesuccess', scheduleSync);
+  else page.addEventListener('popstate', scheduleSync);
+  doc.addEventListener('click', scheduleSync, true);
+  doc.addEventListener('keyup', scheduleSync, true);
 
   let syncFrame = 0;
   let lastModelSignature = '';
@@ -1219,9 +1192,9 @@
   function syncPage() {
     const nextChat = currentChatId();
     if (nextChat !== chatId) {
-      routeGeneration += 1; indexAbort?.abort(); aroundAbort?.abort();
+      routeGeneration += 1; indexAbort?.abort();
       metadata = new Map(); turns = []; ordinal = new Map(); indexComplete = false; indexJob = null; latestMessageId = '';
-      models = []; modelSnapshotKnown = false; lastModelSignature = ''; restoreParked(false); restoreHighlights(); closeReader();
+      models = []; modelSnapshotKnown = false; lastModelSignature = ''; restoreHighlights(); cancelSeek();
       chatId = nextChat;
       if (!chatId) immersive = false;
       updateImmersion(immersive);
@@ -1238,7 +1211,7 @@
       refreshLatest();
       if (settings.theme !== 'none') {
         const rect = nativeScroller()?.getBoundingClientRect();
-        for (const root of doc.querySelectorAll('[data-message-group-id] .wrtn-markdown')) {
+        for (const root of nativeScroller()?.querySelectorAll('[data-message-group-id] .wrtn-markdown') || []) {
           const bounds = root.getBoundingClientRect();
           if (rect && bounds.bottom > rect.top - rect.height && bounds.top < rect.bottom + rect.height) emphasizeRoot(root).catch(showError);
         }
@@ -1249,28 +1222,18 @@
     await storageReady;
     runtimeStyle?.remove();
     runtimeStyle = make('style'); runtimeStyle.id = 'cc-key-focus-runtime-style'; runtimeStyle.dataset.ccFocusOwned = '';
-    runtimeStyle.textContent = '[data-cc-focus-hidden],[data-cc-focus-source]{display:none!important}[data-cc-focus-reader-hidden]{visibility:hidden!important;pointer-events:none!important}[data-cc-focus-grow]{max-height:50dvh!important;overflow-y:auto!important;min-height:0!important}';
+    runtimeStyle.textContent = '[data-cc-focus-hidden],[data-cc-focus-source]{display:none!important}[data-cc-focus-grow]{max-height:50dvh!important;overflow-y:auto!important;min-height:0!important}';
     (doc.head || doc.documentElement).append(runtimeStyle);
     ensureUI();
-    domObserver = new page.MutationObserver(mutations => {
-      if (mutations.some(mutation => !own(mutation.target) && (mutation.type === 'characterData' || [...mutation.addedNodes, ...mutation.removedNodes].some(node => !own(node))))) scheduleSync();
-    });
-    domObserver.observe(doc.body, { childList: true, subtree: true, characterData: true });
-    themeObserver = new page.MutationObserver(() => {
-      if (!immersive) return;
-      highlightRevision += 1; restoreHighlights(); scheduleSync();
-      if (readerUI) readerUI.querySelector('.reader').dataset.sceneMode = sceneMode();
-    });
-    themeObserver.observe(doc.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme', 'style'] });
     syncPage();
   }
   page.CrackCommandline.register({ id: 'crack-key-focus', label: '키설정', useDatabse: false, lambda: openSettings });
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', () => boot().catch(showError), { once: true });
   else boot().catch(showError);
   page.addEventListener('pagehide', () => {
-    suspended = true; domObserver?.disconnect(); themeObserver?.disconnect(); viewportObserver?.disconnect();
+    suspended = true;
     page.cancelAnimationFrame(syncFrame); page.cancelAnimationFrame(scrollFrame); syncFrame = 0; scrollFrame = 0;
-    restoreParked(false); restoreHighlights(); indexAbort?.abort(); aroundAbort?.abort(); stopRegexWorker('페이지를 닫았습니다.');
+    cancelSeek(); restoreHighlights(); indexAbort?.abort(); stopRegexWorker('페이지를 닫았습니다.');
   });
   page.addEventListener('pageshow', event => { if (event.persisted && suspended) { suspended = false; boot().catch(showError); } });
 })();
