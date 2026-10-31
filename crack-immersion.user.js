@@ -78,6 +78,7 @@
       showSlider: true,
       theme: 'none',
       pattern: 0,
+      customTemplate: '',
       customRegex: presets[0].regex
     };
   }
@@ -90,8 +91,28 @@
     }
     if (themes.some(([id]) => id === value.theme)) next.theme = value.theme;
     if (value.pattern === 'custom' || Number.isInteger(value.pattern) && presets[value.pattern]) next.pattern = value.pattern;
+    if (typeof value.customTemplate === 'string') next.customTemplate = value.customTemplate.slice(0, 4096);
     if (typeof value.customRegex === 'string') next.customRegex = value.customRegex.slice(0, 4096);
     return next;
+  }
+
+  // 고정 기호는 이스케이프하고 대사 항목만 이름 있는 정규식 그룹으로 바꾼다.
+  function templateToRegex(template) {
+    const fields = new Set();
+    const source = template.replace(/\r\n?/g, '\n').split(/(\{[a-zA-Z]+\})/).map(part => {
+      const token = /^\{([a-zA-Z]+)\}$/.exec(part);
+      if (!token) return part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\n/g, '\\n');
+      const field = token[1];
+      if (!['name', 'translatedName', 'speech', 'translation', 'pronunciation'].includes(field)) {
+        throw new Error('지원하지 않는 항목입니다: {' + field + '}');
+      }
+      if (fields.has(field)) throw new Error('같은 항목은 한 번만 사용해주세요: {' + field + '}');
+      fields.add(field);
+      return '(?<' + field + '>[^\\n]+?)';
+    }).join('');
+    if (!fields.has('speech')) throw new Error('대사 형식에 {speech}를 넣어주세요.');
+    if (source.length + 2 > 4096) throw new Error('대사 형식이 너무 깁니다. 내용을 줄여주세요.');
+    return '^' + source + '$';
   }
   // 화자 이름을 이미지 검색에 사용할 형태로 정리한다.
   function normalizeName(name) {
@@ -510,41 +531,12 @@
           </div>
           <div id="preset-list" class="preset-list" role="group" aria-label="대사 패턴"></div>
           <div id="custom-pattern" hidden="">
+            <label class="field-label" for="template-input">대사 형식</label>
+            <textarea id="template-input" class="text-input template-input" spellcheck="false" maxlength="4096" placeholder="&gt; {name} ―&#10;&gt; &quot;{speech}&quot;&#10;&gt; ({translation})"></textarea>
+            <small class="template-help"><code>{name}</code> 이름 · <code>{translatedName}</code> 번역명 · <code>{speech}</code> 대사(필수) · <code>{translation}</code> 번역 · <code>{pronunciation}</code> 발음</small>
+            <button class="button subtle" id="convert-template">정규식으로 변환</button>
             <label class="field-label" for="regex-input">인식할 정규식</label>
             <textarea id="regex-input" class="text-input regex-input" spellcheck="false" aria-label="대사 인식 정규식"></textarea>
-            <details class="regex-guide">
-              <summary>처음 만드는 정규식</summary>
-              <ol>
-                <li>원문의 고정 기호를 그대로 적습니다.</li>
-                <li>바뀌는 부분을 아래 그룹으로 바꿉니다.</li>
-                <li>오른쪽 원문으로 인식 결과를 확인합니다.</li>
-              </ol>
-              <div class="guide-example">
-                <span>원문</span>
-                <code>에린: 안녕!</code>
-                <span>정규식</span>
-                <code>^(?&lt;name&gt;.+?): (?&lt;speech&gt;.+)$</code>
-              </div>
-              <dl>
-                <dt><code>(?&lt;name&gt;.+?)</code></dt>
-                <dd>화자 이름</dd>
-                <dt><code>(?&lt;translatedName&gt;.+?)</code></dt>
-                <dd>번역된 이름</dd>
-                <dt><code>(?&lt;speech&gt;.+?)</code></dt>
-                <dd>대사 · 필수</dd>
-                <dt><code>(?&lt;translation&gt;.+?)</code></dt>
-                <dd>한국어 번역</dd>
-                <dt><code>(?&lt;pronunciation&gt;.+?)</code></dt>
-                <dd>한글 발음</dd>
-              </dl>
-              <p><code>.+?</code> 짧게 읽기 · <code>\n</code> 줄바꿈</p>
-              <p><code>\*</code> 별표 · <code>\|</code> 세로줄 · <code>"</code> 따옴표 그대로</p>
-              <p><code>^</code> 시작 · <code>$</code> 끝 · <code>.+</code> 한 글자 이상</p>
-              <p><code>[\s\S]+?</code> 줄바꿈도 포함해 읽기</p>
-              <p>없는 항목의 그룹은 생략하세요.</p>
-              <p>양끝의 <code>/</code> 없이 식만 입력합니다.</p>
-              <button class="button subtle" id="load-regex-example">이 예제로 시작</button>
-            </details>
           </div>
         </section>
         <section class="section speaker-section">
@@ -846,7 +838,7 @@
       transform: translateX(14px);
     }
 
-    /* 대사 인식 패턴과 사용자 정규식 안내. */
+    /* 대사 인식 패턴과 대사 형식 변환기. */
     .preset-list {
       display: grid;
       grid-template-columns: repeat(2,minmax(0,1fr));
@@ -905,7 +897,8 @@
       color: #a5b4b4;
     }
 
-    .cc-ui .regex-input {
+    .cc-ui .regex-input,
+    .cc-ui .template-input {
       display: block;
       min-height: 62px;
       height: 62px;
@@ -914,68 +907,20 @@
       overflow-wrap: anywhere;
     }
 
-    .regex-guide {
-      margin-top: 7px;
-      border-top: 1px solid #66716b44;
-      padding-top: 6px;
-    }
-
-    .regex-guide summary {
-      cursor: pointer;
-      color: #c9b98f;
-    }
-
-    .regex-guide ol {
-      padding-left: 18px;
-      font-size: 10px;
-      line-height: 2;
-      margin: 7px 0;
-    }
-
-    .regex-guide p {
+    .template-help {
+      display: block;
       margin: 5px 0;
       font-size: 9px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
     }
 
-    .regex-guide dl {
-      display: grid;
-      grid-template-columns: 145px 1fr;
-      gap: 3px 10px;
-      margin: 8px 0;
-      font-size: 9px;
-    }
-
-    .regex-guide dt {
-      font-family: Consolas,monospace;
+    .template-help code {
       color: #dcc79c;
     }
 
-    .regex-guide dd {
-      margin: 0;
-    }
-
-    .guide-example {
-      display: grid;
-      gap: 3px;
-      padding: 7px;
-      background: #101920;
-      border-left: 2px solid #9c865a;
-    }
-
-    .guide-example span {
-      color: #7d9195;
-      font-size: 8px;
-    }
-
-    .guide-example code {
-      font: 9px/1.8 Consolas,monospace;
-      white-space: nowrap;
-    }
-
-    .regex-guide .button {
-      min-height: 24px;
-      font-size: 9px;
-      margin-top: 5px;
+    #convert-template {
+      margin-bottom: 9px;
     }
 
     /* 테마 선택, 화자 이미지, 미리보기. */
@@ -2362,17 +2307,23 @@
       $('theme-picker').append(button);
     });
     ui.querySelectorAll('button[data-scene-mode]').forEach(button => button.addEventListener('click', () => setPreviewMode(button.dataset.sceneMode)));
+    $('template-input').addEventListener('input', () => {
+      draft.customTemplate = $('template-input').value;
+    });
+    $('convert-template').addEventListener('click', () => {
+      try {
+        draft.customRegex = templateToRegex(draft.customTemplate);
+        $('regex-input').value = draft.customRegex;
+        updatePreview();
+      } catch (error) {
+        showError(error);
+      }
+    });
     $('regex-input').addEventListener('input', () => {
       draft.customRegex = $('regex-input').value;
       updatePreview();
     });
     $('sample-input').addEventListener('input', updatePreview);
-    $('load-regex-example').addEventListener('click', () => {
-      draft.customRegex = '^(?<name>.+?): (?<speech>.+)$';
-      $('regex-input').value = draft.customRegex;
-      $('sample-input').value = '에린: 안녕!';
-      updatePreview();
-    });
     $('speaker-form').addEventListener('submit', event => {
       event.preventDefault();
       const name = normalizeName($('speaker-name').value);
@@ -2438,6 +2389,7 @@
       'show-slider': 'showSlider'
     })) $(id).checked = draft[key];
     $('sample-input').value = presets[typeof draft.pattern === 'number' ? draft.pattern : 0].sample;
+    $('template-input').value = draft.customTemplate;
     $('regex-input').value = draft.customRegex;
     $('settings-scrim').hidden = false;
     setPreviewMode(sceneMode());
