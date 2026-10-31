@@ -1422,7 +1422,12 @@
     }
     if (!chatId || event.repeat || event.code === 'Escape' || isBang(eventCombo(event)) || commandInputActive()) return;
     const binding = eventCombo(event);
-    const item = configuredActions(settings).find(action => matches(action.binding, binding));
+    let item = configuredActions(settings).find(action => matches(action.binding, binding));
+    // 새로고침 후 모델 메뉴를 아직 열지 않았어도 저장된 모델 배정은 실행한다.
+    if (!item) {
+      const id = Object.keys(settings.bindings).find(id => id.startsWith('model:') && matches(settings.bindings[id], binding));
+      if (id) item = { id, group: 'model' };
+    }
     const native = actions.find(action => matches(action.binding, binding));
     const inEditor = editor() && (event.target === editor() || editor().contains(event.target));
     if (binding.code === 'Enter' && inEditor && (!item || item.id === 'input')) return;
