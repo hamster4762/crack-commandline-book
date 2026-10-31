@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         크랙 키 설정
 // @namespace    crack-commandline
+// @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
 // @version      1.0.0.0
 // @description  PC 전용. !키설정으로 단축키를 변경합니다. 몰입 토글은 몰입모드 설치 시 동작합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*

@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         크랙 아이템 도감
 // @namespace    crack-commandline
+// @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
 // @version      1.0.1.0
 // @description  !아이템으로 인벤토리를 열고 프리셋별 즐겨찾기와 소지품을 관리합니다. (version 관리방식: 데이터스키마버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
