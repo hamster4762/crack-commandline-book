@@ -2960,6 +2960,18 @@
     groups() {
       return [...(this.scroller()?.querySelectorAll('[data-message-group-id]') || [])];
     },
+    stopScroll(scroll) {
+      const root = scroll?.closest('.stick-to-bottom');
+      let fiber = root?.[Object.keys(root).find(key => key.startsWith('__reactFiber$'))];
+      for (let depth = 0; fiber && depth < 5; depth += 1, fiber = fiber.return) {
+        const value = fiber.memoizedProps?.value;
+        if (typeof value?.stopScroll === 'function' && typeof value.scrollToBottom === 'function') {
+          value.stopScroll();
+          return true;
+        }
+      }
+      return false;
+    },
     async jump(message) {
       const serial = ++this.serial;
       const { store, atom } = await this.session();
@@ -3067,7 +3079,7 @@
 
   // 현재 채팅방의 몰입모드를 켜거나 끈다.
   function toggleImmersion() {
-    if (!currentChatId() || !editor()) {
+    if (!immersive && (!currentChatId() || !editor())) {
       toast('크랙 채팅방에서 사용할 수 있습니다.');
       return;
     }
@@ -3171,8 +3183,10 @@
 
   // 진행 중인 기록 이동을 취소한다.
   function cancelSeek() {
+    const navigating = doc.documentElement.hasAttribute('data-cc-focus-navigation');
     crackNavigation.serial += 1;
     crackNavigation.stopWaiting?.();
+    if (navigating) doc.querySelector('button[aria-label="검색 닫기"]')?.click();
     crackNavigation.showSearch();
     page.clearTimeout(aroundTimer);
     pendingTurn = null;
@@ -3197,7 +3211,10 @@
         const existing = crackNavigation.groups().find(group => group.dataset.messageGroupId.replace(/^search:/, '') === id);
         if (existing) {
           const scroll = existing.closest('.stick-to-bottom')?.firstElementChild || nativeScroller();
-          if (scroll) scroll.scrollTop += existing.getBoundingClientRect().top - scroll.getBoundingClientRect().top;
+          // 하단 고정을 먼저 풀어야 대사 테마·이미지 높이가 바뀌어도 마지막 턴으로 되돌아가지 않는다.
+          if (crackNavigation.stopScroll(scroll)) {
+            scroll.scrollTop += existing.getBoundingClientRect().top - scroll.getBoundingClientRect().top;
+          } else if (!await crackNavigation.jump(turns[turn])) return;
         } else if (!await crackNavigation.jump(turns[turn])) return;
       }
       if (generation === routeGeneration && immersive && pendingTurn === turn) syncPage();
