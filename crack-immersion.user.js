@@ -28,6 +28,7 @@
   const doc = document;
   let suspended = false;
   const EDITOR = '.__chat_input_textarea[contenteditable="true"],textarea.__chat_input_textarea';
+  const MESSAGE_ROOT = '[data-message-group-id] .wrtn-markdown';
   const API_ORIGIN = 'https://crack-api.wrtn.ai';
   const own = node => node?.nodeType === 1 && (node.matches('[data-cc-focus-owned]') || !!node.closest('[data-cc-focus-owned]'));
 
@@ -243,11 +244,9 @@
     const url = apiUrl(input);
     if (url) {
       observeAuthorization(url, init?.headers || (typeof input === 'object' ? input.headers : undefined));
-      if (messageRoute(url)) restoreHighlights();
     }
     return nativeFetch(input, init).then(response => {
       if (messageRoute(url)) {
-        restoreHighlights();
         scheduleSync();
         if ((init?.method || input?.method || 'GET').toUpperCase() === 'GET' && response.ok) {
           response.clone().json().then(value => ingestNative(url, value)).catch(() => {});
@@ -274,9 +273,7 @@
   page.XMLHttpRequest.prototype.send = function (...args) {
     const record = xhrRecords.get(this);
     if (messageRoute(record?.url)) {
-      restoreHighlights();
       this.addEventListener('load', () => {
-        restoreHighlights();
         scheduleSync();
         if (this.status < 200 || this.status >= 300) return;
         if (record.method !== 'GET') {
@@ -373,10 +370,13 @@
     turns = [];
     ordinal = new Map();
     let turn = 0;
+    let previousRole = '';
     for (const message of chain) {
-      if (message.role === 'user') turn += 1;
+      // user → assistant만 한 턴으로 묶고, 단독 메시지는 각각 한 턴으로 센다.
+      if (message.role !== 'assistant' || previousRole !== 'user') turn += 1;
       turns[turn] = { id: message.id };
       ordinal.set(message.id, turn);
+      previousRole = message.role;
     }
     if (!turns[0] && turns[1]) turns[0] = turns[1];
     updateChronicle();
@@ -2732,6 +2732,72 @@
 
   let highlightRevision = 0;
   const highlighted = new Map();
+  const changedMessages = new Set();
+  let messageFrame = 0;
+  let messageScroller = null;
+  let observedBody = null;
+  const messageObserver = new page.MutationObserver(observeMessages);
+
+  // 변경된 본문만 모으고, 같은 프레임의 중복 변경은 한 번만 처리한다.
+  function queueMessage(root) {
+    if (!immersive || settings.theme === 'none') return;
+    changedMessages.add(root);
+    if (!messageFrame) messageFrame = page.requestAnimationFrame(() => {
+      messageFrame = 0;
+      const roots = [...changedMessages];
+      changedMessages.clear();
+      for (const root of roots) {
+        if (root.isConnected && root.matches(MESSAGE_ROOT)) emphasizeRoot(root).catch(showError);
+        else {
+          const record = highlighted.get(root);
+          if (record) clearHighlight(record);
+          highlighted.delete(root);
+        }
+      }
+    });
+  }
+
+  // 기존 목록 전체가 아니라 이번에 추가·제거된 하위 트리만 확인한다.
+  function collectMessages(node) {
+    if (node.nodeType !== 1 || own(node)) return false;
+    let found = false;
+    const collect = root => {
+      if (!root.matches(MESSAGE_ROOT) && !highlighted.has(root)) return;
+      queueMessage(root);
+      found = true;
+    };
+    if (node.matches('.wrtn-markdown')) collect(node);
+    node.querySelectorAll('.wrtn-markdown').forEach(collect);
+    return found;
+  }
+
+  function observeMessages(records) {
+    if (suspended) return;
+    if (currentChatId() !== chatId) scheduleSync();
+    for (const record of records) {
+      const target = record.target.nodeType === 1 ? record.target : record.target.parentElement;
+      if (!target || own(target)) continue;
+      const root = target.closest(MESSAGE_ROOT);
+      if (root) queueMessage(root);
+      if (record.type !== 'childList') continue;
+      for (const node of [...record.addedNodes, ...record.removedNodes]) {
+        if (collectMessages(node)) scheduleSync();
+        if (node.nodeType === 1 && !own(node) &&
+          (node.matches('main,' + EDITOR) || node.querySelector(EDITOR))) scheduleSync();
+      }
+    }
+  }
+
+  // 대기 중인 변경은 회수하고, 테마 DOM을 조작하는 동안만 관찰을 멈춘다.
+  function changeHighlights(change) {
+    observeMessages(messageObserver.takeRecords());
+    messageObserver.disconnect();
+    try {
+      change();
+    } finally {
+      if (observedBody && !suspended) messageObserver.observe(observedBody, { childList: true, subtree: true, characterData: true });
+    }
+  }
 
   // 인라인 서식을 유지하며 텍스트를 직렬화한다.
   function serializeInline(node) {
@@ -2795,18 +2861,22 @@
 
   // 테마 표시를 제거하고 원래 텍스트 노드를 복원한다.
   function clearHighlight(record) {
-    record.overlays.forEach(node => node.remove());
-    record.sources.forEach(node => node.removeAttribute('data-cc-focus-source'));
-    record.textSources.forEach(node => node.replaceWith(...node.childNodes));
+    changeHighlights(() => {
+      record.overlays.forEach(node => node.remove());
+      record.sources.forEach(node => node.removeAttribute('data-cc-focus-source'));
+      record.textSources.forEach(node => node.replaceWith(...node.childNodes));
+    });
     record.overlays = [];
     record.sources = [];
     record.textSources = [];
   }
 
-  // 크랙이 DOM을 갱신하기 전에 원문을 복원한다.
+  // 모드·설정·채팅방이 바뀔 때 테마 표시를 모두 복원한다.
   function restoreHighlights() {
     for (const record of highlighted.values()) clearHighlight(record);
     highlighted.clear();
+    changedMessages.clear();
+    messageScroller = null;
   }
 
   // 대사 패턴에 맞는 텍스트 구간을 테마로 표시한다.
@@ -2815,12 +2885,15 @@
     let runs = paragraphRuns(root);
     const signature = highlightRevision + ':' + runs.map(run => run.map(block => block.text).join('\n')).join('\uFFFF');
     const previous = highlighted.get(root);
-    if (previous?.signature === signature) return;
+    if (previous?.signature === signature &&
+      previous.nodes.every(node => root.contains(node)) &&
+      previous.sources.every(node => root.contains(node) && node.hasAttribute('data-cc-focus-source')) &&
+      previous.overlays.every(node => root.contains(node))) return;
     if (previous) {
       clearHighlight(previous);
       runs = paragraphRuns(root);
     }
-    const record = { signature, overlays: [], sources: [], textSources: [] };
+    const record = { signature, nodes: runs.flatMap(run => run.flatMap(block => block.nodes)), overlays: [], sources: [], textSources: [] };
     highlighted.set(root, record);
     for (const run of runs) {
       let offset = 0;
@@ -2845,33 +2918,35 @@
           previousGroup.matches.push(match);
         } else groups.push({ first, last, matches: [match] });
       }
-      for (const group of groups) {
-        if (!chunks[group.first].node.isConnected) continue;
-        const overlay = make('div');
-        overlay.dataset.ccFocusOwned = '';
-        let position = chunks[group.first].start;
-        for (const match of group.matches) {
-          appendMarkdown(overlay, text.slice(position, match.start));
-          overlay.append(makeDialogue(match.fields, settings, portraits));
-          position = match.end;
-        }
-        appendMarkdown(overlay, text.slice(position, chunks[group.last].end));
-        chunks[group.first].node.before(overlay);
-        for (let i = group.first; i <= group.last; i += 1) {
-          for (const node of chunks[i].nodes) {
-            let source = node;
-            if (node.nodeType === page.Node.TEXT_NODE) {
-              source = make('span');
-              node.before(source);
-              source.append(node);
-              record.textSources.push(source);
-            }
-            source.dataset.ccFocusSource = '';
-            record.sources.push(source);
+      changeHighlights(() => {
+        for (const group of groups) {
+          if (!chunks[group.first].node.isConnected) continue;
+          const overlay = make('div');
+          overlay.dataset.ccFocusOwned = '';
+          let position = chunks[group.first].start;
+          for (const match of group.matches) {
+            appendMarkdown(overlay, text.slice(position, match.start));
+            overlay.append(makeDialogue(match.fields, settings, portraits));
+            position = match.end;
           }
+          appendMarkdown(overlay, text.slice(position, chunks[group.last].end));
+          chunks[group.first].node.before(overlay);
+          for (let i = group.first; i <= group.last; i += 1) {
+            for (const node of chunks[i].nodes) {
+              let source = node;
+              if (node.nodeType === page.Node.TEXT_NODE) {
+                source = make('span');
+                node.before(source);
+                source.append(node);
+                record.textSources.push(source);
+              }
+              source.dataset.ccFocusSource = '';
+              record.sources.push(source);
+            }
+          }
+          record.overlays.push(overlay);
         }
-        record.overlays.push(overlay);
-      }
+      });
     }
   }
 
@@ -2976,7 +3051,6 @@
       const serial = ++this.serial;
       const { store, atom } = await this.session();
       if (serial !== this.serial || !immersive) return false;
-      restoreHighlights();
       // 검색의 원래 앵커 경로만 전달한다. around 요청·본문·페이징·DOM은 전부 크랙이 처리한다.
       // 검색 결과의 기존 항목은 보존한다. 본문 텍스트는 복제하거나 검색어로 보내지 않는다.
       store.set(atom, { type: 'setSpeakerFilter', filter: 'all' });
@@ -3267,14 +3341,10 @@
       event.preventDefault();
       event.stopImmediatePropagation();
       toggleImmersion();
-    } else if (!event.composedPath().includes(uiHost)) restoreHighlights();
+    }
   }, true);
   doc.addEventListener('pointerdown', event => {
     if (event.target.closest?.('button[aria-label="메시지 검색"]')) crackNavigation.showSearch();
-    if (!event.composedPath().includes(uiHost)) {
-      restoreHighlights();
-      scheduleSync();
-    }
   }, true);
   doc.addEventListener('input', event => {
     if (event.target.matches?.(EDITOR) || event.target.closest?.(EDITOR)) resizeInput();
@@ -3284,7 +3354,6 @@
     scrollFrame = page.requestAnimationFrame(() => {
       scrollFrame = 0;
       if (seeking || !indexComplete) return;
-      scheduleSync();
       const scroll = nativeScroller(), rect = scroll?.getBoundingClientRect();
       if (!rect) return;
       let nearest = null, distance = Infinity;
@@ -3311,11 +3380,6 @@
   page.visualViewport?.addEventListener('resize', positionOverlays);
   if (page.navigation) page.navigation.addEventListener('navigatesuccess', scheduleSync);
   else page.addEventListener('popstate', scheduleSync);
-  doc.addEventListener('click', event => {
-    if (!event.composedPath().includes(uiHost)) restoreHighlights();
-    scheduleSync();
-  }, true);
-  doc.addEventListener('keyup', scheduleSync, true);
   let syncFrame = 0;
   // 같은 프레임의 화면 갱신 요청을 하나로 합친다.
   function scheduleSync() {
@@ -3345,19 +3409,13 @@
       updateToggleButton();
     }
     if (!chatId) return;
-    for (const [root, record] of highlighted) if (!root.isConnected) {
-      clearHighlight(record);
-      highlighted.delete(root);
-    }
     if (immersive) {
       updateImmersion();
       refreshLatest();
-      if (settings.theme !== 'none') {
-        const rect = nativeScroller()?.getBoundingClientRect();
-        for (const root of nativeScroller()?.querySelectorAll('[data-message-group-id] .wrtn-markdown') || []) {
-          const bounds = root.getBoundingClientRect();
-          if (rect && bounds.bottom > rect.top - rect.height && bounds.top < rect.bottom + rect.height) emphasizeRoot(root).catch(showError);
-        }
+      const scroll = nativeScroller();
+      if (scroll !== messageScroller) {
+        messageScroller = scroll;
+        scroll?.querySelectorAll(MESSAGE_ROOT).forEach(queueMessage);
       }
     }
   }
@@ -3371,6 +3429,8 @@
     runtimeStyle.textContent = pageCSS;
     (doc.head || doc.documentElement).append(runtimeStyle);
     ensureUI();
+    observedBody = doc.body;
+    messageObserver.observe(observedBody, { childList: true, subtree: true, characterData: true });
     syncPage();
   }
   page.CrackCommandline.register({ id: 'crack-immersion', label: '몰입모드', useDatabse: false, lambda: openSettings });
@@ -3378,8 +3438,12 @@
   else boot().catch(showError);
   page.addEventListener('pagehide', () => {
     suspended = true;
+    messageObserver.disconnect();
+    observedBody = null;
     page.cancelAnimationFrame(syncFrame);
     page.cancelAnimationFrame(scrollFrame);
+    page.cancelAnimationFrame(messageFrame);
+    messageFrame = 0;
     syncFrame = 0;
     scrollFrame = 0;
     cancelSeek();
