@@ -2037,7 +2037,7 @@
     /* 모바일 설정창: 대분류를 탭으로 나누고 대사 설정은 문서 순서대로 표시한다. */
     @media (max-width: 767px) {
       .settings-scrim {
-        padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+        padding: max(48px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
       }
 
       .cc-ui.focus-window {
