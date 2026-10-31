@@ -66,7 +66,19 @@
     }
   ];
 
-  const themes = [['none', '미설정', '—'], ['fantasy', '판타지', '✦'], ['dark', '정통 판타지', '⚜'], ['game', '게임 말풍선', '···'], ['sf', 'SF 통신', '⌁'], ['urban', '어반 판타지', '↗'], ['noir', '느와르', '◒'], ['ink', '수묵', '墨'], ['terminal', '터미널', '>_'], ['letter', '편지', '✉'], ['comic', '코믹', '!'], ['glass', '글라스', '◌']];
+  const themes = [
+    ['none', '미설정', '—'],
+    ['game', '게임 말풍선', '···'],
+    ['sf', 'SF 통신', '⌁'],
+    ['glass', '글라스', '◌'],
+    ['ashen', '고딕 금장', '◆'],
+    ['neon', '네온 태그', '//'],
+    ['menhera', '분홍 하트', '♡'],
+    ['grave', '고딕 초상', '⚜'],
+    ['telegram', '황동 액자', '✉'],
+    ['aurora', '은빛 방패', '✦'],
+    ['peach', '파스텔 구름', '☁']
+  ];
 
   // 화면 설정과 대사 테마만 저장한다. 키 배정은 이 스크립트에서 다루지 않는다.
   function defaultSettings() {
@@ -962,16 +974,6 @@
       background: #111a22;
     }
 
-    .theme-art.fantasy {
-      background: #263c3c;
-      color: #bdd7cc;
-    }
-
-    .theme-art.dark {
-      background: #302c27;
-      color: #d4bd8f;
-    }
-
     .theme-art.game {
       background: #2c3540;
       color: #bfcfe1;
@@ -982,41 +984,44 @@
       color: #7ffff2;
     }
 
-    .theme-art.urban {
-      background: #302c3a;
-      color: #d4c9e5;
-    }
-
-    .theme-art.noir {
-      background: #292a2d;
-      color: #d7d2ce;
-    }
-
-    .theme-art.ink {
-      background: #303536;
-      color: #e0e2dc;
-    }
-
-    .theme-art.terminal {
-      background: #1a292c;
-      color: #b7d0cf;
-      font: 11px Consolas,monospace;
-    }
-
-    .theme-art.letter {
-      background: #35322e;
-      color: #ded3bf;
-    }
-
-    .theme-art.comic {
-      background: #30333b;
-      color: #e5d6d9;
-      font-weight: 900;
-    }
-
     .theme-art.glass {
       background: linear-gradient(135deg,#79adcd44,#d2a4c522);
       color: #c7e8fb;
+    }
+
+    .theme-art.ashen {
+      background: #20211f;
+      color: #bda26c;
+    }
+
+    .theme-art.neon {
+      background: #222935;
+      color: #b8e870;
+    }
+
+    .theme-art.menhera {
+      background: #3c2439;
+      color: #ff9cc7;
+    }
+
+    .theme-art.grave {
+      background: #20211f;
+      color: #c8af78;
+    }
+
+    .theme-art.telegram {
+      background: #29251f;
+      color: #c5a36f;
+    }
+
+    .theme-art.aurora {
+      background: #354953;
+      color: #dbe8b7;
+    }
+
+    .theme-art.peach {
+      background: #dceaf0;
+      color: #557d8f;
     }
 
     .speaker-form {
@@ -1217,150 +1222,6 @@
       align-self: center;
     }
 
-    .dialogue[data-theme=fantasy] {
-      --paper: #202f31;
-      --ink: #e4ece7;
-      --secondary: #c5d5cc;
-      --subtle: #acbfb6;
-      --edge: #6d8b85;
-      --edge-soft: #6d8b8555;
-      --accent: #c4dcd0;
-      background: radial-gradient(ellipse at 0 0,#a6d1b312,transparent 65%),var(--paper);
-      border-radius: 2px 14px 2px 14px;
-      border-block-color: var(--edge-soft);
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=fantasy] {
-      --paper: #f1f6f2;
-      --ink: #293e38;
-      --secondary: #425c50;
-      --subtle: #596e62;
-      --edge: #8ca99c;
-      --edge-soft: #8ca99c66;
-      --accent: #406b57;
-    }
-
-    .dialogue[data-theme=fantasy]::after {
-      content: '✧';
-      position: absolute;
-      right: 7px;
-      top: 0;
-      color: var(--accent);
-      font: 19px Georgia,serif;
-    }
-
-    .dialogue[data-theme=fantasy] .speaker-portrait {
-      width: 59px;
-      height: 70px;
-      margin: -10px 0 -9px -4px;
-      object-fit: contain;
-      object-position: bottom;
-      align-self: flex-end;
-    }
-
-    .dialogue[data-theme=fantasy] .dialogue-name {
-      letter-spacing: .04em;
-    }
-
-    .dialogue[data-theme=dark] {
-      --paper: #292a27;
-      --ink: #e8e1d1;
-      --secondary: #d1c7b3;
-      --subtle: #b7ad98;
-      --edge: #8d7a55;
-      --edge-soft: #8d7a5566;
-      --accent: #dac394;
-      padding: 10px 17px;
-      border-block: 3px double var(--edge);
-      background: radial-gradient(ellipse at 50% 100%,#ac8e4f0b,transparent 70%),var(--paper);
-      box-shadow: inset 0 0 14px #0003,0 2px 4px #0002;
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=dark] {
-      --paper: #f0eadd;
-      --ink: #39352e;
-      --secondary: #514a3d;
-      --subtle: #6c614f;
-      --edge: #a68c60;
-      --edge-soft: #a68c6066;
-      --accent: #70572f;
-      box-shadow: inset 0 0 14px #8c71420a,0 2px 4px #3d2d1610;
-    }
-
-    .medieval-frame {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-      color: var(--accent);
-    }
-
-    .medieval-frame::before {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      border: 1px solid var(--edge-soft);
-      clip-path: polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px);
-    }
-
-    .medieval-frame::after {
-      content: '◆';
-      position: absolute;
-      left: 50%;
-      bottom: -9px;
-      font-size: 8px;
-      transform: translateX(-50%);
-      color: var(--edge);
-      text-shadow: 0 1px var(--paper);
-    }
-
-    .medieval-frame i {
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: 30px;
-      height: 30px;
-      background: var(--accent);
-      filter: drop-shadow(0 1px #0005);
-      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='white' stroke-width='1.2'%3E%3Cpath d='M3 31V3h28M8 27V8h19M3 17l7-7 7-7M8 22l5-5-4-4 4-4 4 4 5-5M13 17q6 0 6-6M3 3l5 5'/%3E%3Ccircle cx='3' cy='3' r='2'/%3E%3Cpath d='m24 3 3-3 3 3-3 3Zm-21 21 3 3-3 3-3-3Z' fill='white' stroke='none'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
-    }
-
-    .medieval-frame i:nth-child(2) {
-      left: auto;
-      right: -5px;
-      transform: rotate(90deg);
-    }
-
-    .medieval-frame i:nth-child(3) {
-      top: auto;
-      bottom: -5px;
-      left: auto;
-      right: -5px;
-      transform: rotate(180deg);
-    }
-
-    .medieval-frame i:nth-child(4) {
-      top: auto;
-      bottom: -5px;
-      transform: rotate(270deg);
-    }
-
-    .dialogue[data-theme=dark] .speaker-portrait {
-      order: 2;
-      width: 47px;
-      height: 58px;
-      border: 3px double var(--edge);
-      border-radius: 45% 45% 3px 3px;
-      object-fit: cover;
-      background: var(--wash);
-      filter: saturate(.65);
-    }
-
-    .dialogue[data-theme=dark] .dialogue-name {
-      font-variant: small-caps;
-      letter-spacing: .07em;
-    }
-
     .dialogue[data-theme=game] {
       --paper: #28313d;
       --accent: #c9d9ed;
@@ -1457,291 +1318,6 @@
       text-shadow: .5px 0 #35ffff22;
     }
 
-    .dialogue[data-theme=urban] {
-      --paper: #292832;
-      --accent: #d8cee9;
-      --edge: #716a85;
-      --wash: #d8cee916;
-      border: 0;
-      border-left: 2px solid var(--accent);
-      border-radius: 0 8px 0 0;
-      background: linear-gradient(100deg,var(--wash),transparent 65%),var(--paper);
-      box-shadow: 0 1px 0 var(--edge);
-      padding: 8px 13px;
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=urban] {
-      --paper: #f5f3f8;
-      --accent: #625275;
-      --edge: #ada3bb;
-      --wash: #6252750a;
-    }
-
-    .dialogue[data-theme=urban]::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 26px;
-      height: 5px;
-      background: var(--edge);
-      clip-path: polygon(5px 0,100% 0,100% 100%,0 100%);
-    }
-
-    .dialogue[data-theme=urban] .dialogue-name {
-      width: fit-content;
-      border-bottom: 1px solid var(--edge);
-      padding: 0 10px 2px 0;
-      margin-bottom: 4px;
-      font: 700 10px/1.4 'Malgun Gothic',sans-serif;
-      letter-spacing: .04em;
-    }
-
-    .dialogue[data-theme=urban] .speaker-portrait {
-      order: 2;
-      width: 61px;
-      height: 69px;
-      object-fit: contain;
-      margin: -9px 0 -8px;
-      align-self: flex-end;
-      filter: drop-shadow(-2px 2px #0002);
-    }
-
-    .dialogue[data-theme=noir] {
-      --paper: #242527;
-      --ink: #eeebe6;
-      --secondary: #d0cbc5;
-      --subtle: #b0aba6;
-      --accent: #d9b8ae;
-      --edge: #81736d;
-      border: 0;
-      border-block: 1px solid var(--edge);
-      padding: 8px 12px 8px 0;
-      background: linear-gradient(90deg,var(--paper),transparent);
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=noir] {
-      --paper: #f4f1ed;
-      --ink: #302c2b;
-      --secondary: #4d4642;
-      --subtle: #6e625b;
-      --accent: #79544a;
-      --edge: #a89991;
-    }
-
-    .dialogue[data-theme=noir] .speaker-portrait {
-      width: 42px;
-      height: 59px;
-      filter: grayscale(1) contrast(1.1);
-      background: var(--wash);
-      margin-left: 5px;
-      border: 1px solid var(--edge);
-    }
-
-    .dialogue[data-theme=noir] .dialogue-name {
-      font: italic 12px/1.5 Georgia,'Batang',serif;
-    }
-
-    .dialogue[data-theme=noir] .dialogue-name::after {
-      content: '';
-      height: 1px;
-      width: 22px;
-      background: var(--edge);
-    }
-
-    .dialogue[data-theme=ink] {
-      --paper: #262d2c;
-      --ink: #e1e6df;
-      --secondary: #c6cfc6;
-      --subtle: #acb9b0;
-      --accent: #dfb1a6;
-      --edge: #6d8073;
-      border: 0;
-      border-left: 3px solid var(--edge);
-      background: linear-gradient(90deg,var(--paper),transparent);
-      padding: 7px 12px;
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=ink] {
-      --paper: #f3f4ef;
-      --ink: #2e3832;
-      --secondary: #48574c;
-      --subtle: #606c62;
-      --accent: #8e4e43;
-      --edge: #9aa99a;
-    }
-
-    .dialogue[data-theme=ink]::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -3px;
-      width: 20px;
-      height: 1px;
-      background: var(--edge);
-    }
-
-    .dialogue[data-theme=ink] .speaker-portrait {
-      order: 2;
-      width: 32px;
-      height: 32px;
-      filter: grayscale(1);
-      border-radius: 2px;
-      opacity: .9;
-    }
-
-    .dialogue[data-theme=ink] .dialogue-name {
-      font-size: 10px;
-      width: fit-content;
-      padding: 1px 5px;
-      border: 1px solid var(--accent);
-      border-radius: 1px;
-      margin-bottom: 4px;
-    }
-
-    .dialogue[data-theme=terminal] {
-      --paper: #1c2a2d;
-      --ink: #deebea;
-      --secondary: #bcd3d0;
-      --subtle: #a4bebc;
-      --accent: #b3d9d2;
-      --edge: #5b7c7b;
-      background: linear-gradient(90deg,var(--wash) 30px,transparent 30px),var(--paper);
-      border: 1px solid var(--edge);
-      border-radius: 2px;
-      padding: 7px 11px;
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=terminal] {
-      --paper: #f0f6f5;
-      --ink: #29413f;
-      --secondary: #3e5d59;
-      --subtle: #53726f;
-      --accent: #386e65;
-      --edge: #92b1aa;
-    }
-
-    .dialogue[data-theme=terminal] .speaker-portrait {
-      width: 20px;
-      height: 20px;
-      align-self: flex-start;
-      filter: grayscale(.8);
-    }
-
-    .dialogue[data-theme=terminal] .dialogue-name {
-      font: 10px/1.5 Consolas,'Malgun Gothic',monospace;
-    }
-
-    .dialogue[data-theme=terminal] .dialogue-name::before {
-      content: '›';
-      color: var(--subtle);
-      font-weight: 400;
-    }
-
-    .dialogue[data-theme=terminal] .dialogue-speech {
-      font-family: Consolas,'Malgun Gothic',monospace;
-    }
-
-    .dialogue[data-theme=letter] {
-      --paper: #302e2a;
-      --ink: #e9e3d9;
-      --secondary: #d0c7b9;
-      --subtle: #b8ae9e;
-      --accent: #dbc6a5;
-      --edge: #897d69;
-      border: 0;
-      border-top: 1px solid var(--edge);
-      border-bottom: 1px solid var(--edge-soft);
-      background: linear-gradient(90deg,var(--paper),transparent);
-      padding: 9px 12px;
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=letter] {
-      --paper: #f7f3eb;
-      --ink: #38332b;
-      --secondary: #544b3f;
-      --subtle: #6e6352;
-      --accent: #775f3d;
-      --edge: #b5a68c;
-    }
-
-    .dialogue[data-theme=letter] .dialogue-body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .dialogue[data-theme=letter] .dialogue-name {
-      order: 3;
-      align-self: flex-end;
-      margin: 3px 0 0;
-      font: italic 11px/1.4 Georgia,'Batang',serif;
-    }
-
-    .dialogue[data-theme=letter] .dialogue-name::before {
-      content: '—';
-      font-weight: 400;
-    }
-
-    .dialogue[data-theme=letter] .speaker-portrait {
-      order: 2;
-      width: 36px;
-      height: 43px;
-      border: 3px double var(--edge);
-      filter: saturate(.45);
-      align-self: flex-end;
-    }
-
-    .dialogue[data-theme=comic] {
-      --paper: #2d3039;
-      --ink: #f0edf0;
-      --secondary: #d0cbd4;
-      --subtle: #b8b1bf;
-      --accent: #e2bcc7;
-      --edge: #a09aa9;
-      border: 1.5px solid var(--edge);
-      border-radius: 12px 5px 14px 4px;
-      box-shadow: 2px 2px 0 var(--edge-soft);
-      background: radial-gradient(circle at 100% 0,var(--wash),transparent 60%),var(--paper);
-    }
-
-    [data-scene-mode=light] .dialogue[data-theme=comic] {
-      --paper: #fffafc;
-      --ink: #302a32;
-      --secondary: #514750;
-      --subtle: #70616d;
-      --accent: #8f4f65;
-      --edge: #7d6e7c;
-    }
-
-    .dialogue[data-theme=comic]::before {
-      content: '';
-      position: absolute;
-      left: 25px;
-      bottom: -7px;
-      width: 12px;
-      height: 8px;
-      border-left: 1.5px solid var(--edge);
-      background: var(--paper);
-      transform: skewX(-30deg);
-      clip-path: polygon(0 0,100% 0,0 100%);
-    }
-
-    .dialogue[data-theme=comic] .speaker-portrait {
-      width: 53px;
-      height: 63px;
-      object-fit: contain;
-      margin: -9px 0 -9px -5px;
-      align-self: flex-end;
-    }
-
-    .dialogue[data-theme=comic] .dialogue-name {
-      font: 700 10px/1.5 'Malgun Gothic',sans-serif;
-    }
-
-    .dialogue[data-theme=comic] .dialogue-speech {
-      font-family: 'Malgun Gothic',sans-serif;
-    }
-
     .dialogue[data-theme=glass] {
       --paper: #19242dcc;
       --ink: #e5edf2;
@@ -1776,6 +1352,375 @@
 
     .dialogue[data-theme=glass] .dialogue-name {
       font: 500 10px/1.5 'Malgun Gothic',sans-serif;
+    }
+
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) {
+      box-sizing: border-box;
+      font: 13px/1.55 'Malgun Gothic',sans-serif;
+    }
+
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-name {
+      flex-wrap: wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-speech {
+      font: inherit;
+    }
+
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-translation {
+      font-size: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .dialogue[data-theme=ashen] {
+      --ink: #ddd9cd;
+      --accent: #bda26c;
+      --subtle: #787c78;
+      --secondary: #a7a59c;
+      padding: 7px 12px;
+      background: radial-gradient(circle at 70% 0,#8870460c,transparent 45%),linear-gradient(90deg,#20211f,#161716);
+      border: 1px solid #55544d;
+      border-left: 3px solid #877650;
+      box-shadow: inset 0 0 18px #0008,0 2px 7px #0004;
+    }
+
+    .dialogue[data-theme=ashen]::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      pointer-events: none;
+      border: 1px solid #8d7e5a22;
+      clip-path: polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px);
+    }
+
+    .dialogue[data-theme=ashen] .speaker-portrait {
+      width: 42px;
+      height: 51px;
+      align-self: flex-end;
+      margin-bottom: -7px;
+      filter: saturate(.45) contrast(1.08);
+      border-left: 1px solid #8e7c54;
+      border-right: 1px solid #34342f;
+      mask-image: linear-gradient(#000 75%,transparent);
+    }
+
+    .dialogue[data-theme=ashen] .dialogue-name {
+      letter-spacing: .08em;
+    }
+
+    .dialogue[data-theme=ashen] .dialogue-name::before {
+      content: '◆';
+      color: #756645;
+      font-size: 6px;
+    }
+
+    .dialogue[data-theme=ashen] .dialogue-name small {
+      color: #77766e;
+    }
+
+    .dialogue[data-theme=ashen] .dialogue-speech {
+      font-family: Georgia,'Batang',serif;
+    }
+
+    .dialogue[data-theme=ashen] .dialogue-pronunciation {
+      font-style: italic;
+    }
+
+    .dialogue[data-theme=neon] {
+      --ink: #ebeff1;
+      --accent: #b8e870;
+      --subtle: #698fa5;
+      --secondary: #b9bdc5;
+      padding: 6px 10px;
+      background: linear-gradient(105deg,#222935,#181d26 70%);
+      border: 1px solid #454d5d;
+      clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+      box-shadow: inset 30px 0 30px #8a73d00c;
+    }
+
+    .dialogue[data-theme=neon]::before {
+      content: '//';
+      position: absolute;
+      right: 10px;
+      top: 3px;
+      color: #d05ec9;
+      opacity: .7;
+      font: 900 10px Arial,sans-serif;
+    }
+
+    .dialogue[data-theme=neon] .speaker-portrait {
+      width: 36px;
+      height: 36px;
+      align-self: flex-start;
+      border-radius: 3px;
+      border: 1px solid #667587;
+      transform: rotate(-2deg);
+      box-shadow: 3px 3px 0 #473b62;
+    }
+
+    .dialogue[data-theme=neon] .dialogue-name {
+      width: fit-content;
+      padding: 0 5px;
+      color: #14171b;
+      background: #b8e870;
+      font: 800 11px/1.5 Arial,'Malgun Gothic',sans-serif;
+      letter-spacing: .04em;
+      transform: skew(-8deg);
+    }
+
+    .dialogue[data-theme=neon] .dialogue-name small {
+      color: #473b62;
+      font: 8px Consolas,monospace;
+    }
+
+    .dialogue[data-theme=neon] .dialogue-speech {
+      font-weight: 500;
+    }
+
+    .dialogue[data-theme=neon] .dialogue-pronunciation {
+      font-family: Consolas,monospace;
+    }
+
+    .dialogue[data-theme=neon] .dialogue-translation {
+      width: fit-content;
+      padding: 0 4px;
+      background: #ffffff07;
+    }
+
+    .dialogue[data-theme=menhera] {
+      --ink: #f5e9f2;
+      --accent: #ff9cc7;
+      --subtle: #9a82aa;
+      --secondary: #c7b1c3;
+      padding: 6px 10px;
+      background: linear-gradient(110deg,#3c2439,#211d2c 65%);
+      border: 1px solid #83566f;
+      border-radius: 9px 2px 9px 2px;
+      box-shadow: inset 0 0 16px #ff73b50d;
+    }
+
+    .dialogue[data-theme=menhera]::before {
+      content: '♡×';
+      position: absolute;
+      right: 7px;
+      top: 2px;
+      color: #f783ba;
+      font: 800 10px Arial,sans-serif;
+      transform: rotate(5deg);
+    }
+
+    .dialogue[data-theme=menhera] .speaker-portrait {
+      box-sizing: border-box;
+      width: 35px;
+      height: 35px;
+      align-self: flex-start;
+      border-radius: 50%;
+      border: 2px solid #f18cb9;
+      box-shadow: 0 0 0 2px #251c28,3px 1px 0 #705282;
+    }
+
+    .dialogue[data-theme=menhera] .dialogue-name {
+      font: 700 10px/1.5 'Malgun Gothic',sans-serif;
+    }
+
+    .dialogue[data-theme=menhera] .dialogue-name::before {
+      content: '♥';
+      color: #d96a9f;
+      font-size: 7px;
+    }
+
+    .dialogue[data-theme=menhera] .dialogue-name small {
+      padding: 0 4px;
+      color: #bb9fc0;
+      background: #ffffff08;
+      border-radius: 8px;
+    }
+
+    .dialogue[data-theme=menhera] .dialogue-speech {
+      font-weight: 500;
+    }
+
+    .dialogue[data-theme=grave] {
+      --ink: #dfdbd1;
+      --accent: #c8af78;
+      --subtle: #717570;
+      --secondary: #a4a198;
+      padding: 7px 11px;
+      background: linear-gradient(90deg,#20211f,#171817);
+      border: 0;
+      border-top: 1px solid #5a574e;
+      border-bottom: 1px solid #31312d;
+      box-shadow: inset 0 0 20px #0008;
+    }
+
+    .dialogue[data-theme=grave] .speaker-portrait {
+      box-sizing: border-box;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px double #786b4e;
+      filter: grayscale(.35) saturate(.55);
+    }
+
+    .dialogue[data-theme=grave] .dialogue-name {
+      font: 700 11px/1.5 Georgia,'Batang',serif;
+      letter-spacing: .07em;
+    }
+
+    .dialogue[data-theme=grave] .dialogue-name small {
+      color: #6f6d67;
+    }
+
+    .dialogue[data-theme=grave] .dialogue-speech {
+      font-family: Georgia,'Batang',serif;
+    }
+
+    .dialogue[data-theme=grave] .dialogue-pronunciation {
+      font: italic 9px/1.45 Georgia,'Batang',serif;
+    }
+
+    .dialogue[data-theme=telegram] {
+      --ink: #ded5c6;
+      --accent: #c5a36f;
+      --subtle: #82796d;
+      --secondary: #a9a091;
+      padding: 7px 12px;
+      background: linear-gradient(90deg,#29251f,#1f1d19);
+      border: 0;
+      border-left: 5px double #8f7146;
+      border-top: 1px solid #5d4e38;
+      border-bottom: 1px solid #463b2e;
+    }
+
+    .dialogue[data-theme=telegram] .speaker-portrait {
+      box-sizing: border-box;
+      order: 2;
+      width: 34px;
+      height: 40px;
+      align-self: flex-start;
+      padding: 2px;
+      border: 2px solid #8b7048;
+      filter: sepia(.4) saturate(.55);
+    }
+
+    .dialogue[data-theme=telegram] .dialogue-name {
+      letter-spacing: .04em;
+    }
+
+    .dialogue[data-theme=telegram] .dialogue-name small {
+      color: #776b5c;
+    }
+
+    .dialogue[data-theme=telegram] .dialogue-speech {
+      font-family: Georgia,'Batang',serif;
+    }
+
+    .dialogue[data-theme=telegram] .dialogue-pronunciation {
+      font: 8px/1.5 'Courier New',monospace;
+    }
+
+    .dialogue[data-theme=telegram] .dialogue-pronunciation::before {
+      content: 'PHONOGRAPH / ';
+      color: #595249;
+    }
+
+    .dialogue[data-theme=telegram] .dialogue-translation {
+      padding-top: 2px;
+      border-top: 1px dotted #51483b;
+    }
+
+    .dialogue[data-theme=aurora] {
+      --ink: #edf1f2;
+      --accent: #dbe8b7;
+      --subtle: #78949e;
+      --secondary: #aec0c4;
+      padding: 5px 9px;
+      overflow: hidden;
+      background: linear-gradient(180deg,#354953,#263841);
+      border: 1px solid #718b98;
+      border-radius: 6px 13px 6px 13px;
+      box-shadow: inset 0 1px #ffffff1c;
+    }
+
+    .dialogue[data-theme=aurora] .speaker-portrait {
+      box-sizing: border-box;
+      width: 34px;
+      height: 39px;
+      border: 1px solid #a0b7c1;
+      border-radius: 4px 4px 12px 12px;
+    }
+
+    .dialogue[data-theme=aurora] .dialogue-name::before {
+      content: '✦';
+      color: #b4c68e;
+      font-size: 7px;
+    }
+
+    .dialogue[data-theme=aurora] .dialogue-name small {
+      color: #88a0aa;
+    }
+
+    .dialogue[data-theme=aurora] .dialogue-speech {
+      font-family: Georgia,'Batang',serif;
+    }
+
+    .dialogue[data-theme=aurora] .dialogue-pronunciation {
+      font-size: 8px;
+    }
+
+    .dialogue[data-theme=aurora] .dialogue-translation {
+      margin: 3px -9px -5px;
+      padding: 2px 8px;
+      background: #16272d77;
+      border-top: 1px solid #ffffff0d;
+    }
+
+    .dialogue[data-theme=peach] {
+      --ink: #46515a;
+      --accent: #557d8f;
+      --subtle: #80949d;
+      --secondary: #726e78;
+      padding: 8px 12px;
+      background: linear-gradient(115deg,#dceaf0,#f0e8ef);
+      border: 1px solid #b8cad2;
+      border-radius: 14px;
+      box-shadow: inset 0 -3px #a8bec726;
+    }
+
+    .dialogue[data-theme=peach] .speaker-portrait {
+      box-sizing: border-box;
+      width: 34px;
+      height: 34px;
+      transform: rotate(-3deg);
+      border: 2px solid white;
+      border-radius: 11px;
+      box-shadow: 0 2px 0 #a9bbc4;
+    }
+
+    .dialogue[data-theme=peach] .dialogue-name {
+      font: 700 10px/1.5 'Malgun Gothic',sans-serif;
+    }
+
+    .dialogue[data-theme=peach] .dialogue-name::before {
+      content: '☁';
+      color: #8db8c7;
+    }
+
+    .dialogue[data-theme=peach] .dialogue-name small {
+      color: #8b8290;
+    }
+
+    .dialogue[data-theme=peach] .dialogue-pronunciation {
+      font-size: 8px;
+    }
+
+    .dialogue[data-theme=peach] .dialogue-translation {
+      display: inline-block;
+      padding: 1px 7px;
+      background: #ffffff70;
+      border: 1px solid #cad5da;
+      border-radius: 9px;
     }
 
     .sample-tools {
@@ -2575,12 +2520,6 @@
     wrapper.dataset.sceneMode = mode;
     const bubble = make('article', 'dialogue');
     bubble.dataset.theme = config.theme;
-    if (config.theme === 'dark') {
-      const frame = make('span', 'medieval-frame');
-      frame.setAttribute('aria-hidden', 'true');
-      for (let i = 0; i < 4; i += 1) frame.append(make('i'));
-      bubble.append(frame);
-    }
     const blob = images.get(normalizeName(fields.name)) || images.get(normalizeName(fields.translatedName));
     if (blob) {
       const image = make('img', 'speaker-portrait');
