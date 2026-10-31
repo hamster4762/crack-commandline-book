@@ -16,6 +16,8 @@
 // @connect      securetoken.googleapis.com
 // @connect      firebaseio.com
 // @connect      firebasedatabase.app
+// @updateURL    https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-immersion.user.js
+// @downloadURL  https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-immersion.user.js
 // ==/UserScript==
 
 /* 공유 core가 먼저 실행된 스크립트의 권한을 사용하므로 Firebase 권한도 동일하게 선언한다. */

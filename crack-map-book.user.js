@@ -2,7 +2,7 @@
 // @name         크랙 지도 도감
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.1.0
+// @version      1.0.1.1
 // @description  !지도로 지역과 이동 시간을 확인하고 커스텀 지도를 관리합니다. (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-idle
@@ -18,6 +18,8 @@
 // @connect      securetoken.googleapis.com
 // @connect      firebaseio.com
 // @connect      firebasedatabase.app
+// @updateURL    https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-map-book.user.js
+// @downloadURL  https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-map-book.user.js
 // ==/UserScript==
 
 /*

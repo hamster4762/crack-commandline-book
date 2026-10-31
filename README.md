@@ -6,6 +6,8 @@
 - 아이템 도감 설치 : https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-item-book.user.js
 - 지도 도감 설치 : https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-map-book.user.js
 	- 커스텀 지도 편집기 : https://hamster4762.github.io/crack-commandline-book/
+- 몰입모드 설치 : https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-immersion.user.js
+- 키설정 설치 (PC전용) : https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/crack-key-settings.user.js
 
 ## 사용법
 
