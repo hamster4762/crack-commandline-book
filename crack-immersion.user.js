@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.0.0
+// @version      1.0.1.0
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -16,6 +16,10 @@
 // @connect      securetoken.googleapis.com
 // @connect      firebaseio.com
 // @connect      firebasedatabase.app
+// @connect      api.github.com
+// @connect      github.com
+// @connect      objects.githubusercontent.com
+// @connect      release-assets.githubusercontent.com
 // @updateURL    https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-immersion.user.js
 // @downloadURL  https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-immersion.user.js
 // ==/UserScript==
@@ -90,6 +94,8 @@
       autoGrow: true,
       showSlider: true,
       theme: 'none',
+      autoPronunciation: false,
+      pronunciationLanguage: 'ja',
       pattern: 0,
       customTemplate: '',
       customRegex: presets[0].regex
@@ -99,7 +105,7 @@
   function normalizeSettings(value) {
     const next = defaultSettings();
     if (!value || value.version !== 1) return next;
-    for (const key of ['hideLeft', 'hideTop', 'closeRight', 'autoGrow', 'showSlider']) {
+    for (const key of ['hideLeft', 'hideTop', 'closeRight', 'autoGrow', 'showSlider', 'autoPronunciation']) {
       if (typeof value[key] === 'boolean') next[key] = value[key];
     }
     if (themes.some(([id]) => id === value.theme)) next.theme = value.theme;
@@ -565,6 +571,20 @@
           <input id="speaker-file" type="file" accept="image/png,image/webp,image/jpeg,image/gif" hidden="">
           <small class="speaker-help">이름당 1장 · 정사각형 · PNG / WebP 투명 지원</small>
           <div id="speaker-list" class="speaker-list"></div>
+        </section>
+        <section class="section pronunciation-section">
+          <div class="section-heading">
+            <div class="section-title">
+              <span class="section-number">05</span>
+              <h2>자동 발음</h2>
+            </div>
+          </div>
+          <label class="setting-line"><span>발음 자동 생성<small>원문에 발음이 없을 때 대사에서 한글 발음 생성</small></span><input class="switch" id="auto-pronunciation" type="checkbox"></label>
+          <label class="field-label" for="pronunciation-language">대사 언어</label>
+          <select class="text-input" id="pronunciation-language" disabled><option value="ja">일본어 → 한글 발음</option></select>
+          <small class="template-help">인명·고유명사의 읽기는 실제 발음과 다를 수 있습니다.</small>
+          <small class="template-help" id="pronunciation-status" role="status">자동 발음 꺼짐 · 사전 미로드</small>
+          <small class="template-help">사전 출처: <a href="https://github.com/hexenq/kuroshiro-analyzer-kuromoji" target="_blank" rel="noopener noreferrer">Kuromoji Analyzer (MIT)</a> · <a href="https://github.com/takuyaa/kuromoji.js" target="_blank" rel="noopener noreferrer">Kuromoji (Apache-2.0)</a> · <a href="https://github.com/Doublevil/JmdictFurigana" target="_blank" rel="noopener noreferrer">JMdictFurigana / Doublevil</a> · <a href="https://www.edrdg.org/jmdict/j_jmdict.html" target="_blank" rel="noopener noreferrer">JMdict / EDRDG (CC BY-SA)</a></small>
         </section>
       </div>
     </div>
@@ -1942,7 +1962,7 @@
     .theme-panel {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      grid-template-areas: "themes speakers" "preview preview" "patterns patterns";
+      grid-template-areas: "themes speakers" "preview preview" "patterns patterns" "pronunciation pronunciation";
       gap: 10px 20px;
       align-content: start;
     }
@@ -1961,6 +1981,20 @@
 
     .speaker-section {
       grid-area: speakers;
+    }
+
+    .pronunciation-section {
+      grid-area: pronunciation;
+    }
+
+    #pronunciation-language {
+      width: 100%;
+      color: #c5ceca;
+      background: #101820;
+    }
+
+    #pronunciation-status {
+      white-space: pre-line;
     }
 
     .sample-heading {
@@ -2269,6 +2303,18 @@
       updatePreview();
     });
     $('sample-input').addEventListener('input', updatePreview);
+    $('auto-pronunciation').addEventListener('change', () => {
+      if (!draft) return;
+      draft.autoPronunciation = $('auto-pronunciation').checked;
+      if (draft.autoPronunciation && (pronunciationError || pronunciationStatus.jmdict.startsWith('보조 사전 로드 실패'))) stopPronunciationWorker();
+      syncPronunciationWorker();
+      updatePreview();
+    });
+    $('pronunciation-language').addEventListener('change', () => {
+      if (!draft) return;
+      draft.pronunciationLanguage = $('pronunciation-language').value;
+      updatePreview();
+    });
     $('speaker-form').addEventListener('submit', event => {
       event.preventDefault();
       const name = normalizeName($('speaker-name').value);
@@ -2336,6 +2382,9 @@
     $('sample-input').value = presets[typeof draft.pattern === 'number' ? draft.pattern : 0].sample;
     $('template-input').value = draft.customTemplate;
     $('regex-input').value = draft.customRegex;
+    $('auto-pronunciation').checked = draft.autoPronunciation;
+    $('pronunciation-language').value = draft.pronunciationLanguage;
+    syncPronunciationWorker();
     $('settings-scrim').hidden = false;
     setPreviewMode(sceneMode());
     selectTab(activeTab);
@@ -2355,6 +2404,7 @@
     $('settings-scrim').hidden = true;
     draft = null;
     draftPortraits = null;
+    syncPronunciationWorker();
     releaseUnusedImages();
     editor()?.focus();
   }
@@ -2372,6 +2422,7 @@
       const next = normalizeSettings(draft);
       await persist(next, draftPortraits);
       settings = next;
+      syncPronunciationWorker();
       portraits = new Map(draftPortraits);
       highlightRevision += 1;
       restoreHighlights();
@@ -2385,6 +2436,279 @@
       $('save-preview').disabled = false;
       releaseUnusedImages();
     }
+  }
+
+  // 사전 다운로드 이후의 압축 해제·색인·발음 변환은 모두 전용 워커에서 수행한다.
+  function japanesePronunciationWorker() {
+    const status = (dictionary, text) => self.postMessage({ type: 'status', dictionary, text });
+    const hira = text => String(text).normalize('NFKC').replace(/[\u30a1-\u30f6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 96));
+    const isHan = text => /\p{Script=Han}/u.test(text);
+    const validReading = text => typeof text === 'string' && text.length > 0 && text !== '*' && !isHan(text);
+    let analyzerReady, supplementalReady, remoteSequence = 0;
+    const remoteJobs = new Map();
+
+    function init() {
+      if (!analyzerReady) analyzerReady = (async () => {
+        status('kuromoji', '기본 사전 불러오는 중…');
+        importScripts('https://cdn.jsdelivr.net/npm/kuroshiro-analyzer-kuromoji@1.1.0/dist/kuroshiro-analyzer-kuromoji.min.js');
+        const exported = self.KuromojiAnalyzer;
+        const Analyzer = typeof exported === 'function' ? exported : exported.default;
+        const analyzer = new Analyzer({ dictPath: 'https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/dict/' });
+        await analyzer.init();
+        status('kuromoji', '기본 사전 준비됨');
+        return analyzer;
+      })();
+      return analyzerReady;
+    }
+
+    function download(url) {
+      return new Promise((resolve, reject) => {
+        const requestId = ++remoteSequence;
+        remoteJobs.set(requestId, { resolve, reject });
+        self.postMessage({ type: 'download', requestId, url });
+      });
+    }
+
+    function supplemental() {
+      if (!supplementalReady) supplementalReady = (async () => {
+        status('jmdict', '보조 사전 릴리스 확인 중…');
+        const metadata = JSON.parse(new TextDecoder().decode(await download('https://api.github.com/repos/Doublevil/JmdictFurigana/releases/latest')));
+        const asset = metadata.assets?.find(item => item.name === 'JmdictFurigana.json.gz')
+          || metadata.assets?.find(item => item.name === 'JmdictFurigana.json');
+        if (!asset) throw new Error('보조 사전 파일을 찾지 못했습니다.');
+        status('jmdict', '보조 사전 다운로드 중…');
+        const bytes = await download(asset.browser_download_url);
+        status('jmdict', '보조 사전 압축 해제·색인 생성 중…');
+        const stream = new Blob([bytes]).stream();
+        const json = await new Response(asset.name.endsWith('.gz') ? stream.pipeThrough(new DecompressionStream('gzip')) : stream).json();
+        const entries = new Map();
+        for (const item of json) {
+          if (typeof item.text !== 'string' || !isHan(item.text) || item.text.length > 20 || !validReading(item.reading)) continue;
+          if (!entries.has(item.text)) entries.set(item.text, hira(item.reading));
+        }
+        status('jmdict', '보조 사전 준비됨');
+        return entries;
+      })().catch(error => {
+        status('jmdict', '보조 사전 로드 실패: ' + error.message);
+        return null;
+      });
+      return supplementalReady;
+    }
+
+    const kana = new Map([
+      'あ:아 い:이 う:우 え:에 お:오 か:카 き:키 く:쿠 け:케 こ:코 さ:사 し:시 す:스 せ:세 そ:소 た:타 ち:치 つ:츠 て:테 と:토 な:나 に:니 ぬ:누 ね:네 の:노 は:하 ひ:히 ふ:후 へ:헤 ほ:호 ま:마 み:미 む:무 め:메 も:모 や:야 ゆ:유 よ:요 ら:라 り:리 る:루 れ:레 ろ:로 わ:와 を:오',
+      'が:가 ぎ:기 ぐ:구 げ:게 ご:고 ざ:자 じ:지 ず:즈 ぜ:제 ぞ:조 だ:다 ぢ:지 づ:즈 で:데 ど:도 ば:바 び:비 ぶ:부 べ:베 ぼ:보 ぱ:파 ぴ:피 ぷ:푸 ぺ:페 ぽ:포',
+      'きゃ:캬 きゅ:큐 きょ:쿄 しゃ:샤 しゅ:슈 しょ:쇼 ちゃ:차 ちゅ:추 ちょ:초 にゃ:냐 にゅ:뉴 にょ:뇨 ひゃ:햐 ひゅ:휴 ひょ:효 みゃ:먀 みゅ:뮤 みょ:묘 りゃ:랴 りゅ:류 りょ:료',
+      'ぎゃ:갸 ぎゅ:규 ぎょ:교 じゃ:자 じゅ:주 じょ:조 びゃ:뱌 びゅ:뷰 びょ:뵤 ぴゃ:퍄 ぴゅ:퓨 ぴょ:표',
+      'ふぁ:파 ふぃ:피 ふぇ:페 ふぉ:포 てぃ:티 でぃ:디 とぅ:투 どぅ:두 しぇ:셰 じぇ:제 ちぇ:체 うぃ:위 うぇ:웨 うぉ:워 ゔ:브 ゔぁ:바 ゔぃ:비 ゔぇ:베 ゔぉ:보 ぁ:아 ぃ:이 ぅ:우 ぇ:에 ぉ:오 ゃ:야 ゅ:유 ょ:요 ゎ:와'
+    ].join(' ').split(/\s+/).map(pair => pair.split(':')));
+
+    function toKorean(value) {
+      const text = hira(value).replace(/([おこそとのほもよろをごぞどぼぽょ])う/g, '$1お');
+      let output = '';
+      for (let i = 0; i < text.length; i += 1) {
+        const ch = text[i], code = output.charCodeAt(output.length - 1);
+        if (ch === 'っ' || ch === 'ん') {
+          if (code >= 0xac00 && code <= 0xd7a3 && (code - 0xac00) % 28 === 0) {
+            output = output.slice(0, -1) + String.fromCharCode(code + (ch === 'っ' ? 19 : 4));
+          } else output += ch === 'ん' ? '응' : '읏';
+        } else if (ch === 'ー') {
+          if (code >= 0xac00 && code <= 0xd7a3) {
+            output += ['아', '애', '아', '애', '어', '에', '어', '에', '오', '아', '애', '에', '오', '우', '어', '에', '이', '우', '으', '이', '이'][Math.floor((code - 0xac00) / 28) % 21];
+          }
+        } else {
+          const pair = kana.get(text.slice(i, i + 2));
+          output += pair || kana.get(ch) || ch;
+          if (pair) i += 1;
+        }
+      }
+      return output.replace(/[\u00a0\t\r\n]+/g, ' ').replace(/ {2,}/g, ' ')
+        .replace(/([,，、;；:：])(?=\S)/g, '$1 ')
+        .replace(/((?:…)+|\.{3,})(?=\S)/g, '$1 ')
+        .replace(/([!?。！？]|(?<!\.)\.(?!\.))(?=[^\s」』”’）)\]])/g, '$1 ').trim();
+    }
+
+    async function convert(text) {
+      const analyzer = await init();
+      const tokens = await analyzer.parse(text.normalize('NFKC'));
+      const units = tokens.map(token => ({
+        surface: token.surface_form,
+        value: validReading(token.pronunciation) ? hira(token.pronunciation)
+          : validReading(token.reading) ? hira(token.reading) : isHan(token.surface_form) ? null : hira(token.surface_form),
+        pos: token.pos
+      }));
+      // 미등록 한자어는 주변 토큰까지 포함해 가장 긴 실제 표제어로 다시 찾는다.
+      const lexicon = units.some(unit => unit.value === null) ? await supplemental() : null;
+      if (lexicon) for (let i = 0; i < units.length; i += 1) {
+        if (units[i].value !== null) continue;
+        let best;
+        for (let start = Math.max(0, i - 3); start <= i; start += 1) {
+          let surface = '';
+          for (let end = start; end < Math.min(units.length, i + 5); end += 1) {
+            surface += units[end].surface;
+            if (surface.length > 20) break;
+            if (end < i || !lexicon.has(surface)) continue;
+            if (!best || surface.length > best.surface.length) best = { start, end, surface, value: lexicon.get(surface), pos: '名詞' };
+          }
+        }
+        if (best) {
+          units.splice(best.start, best.end - best.start + 1, best);
+          i = best.start - 1;
+        }
+      }
+      let output = '', previous;
+      for (const unit of units) {
+        if (unit.value === null) unit.value = '〔미확인:' + unit.surface + '〕';
+        if (unit.pos === '助詞') unit.value = ({ 'は': 'わ', 'へ': 'え', 'を': 'お' })[unit.surface] || unit.value;
+        const punct = /^[、。，．！？!?…・「」『』（）()\s]+$/u.test(unit.surface);
+        const opening = /^[「『（(]+$/u.test(unit.surface);
+        const attach = !output || punct || opening || unit.pos === '助詞' || unit.pos === '助動詞'
+          || unit.pos === '接尾' || previous?.opening || ['助詞', '助動詞', '接頭詞'].includes(previous?.pos);
+        if (!attach && !/[\s、。！？!?…]$/u.test(output)) output += ' ';
+        output += unit.value;
+        previous = { pos: unit.pos, opening };
+      }
+      return toKorean(output);
+    }
+
+    self.onmessage = async ({ data }) => {
+      if (data.type === 'download-result') {
+        const job = remoteJobs.get(data.requestId);
+        if (!job) return;
+        remoteJobs.delete(data.requestId);
+        if (data.error) job.reject(new Error(data.error));
+        else job.resolve(data.bytes);
+        return;
+      }
+      try {
+        const text = await convert(data.text);
+        self.postMessage({ id: data.id, text });
+      } catch (error) {
+        self.postMessage({ id: data.id, error: error.message });
+      }
+    };
+  }
+
+  let pronunciationWorker = null, pronunciationSequence = 0, pronunciationError = '';
+  const pronunciationJobs = new Map(), pronunciationCache = new Map(), pronunciationDownloads = new Set();
+  const pronunciationStatus = { kuromoji: '기본 사전 미로드', jmdict: '보조 사전 미로드 · 미등록 한자어가 있을 때 로드' };
+
+  function renderPronunciationStatus() {
+    if (!ui) return;
+    const config = draft || settings;
+    $('pronunciation-language').disabled = !config.autoPronunciation;
+    $('pronunciation-status').textContent = config.autoPronunciation
+      ? pronunciationError || Object.values(pronunciationStatus).join('\n')
+      : '자동 발음 꺼짐' + (settings.autoPronunciation && draft ? ' · 저장 전까지 채팅에는 기존 설정 적용' : ' · 사전 미로드');
+  }
+
+  function stopPronunciationWorker(error = '') {
+    pronunciationWorker?.terminate();
+    pronunciationWorker = null;
+    pronunciationError = error;
+    for (const request of pronunciationDownloads) request.abort();
+    pronunciationDownloads.clear();
+    for (const job of pronunciationJobs.values()) {
+      page.clearTimeout(job.timer);
+      job.resolve('');
+    }
+    pronunciationJobs.clear();
+    pronunciationCache.clear();
+    pronunciationStatus.kuromoji = '기본 사전 미로드';
+    pronunciationStatus.jmdict = '보조 사전 미로드 · 미등록 한자어가 있을 때 로드';
+    renderPronunciationStatus();
+  }
+
+  function syncPronunciationWorker() {
+    if (!settings.autoPronunciation && !draft?.autoPronunciation) stopPronunciationWorker();
+    renderPronunciationStatus();
+  }
+
+  // GM은 CORS가 필요한 사전 다운로드만 중계하고 바이너리를 그대로 워커에 넘긴다.
+  function downloadPronunciationDictionary(worker, data) {
+    const reply = result => {
+      if (pronunciationWorker !== worker) return;
+      worker.postMessage({ type: 'download-result', requestId: data.requestId, ...result }, result.bytes ? [result.bytes] : []);
+    };
+    const release = 'https://api.github.com/repos/Doublevil/JmdictFurigana/releases/latest';
+    let request;
+    const finish = result => {
+      pronunciationDownloads.delete(request);
+      reply(result);
+    };
+    try {
+      const url = new page.URL(data.url);
+      if (data.url !== release && !(url.protocol === 'https:' && ['github.com', 'objects.githubusercontent.com', 'release-assets.githubusercontent.com'].includes(url.hostname))) {
+        throw new Error('허용되지 않은 사전 주소입니다.');
+      }
+      request = GM_xmlhttpRequest({
+        method: 'GET', url: data.url, anonymous: true, responseType: 'arraybuffer', timeout: 60000,
+        headers: data.url === release ? { Accept: 'application/vnd.github+json' } : {},
+        onload: response => finish(response.status >= 200 && response.status < 300
+          ? { bytes: response.response } : { error: '사전 다운로드 실패: HTTP ' + response.status }),
+        onerror: () => finish({ error: '사전 다운로드에 실패했습니다. 연결 및 스크립트 권한을 확인해주세요.' }),
+        ontimeout: () => finish({ error: '사전 다운로드 제한 시간을 초과했습니다.' }),
+        onabort: () => finish({ error: '사전 다운로드가 취소되었습니다.' })
+      });
+      pronunciationDownloads.add(request);
+    } catch (error) {
+      finish({ error: error.message });
+    }
+  }
+
+  function getPronunciation(text) {
+    if (suspended || pronunciationError || !settings.autoPronunciation && !draft?.autoPronunciation) return Promise.resolve('');
+    if (pronunciationCache.has(text)) return pronunciationCache.get(text);
+    if (!pronunciationWorker) {
+      try {
+        const url = page.URL.createObjectURL(new page.Blob(['(' + japanesePronunciationWorker.toString() + ')();'], { type: 'text/javascript' }));
+        try {
+          pronunciationWorker = new page.Worker(url);
+        } finally {
+          page.URL.revokeObjectURL(url);
+        }
+        const worker = pronunciationWorker;
+        worker.onmessage = ({ data }) => {
+          if (worker !== pronunciationWorker) return;
+          if (data.type === 'download') {
+            downloadPronunciationDictionary(worker, data);
+            return;
+          }
+          if (data.type === 'status') {
+            pronunciationStatus[data.dictionary] = data.text;
+            renderPronunciationStatus();
+            return;
+          }
+          const job = pronunciationJobs.get(data.id);
+          if (!job) return;
+          if (data.error) {
+            stopPronunciationWorker('발음 생성 실패: ' + data.error + ' 자동 발음을 껐다 켜면 다시 시도합니다.');
+            return;
+          }
+          page.clearTimeout(job.timer);
+          pronunciationJobs.delete(data.id);
+          job.resolve(data.text);
+        };
+        worker.onerror = () => stopPronunciationWorker('일본어 사전 Worker를 실행하지 못했습니다. 자동 발음을 껐다 켜면 다시 시도합니다.');
+        worker.onmessageerror = worker.onerror;
+      } catch {
+        stopPronunciationWorker('이 브라우저에서는 일본어 사전 Worker를 실행할 수 없습니다.');
+        return Promise.resolve('');
+      }
+    }
+    const promise = new Promise(resolve => {
+      const id = ++pronunciationSequence;
+      const timer = page.setTimeout(() => stopPronunciationWorker('사전 처리 제한 시간을 초과했습니다. 자동 발음을 껐다 켜면 다시 시도합니다.'), 180000);
+      pronunciationJobs.set(id, { resolve, timer });
+      try {
+        pronunciationWorker.postMessage({ id, text });
+      } catch {
+        stopPronunciationWorker('발음 변환 요청을 전달하지 못했습니다. 자동 발음을 껐다 켜면 다시 시도합니다.');
+      }
+    });
+    pronunciationCache.set(text, promise);
+    if (pronunciationCache.size > 300) pronunciationCache.delete(pronunciationCache.keys().next().value);
+    return promise;
   }
 
   // 정규식 실행, 미리보기, 화자 이미지 관리.
@@ -2536,6 +2860,15 @@
     }
     body.append(make('p', 'dialogue-speech', fields.speech));
     if (fields.pronunciation) body.append(make('p', 'dialogue-pronunciation', fields.pronunciation));
+    else if (config.autoPronunciation && config.pronunciationLanguage === 'ja' && /[\u3040-\u30ff\uff66-\uff9d\p{Script=Han}]/u.test(fields.speech)) {
+      const pronunciation = make('p', 'dialogue-pronunciation', '발음 생성 중…');
+      body.append(pronunciation);
+      getPronunciation(fields.speech).then(value => {
+        if (!host.isConnected || suspended) return;
+        pronunciation.textContent = value || '발음을 생성하지 못했습니다.';
+        pronunciation.title = value ? '' : pronunciationError || pronunciationStatus.jmdict;
+      });
+    }
     if (fields.translation) body.append(make('p', 'dialogue-translation', fields.translation));
     bubble.append(body);
     wrapper.append(bubble);
@@ -3389,6 +3722,7 @@
     restoreHighlights();
     indexAbort?.abort();
     stopRegexWorker('페이지를 닫았습니다.');
+    stopPronunciationWorker();
   });
   page.addEventListener('pageshow', event => {
     if (event.persisted && suspended) {
