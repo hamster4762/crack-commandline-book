@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.1.0
+// @version      1.0.2.0
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -143,35 +143,97 @@
   let draft = null;
   let draftPortraits = null;
   let database;
-  let storageError = false;
-  const storageReady = loadSettings().catch(() => {
-    storageError = true;
-  });
+  let databasePromise;
+  let storageError = null;
+  let storageReady;
+  let book;
+  let updatedAt = null;
+  let alwaysOn = false;
 
-  // 새 전용 저장소를 열고 저장된 설정을 불러온다.
-  async function loadSettings() {
-    database = await new Promise((resolve, reject) => {
+  // 기존 전용 저장소는 설정·이미지의 열람용 사본과 기기 전용 토글에 사용한다.
+  function openCache() {
+    if (databasePromise) return databasePromise;
+    databasePromise = new Promise((resolve, reject) => {
       const request = page.indexedDB.open('crack-immersion-local', 1);
       request.onupgradeneeded = () => {
         request.result.createObjectStore('settings');
         request.result.createObjectStore('portraits', { keyPath: 'name' });
       };
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => { databasePromise = null; reject(request.error); };
+      request.onsuccess = () => {
+        database = request.result;
+        database.onversionchange = () => { database.close(); databasePromise = null; };
+        resolve(database);
+      };
     });
-    database.onversionchange = () => database.close();
-    const saved = await new Promise((resolve, reject) => {
+    return databasePromise;
+  }
+
+  async function readCache() {
+    await openCache();
+    return new Promise((resolve, reject) => {
       const transaction = database.transaction(['settings', 'portraits']);
       const config = transaction.objectStore('settings').get('current');
+      const local = transaction.objectStore('settings').get('alwaysOn');
       const images = transaction.objectStore('portraits').getAll();
-      transaction.oncomplete = () => resolve({ config: config.result, images: images.result });
-      transaction.onerror = () => reject(transaction.error);
+      transaction.oncomplete = () => resolve({ config: config.result, images: images.result, alwaysOn: local.result === true });
+      transaction.onabort = () => reject(transaction.error);
+      transaction.onerror = () => {};
     });
-    const value = saved.config === undefined ? await readLegacySettings() : saved;
-    settings = normalizeSettings(value?.config);
-    persistedPortraits = new Map((saved.images || []).map(item => [normalizeName(item.name), item.blob]));
-    portraits = new Map((value?.images || []).filter(item => typeof item.name === 'string' && item.blob instanceof page.Blob).map(item => [normalizeName(item.name), item.blob]));
-    if (saved.config === undefined && value?.config) await persist(settings, portraits);
+  }
+
+  // 저장 버전만 조회하고 같으면 이미지가 포함된 본문 대신 로컬 사본을 사용한다.
+  async function loadSettings(refresh = false) {
+    const saved = await readCache();
+    alwaysOn = saved.alwaysOn;
+    persistedPortraits = new Map(saved.images.map(item => [normalizeName(item.name), item.blob]));
+    let revision = await book.load('updatedAt');
+    let next, images;
+    if (!refresh && saved.config?.updatedAt === revision && revision !== null) {
+      next = normalizeSettings(saved.config.config);
+      images = new Map(persistedPortraits);
+    } else {
+      let value = await book.load();
+      // 최초 등록의 기본 저장소는 core의 Local이다. 기존 값이 없을 때만 구버전 데이터를 이어받는다.
+      if (value === null) {
+        const legacy = saved.config === undefined ? await readLegacySettings() : saved;
+        if (legacy?.config?.version === 1) {
+          const images = new Map((legacy.images || []).filter(item => typeof item.name === 'string' && item.blob instanceof page.Blob)
+            .map(item => [normalizeName(item.name), item.blob]));
+          value = await settingsRecord(normalizeSettings(legacy.config), images);
+          await book.save(value);
+        }
+      }
+      revision = value?.updatedAt ?? null;
+      next = normalizeSettings(value?.config);
+      images = new Map((value?.images || []).map(item => [normalizeName(item.name), portraitBlob(item.data)]));
+      try { await cacheSettings(next, images, revision); }
+      catch { toast('설정을 불러왔지만 로컬 사본을 갱신하지 못했습니다.'); }
+    }
+    updatedAt = revision;
+    settings = next;
+    portraits = images;
+    storageError = null;
+  }
+
+  function portraitBlob(data) {
+    const [header, encoded] = data.split(',');
+    const bytes = Uint8Array.from(page.atob(encoded), character => character.charCodeAt(0));
+    return new page.Blob([bytes], { type: header.slice(5, header.indexOf(';')) });
+  }
+
+  async function settingsRecord(config, images) {
+    const records = [];
+    for (const [name, blob] of images) {
+      const data = await new Promise((resolve, reject) => {
+        const reader = new page.FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+      });
+      records.push({ name, data });
+    }
+    return { updatedAt: Math.max(Date.now(), (updatedAt ?? 0) + 1), config, images: records };
   }
 
   // 이전 통합판의 로컬 데이터 중 이 스크립트가 쓰는 값만 이어받는다.
@@ -204,13 +266,14 @@
     });
   }
 
-  // 검증된 설정과 변경된 화자 이미지를 이 스크립트 전용 IndexedDB에 저장한다.
-  async function persist(next, images) {
-    if (!database || storageError) throw new Error('이 브라우저의 로컬 저장소를 열 수 없습니다.');
+  // core에 저장한 버전과 화자 이미지 사본을 함께 갱신한다.
+  async function cacheSettings(next, images, revision, localAlwaysOn) {
+    await openCache();
     const nextPortraits = new Map(images);
     return new Promise((resolve, reject) => {
       const transaction = database.transaction(['settings', 'portraits'], 'readwrite');
-      transaction.objectStore('settings').put(next, 'current');
+      transaction.objectStore('settings').put({ updatedAt: revision, config: next }, 'current');
+      if (localAlwaysOn !== undefined) transaction.objectStore('settings').put(localAlwaysOn, 'alwaysOn');
       const store = transaction.objectStore('portraits');
       for (const name of persistedPortraits.keys()) if (!nextPortraits.has(name)) store.delete(name);
       for (const [name, blob] of nextPortraits) if (persistedPortraits.get(name) !== blob) store.put({ name, blob });
@@ -491,7 +554,7 @@
         </div>
       </div>
       <div class="header-end">
-        <span class="local-label">설정은 이 기기에만 저장</span>
+        <span class="local-label">저장소는 !설정에서 선택</span>
         <button class="icon-button" id="close-settings" aria-label="설정 닫기">×</button>
       </div>
     </header>
@@ -589,7 +652,10 @@
       </div>
     </div>
     <footer class="window-footer">
-      <button class="button" id="toggle-immersion">몰입모드 켜기</button>
+      <div class="immersion-actions">
+        <button class="button" id="toggle-immersion">몰입모드 켜기</button>
+        <label class="always-on-option" title="이 기기에서 채팅방 진입 시 기본으로 켭니다. 설정 저장 후 적용됩니다."><span>상시 켜기</span><input class="switch" id="always-on" type="checkbox"></label>
+      </div>
       <div class="footer-actions">
         <button class="button subtle" id="save-preview">설정 저장</button>
         <button class="button subtle" id="cancel-settings">취소</button>
@@ -815,6 +881,18 @@
     .footer-actions {
       display: flex;
       gap: 7px;
+    }
+
+    .immersion-actions, .always-on-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .always-on-option {
+      font-size: 11px;
+      color: #c5ceca;
+      white-space: nowrap;
     }
 
     /* 몰입 화면 옵션. */
@@ -2364,6 +2442,7 @@
   // 화면·대사 설정의 편집 사본을 만들고 미리보기를 준비한다.
   async function openSettings() {
     await storageReady;
+    if (storageError) await (storageReady = loadSettings(true).catch(error => { storageError = error; }));
     if (!doc.body) return;
     ensureUI();
     if (draft) {
@@ -2384,6 +2463,7 @@
     $('regex-input').value = draft.customRegex;
     $('auto-pronunciation').checked = draft.autoPronunciation;
     $('pronunciation-language').value = draft.pronunciationLanguage;
+    $('always-on').checked = alwaysOn;
     syncPronunciationWorker();
     $('settings-scrim').hidden = false;
     setPreviewMode(sceneMode());
@@ -2394,7 +2474,7 @@
     updatePreview();
     updateToggleButton();
     $('close-settings').focus();
-    if (storageError) toast('로컬 저장소를 열지 못했습니다. 저장을 사용할 수 없습니다.');
+    if (storageError) showError(storageError);
   }
 
   // 취소하면 설정 사본과 미리보기에만 쓰던 이미지 URL을 정리한다.
@@ -2415,20 +2495,40 @@
     saving = true;
     $('save-preview').disabled = true;
     try {
+      if (storageError) throw storageError;
       if (draft.pattern === 'custom') {
         const result = await findMatches($('sample-input').value, draft);
         if (result.error) throw new Error(result.error);
       }
       const next = normalizeSettings(draft);
-      await persist(next, draftPortraits);
+      const images = new Map(draftPortraits);
+      const nextAlwaysOn = $('always-on').checked;
+      const current = await book.load();
+      if ((current?.updatedAt ?? null) !== updatedAt) {
+        throw new Error('저장된 설정이 변경되었습니다. 페이지를 새로고침한 뒤 확인해주세요.');
+      }
+      const record = await settingsRecord(next, images);
+      await book.save(record);
       settings = next;
       syncPronunciationWorker();
-      portraits = new Map(draftPortraits);
+      portraits = images;
+      updatedAt = record.updatedAt;
+      const enableByDefault = nextAlwaysOn && !alwaysOn;
+      let warning = '';
+      try {
+        await cacheSettings(next, images, updatedAt, nextAlwaysOn);
+        alwaysOn = nextAlwaysOn;
+      } catch {
+        warning = '설정은 저장됐지만 로컬 사본과 상시 켜기를 저장하지 못했습니다.';
+        $('always-on').checked = alwaysOn;
+      }
+      if (enableByDefault && alwaysOn && currentChatId() && editor()) immersive = true;
       highlightRevision += 1;
       restoreHighlights();
       updateImmersion();
+      updateToggleButton();
       syncPage();
-      toast('몰입모드 설정을 이 브라우저에 저장했습니다.');
+      toast(warning || '몰입모드 설정을 저장했습니다.');
     } catch (error) {
       showError(error);
     } finally {
@@ -3357,6 +3457,7 @@
 
   const hiddenLayout = new Set();
   const grownEditors = new Map();
+  let immersiveChat = '';
   let chronicleHost = null, chronicleUI = null;
   let scrollFrame = 0;
   let runtimeStyle;
@@ -3380,10 +3481,11 @@
   }
 
   // 현재 설정을 크랙 레이아웃과 입력창에 반영한다.
-  function updateImmersion(entering = false) {
+  function updateImmersion() {
     restoreLayout();
     const main = doc.querySelector('main'), input = editor();
     if (!immersive || !main || !input || !chatId) {
+      if (!immersive) immersiveChat = '';
       chronicleHost?.remove();
       chronicleHost = null;
       chronicleUI = null;
@@ -3400,7 +3502,8 @@
     const left = [...(layout?.children || [])].find(node => node !== column && node.querySelector?.('button[aria-label="사이드바 접기"],button[aria-label="사이드바 펼치기"]'));
     hideLayout(left, settings.hideLeft);
     hideLayout(main.previousElementSibling, settings.hideTop);
-    if (entering && settings.closeRight) doc.querySelector('button[aria-label="사이드 패널 닫기"]')?.click();
+    if (immersiveChat !== chatId && settings.closeRight) doc.querySelector('button[aria-label="사이드 패널 닫기"]')?.click();
+    immersiveChat = chatId;
     if (settings.autoGrow) {
       if (!grownEditors.has(input)) grownEditors.set(input, input.style.height);
       input.dataset.ccFocusGrow = '';
@@ -3430,7 +3533,7 @@
       return;
     }
     immersive = !immersive;
-    updateImmersion(immersive);
+    updateImmersion();
     updateToggleButton();
     scheduleSync();
   }
@@ -3663,6 +3766,7 @@
   }
   // 채팅방 변경과 몰입 화면의 현재 상태를 동기화한다.
   function syncPage() {
+    if (!runtimeStyle) return;
     const nextChat = currentChatId();
     if (nextChat !== chatId) {
       routeGeneration += 1;
@@ -3676,8 +3780,8 @@
       restoreHighlights();
       cancelSeek();
       chatId = nextChat;
-      if (!chatId) immersive = false;
-      updateImmersion(immersive);
+      immersive = !!chatId && (alwaysOn || immersive);
+      updateImmersion();
       updateToggleButton();
     }
     if (!chatId) return;
@@ -3705,7 +3809,22 @@
     messageObserver.observe(observedBody, { childList: true, subtree: true, characterData: true });
     syncPage();
   }
-  page.CrackCommandline.register({ id: 'crack-immersion', label: '몰입모드', useDatabse: false, lambda: openSettings });
+  book = page.CrackCommandline.register({ id: 'crack-immersion', label: '몰입모드', useDatabse: true,
+    lambda: openSettings });
+  storageReady = loadSettings().catch(error => { storageError = error; });
+  doc.addEventListener('cc-content-data-changed', event => {
+    if (event.detail.id !== 'crack-immersion') return;
+    storageReady = storageReady.then(async () => {
+      if (draft) closeSettings();
+      await loadSettings(true);
+      syncPronunciationWorker();
+      highlightRevision += 1;
+      restoreHighlights();
+      updateImmersion();
+      scheduleSync();
+      releaseUnusedImages();
+    }).catch(error => { storageError = error; showError(error); });
+  });
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', () => boot().catch(showError), { once: true });
   else boot().catch(showError);
   page.addEventListener('pagehide', () => {
