@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.2.0
+// @version      1.0.3.0
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -790,6 +790,274 @@
     .chronicle-position small {
       color: #9a8c71;
       font-size: 12px;
+    }
+
+    /* 기본·고딕 테마는 기존 금빛 나침반을 유지한다. */
+    :host([data-theme=game]) {
+      --turn-paper: #28313d;
+      --turn-accent: #c9d9ed;
+      --turn-edge: #566479;
+      --turn-fill: linear-gradient(#71869f,#c9d9ed);
+      --turn-radius: 50%;
+      --turn-emblem-fill: #28313d;
+    }
+
+    :host([data-scene-mode=light][data-theme=game]) {
+      --turn-paper: #f6f8fc;
+      --turn-accent: #49627f;
+      --turn-edge: #b7c4d5;
+      --turn-fill: linear-gradient(#b7c4d5,#49627f);
+      --turn-emblem-fill: #f6f8fc;
+    }
+
+    :host([data-theme=sf]) {
+      --turn-paper: #0a1d29;
+      --turn-accent: #80ffe9;
+      --turn-edge: #39c2bc;
+      --turn-fill: repeating-linear-gradient(0deg,#80ffe9 0 3px,#39c2bc 3px 6px);
+      --turn-radius: 1px;
+    }
+
+    :host([data-scene-mode=light][data-theme=sf]) {
+      --turn-paper: #ecf7f8;
+      --turn-accent: #126a76;
+      --turn-edge: #539eaa;
+      --turn-fill: repeating-linear-gradient(0deg,#126a76 0 3px,#539eaa 3px 6px);
+    }
+
+    :host([data-theme=glass]) {
+      --turn-paper: #19242dcc;
+      --turn-accent: #c7e0ee;
+      --turn-edge: #8fb6cc99;
+      --turn-fill: linear-gradient(#79adcd88,#e4f5ffcc,#d2a4c588);
+      --turn-radius: 50%;
+    }
+
+    :host([data-scene-mode=light][data-theme=glass]) {
+      --turn-paper: #ffffffc9;
+      --turn-accent: #3c657b;
+      --turn-edge: #7695a2;
+      --turn-fill: linear-gradient(#7695a2,#c7e0ee,#3c657b);
+    }
+
+    :host([data-theme=neon]) {
+      --turn-paper: #181d26;
+      --turn-accent: #b8e870;
+      --turn-edge: #667587;
+      --turn-fill: linear-gradient(#68864b,#b8e870);
+      --turn-radius: 3px;
+      --turn-emblem-fill: #222935;
+    }
+
+    :host([data-theme=menhera]) {
+      --turn-paper: #251c28;
+      --turn-accent: #ff9cc7;
+      --turn-edge: #83566f;
+      --turn-fill: linear-gradient(#a35c89,#f18cb9);
+      --turn-radius: 50%;
+      --turn-emblem-fill: #3c2439;
+    }
+
+    :host([data-theme=telegram]) {
+      --turn-paper: #29251f;
+      --turn-accent: #c5a36f;
+      --turn-edge: #8f7146;
+      --turn-fill: linear-gradient(#8f7146,#e0c593 55%,#b3915e);
+      --turn-radius: 50%;
+      --turn-emblem-fill: #29251f;
+    }
+
+    :host([data-theme=aurora]) {
+      --turn-paper: #263841;
+      --turn-accent: #dbe8b7;
+      --turn-edge: #a0b7c1;
+      --turn-fill: linear-gradient(#718b98,#dbe8b7);
+      --turn-radius: 3px 3px 50% 50%;
+    }
+
+    :host([data-theme=peach]) {
+      --turn-paper: #f7fbff;
+      --turn-accent: #668fa9;
+      --turn-edge: #a8cbdc;
+      --turn-fill: linear-gradient(#a8d5ec,#d9eaf5 65%,#eddae9);
+      --turn-radius: 50%;
+      --turn-emblem-fill: #fafdff;
+    }
+
+    :host([data-slider-themed]) .chronicle-cap {
+      filter: drop-shadow(0 0 5px var(--turn-edge));
+    }
+
+    :host([data-slider-themed]) .chronicle-cap svg {
+      fill: var(--turn-emblem-fill,var(--turn-paper));
+      stroke: var(--turn-accent);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    :host([data-slider-themed]) .chronicle-cap svg path:first-of-type {
+      fill: var(--turn-emblem-fill,none);
+      stroke: var(--turn-accent);
+    }
+
+    :host([data-slider-themed]) .chronicle-cap .chronicle-ink {
+      fill: var(--turn-accent);
+      stroke: none;
+    }
+
+    :host([data-slider-themed]) .chronicle-cap svg path.chronicle-detail {
+      fill: none;
+      stroke: var(--turn-edge);
+      stroke-width: 2;
+    }
+
+    :host([data-slider-themed]) .chronicle-spine {
+      background: var(--turn-paper);
+      box-shadow: 0 0 0 1px var(--turn-edge);
+    }
+
+    :host([data-slider-themed]) .chronicle-fill {
+      background: var(--turn-fill);
+      box-shadow: 0 0 6px var(--turn-edge);
+    }
+
+    :host([data-slider-themed]) .chronicle-gem {
+      border-color: var(--turn-accent);
+      border-radius: var(--turn-radius);
+      background: radial-gradient(circle,var(--turn-accent),var(--turn-paper));
+      box-shadow: 0 0 0 3px var(--turn-paper),0 0 10px var(--turn-edge);
+    }
+
+    :host([data-slider-themed]) .chronicle-position strong {
+      color: var(--turn-accent);
+    }
+
+    :host([data-slider-themed]) .chronicle-position i {
+      background: var(--turn-edge);
+    }
+
+    :host([data-slider-themed]) .chronicle-position small {
+      color: var(--turn-edge);
+    }
+
+    :host([data-theme=game]) .chronicle-cap {
+      filter: drop-shadow(0 2px 1px #10172244);
+    }
+
+    :host([data-theme=game]) .chronicle-gem {
+      background: linear-gradient(145deg,#ecf5ff,var(--turn-accent) 45%,var(--turn-edge));
+      box-shadow: inset 0 0 0 2px var(--turn-paper),0 1px 3px #10172266;
+    }
+
+    :host([data-theme=neon]) .chronicle-cap {
+      filter: drop-shadow(2px 2px 0 #473b62);
+    }
+
+    :host([data-theme=neon]) .chronicle-spine {
+      box-shadow: 0 0 0 1px #454d5d,2px 0 #473b6266;
+    }
+
+    :host([data-theme=neon]) .chronicle-fill {
+      box-shadow: none;
+    }
+
+    :host([data-theme=neon]) .chronicle-gem {
+      background: linear-gradient(0deg,#222935 0 32%,#b8e870 32% 68%,#222935 68%);
+      box-shadow: 2px 2px 0 #473b62;
+    }
+
+    :host([data-theme=neon]) .chronicle-position {
+      font-family: Consolas,'Malgun Gothic',monospace;
+    }
+
+    :host([data-theme=menhera]) .chronicle-cap {
+      filter: drop-shadow(0 1px 0 #100e17) drop-shadow(1px 1px 1px #70528288);
+    }
+
+    :host([data-theme=menhera]) .chronicle-spine {
+      box-shadow: 0 0 0 1px #83566f,0 0 0 3px #251c28;
+    }
+
+    :host([data-theme=menhera]) .chronicle-spine::before {
+      content: '';
+      position: absolute;
+      inset: 0 -4px 0 2px;
+      background: repeating-linear-gradient(to bottom,#bb8ba899 0 1px,transparent 1px 96px) right top / 4px 100% no-repeat,repeating-linear-gradient(to bottom,#bb8ba866 0 1px,transparent 1px 48px) right top / 2px 100% no-repeat;
+      pointer-events: none;
+    }
+
+    :host([data-theme=menhera]) .chronicle-gem {
+      border-color: transparent;
+      border-radius: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 18L3 11C-3 4 5-1 10 5C15-1 23 4 17 11Z' fill='%23f18cb9' stroke='%23251c28' stroke-width='1.5'/%3E%3Cpath d='M5 6Q7 4 8 7' fill='none' stroke='%23ffe0ee' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+      box-shadow: none;
+      filter: drop-shadow(1px 1px 1px #100e17);
+    }
+
+    :host([data-theme=telegram]) .chronicle-cap {
+      filter: drop-shadow(0 1px 1px #16130f88);
+    }
+
+    :host([data-theme=telegram]) .chronicle-cap svg {
+      stroke-width: 2;
+    }
+
+    :host([data-theme=telegram]) .chronicle-gem {
+      background: radial-gradient(circle at 35% 30%,#f0dfb5,#c5a36f 35%,#715432 72%,#30271c);
+      box-shadow: 0 0 0 2px #29251f,0 0 0 3px #8f714688,0 2px 3px #16130f66;
+    }
+
+    :host([data-theme=peach]) .chronicle-cap {
+      filter: drop-shadow(0 2px 0 #a8bec744);
+    }
+
+    :host([data-theme=peach]) .chronicle-cap svg {
+      stroke: #a8cbdc;
+      stroke-width: 1.6;
+    }
+
+    :host([data-theme=peach]) .chronicle-cap svg path:first-of-type {
+      stroke: #a8cbdc;
+    }
+
+    :host([data-theme=peach]) .chronicle-cap .chronicle-blush {
+      fill: #efc9dc;
+      stroke: none;
+    }
+
+    :host([data-theme=peach]) .chronicle-cap .chronicle-ink {
+      fill: #5cb8d8;
+    }
+
+    :host([data-theme=peach]) .chronicle-cap svg path.chronicle-detail {
+      stroke: #75aeca;
+      stroke-width: 1.8;
+    }
+
+    :host([data-theme=peach]) .chronicle-spine {
+      background: #f7fbff;
+      box-shadow: 0 0 0 1px #a8cbdc88,0 0 0 3px #ffffff44;
+    }
+
+    :host([data-theme=peach]) .chronicle-fill {
+      box-shadow: none;
+    }
+
+    :host([data-theme=peach]) .chronicle-gem {
+      border-color: #fff;
+      background: radial-gradient(circle at 35% 30%,#fff 8%,#e2f3fc 38%,#b4d9ed 75%);
+      box-shadow: 0 0 0 1px #a8cbdc,0 2px 0 #a8bec755;
+    }
+
+    :host([data-theme=peach]) .chronicle-gem::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid #8db8c7;
+      border-radius: 50%;
+      box-shadow: inset 1px 0 #ffffffaa;
+      pointer-events: none;
     }
 
     /* 설정창 공용 프레임과 대분류 탭. */
@@ -3517,6 +3785,7 @@
     }
     if (settings.showSlider) {
       ensureChronicle();
+      updateChronicle();
       positionOverlays();
       startIndex().catch(showError);
     } else {
@@ -3549,6 +3818,18 @@
     positionOverlays();
   }
 
+  const chronicleEmblems = {
+    none: '<circle cx="32" cy="32" r="20"></circle><path d="M32 0 37 27 64 32 37 37 32 64 27 37 0 32 27 27Z"></path><path d="m14 14 18 12 18-12-12 18 12 18-18-12-18 12 12-18Z"></path><circle cx="32" cy="32" r="3"></circle>',
+    game: '<path d="M32 7L49 30L32 53L15 30Z"></path><path class="chronicle-ink" d="M32 15L42 30H32Z"/><path class="chronicle-detail" d="M32 15V45M22 30H42M14 14H8V24M50 14H56V24M25 59H39"/>',
+    sf: '<path d="M12 8H44L56 20V56H20L8 44V12ZM17 33H23L28 21L35 43L41 29H48"></path>',
+    glass: '<circle cx="32" cy="32" r="23"></circle><circle cx="32" cy="32" r="14"></circle><path d="M18 20Q23 12 34 13"></path>',
+    neon: '<path d="M13 12H43L53 22V51H23L11 39V14Z"/><path class="chronicle-ink" d="M18 23H46V33H18Z"/><path class="chronicle-detail" d="M21 39H34M21 44H29M47 37V44"/><circle class="chronicle-ink" cx="20" cy="17" r="1.5"/>',
+    menhera: '<path d="M28 28L18 53L27 48L33 56L37 30M36 28L47 52L39 48L34 55L28 30"/><path d="M29 22C19 10 5 8 6 20L7 33C8 42 24 33 29 29ZM35 22C45 10 59 8 58 20L57 33C56 42 40 33 35 29Z"/><path class="chronicle-detail" d="M13 20L26 26L13 32M51 20L38 26L51 32"/><path class="chronicle-ink" d="M32 35L24 27C18 20 27 15 32 22C37 15 46 20 40 27Z"/>',
+    telegram: '<circle cx="32" cy="30" r="21"/><circle cx="32" cy="30" r="16"/><path class="chronicle-detail" d="M18 13Q8 19 10 31M46 13Q56 19 54 31M20 48Q32 57 44 48M26 8Q32 3 38 8"/><path d="M32 18C39 18 35 25 40 26C47 29 39 35 35 33C37 43 27 43 29 33C20 37 16 27 25 26C29 26 25 18 32 18Z"/><circle class="chronicle-ink" cx="32" cy="30" r="3"/>',
+    aurora: '<path d="M32 5L54 13V31Q54 47 32 59Q10 47 10 31V13ZM32 16L35 27L46 30L35 33L32 44L29 33L18 30L29 27Z"></path>',
+    peach: '<path d="M17 25C21 19 27 18 32 19C38 18 44 20 47 25C51 27 56 26 60 28C65 31 62 42 56 42C51 42 48 38 46 34C48 43 42 47 32 46C22 47 16 43 18 34C15 39 11 42 7 42C1 42-1 32 3 28C7 26 12 27 17 25Z"/><ellipse class="chronicle-blush" cx="22" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-blush" cx="42" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-ink" cx="25" cy="32" rx="1.8" ry="2.8"/><ellipse class="chronicle-ink" cx="39" cy="32" rx="1.8" ry="2.8"/><path class="chronicle-detail" d="M29 37C29 40 32 40 32 37C32 40 35 40 35 37"/>'
+  };
+
   // 턴 슬라이더를 한 번 만들고 이동 이벤트를 연결한다.
   function ensureChronicle() {
     if (chronicleHost) return;
@@ -3562,10 +3843,7 @@
     wrap.innerHTML = String.raw`
 <div class="chronicle-cap" aria-hidden="true">
   <svg viewBox="0 0 64 64">
-    <circle cx="32" cy="32" r="20"></circle>
-    <path d="M32 0 37 27 64 32 37 37 32 64 27 37 0 32 27 27Z"></path>
-    <path d="m14 14 18 12 18-12-12 18 12 18-18-12-18 12 12-18Z"></path>
-    <circle cx="32" cy="32" r="3"></circle>
+    ${chronicleEmblems.none}
   </svg>
 </div>
 <div class="chronicle-scale">
@@ -3595,7 +3873,6 @@
       page.clearTimeout(aroundTimer);
       jumpToTurn(Number(slider.value)).catch(showError);
     });
-    updateChronicle();
   }
 
   // 화면 너비에 맞춰 슬라이더 위치와 길이를 계산한다.
@@ -3616,6 +3893,12 @@
   // 현재 턴과 전체 턴을 슬라이더에 반영한다.
   function updateChronicle(status = '') {
     if (!chronicleUI) return;
+    if (chronicleHost.dataset.theme !== settings.theme) {
+      chronicleHost.dataset.theme = settings.theme;
+      const themed = !['none', 'ashen', 'grave'].includes(settings.theme);
+      chronicleHost.toggleAttribute('data-slider-themed', themed);
+      chronicleUI.querySelector('.chronicle-cap svg').innerHTML = chronicleEmblems[settings.theme] || chronicleEmblems.none;
+    }
     const slider = chronicleUI.getElementById('turn-range');
     const maximum = Math.max(0, turns.length - 1), current = Math.min(maximum, pendingTurn ?? maximum);
     slider.disabled = !indexComplete || !turns.length;
