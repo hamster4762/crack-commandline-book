@@ -4247,7 +4247,9 @@
     sessionAtom: null,
     serial: 0,
     stopWaiting: null,
+    scrollLock: null,
     showSearch() {
+      this.releaseScroll();
       doc.documentElement.removeAttribute('data-cc-focus-navigation');
     },
     scroller() {
@@ -4317,17 +4319,63 @@
     groups() {
       return [...(this.scroller()?.querySelectorAll('[data-message-group-id]') || [])];
     },
-    stopScroll(scroll) {
+    releaseScroll() {
+      const lock = this.scrollLock;
+      if (lock && lock.context.targetScrollTop === lock.hold) lock.context.targetScrollTop = lock.previous;
+      this.scrollLock = null;
+    },
+    stopScroll(scroll, hold = false) {
       const root = scroll?.closest('.stick-to-bottom');
       let fiber = root?.[Object.keys(root).find(key => key.startsWith('__reactFiber$'))];
       for (let depth = 0; fiber && depth < 5; depth += 1, fiber = fiber.return) {
         const value = fiber.memoizedProps?.value;
         if (typeof value?.stopScroll === 'function' && typeof value.scrollToBottom === 'function') {
+          if (hold && this.scrollLock?.context.scrollRef !== value.scrollRef) {
+            this.releaseScroll();
+            const previous = value.targetScrollTop;
+            const hold = (_, { scrollElement }) => scrollElement.scrollTop;
+            value.targetScrollTop = hold;
+            this.scrollLock = { context: value, previous, hold };
+          }
           value.stopScroll();
           return true;
         }
       }
       return false;
+    },
+    recheckPaging(scroll) {
+      if (!doc.documentElement.hasAttribute('data-cc-focus-navigation')) return;
+      const atTop = scroll.scrollTop <= 20;
+      const atBottom = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight <= 50;
+      if (!atTop && !atBottom) return;
+      const groups = this.groups();
+      for (const [group, direction] of [[groups[0], 'upper'], [groups.at(-1), 'lower']]) {
+        if (!group || !(direction === 'upper' ? atTop : atBottom)) continue;
+        let fiber = group[Object.keys(group).find(key => key.startsWith('__reactFiber$'))];
+        let paging = null;
+        for (let depth = 0; fiber && depth < 35; depth += 1, fiber = fiber.return) {
+          paging ||= fiber.memoizedProps?.paging?.[direction];
+          if (!paging?.hasMore || paging.isValidating || !paging.observerRef?.current) continue;
+          let check = null;
+          for (let hook = fiber.memoizedState; hook; hook = hook.next) {
+            const deps = hook.memoizedState?.deps;
+            // 크랙 감지 훅의 [ref, options, callback]을 찾아 기존 방향·로딩 중 검사를 그대로 사용한다.
+            if (deps?.[0] === paging.observerRef && typeof deps[2] === 'function') {
+              check = deps[2];
+            }
+            // 같은 메시지 수로 앵커만 바뀌면 생략되는 크랙의 기록 스크롤 초기화를 보충한다.
+            if (deps?.length === 5 && deps[0] > 0 && deps[1] === false &&
+              deps[2] === this.scrollLock?.context.scrollToBottom && deps[4] === 'none' &&
+              typeof hook.memoizedState.create === 'function') {
+              hook.memoizedState.create();
+            }
+          }
+          if (check) {
+            check([{ isIntersecting: true, target: paging.observerRef.current }]);
+            break;
+          }
+        }
+      }
     },
     async jump(message) {
       const serial = ++this.serial;
@@ -4355,6 +4403,9 @@
       await this.waitFor(() => this.groups().find(group => group.dataset.messageGroupId === 'search:' + message.id));
       if (serial !== this.serial || !immersive) return false;
       await new Promise(resolve => page.requestAnimationFrame(() => page.requestAnimationFrame(resolve)));
+      if (serial !== this.serial || !immersive) return false;
+      // 기록 페이지의 임시 하단에 도달해도 다음 페이지를 자동으로 따라가지 않는다.
+      this.stopScroll(this.scroller(), true);
       return true;
     },
     latest() {
@@ -4863,13 +4914,14 @@
   doc.addEventListener('input', event => {
     if (event.target.matches?.(EDITOR) || event.target.closest?.(EDITOR)) resizeInput();
   }, true);
-  doc.addEventListener('scroll', event => {
-    if (!immersive || event.target !== nativeScroller() || scrollFrame) return;
+  function scheduleScrollSync() {
+    if (!immersive || scrollFrame) return;
     scrollFrame = page.requestAnimationFrame(() => {
       scrollFrame = 0;
       if (seeking || !indexComplete) return;
       const scroll = nativeScroller(), rect = scroll?.getBoundingClientRect();
       if (!rect) return;
+      crackNavigation.recheckPaging(scroll);
       let nearest = null, distance = Infinity;
       for (const group of crackNavigation.groups()) {
         const id = group.dataset.messageGroupId.replace(/^search:/, ''), turn = ordinal.get(id);
@@ -4885,7 +4937,14 @@
         updateChronicle();
       }
     });
+  }
+  doc.addEventListener('scroll', event => {
+    if (event.target === nativeScroller()) scheduleScrollSync();
   }, true);
+  for (const type of ['wheel', 'touchmove']) doc.addEventListener(type, event => {
+    if (!immersive || !doc.documentElement.hasAttribute('data-cc-focus-navigation')) return;
+    if (nativeScroller()?.contains(event.target)) scheduleScrollSync();
+  }, { capture: true, passive: true });
   page.addEventListener('resize', () => {
     if (ui) selectTab(activeTab);
     resizeInput();
