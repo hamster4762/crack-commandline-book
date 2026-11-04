@@ -154,6 +154,258 @@
   let book;
   let updatedAt = null;
   let alwaysOn = false;
+  const bookmarkRooms = new Map();
+  let draftBookmarks = null;
+  const chatTitles = new Map();
+  let bookmarkSaving = false;
+  let bookmarkRoom = '';
+  let bookmarkRevision = 0;
+
+  function bookmarkPath(id) {
+    return 'bookmarks/' + encodeURIComponent(id).replace(/\./g, '%2E');
+  }
+
+  function editableBookmarkRoom(id) {
+    return draftBookmarks?.get(id) || bookmarkRooms.get(id);
+  }
+
+  function roomTitle(id) {
+    if (chatTitles.has(id)) return chatTitles.get(id);
+    const link = [...doc.querySelectorAll('a[href*="/episodes/"]')].find(node => {
+      try { return new page.URL(node.href).pathname.match(/\/episodes\/([^/]+)/)?.[1] === id; }
+      catch { return false; }
+    });
+    const title = (link?.querySelector('h1,h2,h3')?.textContent || link?.textContent)?.trim();
+    if (title) chatTitles.set(id, title);
+    return chatTitles.get(id) || bookmarkRooms.get(id)?.title || id;
+  }
+
+  // 페이지가 실제로 조회한 채팅방 응답에서 이름만 보관한다. 별도 API를 추측해 요청하지 않는다.
+  function observeChatTitles(url, value) {
+    if (!url || !/^\/crack-gen\/v\d+\/chats(?:\/|$)/.test(url.pathname)) return;
+    const detailId = /^\/crack-gen\/v\d+\/chats\/([^/]+)\/?$/.exec(url.pathname)?.[1];
+    const data = value?.data;
+    const records = Array.isArray(data) ? data : data?.chats || (detailId ? [data?.chat || data] : []);
+    if (!Array.isArray(records)) return;
+    for (const item of records) {
+      const id = item?._id || item?.id || detailId;
+      const title = item?.title || item?.name;
+      if (typeof id === 'string' && typeof title === 'string' && title.trim()) chatTitles.set(id, title.trim());
+    }
+    if (ui && !bookmarkRoom) renderBookmarkRooms();
+  }
+
+  async function loadBookmarks(id) {
+    if (!id) return;
+    const revision = bookmarkRevision;
+    const value = await book.load(bookmarkPath(id));
+    if (revision !== bookmarkRevision) return;
+    bookmarkRooms.set(id, { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: value !== null });
+    refreshBookmarks();
+  }
+
+  // 설정창에서는 편집 사본에 반영하고, 슬라이더의 등록 버튼은 해당 북마크를 저장한다.
+  async function changeBookmarks(id, change) {
+    if (bookmarkSaving || saving) throw new Error('저장 중입니다. 잠시 뒤 다시 시도해주세요.');
+    if (draftBookmarks) {
+      const items = change(editableBookmarkRoom(id)?.items || []);
+      draftBookmarks.set(id, { title: roomTitle(id), items, stored: !!items.length });
+      refreshBookmarks();
+      return;
+    }
+    bookmarkSaving = true;
+    try {
+      await storageReady;
+      const revision = bookmarkRevision;
+      const path = bookmarkPath(id);
+      const value = await book.load(path);
+      if (revision !== bookmarkRevision) throw new Error('저장소가 변경되었습니다. 다시 시도해주세요.');
+      const items = change(Array.isArray(value?.items) ? value.items : []);
+      const title = roomTitle(id);
+      await book.save(items.length ? { title, items } : null, path);
+      if (revision === bookmarkRevision) {
+        bookmarkRooms.set(id, { title, items, stored: !!items.length });
+        closeBookmarkPopover();
+        refreshBookmarks();
+      }
+    } finally {
+      bookmarkSaving = false;
+    }
+  }
+
+  const bookmarkIcons = {
+    edit: '<path d="m4 12 9-9 3 3-9 9-4 1Z M11 5l3 3"/>',
+    remove: '<path d="M3 5h12M7 5V3h4v2M5 5l1 11h6l1-11M8 8v5M10 8v5"/>',
+    save: '<path d="m3 9 4 4 8-9"/>',
+    cancel: '<path d="m4 4 10 10M14 4 4 14"/>',
+    select: '<rect x="3" y="3" width="12" height="12" rx="2"/><path d="m6 9 2 2 4-4"/>',
+    all: '<path d="M3 6V3h3M12 3h3v3M15 12v3h-3M6 15H3v-3m3-3 2 2 4-4"/>'
+  };
+
+  function bookmarkIcon(icon, label, action) {
+    const button = make('button', 'bookmark-icon');
+    button.type = 'button';
+    button.title = label;
+    button.setAttribute('aria-label', label);
+    button.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true">' + bookmarkIcons[icon] + '</svg>';
+    button.addEventListener('click', action);
+    return button;
+  }
+
+  function renderBookmarkList(container, id) {
+    container.replaceChildren();
+    const room = editableBookmarkRoom(id);
+    const items = [...(room?.items || [])].sort((a, b) => a.turn - b.turn);
+    if (!items.length) {
+      container.append(make('p', 'bookmark-empty', !id ? '채팅방에서 사용할 수 있습니다.' : !room ? '북마크 불러오는 중…' : '등록된 북마크가 없습니다.'));
+      return;
+    }
+    const selected = new Set();
+    const tools = make('div', 'bookmark-tools');
+    const toggle = bookmarkIcon('select', '일괄 선택', () => {
+      container.classList.add('is-selecting');
+      toggle.hidden = true;
+      select.hidden = remove.hidden = cancelSelection.hidden = false;
+    });
+    const cancelSelection = bookmarkIcon('cancel', '일괄 선택 취소', () => {
+      container.classList.remove('is-selecting');
+      toggle.hidden = false;
+      select.hidden = remove.hidden = cancelSelection.hidden = true;
+      selected.clear();
+      checkboxes.forEach(({ checkbox }) => { checkbox.checked = false; });
+      updateSelection();
+    });
+    const select = bookmarkIcon('all', '전체 선택', () => {
+      const all = selected.size !== items.length;
+      selected.clear();
+      checkboxes.forEach(({ checkbox, turn }) => {
+        checkbox.checked = all;
+        if (all) selected.add(turn);
+      });
+      updateSelection();
+    });
+    const remove = bookmarkIcon('remove', '선택 삭제', () => {
+      changeBookmarks(id, values => values.filter(item => !selected.has(item.turn))).catch(showError);
+    });
+    remove.disabled = true;
+    select.hidden = remove.hidden = cancelSelection.hidden = true;
+    container.classList.remove('is-selecting');
+    tools.append(toggle, select, remove, cancelSelection);
+    container.append(tools);
+    const checkboxes = [];
+    const updateSelection = () => {
+      const label = selected.size === items.length ? '전체 선택 해제' : '전체 선택';
+      select.title = label;
+      select.setAttribute('aria-label', label);
+      select.setAttribute('aria-pressed', String(selected.size === items.length));
+      remove.disabled = !selected.size;
+    };
+    for (const item of items) {
+      const row = make('div', 'bookmark-row');
+      const checkbox = make('input');
+      checkbox.type = 'checkbox';
+      checkbox.setAttribute('aria-label', item.turn + '턴 ' + item.name + ' 선택');
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) selected.add(item.turn);
+        else selected.delete(item.turn);
+        updateSelection();
+      });
+      checkboxes.push({ checkbox, turn: item.turn });
+      const name = make('span', 'bookmark-name', item.name);
+      name.title = item.name;
+      const edit = bookmarkIcon('edit', '이름 편집', () => {
+        const input = make('input', 'text-input');
+        input.value = item.name;
+        input.maxLength = 120;
+        input.required = true;
+        input.setAttribute('aria-label', '북마크 이름');
+        input.addEventListener('input', () => {
+          const value = input.value.trim();
+          if (!value || !draftBookmarks || saving) return;
+          const room = editableBookmarkRoom(id);
+          draftBookmarks.set(id, { ...room, items: room.items.map(entry => entry.turn === item.turn ? { turn: entry.turn, name: value } : entry) });
+        });
+        const save = () => {
+          const value = input.value.trim();
+          if (!value) { input.focus(); return; }
+          changeBookmarks(id, values => values.map(entry => entry.turn === item.turn ? { turn: entry.turn, name: value } : entry)).catch(showError);
+        };
+        const done = bookmarkIcon('save', '이름 저장', save);
+        const cancel = bookmarkIcon('cancel', '이름 수정 취소', () => {
+          changeBookmarks(id, values => values.map(entry => entry.turn === item.turn ? { turn: entry.turn, name: item.name } : entry)).catch(showError);
+        });
+        input.addEventListener('keydown', event => {
+          if (event.isComposing) return;
+          if (event.key === 'Enter') { event.preventDefault(); save(); }
+          if (event.key === 'Escape') { event.preventDefault(); cancel.click(); }
+        });
+        name.replaceWith(input);
+        edit.replaceWith(done);
+        deletion.replaceWith(cancel);
+        input.focus();
+        input.select();
+      });
+      const deletion = bookmarkIcon('remove', '북마크 삭제', () => {
+        changeBookmarks(id, values => values.filter(entry => entry.turn !== item.turn)).catch(showError);
+      });
+      row.append(checkbox, make('span', 'bookmark-turn', item.turn + '턴'), name, edit, deletion);
+      container.append(row);
+    }
+  }
+
+  function renderBookmarkRooms() {
+    if (!$('bookmark-browser') || $('bookmark-browser').hidden) return;
+    const container = $('bookmark-browser-list');
+    const room = editableBookmarkRoom(bookmarkRoom);
+    if (bookmarkRoom && !room?.stored) bookmarkRoom = '';
+    $('bookmark-back').hidden = !bookmarkRoom;
+    $('bookmark-browser-title').textContent = bookmarkRoom ? roomTitle(bookmarkRoom) : '다른 채팅방 북마크';
+    if (bookmarkRoom) { renderBookmarkList(container, bookmarkRoom); return; }
+    container.replaceChildren();
+    for (const [id, value] of new Map([...bookmarkRooms, ...(draftBookmarks || [])])) {
+      if (id === chatId || !value.stored) continue;
+      const row = make('div', 'bookmark-room-row');
+      const open = make('button', 'bookmark-room-open');
+      open.append(make('span', '', roomTitle(id)), make('small', '', value.items.length + '개'));
+      open.title = id;
+      open.addEventListener('click', () => { bookmarkRoom = id; renderBookmarkRooms(); });
+      row.append(open, bookmarkIcon('remove', '채팅방 북마크 전체 삭제', () => {
+        changeBookmarks(id, () => []).catch(showError);
+      }));
+      container.append(row);
+    }
+    if (!container.childElementCount) container.append(make('p', 'bookmark-empty', '다른 채팅방에 등록된 북마크가 없습니다.'));
+  }
+
+  async function openBookmarkRooms() {
+    bookmarkRoom = '';
+    $('bookmark-browser').hidden = false;
+    $('bookmark-browser-title').textContent = '다른 채팅방 북마크';
+    $('bookmark-back').hidden = true;
+    $('bookmark-browser-list').replaceChildren(make('p', 'bookmark-empty', '불러오는 중…'));
+    try {
+      const revision = bookmarkRevision;
+      const values = await book.load('bookmarks');
+      if (revision !== bookmarkRevision) return;
+      bookmarkRooms.clear();
+      for (const [key, value] of Object.entries(values || {})) {
+        bookmarkRooms.set(decodeURIComponent(key), { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: true });
+      }
+      if (chatId && !bookmarkRooms.has(chatId)) bookmarkRooms.set(chatId, { title: '', items: [], stored: false });
+      refreshBookmarks();
+    } catch (error) {
+      $('bookmark-browser-list').replaceChildren(make('p', 'bookmark-empty', '북마크를 불러오지 못했습니다. 창을 다시 열어주세요.'));
+      showError(error);
+    }
+  }
+
+  let bookmarkDisplayRevision = 0;
+  function refreshBookmarks() {
+    bookmarkDisplayRevision += 1;
+    if ($('bookmark-list')) renderBookmarkList($('bookmark-list'), chatId);
+    renderBookmarkRooms();
+    updateChronicle();
+  }
 
   // 기존 전용 저장소는 설정·이미지의 열람용 사본과 기기 전용 토글에 사용한다.
   function openCache() {
@@ -333,6 +585,10 @@
       observeAuthorization(url, init?.headers || (typeof input === 'object' ? input.headers : undefined));
     }
     return nativeFetch(input, init).then(response => {
+      if (url && /^\/crack-gen\/v\d+\/chats(?:\/[^/]+)?\/?$/.test(url.pathname) && response.ok &&
+          (init?.method || input?.method || 'GET').toUpperCase() === 'GET') {
+        response.clone().json().then(value => observeChatTitles(url, value)).catch(() => {});
+      }
       if (messageRoute(url)) {
         scheduleSync();
         if ((init?.method || input?.method || 'GET').toUpperCase() === 'GET' && response.ok) {
@@ -359,6 +615,13 @@
 
   page.XMLHttpRequest.prototype.send = function (...args) {
     const record = xhrRecords.get(this);
+    if (record?.method === 'GET' && record.url && /^\/crack-gen\/v\d+\/chats(?:\/[^/]+)?\/?$/.test(record.url.pathname)) {
+      this.addEventListener('load', () => {
+        if (this.status < 200 || this.status >= 300) return;
+        try { observeChatTitles(record.url, this.responseType === 'json' ? this.response : JSON.parse(this.responseText)); }
+        catch { /* JSON 이외의 응답은 사용하지 않는다. */ }
+      }, { once: true });
+    }
     if (messageRoute(record?.url)) {
       this.addEventListener('load', () => {
         scheduleSync();
@@ -565,12 +828,13 @@
       </div>
     </header>
     <nav class="settings-tabs" role="tablist" aria-label="몰입모드 설정 분류">
-      <button id="screen-tab" role="tab" aria-selected="true" aria-controls="screen-panel" data-tab="screen">몰입 화면</button>
+      <button id="screen-tab" role="tab" aria-selected="true" aria-controls="screen-section" data-tab="screen">몰입 화면</button>
+      <button id="bookmarks-tab" role="tab" aria-selected="false" aria-controls="bookmarks-panel" data-tab="bookmarks">북마크</button>
       <button id="theme-tab" role="tab" aria-selected="false" aria-controls="theme-panel" data-tab="theme">대사 테마</button>
     </nav>
     <div class="settings-content">
-      <div id="screen-panel" class="screen-panel" role="tabpanel" aria-labelledby="screen-tab">
-        <section class="section">
+      <div id="screen-panel" class="screen-panel">
+        <section class="section" id="screen-section" role="tabpanel" aria-labelledby="screen-tab">
           <div class="section-heading">
             <div class="section-title">
               <span class="section-icon" aria-hidden="true">◆</span>
@@ -582,6 +846,13 @@
           <label class="setting-line"><span>진입할 때 오른쪽 메뉴 닫기</span><input class="switch" id="close-right" type="checkbox" checked=""></label>
           <label class="setting-line"><span>입력창 자동 늘리기<small>최대 화면 높이의 50%</small></span><input class="switch" id="auto-grow" type="checkbox" checked=""></label>
           <label class="setting-line"><span>턴 슬라이더 표시</span><input class="switch" id="show-slider" type="checkbox" checked=""></label>
+        </section>
+        <section class="section" id="bookmarks-panel" role="tabpanel" aria-labelledby="bookmarks-tab">
+          <div class="section-heading">
+            <div class="section-title"><span class="section-icon" aria-hidden="true">◆</span><h2>북마크</h2></div>
+            <button class="bookmark-icon" id="bookmark-rooms" aria-label="다른 채팅방 북마크" title="다른 채팅방 북마크">▤</button>
+          </div>
+          <div id="bookmark-list"></div>
         </section>
       </div>
       <div id="theme-panel" class="theme-panel" role="tabpanel" aria-labelledby="theme-tab">
@@ -676,6 +947,14 @@
         <button class="button subtle" id="cancel-settings">취소</button>
       </div>
     </footer>
+    <section class="bookmark-browser" id="bookmark-browser" role="dialog" aria-label="다른 채팅방 북마크" hidden="">
+      <header class="bookmark-browser-heading">
+        <button class="bookmark-icon" id="bookmark-back" aria-label="채팅방 목록으로" hidden="">←</button>
+        <strong id="bookmark-browser-title">다른 채팅방 북마크</strong>
+        <button class="bookmark-icon" id="bookmark-browser-close" aria-label="북마크 창 닫기">×</button>
+      </header>
+      <div id="bookmark-browser-list"></div>
+    </section>
   </section>
 </div>
 <div class="cc-ui preview-toast" id="toast" role="status" hidden=""></div>
@@ -727,6 +1006,7 @@
       width: 100%;
       min-height: 100px;
       position: relative;
+      z-index: 1;
       margin-top: -1px;
     }
 
@@ -1074,6 +1354,167 @@
       box-shadow: inset 1px 0 #ffffffaa;
       pointer-events: none;
     }
+
+    .chronicle-cap {
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+    }
+
+    .chronicle-gem { z-index: 8; }
+    #turn-range { z-index: 5; }
+    .chronicle-handle {
+      position: absolute;
+      left: 50%;
+      width: 22px;
+      height: 22px;
+      transform: translate(-50%,-50%);
+      z-index: 7;
+      cursor: grab;
+      touch-action: none;
+    }
+    .bookmark-markers { position: absolute; inset: 0; pointer-events: none; }
+    .bookmark-marker {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 14px;
+      height: 14px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--turn-accent,#e4cfa4);
+      font: 10px/1 Georgia,serif;
+      cursor: pointer;
+      pointer-events: auto;
+      z-index: 6;
+      text-shadow: 0 1px 3px var(--turn-paper,#263036);
+    }
+    .bookmark-symbol { pointer-events: none; }
+    .bookmark-tooltip {
+      display: none;
+      position: absolute;
+      left: calc(100% + 4px);
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: min(180px,calc(100vw - 60px));
+      padding: 2px 6px;
+      border: 1px solid var(--turn-edge,#96805a);
+      border-radius: 3px;
+      background: var(--turn-paper,#263036);
+      color: var(--turn-accent,#e4cfa4);
+      font: 11px/1.35 'Segoe UI','Malgun Gothic',sans-serif;
+      text-shadow: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .bookmark-marker.is-active .bookmark-tooltip,
+    :host([data-bookmark-overview]) .bookmark-tooltip { display: block; }
+    :host([data-theme=sf]) .bookmark-tooltip,
+    :host([data-theme=neon]) .bookmark-tooltip { border-radius: 0; }
+    :host([data-theme=glass]) .bookmark-tooltip { backdrop-filter: blur(12px); }
+    :host([data-theme=menhera]) .bookmark-tooltip,
+    :host([data-theme=peach]) .bookmark-tooltip { border-radius: 8px; }
+    .bookmark-popover {
+      position: fixed;
+      box-sizing: border-box;
+      width: min(220px,calc(100vw - 64px));
+      max-height: min(360px,calc(100dvh - 32px));
+      overflow: auto;
+      padding: 8px;
+      border: 1px solid var(--turn-edge,#96805a);
+      border-radius: 4px;
+      background: var(--turn-paper,#263036);
+      color: var(--turn-accent,#e4cfa4);
+      box-shadow: 0 8px 24px #0006,inset 0 0 0 3px #0002;
+      z-index: 7;
+      font: 12px/1.5 'Segoe UI','Malgun Gothic',sans-serif;
+      color-scheme: dark;
+    }
+    .bookmark-popover button, .bookmark-popover input { font: inherit; }
+    .bookmark-popover button { color: inherit; cursor: pointer; }
+    .bookmark-popover input {
+      box-sizing: border-box;
+      width: 100%;
+      margin: 4px 0 8px;
+      padding: 5px 6px;
+      color: inherit;
+      background: #8881;
+      border: 1px solid var(--turn-edge,#96805a);
+      border-radius: 3px;
+    }
+    .bookmark-popover-actions { display: flex; justify-content: flex-end; gap: 8px; }
+    .bookmark-popover-actions button {
+      padding: 5px 12px;
+      border: 1px solid var(--turn-edge,#96805a);
+      border-radius: 3px;
+      background: #8882;
+    }
+    .bookmark-popover :focus-visible { outline: 2px solid var(--turn-accent,#e4cfa4); outline-offset: 2px; }
+    :host([data-theme=ashen]), :host([data-theme=grave]) {
+      --turn-paper: #232329;
+      --turn-accent: #e2c99a;
+      --turn-edge: #a58b60;
+    }
+    :host([data-theme=game]) .bookmark-popover { border-radius: 12px; border-width: 2px; }
+    :host([data-theme=sf]) .bookmark-popover { border-radius: 0; box-shadow: inset 3px 0 var(--turn-accent),0 0 12px #39c2bc44; }
+    :host([data-theme=sf]) .bookmark-marker { font-family: monospace; }
+    :host([data-theme=glass]) .bookmark-popover { border-radius: 14px; backdrop-filter: blur(16px); }
+    :host([data-theme=ashen]) .bookmark-popover,
+    :host([data-theme=grave]) .bookmark-popover { border-style: double; border-width: 3px; }
+    :host([data-theme=neon]) .bookmark-popover { border-radius: 0; box-shadow: 4px 4px #473b62; font-family: Consolas,'Malgun Gothic',monospace; }
+    :host([data-theme=menhera]) .bookmark-popover { border-radius: 12px; outline: 1px dashed var(--turn-edge); outline-offset: -5px; }
+    :host([data-theme=telegram]) .bookmark-popover { border-width: 3px; box-shadow: inset 0 0 0 2px #16130f,0 3px 12px #0007; }
+    :host([data-theme=aurora]) .bookmark-popover { border-radius: 3px 3px 14px 14px; }
+    :host([data-theme=peach]) .bookmark-popover { border-radius: 18px; color-scheme: light; box-shadow: 0 3px #a8bec755,0 8px 24px #0002; }
+    :host([data-scene-mode=light][data-theme=game]) .bookmark-popover,
+    :host([data-scene-mode=light][data-theme=sf]) .bookmark-popover,
+    :host([data-scene-mode=light][data-theme=glass]) .bookmark-popover { color-scheme: light; }
+
+    .bookmark-tools { display: flex; justify-content: flex-end; align-items: center; gap: 2px; margin: 0 0 3px; }
+    .bookmark-row {
+      display: grid;
+      grid-template-columns: 5ch minmax(0,1fr) 28px 28px;
+      align-items: center;
+      gap: 5px;
+      min-height: 34px;
+      border-bottom: 1px solid #81704a44;
+    }
+    .bookmark-row input[type=checkbox] { display: none; margin: 0; accent-color: #c5a771; }
+    .is-selecting .bookmark-row { grid-template-columns: 16px 5ch minmax(0,1fr); }
+    .is-selecting .bookmark-row input[type=checkbox] { display: block; }
+    .is-selecting .bookmark-row > .bookmark-icon { display: none; }
+    .bookmark-turn { font-variant-numeric: tabular-nums; color: #c5a771; white-space: nowrap; }
+    .bookmark-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bookmark-row .text-input { width: 100%; min-width: 0; padding: 4px; }
+    .bookmark-icon { display: inline-grid; place-items: center; width: 28px; height: 32px; padding: 4px; flex-shrink: 0; }
+    .bookmark-icon svg { width: 16px; height: 16px; }
+    .bookmark-icon:hover { background: #c5a77122; }
+    .bookmark-empty { margin: 12px 0; color: #9ca89e; font-size: 12px; }
+    .bookmark-browser {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: min(620px,calc(100vw - 40px));
+      max-height: calc(100dvh - 80px);
+      overflow: auto;
+      box-sizing: border-box;
+      padding: 14px;
+      background: #1b2229;
+      border: 1px solid #a58b60;
+      border-radius: 5px;
+      box-shadow: 0 12px 36px #0009;
+      z-index: 5;
+    }
+    .bookmark-browser-heading { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+    .bookmark-browser-heading strong { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+    .bookmark-room-row { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #81704a44; }
+    .bookmark-room-open { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; text-align: left; padding: 12px 0; }
+    .bookmark-room-open span { flex: 1; overflow-wrap: anywhere; }
+    .bookmark-room-open small { white-space: nowrap; color: #c5a771; }
 
     /* 설정창 공용 프레임과 대분류 탭. */
     .settings-scrim {
@@ -2821,6 +3262,9 @@
     $('cancel-settings').addEventListener('click', closeSettings);
     $('save-preview').addEventListener('click', saveSettings);
     $('toggle-immersion').addEventListener('click', toggleImmersion);
+    $('bookmark-rooms').addEventListener('click', openBookmarkRooms);
+    $('bookmark-back').addEventListener('click', () => { bookmarkRoom = ''; renderBookmarkRooms(); });
+    $('bookmark-browser-close').addEventListener('click', () => { $('bookmark-browser').hidden = true; });
   }
 
   // 작업 결과를 설정창 위에 잠시 표시한다.
@@ -2849,7 +3293,9 @@
       button.setAttribute('aria-selected', String(selected));
       button.tabIndex = selected ? 0 : -1;
     });
-    $('screen-panel').hidden = mobile && tab !== 'screen';
+    $('screen-panel').hidden = mobile && tab === 'theme';
+    $('screen-section').hidden = mobile && tab !== 'screen';
+    $('bookmarks-panel').hidden = mobile && tab !== 'bookmarks';
     $('theme-panel').hidden = mobile && tab !== 'theme';
   }
 
@@ -2859,12 +3305,18 @@
     if (storageError) await (storageReady = loadSettings(true).catch(error => { storageError = error; }));
     if (!doc.body) return;
     ensureUI();
+    closeBookmarkPopover();
     if (draft) {
       $('focus-window').focus();
       return;
     }
+    if (chatId) {
+      try { await loadBookmarks(chatId); }
+      catch (error) { showError(error); }
+    }
     draft = page.structuredClone(settings);
     draftPortraits = new Map(portraits);
+    draftBookmarks = new Map();
     for (const [id, key] of Object.entries({
       'hide-left': 'hideLeft',
       'hide-top': 'hideTop',
@@ -2890,6 +3342,7 @@
     renderSpeakers();
     updatePreview();
     updateToggleButton();
+    refreshBookmarks();
     $('close-settings').focus();
     if (storageError) showError(storageError);
   }
@@ -2899,8 +3352,10 @@
     if (saving) return;
     previewRevision += 1;
     $('settings-scrim').hidden = true;
+    $('bookmark-browser').hidden = true;
     draft = null;
     draftPortraits = null;
+    draftBookmarks = null;
     syncThemeFonts();
     syncPronunciationWorker();
     releaseUnusedImages();
@@ -2910,6 +3365,9 @@
   // 대사 패턴을 검증한 뒤 저장된 설정을 실제 몰입 화면에도 반영한다.
   async function saveSettings() {
     if (!draft || saving) return;
+    if (bookmarkSaving) { toast('북마크 저장 중입니다. 잠시 뒤 다시 시도해주세요.'); return; }
+    const emptyName = [...ui.querySelectorAll('.bookmark-row .text-input')].find(input => !input.value.trim());
+    if (emptyName) { emptyName.focus(); emptyName.reportValidity(); return; }
     saving = true;
     $('save-preview').disabled = true;
     try {
@@ -2926,7 +3384,16 @@
         throw new Error('저장된 설정이 변경되었습니다. 페이지를 새로고침한 뒤 확인해주세요.');
       }
       const record = await settingsRecord(next, images);
-      await book.save(record);
+      const bookmarks = { ...current?.bookmarks };
+      for (const [id, room] of draftBookmarks) {
+        const key = bookmarkPath(id).slice('bookmarks/'.length);
+        if (room.items.length) bookmarks[key] = { title: room.title, items: room.items };
+        else delete bookmarks[key];
+      }
+      await book.save({ ...current, ...record, bookmarks });
+      for (const [id, room] of draftBookmarks) bookmarkRooms.set(id, room);
+      draftBookmarks.clear();
+      refreshBookmarks();
       settings = next;
       syncThemeFonts();
       syncPronunciationWorker();
@@ -3901,8 +4368,163 @@
   const grownEditors = new Map();
   let immersiveChat = '';
   let chronicleHost = null, chronicleUI = null;
+  let bookmarkPopover = null, bookmarkAnchor = null;
+  let bookmarkPopoverKey = '', bookmarkMarkerKey = '';
+  let bookmarkHideTimer;
+  let sliderDragging = false;
   let scrollFrame = 0;
   let runtimeStyle;
+
+  function closeBookmarkPopover() {
+    page.clearTimeout(bookmarkHideTimer);
+    bookmarkAnchor?.setAttribute('aria-expanded', 'false');
+    bookmarkPopover?.remove();
+    bookmarkPopover = null;
+    bookmarkAnchor = null;
+    bookmarkPopoverKey = '';
+    chronicleHost?.removeAttribute('data-bookmark-overview');
+    chronicleUI?.querySelectorAll('.bookmark-marker.is-active').forEach(marker => {
+      marker.classList.remove('is-active');
+      marker.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function positionBookmarkPopover() {
+    if (!bookmarkPopover || !bookmarkAnchor?.isConnected) return;
+    const viewportTop = page.visualViewport?.offsetTop || 0;
+    const viewportHeight = page.visualViewport?.height || page.innerHeight;
+    bookmarkPopover.style.maxHeight = Math.max(80, Math.min(360, viewportHeight - 16)) + 'px';
+    const anchor = bookmarkAnchor.getBoundingClientRect();
+    const bounds = bookmarkPopover.getBoundingClientRect();
+    bookmarkPopover.style.left = Math.max(8, Math.min(anchor.right + 8, page.innerWidth - bounds.width - 8)) + 'px';
+    bookmarkPopover.style.top = Math.max(viewportTop + 8, Math.min(anchor.top, viewportTop + viewportHeight - bounds.height - 8)) + 'px';
+  }
+
+  function deferBookmarkClose() {
+    page.clearTimeout(bookmarkHideTimer);
+    if (bookmarkPopoverKey === 'add' || bookmarkPopoverKey === 'overview') return;
+    bookmarkHideTimer = page.setTimeout(closeBookmarkPopover, 220);
+  }
+
+  async function jumpToBookmark(turn) {
+    closeBookmarkPopover();
+    const generation = routeGeneration;
+    await startIndex();
+    if (generation !== routeGeneration || !immersive) return;
+    if (!turns[turn]) throw new Error('이 북마크의 턴이 현재 대화에 없습니다. 설정에서 삭제할 수 있습니다.');
+    await jumpToTurn(turn);
+  }
+
+  function showBookmarkOverview(anchor) {
+    if (sliderDragging || bookmarkPopoverKey === 'add') return;
+    closeBookmarkPopover();
+    bookmarkAnchor = anchor;
+    bookmarkPopoverKey = 'overview';
+    anchor.setAttribute('aria-expanded', 'true');
+    chronicleHost.setAttribute('data-bookmark-overview', '');
+  }
+
+  function showBookmarkName(anchor, item) {
+    if (sliderDragging || bookmarkPopoverKey === 'add') return;
+    page.clearTimeout(bookmarkHideTimer);
+    if (bookmarkPopoverKey === 'overview') return;
+    closeBookmarkPopover();
+    bookmarkAnchor = anchor;
+    bookmarkPopoverKey = 'turn:' + item.turn;
+    anchor.classList.add('is-active');
+    anchor.setAttribute('aria-expanded', 'true');
+  }
+
+  function showBookmarkAdd(anchor) {
+    if (!indexComplete || !turns.length) { toast('턴 기록을 불러온 뒤 등록해주세요.'); return; }
+    const id = chatId;
+    const turn = Math.min(turns.length - 1, pendingTurn ?? turns.length - 1);
+    const existing = bookmarkRooms.get(id)?.items.find(item => item.turn === turn);
+    closeBookmarkPopover();
+    bookmarkAnchor = anchor;
+    bookmarkPopoverKey = 'add';
+    anchor.setAttribute('aria-expanded', 'true');
+    const popup = make('section', 'bookmark-popover');
+    popup.setAttribute('aria-label', '북마크 등록');
+    bookmarkPopover = popup;
+    chronicleUI.append(popup);
+    const form = make('form');
+    const turnLabel = make('label', '', '턴수');
+    const turnInput = make('input');
+    turnInput.type = 'number';
+    turnInput.min = '0';
+    turnInput.max = String(turns.length - 1);
+    turnInput.step = '1';
+    turnInput.required = true;
+    turnInput.value = String(turn);
+    turnLabel.append(turnInput);
+    const label = make('label', '', '북마크 이름');
+    const input = make('input');
+    input.type = 'text';
+    input.required = true;
+    input.maxLength = 120;
+    input.value = existing?.name || '';
+    input.placeholder = '북마크 이름';
+    label.append(input);
+    const actions = make('div', 'bookmark-popover-actions');
+    const save = make('button', '', existing ? '수정' : '등록');
+    save.type = 'submit';
+    const cancel = make('button', '', '취소');
+    cancel.type = 'button';
+    cancel.addEventListener('click', closeBookmarkPopover);
+    actions.append(save, cancel);
+    form.append(turnLabel, label, actions);
+    turnInput.addEventListener('change', () => {
+      const item = bookmarkRooms.get(id)?.items.find(entry => entry.turn === Number(turnInput.value));
+      input.value = item?.name || '';
+      save.textContent = item ? '수정' : '등록';
+    });
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const name = input.value.trim();
+      if (!name) { input.focus(); return; }
+      const selectedTurn = Number(turnInput.value);
+      save.disabled = true;
+      try {
+        await changeBookmarks(id, items => [...items.filter(item => item.turn !== selectedTurn), { turn: selectedTurn, name }].sort((a, b) => a.turn - b.turn));
+      } catch (error) { showError(error); }
+      finally { save.disabled = false; }
+    });
+    popup.append(form);
+    positionBookmarkPopover();
+    input.focus();
+    input.select();
+  }
+
+  // 북마크 변경·테마 변경·턴 수 변경 때만 표시를 다시 만든다. 드래그 값에는 관여하지 않는다.
+  function renderBookmarkMarkers(maximum) {
+    const key = [chatId, bookmarkDisplayRevision, maximum, indexComplete, settings.theme].join(':');
+    if (key === bookmarkMarkerKey) return;
+    bookmarkMarkerKey = key;
+    closeBookmarkPopover();
+    const container = chronicleUI.querySelector('.bookmark-markers');
+    container.replaceChildren();
+    if (!indexComplete) return;
+    for (const item of bookmarkRooms.get(chatId)?.items || []) {
+      if (item.turn < 0 || item.turn > maximum) continue;
+      const symbol = themes.find(([id]) => id === settings.theme)?.[2];
+      const marker = make('button', 'bookmark-marker');
+      marker.append(make('span', 'bookmark-symbol', !symbol || symbol === '—' ? '◆' : symbol), make('span', 'bookmark-tooltip', item.name));
+      marker.type = 'button';
+      marker.style.top = (maximum ? item.turn / maximum * 100 : 0) + '%';
+      marker.setAttribute('aria-label', item.turn + '턴 북마크: ' + item.name);
+      marker.setAttribute('aria-expanded', 'false');
+      marker.addEventListener('pointerenter', event => {
+        if (event.pointerType === 'mouse') showBookmarkName(marker, item);
+      });
+      marker.addEventListener('pointerleave', event => { if (event.pointerType === 'mouse') deferBookmarkClose(); });
+      marker.addEventListener('click', () => {
+        if (bookmarkPopoverKey === 'overview' || bookmarkPopoverKey === 'turn:' + item.turn) jumpToBookmark(item.turn).catch(showError);
+        else showBookmarkName(marker, item);
+      });
+      container.append(marker);
+    }
+  }
 
   // 몰입 설정에 따라 기존 화면 요소의 표시만 전환한다.
   function hideLayout(node, hide) {
@@ -3928,6 +4550,7 @@
     const main = doc.querySelector('main'), input = editor();
     if (!immersive || !main || !input || !chatId) {
       if (!immersive) immersiveChat = '';
+      closeBookmarkPopover();
       chronicleHost?.remove();
       chronicleHost = null;
       chronicleUI = null;
@@ -3963,6 +4586,7 @@
       positionOverlays();
       startIndex().catch(showError);
     } else {
+      closeBookmarkPopover();
       chronicleHost?.remove();
       chronicleHost = null;
       chronicleUI = null;
@@ -4011,21 +4635,26 @@
     chronicleHost.dataset.ccFocusOwned = '';
     chronicleHost.style.cssText = 'position:fixed;z-index:900;width:40px;pointer-events:auto;';
     chronicleUI = chronicleHost.attachShadow({ mode: 'open' });
+    bookmarkMarkerKey = '';
     addStyle(chronicleUI);
+    chronicleUI.addEventListener('keydown', event => event.stopPropagation());
+    chronicleUI.addEventListener('keyup', event => event.stopPropagation());
     const wrap = make('aside', 'chronicle cc-live-chronicle');
     wrap.setAttribute('aria-label', '턴 탐색');
     wrap.innerHTML = String.raw`
-<div class="chronicle-cap" aria-hidden="true">
-  <svg viewBox="0 0 64 64">
+<button class="chronicle-cap" type="button" aria-label="북마크 목록 및 등록" aria-expanded="false">
+  <svg viewBox="0 0 64 64" aria-hidden="true">
     ${chronicleEmblems.none}
   </svg>
-</div>
+</button>
 <div class="chronicle-scale">
   <div class="chronicle-spine">
     <div class="chronicle-fill"></div>
     <div class="chronicle-gem"></div>
+    <div class="chronicle-handle" aria-hidden="true"></div>
     <input id="turn-range" type="range" min="0" max="0" value="0" step="1" aria-label="대화 턴 이동" disabled="">
   </div>
+  <div class="bookmark-markers"></div>
 </div>
 <div class="chronicle-position">
   <strong>…</strong>
@@ -4035,7 +4664,41 @@
 `;
     chronicleUI.append(wrap);
     doc.body.append(chronicleHost);
+    const cap = chronicleUI.querySelector('.chronicle-cap');
+    cap.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse') showBookmarkOverview(cap);
+    });
+    cap.addEventListener('pointerleave', event => { if (event.pointerType === 'mouse') deferBookmarkClose(); });
+    cap.addEventListener('click', () => {
+      if (bookmarkPopoverKey === 'overview') showBookmarkAdd(cap);
+      else if (bookmarkPopoverKey !== 'add') showBookmarkOverview(cap);
+    });
     const slider = chronicleUI.getElementById('turn-range');
+    const handle = chronicleUI.querySelector('.chronicle-handle');
+    let handleOffset = 0;
+    const dragHandle = event => {
+      const rect = chronicleUI.querySelector('.chronicle-scale').getBoundingClientRect();
+      slider.value = String(Math.round(Math.max(0, Math.min(1, (event.clientY - handleOffset - rect.top) / rect.height)) * Number(slider.max)));
+      slider.dispatchEvent(new page.Event('input'));
+    };
+    handle.addEventListener('pointerdown', event => {
+      if (slider.disabled || event.button !== 0) return;
+      event.preventDefault();
+      const rect = handle.getBoundingClientRect();
+      handleOffset = event.clientY - (rect.top + rect.height / 2);
+      sliderDragging = true;
+      closeBookmarkPopover();
+      handle.setPointerCapture(event.pointerId);
+    });
+    handle.addEventListener('pointermove', event => {
+      if (handle.hasPointerCapture(event.pointerId)) dragHandle(event);
+    });
+    handle.addEventListener('pointerup', event => {
+      if (!handle.hasPointerCapture(event.pointerId)) return;
+      handle.releasePointerCapture(event.pointerId);
+      slider.dispatchEvent(new page.Event('change'));
+    });
+    slider.addEventListener('pointerdown', () => { sliderDragging = true; closeBookmarkPopover(); });
     slider.addEventListener('input', () => {
       seeking = true;
       pendingTurn = Number(slider.value);
@@ -4062,6 +4725,7 @@
       chronicleHost.style.top = rect.top + 76 + 'px';
       chronicleHost.style.height = Math.max(140, Math.min(rect.bottom, page.innerHeight) - rect.top - 76 - 110) + 'px';
     }
+    positionBookmarkPopover();
   }
 
   // 현재 턴과 전체 턴을 슬라이더에 반영한다.
@@ -4084,7 +4748,9 @@
     const percent = maximum ? current / maximum * 100 : 0;
     chronicleUI.querySelector('.chronicle-fill').style.height = percent + '%';
     chronicleUI.querySelector('.chronicle-gem').style.top = percent + '%';
+    chronicleUI.querySelector('.chronicle-handle').style.top = percent + '%';
     chronicleHost.dataset.sceneMode = sceneMode();
+    renderBookmarkMarkers(maximum);
   }
 
   // 진행 중인 기록 이동을 취소한다.
@@ -4147,6 +4813,16 @@
   // 외부에서 토글 키를 관리하지 않는 경우에만 고정된 기본 F9를 실행한다.
   doc.addEventListener('keydown', event => {
     if (event.defaultPrevented || event.repeat || event.isComposing) return;
+    if (event.code === 'Escape') {
+      if (bookmarkPopoverKey || $('bookmark-browser') && !$('bookmark-browser').hidden) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (bookmarkPopoverKey) closeBookmarkPopover();
+        else $('bookmark-browser').hidden = true;
+        return;
+      }
+      if (event.composedPath().some(node => node.matches?.('.bookmark-row input'))) return;
+    }
     if (draft) {
       if (event.code === 'Escape') {
         event.preventDefault();
@@ -4176,8 +4852,14 @@
     }
   }, true);
   doc.addEventListener('pointerdown', event => {
+    const path = event.composedPath();
+    const bookmarkTarget = path.some(node => node.matches?.('.bookmark-marker,.chronicle-cap'));
+    if (bookmarkPopoverKey && !path.includes(bookmarkPopover) && !path.includes(bookmarkAnchor) && !bookmarkTarget) closeBookmarkPopover();
+    if ($('bookmark-browser') && !$('bookmark-browser').hidden && !path.includes($('bookmark-browser')) && !path.includes($('bookmark-rooms'))) $('bookmark-browser').hidden = true;
     if (event.target.closest?.('button[aria-label="메시지 검색"]')) crackNavigation.showSearch();
   }, true);
+  doc.addEventListener('pointerup', () => { sliderDragging = false; }, true);
+  doc.addEventListener('pointercancel', () => { sliderDragging = false; }, true);
   doc.addEventListener('input', event => {
     if (event.target.matches?.(EDITOR) || event.target.closest?.(EDITOR)) resizeInput();
   }, true);
@@ -4236,7 +4918,11 @@
       latestMessageId = '';
       restoreHighlights();
       cancelSeek();
+      closeBookmarkPopover();
       chatId = nextChat;
+      bookmarkRoom = '';
+      refreshBookmarks();
+      if (chatId) loadBookmarks(chatId).catch(showError);
       immersive = !!chatId && (alwaysOn || immersive);
       updateImmersion();
       updateToggleButton();
@@ -4272,9 +4958,14 @@
   storageReady = loadSettings().catch(error => { storageError = error; });
   doc.addEventListener('cc-content-data-changed', event => {
     if (event.detail.id !== 'crack-immersion') return;
+    bookmarkRevision += 1;
+    bookmarkRooms.clear();
+    closeBookmarkPopover();
     storageReady = storageReady.then(async () => {
       if (draft) closeSettings();
       await loadSettings(true);
+      if (chatId) await loadBookmarks(chatId);
+      else refreshBookmarks();
       syncPronunciationWorker();
       highlightRevision += 1;
       restoreHighlights();
@@ -4295,6 +4986,8 @@
     messageFrame = 0;
     syncFrame = 0;
     scrollFrame = 0;
+    closeBookmarkPopover();
+    sliderDragging = false;
     cancelSeek();
     restoreHighlights();
     indexAbort?.abort();
