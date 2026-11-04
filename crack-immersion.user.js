@@ -94,6 +94,7 @@
       autoGrow: true,
       showSlider: true,
       theme: 'none',
+      themeFontSize: 100,
       autoPronunciation: false,
       pronunciationLanguage: 'ja',
       pattern: 0,
@@ -109,6 +110,7 @@
       if (typeof value[key] === 'boolean') next[key] = value[key];
     }
     if (themes.some(([id]) => id === value.theme)) next.theme = value.theme;
+    if (Number.isInteger(value.themeFontSize) && value.themeFontSize >= 80 && value.themeFontSize <= 200 && value.themeFontSize % 10 === 0) next.themeFontSize = value.themeFontSize;
     if (value.pattern === 'custom' || Number.isInteger(value.pattern) && presets[value.pattern]) next.pattern = value.pattern;
     if (typeof value.customTemplate === 'string') next.customTemplate = value.customTemplate.slice(0, 4096);
     if (typeof value.customRegex === 'string') next.customRegex = value.customRegex.slice(0, 4096);
@@ -567,7 +569,7 @@
         <section class="section">
           <div class="section-heading">
             <div class="section-title">
-              <span class="section-number">01</span>
+              <span class="section-icon" aria-hidden="true">◆</span>
               <h2>몰입 화면</h2>
             </div>
           </div>
@@ -582,11 +584,16 @@
         <section class="section theme-section">
           <div class="section-heading">
             <div class="section-title">
-              <span class="section-number">02</span>
+              <span class="section-icon" aria-hidden="true">◆</span>
               <h2>대사 테마</h2>
             </div>
           </div>
           <div class="theme-picker" id="theme-picker" role="group" aria-label="대사 테마"></div>
+          <div class="theme-font-control">
+            <label for="theme-font-size">글자 크기</label>
+            <input id="theme-font-size" type="range" min="80" max="200" step="10" value="100">
+            <output id="theme-font-size-value" for="theme-font-size">100%</output>
+          </div>
         </section>
         <section class="sample-section">
           <div class="sample-heading">
@@ -606,7 +613,7 @@
         <section class="section pattern-section">
           <div class="section-heading">
             <div class="section-title">
-              <span class="section-number">03</span>
+              <span class="section-icon" aria-hidden="true">◆</span>
               <h2>대사 인식 패턴</h2>
             </div>
           </div>
@@ -623,7 +630,7 @@
         <section class="section speaker-section">
           <div class="section-heading">
             <div class="section-title">
-              <span class="section-number">04</span>
+              <span class="section-icon" aria-hidden="true">◆</span>
               <h2>화자 이미지</h2>
             </div>
           </div>
@@ -638,7 +645,7 @@
         <section class="section pronunciation-section">
           <div class="section-heading">
             <div class="section-title">
-              <span class="section-number">05</span>
+              <span class="section-icon" aria-hidden="true">◆</span>
               <h2>자동 발음</h2>
             </div>
           </div>
@@ -1163,6 +1170,72 @@
       white-space: nowrap;
     }
 
+    .section-icon {
+      color: #c1a777;
+      font-size: 8px;
+    }
+
+    .theme-font-control {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .theme-font-control label {
+      color: #c1a777;
+      font: 600 10px/1.5 'Malgun Gothic',sans-serif;
+      letter-spacing: .04em;
+    }
+
+    .theme-font-control output {
+      min-width: 4ch;
+      color: #dac69e;
+      font: 600 11px/1.5 Consolas,monospace;
+      text-align: right;
+    }
+
+    #theme-font-size {
+      appearance: none;
+      width: 100%;
+      min-width: 0;
+      height: 28px;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    #theme-font-size::-webkit-slider-runnable-track {
+      height: 3px;
+      background: #68715f;
+      border-radius: 2px;
+    }
+
+    #theme-font-size::-webkit-slider-thumb {
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      margin-top: -5px;
+      border: 1px solid #e4d0a0;
+      border-radius: 2px;
+      background: #bba16c;
+    }
+
+    #theme-font-size::-moz-range-track {
+      height: 3px;
+      background: #68715f;
+      border-radius: 2px;
+    }
+
+    #theme-font-size::-moz-range-thumb {
+      width: 11px;
+      height: 11px;
+      border: 1px solid #e4d0a0;
+      border-radius: 2px;
+      background: #bba16c;
+    }
+
     /* 몰입 화면 옵션. */
     .setting-line {
       display: flex;
@@ -1521,7 +1594,7 @@
       margin: 13px 0;
       padding: 9px 12px;
       color: var(--ink);
-      font-size: 13px;
+      font-size: calc(13px * var(--dialogue-font-scale, 1));
       background: var(--paper);
       border: 1px solid var(--edge);
       isolation: isolate;
@@ -1550,18 +1623,18 @@
       align-items: baseline;
       gap: 7px;
       margin-bottom: 2px;
-      font: 700 11px/1.5 Georgia,'Batang',serif;
+      font: 700 calc(11px * var(--dialogue-font-scale, 1))/1.5 Georgia,'Batang',serif;
       color: var(--accent);
     }
 
     .dialogue-name small {
-      font: 9px 'Malgun Gothic',sans-serif;
+      font: calc(9px * var(--dialogue-font-scale, 1)) 'Malgun Gothic',sans-serif;
       color: var(--subtle);
     }
 
     .dialogue-speech {
       margin: 0;
-      font: 13px/1.7 Georgia,'Batang',serif;
+      font: calc(13px * var(--dialogue-font-scale, 1))/1.7 Georgia,'Batang',serif;
       white-space: pre-line;
       overflow-wrap: anywhere;
     }
@@ -1569,13 +1642,13 @@
     .dialogue-pronunciation {
       margin: 1px 0 0;
       color: var(--subtle);
-      font: 10px/1.5 'Malgun Gothic',sans-serif;
+      font: calc(10px * var(--dialogue-font-scale, 1))/1.5 'Malgun Gothic',sans-serif;
     }
 
     .dialogue-translation {
       margin: 3px 0 0;
       color: var(--secondary);
-      font: 12px/1.6 'Malgun Gothic',sans-serif;
+      font: calc(12px * var(--dialogue-font-scale, 1))/1.6 'Malgun Gothic',sans-serif;
       white-space: pre-line;
     }
 
@@ -1626,7 +1699,7 @@
     }
 
     .dialogue[data-theme=game] .dialogue-name {
-      font: 600 10px/1.5 'Malgun Gothic',sans-serif;
+      font: 600 calc(10px * var(--dialogue-font-scale, 1))/1.5 'Malgun Gothic',sans-serif;
     }
 
     .dialogue[data-theme=game] .dialogue-speech {
@@ -1661,7 +1734,7 @@
       position: absolute;
       right: 10px;
       top: 5px;
-      font: 8px Consolas,monospace;
+      font: calc(8px * var(--dialogue-font-scale, 1)) Consolas,monospace;
       color: var(--subtle);
       letter-spacing: 1px;
     }
@@ -1677,7 +1750,7 @@
 
     .dialogue[data-theme=sf] .dialogue-name {
       text-shadow: 1px 0 #ff4e8544,-1px 0 #19baff66;
-      font: 700 10px Consolas,'Malgun Gothic',monospace;
+      font: 700 calc(10px * var(--dialogue-font-scale, 1)) Consolas,'Malgun Gothic',monospace;
     }
 
     .dialogue[data-theme=sf] .dialogue-speech {
@@ -1717,12 +1790,12 @@
     }
 
     .dialogue[data-theme=glass] .dialogue-name {
-      font: 500 10px/1.5 'Malgun Gothic',sans-serif;
+      font: 500 calc(10px * var(--dialogue-font-scale, 1))/1.5 'Malgun Gothic',sans-serif;
     }
 
     .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) {
       box-sizing: border-box;
-      font: 13px/1.55 'Malgun Gothic',sans-serif;
+      font: calc(13px * var(--dialogue-font-scale, 1))/1.55 'Malgun Gothic',sans-serif;
     }
 
     .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-name {
@@ -1735,7 +1808,7 @@
     }
 
     .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-translation {
-      font-size: 10px;
+      font-size: calc(10px * var(--dialogue-font-scale, 1));
       overflow-wrap: anywhere;
     }
 
@@ -1778,7 +1851,7 @@
     .dialogue[data-theme=ashen] .dialogue-name::before {
       content: '◆';
       color: #756645;
-      font-size: 6px;
+      font-size: calc(6px * var(--dialogue-font-scale, 1));
     }
 
     .dialogue[data-theme=ashen] .dialogue-name small {
@@ -1812,7 +1885,7 @@
       top: 3px;
       color: #d05ec9;
       opacity: .7;
-      font: 900 10px Arial,sans-serif;
+      font: 900 calc(10px * var(--dialogue-font-scale, 1)) Arial,sans-serif;
     }
 
     .dialogue[data-theme=neon] .speaker-portrait {
@@ -1830,14 +1903,14 @@
       padding: 0 5px;
       color: #14171b;
       background: #b8e870;
-      font: 800 11px/1.5 Arial,'Malgun Gothic',sans-serif;
+      font: 800 calc(11px * var(--dialogue-font-scale, 1))/1.5 Arial,'Malgun Gothic',sans-serif;
       letter-spacing: .04em;
       transform: skew(-8deg);
     }
 
     .dialogue[data-theme=neon] .dialogue-name small {
       color: #473b62;
-      font: 8px Consolas,monospace;
+      font: calc(8px * var(--dialogue-font-scale, 1)) Consolas,monospace;
     }
 
     .dialogue[data-theme=neon] .dialogue-speech {
@@ -1872,7 +1945,7 @@
       right: 7px;
       top: 2px;
       color: #f783ba;
-      font: 800 10px Arial,sans-serif;
+      font: 800 calc(10px * var(--dialogue-font-scale, 1)) Arial,sans-serif;
       transform: rotate(5deg);
     }
 
@@ -1887,13 +1960,13 @@
     }
 
     .dialogue[data-theme=menhera] .dialogue-name {
-      font: 700 10px/1.5 'Malgun Gothic',sans-serif;
+      font: 700 calc(10px * var(--dialogue-font-scale, 1))/1.5 'Malgun Gothic',sans-serif;
     }
 
     .dialogue[data-theme=menhera] .dialogue-name::before {
       content: '♥';
       color: #d96a9f;
-      font-size: 7px;
+      font-size: calc(7px * var(--dialogue-font-scale, 1));
     }
 
     .dialogue[data-theme=menhera] .dialogue-name small {
@@ -1930,7 +2003,7 @@
     }
 
     .dialogue[data-theme=grave] .dialogue-name {
-      font: 700 11px/1.5 Georgia,'Batang',serif;
+      font: 700 calc(11px * var(--dialogue-font-scale, 1))/1.5 Georgia,'Batang',serif;
       letter-spacing: .07em;
     }
 
@@ -1943,7 +2016,7 @@
     }
 
     .dialogue[data-theme=grave] .dialogue-pronunciation {
-      font: italic 9px/1.45 Georgia,'Batang',serif;
+      font: italic calc(9px * var(--dialogue-font-scale, 1))/1.45 Georgia,'Batang',serif;
     }
 
     .dialogue[data-theme=telegram] {
@@ -1983,7 +2056,7 @@
     }
 
     .dialogue[data-theme=telegram] .dialogue-pronunciation {
-      font: 8px/1.5 'Courier New',monospace;
+      font: calc(8px * var(--dialogue-font-scale, 1))/1.5 'Courier New',monospace;
     }
 
     .dialogue[data-theme=telegram] .dialogue-pronunciation::before {
@@ -2020,7 +2093,7 @@
     .dialogue[data-theme=aurora] .dialogue-name::before {
       content: '✦';
       color: #b4c68e;
-      font-size: 7px;
+      font-size: calc(7px * var(--dialogue-font-scale, 1));
     }
 
     .dialogue[data-theme=aurora] .dialogue-name small {
@@ -2032,7 +2105,7 @@
     }
 
     .dialogue[data-theme=aurora] .dialogue-pronunciation {
-      font-size: 8px;
+      font-size: calc(8px * var(--dialogue-font-scale, 1));
     }
 
     .dialogue[data-theme=aurora] .dialogue-translation {
@@ -2065,7 +2138,7 @@
     }
 
     .dialogue[data-theme=peach] .dialogue-name {
-      font: 700 10px/1.5 'Malgun Gothic',sans-serif;
+      font: 700 calc(10px * var(--dialogue-font-scale, 1))/1.5 'Malgun Gothic',sans-serif;
     }
 
     .dialogue[data-theme=peach] .dialogue-name::before {
@@ -2078,7 +2151,7 @@
     }
 
     .dialogue[data-theme=peach] .dialogue-pronunciation {
-      font-size: 8px;
+      font-size: calc(8px * var(--dialogue-font-scale, 1));
     }
 
     .dialogue[data-theme=peach] .dialogue-translation {
@@ -2631,6 +2704,12 @@
       });
       $('theme-picker').append(button);
     });
+    $('theme-font-size').addEventListener('input', () => {
+      if (!draft) return;
+      draft.themeFontSize = Number($('theme-font-size').value);
+      $('theme-font-size-value').textContent = draft.themeFontSize + '%';
+      updatePreview();
+    });
     ui.querySelectorAll('button[data-scene-mode]').forEach(button => button.addEventListener('click', () => setPreviewMode(button.dataset.sceneMode)));
     $('template-input').addEventListener('input', () => {
       draft.customTemplate = $('template-input').value;
@@ -2730,6 +2809,8 @@
     $('template-input').value = draft.customTemplate;
     $('regex-input').value = draft.customRegex;
     $('auto-pronunciation').checked = draft.autoPronunciation;
+    $('theme-font-size').value = String(draft.themeFontSize);
+    $('theme-font-size-value').textContent = draft.themeFontSize + '%';
     $('pronunciation-language').value = draft.pronunciationLanguage;
     $('always-on').checked = alwaysOn;
     syncPronunciationWorker();
@@ -3212,6 +3293,7 @@
     wrapper.dataset.sceneMode = mode;
     const bubble = make('article', 'dialogue');
     bubble.dataset.theme = config.theme;
+    bubble.style.setProperty('--dialogue-font-scale', String(config.themeFontSize / 100));
     const blob = images.get(normalizeName(fields.name)) || images.get(normalizeName(fields.translatedName));
     if (blob) {
       const image = make('img', 'speaker-portrait');
