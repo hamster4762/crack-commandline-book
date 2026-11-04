@@ -95,6 +95,7 @@
       showSlider: true,
       theme: 'none',
       themeFontSize: 100,
+      themeFontCSS: '',
       autoPronunciation: false,
       pronunciationLanguage: 'ja',
       pattern: 0,
@@ -111,6 +112,7 @@
     }
     if (themes.some(([id]) => id === value.theme)) next.theme = value.theme;
     if (Number.isInteger(value.themeFontSize) && value.themeFontSize >= 80 && value.themeFontSize <= 200 && value.themeFontSize % 10 === 0) next.themeFontSize = value.themeFontSize;
+    if (typeof value.themeFontCSS === 'string') next.themeFontCSS = value.themeFontCSS.trim();
     if (value.pattern === 'custom' || Number.isInteger(value.pattern) && presets[value.pattern]) next.pattern = value.pattern;
     if (typeof value.customTemplate === 'string') next.customTemplate = value.customTemplate.slice(0, 4096);
     if (typeof value.customRegex === 'string') next.customRegex = value.customRegex.slice(0, 4096);
@@ -144,6 +146,7 @@
   let persistedPortraits = new Map();
   let draft = null;
   let draftPortraits = null;
+  const themeFonts = new Map();
   let database;
   let databasePromise;
   let storageError = null;
@@ -214,6 +217,7 @@
     }
     updatedAt = revision;
     settings = next;
+    syncThemeFonts();
     portraits = images;
     storageError = null;
   }
@@ -593,6 +597,10 @@
             <label for="theme-font-size">글자 크기</label>
             <input id="theme-font-size" type="range" min="80" max="200" step="10" value="100">
             <output id="theme-font-size-value" for="theme-font-size">100%</output>
+          </div>
+          <div class="theme-font-field">
+            <label for="theme-font">폰트</label>
+            <textarea class="text-input" id="theme-font" spellcheck="false" placeholder="웹폰트 CSS를 붙여넣으세요. 비우면 기본 폰트.&#10;@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&amp;display=swap');&#10;또는 @font-face { font-family: 'MyFont'; src: url('https://example.com/font.woff2'); }"></textarea>
           </div>
         </section>
         <section class="sample-section">
@@ -1177,16 +1185,35 @@
 
     .theme-font-control {
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
       align-items: center;
       gap: 12px;
       margin-top: 10px;
     }
 
-    .theme-font-control label {
+    .theme-font-control label,
+    .theme-font-field label {
       color: #c1a777;
       font: 600 10px/1.5 'Malgun Gothic',sans-serif;
       letter-spacing: .04em;
+    }
+
+    .theme-font-field {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      align-items: start;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .theme-font-field label {
+      padding-top: 8px;
+    }
+
+    .cc-ui #theme-font {
+      height: 80px;
+      resize: vertical;
+      font-family: Consolas,'Malgun Gothic',monospace;
     }
 
     .theme-font-control output {
@@ -2644,6 +2671,41 @@
     }
   }
 
+  // @import로 가져온 CSS에서도 폰트명을 찾아 별도 입력 없이 적용한다.
+  async function readFontFamily(css, base = page.location.href, visited = new Set()) {
+    const family = /\bfont-family\s*:\s*([^;}]+)/i.exec(css)?.[1].trim();
+    if (family) return family;
+    for (const match of css.matchAll(/@import\s+(?:url\(\s*(['"]?)(.*?)\1\s*\)|(['"])(.*?)\3)[^;]*;/gi)) {
+      const url = new page.URL(match[2] || match[4], base).href;
+      if (visited.has(url)) continue;
+      visited.add(url);
+      const response = await nativeFetch(url, { credentials: 'omit' });
+      if (!response.ok) throw new Error('웹폰트 CSS를 불러오지 못했습니다.');
+      const importedFamily = await readFontFamily(await response.text(), response.url, visited);
+      if (importedFamily) return importedFamily;
+    }
+    return '';
+  }
+
+  // 웹폰트 CSS는 저장값과 편집 중인 값만 문서에 등록해 대사마다 중복 로드하지 않는다.
+  function syncThemeFonts() {
+    const parent = doc.head || doc.documentElement;
+    if (!parent) return;
+    const sources = new Set([settings.themeFontCSS, draft?.themeFontCSS].filter(css => css?.trim()));
+    for (const [css, font] of themeFonts) if (!sources.has(css)) {
+      font.style.remove();
+      themeFonts.delete(css);
+    }
+    for (const css of sources) if (!themeFonts.has(css)) {
+      const style = make('style');
+      style.dataset.ccFocusOwned = '';
+      style.textContent = css;
+      parent.append(style);
+      const family = readFontFamily(css).catch(error => { showError(error); return ''; });
+      themeFonts.set(css, { style, family });
+    }
+  }
+
   // 화자 이미지 Blob마다 재사용할 URL을 만든다.
   function imageUrl(blob) {
     if (!imageUrls.has(blob)) imageUrls.set(blob, page.URL.createObjectURL(blob));
@@ -2708,6 +2770,11 @@
       if (!draft) return;
       draft.themeFontSize = Number($('theme-font-size').value);
       $('theme-font-size-value').textContent = draft.themeFontSize + '%';
+      updatePreview();
+    });
+    $('theme-font').addEventListener('input', () => {
+      if (!draft) return;
+      draft.themeFontCSS = $('theme-font').value.trim();
       updatePreview();
     });
     ui.querySelectorAll('button[data-scene-mode]').forEach(button => button.addEventListener('click', () => setPreviewMode(button.dataset.sceneMode)));
@@ -2811,6 +2878,7 @@
     $('auto-pronunciation').checked = draft.autoPronunciation;
     $('theme-font-size').value = String(draft.themeFontSize);
     $('theme-font-size-value').textContent = draft.themeFontSize + '%';
+    $('theme-font').value = draft.themeFontCSS;
     $('pronunciation-language').value = draft.pronunciationLanguage;
     $('always-on').checked = alwaysOn;
     syncPronunciationWorker();
@@ -2833,6 +2901,7 @@
     $('settings-scrim').hidden = true;
     draft = null;
     draftPortraits = null;
+    syncThemeFonts();
     syncPronunciationWorker();
     releaseUnusedImages();
     editor()?.focus();
@@ -2859,6 +2928,7 @@
       const record = await settingsRecord(next, images);
       await book.save(record);
       settings = next;
+      syncThemeFonts();
       syncPronunciationWorker();
       portraits = images;
       updatedAt = record.updatedAt;
@@ -3320,6 +3390,11 @@
       });
     }
     if (fields.translation) body.append(make('p', 'dialogue-translation', fields.translation));
+    themeFonts.get(config.themeFontCSS)?.family.then(family => {
+      if (!family || !host.isConnected || suspended) return;
+      body.style.fontFamily = family;
+      body.querySelectorAll('*').forEach(element => { element.style.fontFamily = family; });
+    });
     bubble.append(body);
     wrapper.append(bubble);
     shadow.append(wrapper);
@@ -3381,6 +3456,7 @@
   // 편집 중인 설정으로 대사 인식 결과를 미리 보여준다.
   async function updatePreview() {
     if (!draft || !ui || !$('sample-input')) return;
+    syncThemeFonts();
     const revision = ++previewRevision, config = page.structuredClone(draft);
     const raw = $('sample-input').value, result = await findMatches(raw, config);
     if (revision !== previewRevision || !draft) return;
@@ -4163,6 +4239,7 @@
   // 문서와 저장소가 준비되면 화면을 초기화한다.
   async function boot() {
     await storageReady;
+    syncThemeFonts();
     runtimeStyle?.remove();
     runtimeStyle = make('style');
     runtimeStyle.id = 'cc-immersion-runtime-style';
