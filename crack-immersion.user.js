@@ -2872,7 +2872,7 @@
       'auto-grow': 'autoGrow',
       'show-slider': 'showSlider'
     })) $(id).checked = draft[key];
-    $('sample-input').value = presets[typeof draft.pattern === 'number' ? draft.pattern : 0].sample;
+    $('sample-input').value = patternSample(draft) ?? presets[0].sample;
     $('template-input').value = draft.customTemplate;
     $('regex-input').value = draft.customRegex;
     $('auto-pronunciation').checked = draft.autoPronunciation;
@@ -3338,10 +3338,26 @@
     $('custom-pattern').hidden = draft.pattern !== 'custom';
   }
 
+  // 커스텀 대사 형식의 항목을 예시 값으로 채운다.
+  function patternSample(config) {
+    if (typeof config.pattern === 'number') return presets[config.pattern].sample;
+    if (!config.customTemplate.trim()) return null;
+    const fields = {
+      name: 'Aerin',
+      translatedName: '에린',
+      speech: 'Lux inter tenebras.',
+      pronunciation: '룩스 인테르 테네브라스.',
+      translation: '어둠 속에서도 빛은 남아 있습니다.'
+    };
+    if (!config.customTemplate.includes('{translation}')) fields.speech = fields.translation;
+    return config.customTemplate.replace(/\{(name|translatedName|speech|pronunciation|translation)\}/g, (_, field) => fields[field]);
+  }
+
   // 패턴을 바꾸고 예시와 미리보기를 갱신한다.
   function selectPattern(pattern) {
     draft.pattern = pattern;
-    if (typeof pattern === 'number') $('sample-input').value = presets[pattern].sample;
+    const sample = patternSample(draft);
+    if (sample !== null) $('sample-input').value = sample;
     $('regex-input').value = draft.customRegex;
     renderPatternButtons();
     updatePreview();
