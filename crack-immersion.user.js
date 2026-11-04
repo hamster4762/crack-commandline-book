@@ -1384,14 +1384,16 @@
       padding: 0;
       border: 0;
       background: none;
-      color: var(--turn-accent,#e4cfa4);
-      font: 10px/1 Georgia,serif;
       cursor: pointer;
       pointer-events: auto;
       z-index: 6;
-      text-shadow: 0 1px 3px var(--turn-paper,#263036);
     }
-    .bookmark-symbol { pointer-events: none; }
+    :host .chronicle-gem.bookmark-symbol {
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      box-shadow: 0 0 0 2px var(--turn-paper,#263036);
+    }
     .bookmark-tooltip {
       display: none;
       position: absolute;
@@ -1460,7 +1462,6 @@
     }
     :host([data-theme=game]) .bookmark-popover { border-radius: 12px; border-width: 2px; }
     :host([data-theme=sf]) .bookmark-popover { border-radius: 0; box-shadow: inset 3px 0 var(--turn-accent),0 0 12px #39c2bc44; }
-    :host([data-theme=sf]) .bookmark-marker { font-family: monospace; }
     :host([data-theme=glass]) .bookmark-popover { border-radius: 14px; backdrop-filter: blur(16px); }
     :host([data-theme=ashen]) .bookmark-popover,
     :host([data-theme=grave]) .bookmark-popover { border-style: double; border-width: 3px; }
@@ -4507,9 +4508,8 @@
     if (!indexComplete) return;
     for (const item of bookmarkRooms.get(chatId)?.items || []) {
       if (item.turn < 0 || item.turn > maximum) continue;
-      const symbol = themes.find(([id]) => id === settings.theme)?.[2];
       const marker = make('button', 'bookmark-marker');
-      marker.append(make('span', 'bookmark-symbol', !symbol || symbol === '—' ? '◆' : symbol), make('span', 'bookmark-tooltip', item.name));
+      marker.append(make('span', 'chronicle-gem bookmark-symbol'), make('span', 'bookmark-tooltip', item.name));
       marker.type = 'button';
       marker.style.top = (maximum ? item.turn / maximum * 100 : 0) + '%';
       marker.setAttribute('aria-label', item.turn + '턴 북마크: ' + item.name);
