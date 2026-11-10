@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드 진단용 (원본과 동시 사용 금지)
 // @namespace    crack-commandline-diagnostic
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      0.0.3
+// @version      0.0.4
 // @description  휴대폰 최초 로드 타이밍 진단. 팝업 로그와 진단용 core를 내장합니다.
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -5411,7 +5411,7 @@
     }
     return new Promise(resolve => {
       const id = ++regexSequence;
-      const timer = page.setTimeout(() => stopRegexWorker('정규식 처리 시간이 길어 중단했습니다. 반복 기호를 줄여주세요.'), 500);
+      const timer = page.setTimeout(() => stopRegexWorker('정규식 처리 시간이 길어 중단했습니다. 반복 기호를 줄여주세요.'), 2000);
       regexJobs.set(id, { resolve, timer });
       regexWorker.postMessage({ id, text, source });
     });
