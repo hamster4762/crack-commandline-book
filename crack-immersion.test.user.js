@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드 진단용 (원본과 동시 사용 금지)
 // @namespace    crack-commandline-diagnostic
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      0.0.2
+// @version      0.0.3
 // @description  휴대폰 최초 로드 타이밍 진단. 팝업 로그와 진단용 core를 내장합니다.
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -73,23 +73,68 @@
     if (host || !doc.documentElement) return;
     host = doc.createElement('aside');
     host.dataset.ccFocusOwned = '';
-    host.style.cssText = 'position:fixed;right:8px;top:max(8px,env(safe-area-inset-top));z-index:2147483647;width:min(96vw,660px);';
+    host.style.cssText = 'position:fixed;left:max(8px,calc(100vw - 60px));top:55vh;z-index:2147483647;width:48px;height:48px;';
     const shadow = host.attachShadow({ mode: 'open' });
     shadow.innerHTML = `<style>
       :host{font:13px system-ui;color:#f4f4f5;color-scheme:dark}
-      section{background:#18181b;border:1px solid #71717a;border-radius:10px;box-shadow:0 4px 24px #0008;overflow:hidden}
+      [hidden]{display:none!important}
+      section{position:fixed;box-sizing:border-box;width:min(96vw,660px);background:#18181b;border:1px solid #71717a;border-radius:10px;box-shadow:0 4px 24px #0008;overflow:hidden}
       header{display:flex;gap:6px;align-items:center;padding:8px;flex-wrap:wrap}strong{flex:1;min-width:130px}
       button{font:inherit;min-height:36px;padding:5px 10px;color:#fff;background:#3f3f46;border:1px solid #71717a;border-radius:6px}
+      #bubble{width:48px;height:48px;padding:0;border-radius:50%;touch-action:none;user-select:none;box-shadow:0 3px 12px #0008;cursor:grab}
       textarea{box-sizing:border-box;display:block;width:100%;height:32dvh;max-height:320px;resize:vertical;padding:8px;border:0;border-top:1px solid #52525b;background:#09090b;color:#e4e4e7;font:11px/1.5 monospace;white-space:pre;overflow:auto}
       textarea[hidden]{display:none}p{margin:0;padding:0 8px 8px;color:#d4d4d8;font-size:11px}
-    </style><section><header><strong></strong><button id="settings">설정 열기</button><button id="copy">로그 복사</button><button id="toggle">접기</button></header><p>원본 몰입모드는 끄고 사용하세요. 이전 실행 로그도 함께 남습니다.</p><textarea readonly aria-label="진단 로그" spellcheck="false"></textarea></section>`;
+    </style><button id="bubble" aria-label="진단 로그 열기 · 드래그로 이동" aria-expanded="false">로그</button><section hidden><header><strong></strong><button id="settings">설정 열기</button><button id="copy">로그 복사</button><button id="toggle">닫기</button></header><p>원본 몰입모드는 끄고 사용하세요. 이전 실행 로그도 함께 남습니다.</p><textarea readonly aria-label="진단 로그" spellcheck="false"></textarea></section>`;
     output = shadow.querySelector('textarea');
     title = shadow.querySelector('strong');
-    shadow.getElementById('toggle').onclick = event => {
-      output.hidden = !output.hidden;
-      event.target.textContent = output.hidden ? '펼치기' : '접기';
+    const bubble = shadow.getElementById('bubble'), panel = shadow.querySelector('section');
+    const clamp = (value, maximum) => Math.max(8, Math.min(value, Math.max(8, maximum)));
+    function positionPanel() {
+      if (panel.hidden) return;
+      const rect = host.getBoundingClientRect();
+      const height = panel.offsetHeight;
+      panel.style.left = clamp(rect.right - panel.offsetWidth, page.innerWidth - panel.offsetWidth - 8) + 'px';
+      panel.style.top = clamp(rect.top >= height + 16 ? rect.top - height - 8 : rect.bottom + 8,
+        page.innerHeight - height - 8) + 'px';
+    }
+    function setOpen(open) {
+      panel.hidden = !open;
+      bubble.setAttribute('aria-expanded', String(open));
+      positionPanel();
+      if (open) output.scrollTop = output.scrollHeight;
+    }
+    let drag = null, moved = false;
+    bubble.addEventListener('pointerdown', event => {
+      if (event.button !== 0) return;
+      const rect = host.getBoundingClientRect();
+      drag = { pointer: event.pointerId, x: event.clientX, y: event.clientY, left: rect.left, top: rect.top };
+      moved = false;
+      bubble.setPointerCapture(event.pointerId);
+      event.stopPropagation();
+    });
+    bubble.addEventListener('pointermove', event => {
+      if (!drag || event.pointerId !== drag.pointer) return;
+      const dx = event.clientX - drag.x, dy = event.clientY - drag.y;
+      if (!moved && Math.hypot(dx, dy) < 5) return;
+      moved = true;
+      host.style.left = clamp(drag.left + dx, page.innerWidth - 56) + 'px';
+      host.style.top = clamp(drag.top + dy, page.innerHeight - 56) + 'px';
+      positionPanel();
+    });
+    bubble.addEventListener('pointerup', () => { drag = null; });
+    bubble.addEventListener('pointercancel', () => { drag = null; moved = true; });
+    bubble.onclick = () => { if (!moved) setOpen(panel.hidden); };
+    shadow.getElementById('toggle').onclick = () => setOpen(false);
+    page.addEventListener('resize', () => {
+      const rect = host.getBoundingClientRect();
+      host.style.left = clamp(rect.left, page.innerWidth - 56) + 'px';
+      host.style.top = clamp(rect.top, page.innerHeight - 56) + 'px';
+      positionPanel();
+    });
+    shadow.getElementById('settings').onclick = () => {
+      setOpen(false);
+      page.dispatchEvent(new page.Event('cc-immersion-diagnostic-open'));
     };
-    shadow.getElementById('settings').onclick = () => page.dispatchEvent(new page.Event('cc-immersion-diagnostic-open'));
     shadow.getElementById('copy').onclick = async event => {
       page.dispatchEvent(new page.Event('cc-immersion-diagnostic-snapshot'));
       log('LOG.copy', state());
@@ -131,7 +176,7 @@
   mount();
 })();
 
-// === Embedded scripts/crack-commandline-core.test.user.js ===
+// === Embedded diagnostic core ===
 /* Crack Commandline Core 1.0.0 · Tampermonkey @require 라이브러리 */
 (() => {
   'use strict';
