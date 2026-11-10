@@ -1096,20 +1096,11 @@
       flex-shrink: 0;
       position: relative;
       z-index: 2;
-      filter: drop-shadow(0 0 8px #cfa76544);
     }
 
     .chronicle-cap svg {
       width: 100%;
       height: 100%;
-      fill: #263036;
-      stroke: #c6ab77;
-      stroke-width: 1;
-    }
-
-    .chronicle-cap svg path:first-of-type {
-      fill: #d2b780;
-      stroke: none;
     }
 
     .chronicle-scale {
@@ -1127,28 +1118,18 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: #293337;
-      box-shadow: 0 0 0 1px #96805a44;
     }
 
     .chronicle-fill {
       height: 60%;
-      background: linear-gradient(#b99c66,#f2d9a1);
       width: 100%;
-      box-shadow: 0 0 8px #d9b67544;
     }
 
     .chronicle-gem {
       position: absolute;
       left: 50%;
       top: 60%;
-      width: 13px;
-      height: 13px;
-      border: 1px solid #f4db9d;
-      border-radius: 50%;
       transform: translate(-50%,-50%);
-      background: radial-gradient(circle,#fff3c9,#b28f51 50%,#37403f 60%);
-      box-shadow: 0 0 0 3px #c5a66d22,0 0 14px #e4c98480;
       pointer-events: none;
     }
 
@@ -1183,119 +1164,89 @@
     .chronicle-position strong {
       font-size: 19px;
       font-weight: 400;
-      color: #e4cfa4;
     }
 
     .chronicle-position i {
       width: 14px;
       height: 1px;
-      background: #756c57;
       font-size: 0;
     }
 
     .chronicle-position small {
-      color: #9a8c71;
       font-size: 12px;
     }
 
-    /* 기본·고딕 테마는 기존 금빛 나침반을 유지한다. */
+    /* 북마크 팝오버·툴팁과 기존 두 테마에 사용하는 색상. */
     :host([data-theme=game]) {
       --turn-paper: #28313d;
       --turn-accent: #c9d9ed;
       --turn-edge: #566479;
-      --turn-fill: linear-gradient(#71869f,#c9d9ed);
-      --turn-radius: 50%;
-      --turn-emblem-fill: #28313d;
     }
 
     :host([data-scene-mode=light][data-theme=game]) {
       --turn-paper: #f6f8fc;
       --turn-accent: #49627f;
       --turn-edge: #b7c4d5;
-      --turn-fill: linear-gradient(#b7c4d5,#49627f);
-      --turn-emblem-fill: #f6f8fc;
     }
 
     :host([data-theme=sf]) {
       --turn-paper: #0a1d29;
       --turn-accent: #80ffe9;
       --turn-edge: #39c2bc;
-      --turn-fill: repeating-linear-gradient(0deg,#80ffe9 0 3px,#39c2bc 3px 6px);
-      --turn-radius: 1px;
     }
 
     :host([data-scene-mode=light][data-theme=sf]) {
       --turn-paper: #ecf7f8;
       --turn-accent: #126a76;
       --turn-edge: #539eaa;
-      --turn-fill: repeating-linear-gradient(0deg,#126a76 0 3px,#539eaa 3px 6px);
     }
 
     :host([data-theme=glass]) {
       --turn-paper: #19242dcc;
       --turn-accent: #c7e0ee;
       --turn-edge: #8fb6cc99;
-      --turn-fill: linear-gradient(#79adcd88,#e4f5ffcc,#d2a4c588);
-      --turn-radius: 50%;
     }
 
     :host([data-scene-mode=light][data-theme=glass]) {
       --turn-paper: #ffffffc9;
       --turn-accent: #3c657b;
       --turn-edge: #7695a2;
-      --turn-fill: linear-gradient(#7695a2,#c7e0ee,#3c657b);
     }
 
     :host([data-theme=neon]) {
       --turn-paper: #181d26;
       --turn-accent: #b8e870;
       --turn-edge: #667587;
-      --turn-fill: linear-gradient(#68864b,#b8e870);
-      --turn-radius: 3px;
-      --turn-emblem-fill: #222935;
     }
 
     :host([data-theme=menhera]) {
       --turn-paper: #251c28;
       --turn-accent: #ff9cc7;
       --turn-edge: #83566f;
-      --turn-fill: linear-gradient(#a35c89,#f18cb9);
-      --turn-radius: 50%;
-      --turn-emblem-fill: #3c2439;
     }
 
     :host([data-theme=telegram]) {
       --turn-paper: #29251f;
       --turn-accent: #c5a36f;
       --turn-edge: #8f7146;
-      --turn-fill: linear-gradient(#8f7146,#e0c593 55%,#b3915e);
-      --turn-radius: 50%;
-      --turn-emblem-fill: #29251f;
     }
 
     :host([data-theme=aurora]) {
       --turn-paper: #263841;
       --turn-accent: #dbe8b7;
       --turn-edge: #a0b7c1;
-      --turn-fill: linear-gradient(#718b98,#dbe8b7);
-      --turn-radius: 3px 3px 50% 50%;
     }
 
     :host([data-theme=peach]) {
       --turn-paper: #f7fbff;
       --turn-accent: #668fa9;
       --turn-edge: #a8cbdc;
-      --turn-fill: linear-gradient(#a8d5ec,#d9eaf5 65%,#eddae9);
-      --turn-radius: 50%;
-      --turn-emblem-fill: #fafdff;
     }
 
     :host([data-theme=kowloon]) {
       --turn-paper: #2a0709;
       --turn-accent: #e9b75a;
       --turn-edge: #8a4a2a;
-      --turn-fill: linear-gradient(#6b2e2a,#e9b75a);
-      --turn-radius: 1px;
       --turn-emblem-fill: #4e1c1e;
     }
 
@@ -1303,7 +1254,6 @@
       --turn-paper: #f3e6dc;
       --turn-accent: #a52a2c;
       --turn-edge: #c9a090;
-      --turn-fill: linear-gradient(#d9b9a8,#a52a2c);
       --turn-emblem-fill: #f3e6dc;
     }
 
@@ -1311,8 +1261,6 @@
       --turn-paper: #262523;
       --turn-accent: #ddd3bd;
       --turn-edge: #6b5640;
-      --turn-fill: linear-gradient(#6b5640,#b8433a);
-      --turn-radius: 1px;
       --turn-emblem-fill: #262523;
     }
 
@@ -1320,18 +1268,12 @@
       --turn-paper: #ecebe5;
       --turn-accent: #5a4a3c;
       --turn-edge: #a39a8c;
-      --turn-fill: linear-gradient(#a39a8c,#a8302a);
       --turn-emblem-fill: #ecebe5;
-    }
-
-    :host([data-slider-themed]) .chronicle-cap {
-      filter: drop-shadow(0 0 5px var(--turn-edge));
     }
 
     :host([data-slider-themed]) .chronicle-cap svg {
       fill: var(--turn-emblem-fill,var(--turn-paper));
       stroke: var(--turn-accent);
-      stroke-width: 3;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
@@ -1352,23 +1294,6 @@
       stroke-width: 2;
     }
 
-    :host([data-slider-themed]) .chronicle-spine {
-      background: var(--turn-paper);
-      box-shadow: 0 0 0 1px var(--turn-edge);
-    }
-
-    :host([data-slider-themed]) .chronicle-fill {
-      background: var(--turn-fill);
-      box-shadow: 0 0 6px var(--turn-edge);
-    }
-
-    :host([data-slider-themed]) .chronicle-gem {
-      border-color: var(--turn-accent);
-      border-radius: var(--turn-radius);
-      background: radial-gradient(circle,var(--turn-accent),var(--turn-paper));
-      box-shadow: 0 0 0 3px var(--turn-paper),0 0 10px var(--turn-edge);
-    }
-
     :host([data-slider-themed]) .chronicle-position strong {
       color: var(--turn-accent);
     }
@@ -1381,124 +1306,10 @@
       color: var(--turn-edge);
     }
 
-    :host([data-theme=game]) .chronicle-cap {
-      filter: drop-shadow(0 2px 1px #10172244);
-    }
-
-    :host([data-theme=game]) .chronicle-gem {
-      background: linear-gradient(145deg,#ecf5ff,var(--turn-accent) 45%,var(--turn-edge));
-      box-shadow: inset 0 0 0 2px var(--turn-paper),0 1px 3px #10172266;
-    }
-
-    :host([data-theme=neon]) .chronicle-cap {
-      filter: drop-shadow(2px 2px 0 #473b62);
-    }
-
-    :host([data-theme=neon]) .chronicle-spine {
-      box-shadow: 0 0 0 1px #454d5d,2px 0 #473b6266;
-    }
-
-    :host([data-theme=neon]) .chronicle-fill {
-      box-shadow: none;
-    }
-
-    :host([data-theme=neon]) .chronicle-gem {
-      background: linear-gradient(0deg,#222935 0 32%,#b8e870 32% 68%,#222935 68%);
-      box-shadow: 2px 2px 0 #473b62;
-    }
-
     :host([data-theme=neon]) .chronicle-position {
       font-family: Consolas,'Malgun Gothic',monospace;
     }
 
-    :host([data-theme=menhera]) .chronicle-cap {
-      filter: drop-shadow(0 1px 0 #100e17) drop-shadow(1px 1px 1px #70528288);
-    }
-
-    :host([data-theme=menhera]) .chronicle-spine {
-      box-shadow: 0 0 0 1px #83566f,0 0 0 3px #251c28;
-    }
-
-    :host([data-theme=menhera]) .chronicle-spine::before {
-      content: '';
-      position: absolute;
-      inset: 0 -4px 0 2px;
-      background: repeating-linear-gradient(to bottom,#bb8ba899 0 1px,transparent 1px 96px) right top / 4px 100% no-repeat,repeating-linear-gradient(to bottom,#bb8ba866 0 1px,transparent 1px 48px) right top / 2px 100% no-repeat;
-      pointer-events: none;
-    }
-
-    :host([data-theme=menhera]) .chronicle-gem {
-      border-color: transparent;
-      border-radius: 0;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 18L3 11C-3 4 5-1 10 5C15-1 23 4 17 11Z' fill='%23f18cb9' stroke='%23251c28' stroke-width='1.5'/%3E%3Cpath d='M5 6Q7 4 8 7' fill='none' stroke='%23ffe0ee' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
-      box-shadow: none;
-      filter: drop-shadow(1px 1px 1px #100e17);
-    }
-
-    :host([data-theme=telegram]) .chronicle-cap {
-      filter: drop-shadow(0 1px 1px #16130f88);
-    }
-
-    :host([data-theme=telegram]) .chronicle-cap svg {
-      stroke-width: 2;
-    }
-
-    :host([data-theme=telegram]) .chronicle-gem {
-      background: radial-gradient(circle at 35% 30%,#f0dfb5,#c5a36f 35%,#715432 72%,#30271c);
-      box-shadow: 0 0 0 2px #29251f,0 0 0 3px #8f714688,0 2px 3px #16130f66;
-    }
-
-    :host([data-theme=peach]) .chronicle-cap {
-      filter: drop-shadow(0 2px 0 #a8bec744);
-    }
-
-    :host([data-theme=peach]) .chronicle-cap svg {
-      stroke: #a8cbdc;
-      stroke-width: 1.6;
-    }
-
-    :host([data-theme=peach]) .chronicle-cap svg path:first-of-type {
-      stroke: #a8cbdc;
-    }
-
-    :host([data-theme=peach]) .chronicle-cap .chronicle-blush {
-      fill: #efc9dc;
-      stroke: none;
-    }
-
-    :host([data-theme=peach]) .chronicle-cap .chronicle-ink {
-      fill: #5cb8d8;
-    }
-
-    :host([data-theme=peach]) .chronicle-cap svg path.chronicle-detail {
-      stroke: #75aeca;
-      stroke-width: 1.8;
-    }
-
-    :host([data-theme=peach]) .chronicle-spine {
-      background: #f7fbff;
-      box-shadow: 0 0 0 1px #a8cbdc88,0 0 0 3px #ffffff44;
-    }
-
-    :host([data-theme=peach]) .chronicle-fill {
-      box-shadow: none;
-    }
-
-    :host([data-theme=peach]) .chronicle-gem {
-      border-color: #fff;
-      background: radial-gradient(circle at 35% 30%,#fff 8%,#e2f3fc 38%,#b4d9ed 75%);
-      box-shadow: 0 0 0 1px #a8cbdc,0 2px 0 #a8bec755;
-    }
-
-    :host([data-theme=peach]) .chronicle-gem::after {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      border: 1px solid #8db8c7;
-      border-radius: 50%;
-      box-shadow: inset 1px 0 #ffffffaa;
-      pointer-events: none;
-    }
 
     /* 홍콩 벽지 슬라이더: 매화 문양, 꽃눈 달린 가지, 매화 손잡이. */
     :host([data-theme=kowloon]) .chronicle-cap {
@@ -1634,9 +1445,6 @@
     }
     :host .chronicle-gem.bookmark-symbol {
       top: 50%;
-      width: 8px;
-      height: 8px;
-      box-shadow: 0 0 0 2px var(--turn-paper,#263036);
     }
     /* 두 테마는 북마크를 가지의 꽃눈·매듭끈의 매듭으로 표시해 손잡이와 구분한다. */
     :host([data-theme=kowloon]) .chronicle-gem.bookmark-symbol,
@@ -1673,6 +1481,247 @@
     :host([data-scene-mode=light][data-theme=chuhan]) .chronicle-gem.bookmark-symbol {
       background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20d='M10%203L17%2010L10%2017L3%2010Z'%20fill='%23ecebe5'%20stroke='%23a8302a'%20stroke-width='2'/%3E%3Cpath%20d='M10%207L13%2010L10%2013L7%2010Z'%20fill='%23a8302a'/%3E%3C/svg%3E");
       filter: drop-shadow(0 1px 1px #5a4a3c55);
+    }
+
+    /* 슬라이더 장식: 이동 입력과 북마크 버튼의 영역은 유지한다. */
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-cap {
+      background: var(--slider-cap) center / contain no-repeat;
+    }
+
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-cap svg {
+      visibility: hidden;
+    }
+
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-spine::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 50%;
+      width: 14px;
+      height: 100%;
+      transform: translateX(-50%);
+      background-image: var(--slider-rail);
+      background-position: center top;
+      background-size: var(--slider-rail-size,14px 100%);
+      background-repeat: var(--slider-rail-repeat,no-repeat);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-fill {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: var(--slider-progress-width);
+      transform: translateX(-50%);
+      background: var(--slider-progress);
+      background-position: center top;
+      background-size: var(--slider-progress-size,100% 100%);
+      background-repeat: var(--slider-progress-repeat,no-repeat);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-gem {
+      width: 22px;
+      height: 22px;
+      background: var(--slider-grip) center / contain no-repeat;
+    }
+
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-gem.bookmark-symbol {
+      width: 14px;
+      height: 14px;
+      background-image: var(--slider-marker);
+    }
+
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-position strong { color: var(--slider-accent); }
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-position i { background: var(--slider-edge); }
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-position small { color: var(--slider-edge); }
+
+    :host([data-theme=none]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225.5%22%20fill%3D%22%23bcc5c0%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-3.5%22%20y%3D%22-6%22%20width%3D%227%22%20height%3D%2212%22%20rx%3D%223.5%22%20fill%3D%22%23d7ded9%22%20stroke%3D%22%2365726b%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-2.5%205%200%200%202.5Z%22%20fill%3D%22%23bcc5c0%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-0.6%22%20y%3D%220%22%20width%3D%221.2%22%20height%3D%22304%22%20rx%3D%220.6%22%20fill%3D%22%2326302a%22%20stroke%3D%22%2365726b%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #bcc5c0;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #bcc5c0;
+      --slider-edge: #65726b;
+    }
+
+    :host([data-theme=game]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9d9ed%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-10%206%200%200%2010-6%200Z%22%20fill%3D%22%2328394a%22%20stroke%3D%22%23c9d9ed%22%20%2F%3E%3Cpath%20d%3D%22M0-10%203%200%200%2010Z%22%20fill%3D%22%23c9d9ed%22%20stroke%3D%22none%22%20%2F%3E%3Cpath%20d%3D%22M-6%200H6%22%20fill%3D%22none%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M-10-3V-7H-7M7%207H10V3%22%20fill%3D%22none%22%20stroke%3D%22%235e7794%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9d9ed%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%224.5%22%20fill%3D%22%23b7d2ed%22%20stroke%3D%22%23c9d9ed%22%20%2F%3E%3Ccircle%20cx%3D%22-1.2%22%20cy%3D%22-1.2%22%20r%3D%221.3%22%20fill%3D%22%23f1f8ff%22%20stroke%3D%22none%22%20%2F%3E%3Cpath%20d%3D%22M-7%200H-5.5M5.5%200H7M-2%205.5%200%207%202%205.5%22%20fill%3D%22none%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9d9ed%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%22-2.5%22%20x2%3D%220%22%20y2%3D%223%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M0-2.5H5L3.5%200H0Z%22%20fill%3D%22%23c9d9ed%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9d9ed%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-0.9%22%20y%3D%220%22%20width%3D%221.8%22%20height%3D%22304%22%20rx%3D%220.9%22%20fill%3D%22%2328394a%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%227%22%20x2%3D%226%22%20y2%3D%227%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2229%22%20x2%3D%225%22%20y2%3D%2229%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2251%22%20x2%3D%225%22%20y2%3D%2251%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2273%22%20x2%3D%225%22%20y2%3D%2273%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2295%22%20x2%3D%226%22%20y2%3D%2295%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22117%22%20x2%3D%225%22%20y2%3D%22117%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22139%22%20x2%3D%225%22%20y2%3D%22139%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22161%22%20x2%3D%225%22%20y2%3D%22161%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22183%22%20x2%3D%226%22%20y2%3D%22183%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22205%22%20x2%3D%225%22%20y2%3D%22205%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22227%22%20x2%3D%225%22%20y2%3D%22227%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22249%22%20x2%3D%225%22%20y2%3D%22249%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22271%22%20x2%3D%226%22%20y2%3D%22271%22%20stroke%3D%22%235e7794%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #c9d9ed;
+      --slider-progress-width: 1.8px;
+      --slider-accent: #c9d9ed;
+      --slider-edge: #5e7794;
+    }
+
+    :host([data-theme=sf]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2382ede4%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%227%22%20fill%3D%22%2315303b%22%20stroke%3D%22%233d7f88%22%20%2F%3E%3Cg%20transform%3D%22rotate(0)%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2211%22%20ry%3D%224%22%20fill%3D%22none%22%20stroke%3D%22%2382ede4%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%222%22%20fill%3D%22%2382ede4%22%20stroke%3D%22none%22%20%2F%3E%3Cpath%20d%3D%22M-3-7Q4-12%207-5%22%20fill%3D%22none%22%20stroke%3D%22%2382ede4%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2382ede4%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-7%205-1%203%205-1%207-5%201-3-5Z%22%20fill%3D%22%2355b9ba%22%20stroke%3D%22%2382ede4%22%20%2F%3E%3Cpath%20d%3D%22M0-5%202%200-1%204-2-1Z%22%20fill%3D%22%23c5fff3%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2382ede4%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%222%22%20y2%3D%220%22%20stroke%3D%22%233d7f88%22%20%2F%3E%3Cpath%20d%3D%22M2-2H6V2H2Z%22%20fill%3D%22%2315303b%22%20stroke%3D%22%2382ede4%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2382ede4%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%22-1.5%22%20y1%3D%220%22%20x2%3D%22-1.5%22%20y2%3D%22304%22%20stroke%3D%22%233d7f88%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%220%22%20x2%3D%221.5%22%20y2%3D%22304%22%20stroke%3D%22%233d7f88%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #82ede4;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #82ede4;
+      --slider-edge: #3d7f88;
+    }
+
+    :host([data-theme=glass]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c7e0ee%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22scale(0.375)%22%3E%3Cg%20transform%3D%22translate(-32%20-32)%22%20fill%3D%22%23263e4d%22%20stroke%3D%22%23c7e0ee%22%20stroke-width%3D%223%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2223%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2214%22%2F%3E%3Cpath%20d%3D%22M18%2020Q23%2012%2034%2013%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c7e0ee%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224.6%22%20ry%3D%225.4%22%20fill%3D%22%23d9f1ff55%22%20stroke%3D%22%23c7e0ee%22%2F%3E%3Cellipse%20cx%3D%22-1.2%22%20cy%3D%22-1.3%22%20rx%3D%221.3%22%20ry%3D%222.2%22%20fill%3D%22%23ffffff66%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22M-2.5%202.5Q1%204.5%203%201.8%22%20fill%3D%22none%22%20stroke%3D%22%238fb6cc%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c7e0ee%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%22-2%22%20y2%3D%220%22%20stroke%3D%22%238fb6cc%22%20stroke-width%3D%22.65%22%2F%3E%3Cg%20transform%3D%22translate(-5%200)%22%20%3E%3Cpath%20d%3D%22M0-2%204%200%200%202Z%22%20fill%3D%22%23d8efff88%22%20stroke%3D%22%23c7e0ee%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c7e0ee%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-1.5%22%20y%3D%220%22%20width%3D%223%22%20height%3D%22304%22%20rx%3D%221.5%22%20fill%3D%22%23e4f5ff12%22%20stroke%3D%22%238fb6cc%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #b8dced;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #c7e0ee;
+      --slider-edge: #8fb6cc;
+    }
+
+    :host([data-theme=ashen]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d2b780%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22scale(0.375)%22%3E%3Cg%20transform%3D%22translate(-32%20-32)%22%20stroke-width%3D%221%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2220%22%20fill%3D%22%23263036%22%20stroke%3D%22%23c6ab77%22%2F%3E%3Cpath%20d%3D%22M32%200%2037%2027%2064%2032%2037%2037%2032%2064%2027%2037%200%2032%2027%2027Z%22%20fill%3D%22%23d2b780%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22m14%2014%2018%2012%2018-12-12%2018%2012%2018-18-12-18%2012%2012-18Z%22%20fill%3D%22%23263036%22%20stroke%3D%22%23c6ab77%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%223%22%20fill%3D%22%23263036%22%20stroke%3D%22%23c6ab77%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22chronicle-ashen-grip%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23d2b780%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23f6e6bd%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23806e49%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d2b780%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-8.5%203.5-3.5%203%204%200%208-3%204-3.5-3.5Z%22%20fill%3D%22url(%23chronicle-ashen-grip)%22%20stroke%3D%22%23806e49%22%20%2F%3E%3Cpath%20d%3D%22M0-5.5%201.5-2V3L0%205-1.5%203V-2Z%22%20fill%3D%22%2328302e%22%20stroke%3D%22%23d2b780%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M-5-2.5Q-9%200-5%202.5M5-2.5Q9%200%205%202.5%22%20fill%3D%22none%22%20stroke%3D%22%23d2b780%22%20stroke-width%3D%22.75%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d2b780%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%222%22%20y2%3D%220%22%20stroke%3D%22%23806e49%22%20stroke-width%3D%22.6%22%2F%3E%3Cg%20transform%3D%22translate(4%200)%22%20%3E%3Cpath%20d%3D%22M0%20-2.5%200.7%20-0.7%202.5%200%200.7%200.7%200%202.5%20-0.7%200.7%20-2.5%200%20-0.7%20-0.7Z%22%20fill%3D%22%23d2b780%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d2b780%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%22-2.2%22%20y1%3D%220%22%20x2%3D%22-2.2%22%20y2%3D%22304%22%20stroke%3D%22%23806e49%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%222.2%22%20y1%3D%220%22%20x2%3D%222.2%22%20y2%3D%22304%22%20stroke%3D%22%23806e49%22%20stroke-width%3D%22.65%22%2F%3E%3Cg%20transform%3D%22translate(0%20304)%22%20%3E%3Cpath%20d%3D%22M0%20-2.5%201.2%200%200%202.5%20-1.2%200Z%22%20fill%3D%22%23d2b780%22%20stroke%3D%22%23806e49%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #d2b780;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #d2b780;
+      --slider-edge: #806e49;
+    }
+
+    :host([data-theme=neon]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b8e870%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22rotate(-8)%22%3E%3Cg%20transform%3D%22scale(0.94)%22%3E%3Crect%20x%3D%22-11%22%20y%3D%22-7.5%22%20width%3D%2222%22%20height%3D%2215%22%20rx%3D%222.3%22%20fill%3D%22%23252c38%22%20stroke%3D%22%2368748b%22%20%2F%3E%3Crect%20x%3D%22-8%22%20y%3D%22-5%22%20width%3D%2216%22%20height%3D%227%22%20rx%3D%221%22%20fill%3D%22%23151a23%22%20stroke%3D%22%23b8e870%22%20stroke-width%3D%22.75%22%2F%3E%3Ccircle%20cx%3D%22-4%22%20cy%3D%22-1.5%22%20r%3D%222%22%20fill%3D%22none%22%20stroke%3D%22%23b8e870%22%20%2F%3E%3Ccircle%20cx%3D%224%22%20cy%3D%22-1.5%22%20r%3D%222%22%20fill%3D%22none%22%20stroke%3D%22%23b8e870%22%20%2F%3E%3Cline%20x1%3D%22-2%22%20y1%3D%22-1.5%22%20x2%3D%222%22%20y2%3D%22-1.5%22%20stroke%3D%22%2368748b%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M-6%206-4%202.5H4L6%206Z%22%20fill%3D%22%23b8e870%22%20stroke%3D%22none%22%20%2F%3E%3Ccircle%20cx%3D%22-9%22%20cy%3D%225.5%22%20r%3D%220.65%22%20fill%3D%22%23d05ec9%22%20stroke%3D%22none%22%20%2F%3E%3Ccircle%20cx%3D%229%22%20cy%3D%225.5%22%20r%3D%220.65%22%20fill%3D%22%23d05ec9%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b8e870%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M-9-2-5-4H2L4-2H9V2L5%204H-2L-4%202H-9Z%22%20fill%3D%22%23252c38%22%20stroke%3D%22%2368748b%22%20%2F%3E%3Cpath%20d%3D%22M-7-1H3L1%201.5H-7Z%22%20fill%3D%22%23b8e870%22%20stroke%3D%22none%22%20%2F%3E%3Crect%20x%3D%225%22%20y%3D%22-1.5%22%20width%3D%222%22%20height%3D%223%22%20rx%3D%220.4%22%20fill%3D%22%23d05ec9%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b8e870%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-3%205%200%200%203Z%22%20fill%3D%22%23252c38%22%20stroke%3D%22%23b8e870%22%20stroke-width%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%208%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b8e870%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-1.6%22%20y%3D%220%22%20width%3D%223.2%22%20height%3D%228%22%20fill%3D%22%23252c38%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22M-1.6%200V8M1.6%200V8%22%20stroke%3D%22%2368748b%22%20stroke-width%3D%22.6%22%2F%3E%3Cpath%20d%3D%22M3%200V8%22%20stroke%3D%22%23d05ec9%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%208%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b8e870%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-1.2%22%20y%3D%220%22%20width%3D%222.4%22%20height%3D%228%22%20fill%3D%22%23b8e870%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22M-1.6%203l3.2%202v1.6l-3.2-2Z%22%20fill%3D%22%23252c38%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress-width: 14px;
+      --slider-accent: #b8e870;
+      --slider-edge: #68748b;
+      --slider-rail-size: 14px 8px;
+      --slider-rail-repeat: repeat-y;
+      --slider-progress-size: 14px 8px;
+      --slider-progress-repeat: repeat-y;
+    }
+
+    :host([data-theme=menhera]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ff9cc7%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M-7%200C-12-5-12-12-8-11-5-10-5-6-3-4Q0-6%203-4C5-6%205-10%208-11%2012-12%2012-5%207%200Q11%2010%200%2010-11%2010-7%200Z%22%20fill%3D%22%23191520%22%20stroke%3D%22%23ff9cc7%22%20%2F%3E%3Cpath%20d%3D%22M-5%200-2%203M-2%200-5%203%22%20fill%3D%22none%22%20stroke%3D%22%23ff9cc7%22%20stroke-width%3D%221%22%2F%3E%3Cellipse%20cx%3D%224%22%20cy%3D%221.5%22%20rx%3D%221%22%20ry%3D%221.5%22%20fill%3D%22%23ff9cc7%22%20stroke%3D%22none%22%2F%3E%3Cg%20transform%3D%22translate(0%206)%22%20%3E%3Cg%20transform%3D%22scale(0.3)%22%3E%3Cpath%20d%3D%22M0%204C-3%202-6-1-5-4-4-7-1-7%200-4%201-7%204-7%205-4%206-1%203%202%200%204Z%22%20fill%3D%22%23ff9cc7%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(6%20-3)%22%20%3E%3Cg%20transform%3D%22scale(0.3)%22%3E%3Cg%20transform%3D%22scale(1)%22%3E%3Cpath%20d%3D%22M-1-1Q-10-9-10-3V4Q-7%208-1%201L-4%2011%200%208%204%2011%201%201Q10%209%2010%203V-4Q8-8%201-1Z%22%20fill%3D%22%23191520%22%20stroke%3D%22%23ff9cc7%22%20%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%222%22%20ry%3D%222.6%22%20fill%3D%22%23ff9cc7%22%20stroke%3D%22%238d5d7b%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ff9cc7%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22translate(0%201)%22%20%3E%3Cg%20transform%3D%22scale(0.9)%22%3E%3Cpath%20d%3D%22M0%204C-3%202-6-1-5-4-4-7-1-7%200-4%201-7%204-7%205-4%206-1%203%202%200%204Z%22%20fill%3D%22%23e790b6%22%20stroke%3D%22%23ff9cc7%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cpath%20d%3D%22M-2.5-2.5%202%201M-2.5%20.5%201.5-3%22%20fill%3D%22none%22%20stroke%3D%22%23191520%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%22-5.5%22%20y%3D%22-1.5%22%20width%3D%2211%22%20height%3D%223%22%20rx%3D%221%22%20fill%3D%22none%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ff9cc7%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%222%22%20y2%3D%220%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.7%22%2F%3E%3Cg%20transform%3D%22translate(4%200)%22%20%3E%3Cpath%20d%3D%22M0-2.5%202%200%200%202.5-2%200Z%22%20fill%3D%22%23ff9cc7%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22chronicle-menhera-rail%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23ff9cc7%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23fff0f5%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%238d5d7b%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ff9cc7%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-3%22%20y%3D%224%22%20width%3D%226%22%20height%3D%22278%22%20rx%3D%221.3%22%20fill%3D%22%23f7cde514%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%22-6%22%20y%3D%220%22%20width%3D%2212%22%20height%3D%223%22%20rx%3D%221%22%20fill%3D%22url(%23chronicle-menhera-rail)%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%2212%22%20x2%3D%222.5%22%20y2%3D%2212%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%2223%22%20x2%3D%222.5%22%20y2%3D%2223%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%2234%22%20x2%3D%222.5%22%20y2%3D%2234%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%2245%22%20x2%3D%222.5%22%20y2%3D%2245%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%2256%22%20x2%3D%222.5%22%20y2%3D%2256%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%2267%22%20x2%3D%222.5%22%20y2%3D%2267%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%2278%22%20x2%3D%222.5%22%20y2%3D%2278%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%2289%22%20x2%3D%222.5%22%20y2%3D%2289%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22100%22%20x2%3D%222.5%22%20y2%3D%22100%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22111%22%20x2%3D%222.5%22%20y2%3D%22111%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22122%22%20x2%3D%222.5%22%20y2%3D%22122%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22133%22%20x2%3D%222.5%22%20y2%3D%22133%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22144%22%20x2%3D%222.5%22%20y2%3D%22144%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22155%22%20x2%3D%222.5%22%20y2%3D%22155%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22166%22%20x2%3D%222.5%22%20y2%3D%22166%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22177%22%20x2%3D%222.5%22%20y2%3D%22177%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22188%22%20x2%3D%222.5%22%20y2%3D%22188%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22199%22%20x2%3D%222.5%22%20y2%3D%22199%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22210%22%20x2%3D%222.5%22%20y2%3D%22210%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22221%22%20x2%3D%222.5%22%20y2%3D%22221%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22232%22%20x2%3D%222.5%22%20y2%3D%22232%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22243%22%20x2%3D%222.5%22%20y2%3D%22243%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%22254%22%20x2%3D%222.5%22%20y2%3D%22254%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.65%22%2F%3E%3Crect%20x%3D%22-1.7%22%20y%3D%22282%22%20width%3D%223.4%22%20height%3D%225%22%20rx%3D%220.5%22%20fill%3D%22%23191520%22%20stroke%3D%22%23ff9cc7%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M-1%20287H1L.5%20291H-.5Z%22%20fill%3D%22url(%23chronicle-menhera-rail)%22%20stroke%3D%22%238d5d7b%22%20stroke-width%3D%22.6%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22291%22%20x2%3D%220%22%20y2%3D%22304%22%20stroke%3D%22%23fff0f5%22%20stroke-width%3D%22.7%22%2F%3E%3Cline%20x1%3D%22-2%22%20y1%3D%228%22%20x2%3D%22-2%22%20y2%3D%22279%22%20stroke%3D%22%23ffdaeb77%22%20stroke-width%3D%22.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #241c2a;
+      --slider-progress-width: 4px;
+      --slider-accent: #ff9cc7;
+      --slider-edge: #8d5d7b;
+    }
+
+    :host([data-theme=grave]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c8af78%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22rotate(-15)%22%3E%3Cpath%20d%3D%22M6-10C-4-13-12-5-9%204-6%2012%203%2014%209%206C1%2010-7%203-5-4-3-8%201-10%206-10Z%22%20fill%3D%22%23c8af78%22%20stroke%3D%22%23786b4e%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(4%20-1)%22%20%3E%3Cpath%20d%3D%22M0%20-3.2%200.85%20-0.85%203.2%200%200.85%200.85%200%203.2%20-0.85%200.85%20-3.2%200%20-0.85%20-0.85Z%22%20fill%3D%22%23e7dcc1%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22chronicle-grave-grip%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23c8af78%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23e7dcc1%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23786b4e%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c8af78%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-8%204-4%204%204%200%208-4%204-4-4Z%22%20fill%3D%22url(%23chronicle-grave-grip)%22%20stroke%3D%22%23786b4e%22%20%2F%3E%3Cpath%20d%3D%22M0-5%202-2V3L0%205-2%203V-2Z%22%20fill%3D%22%23292b26%22%20stroke%3D%22%23c8af78%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M-5.5-1V1M5.5-1V1%22%20fill%3D%22none%22%20stroke%3D%22%23c8af78%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c8af78%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0%20-4%201.3%20-1.3%204%200%201.3%201.3%200%204%20-1.3%201.3%20-4%200%20-1.3%20-1.3Z%22%20fill%3D%22%23dbc18a%22%20stroke%3D%22none%22%20%2F%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%221%22%20fill%3D%22%23713e35%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c8af78%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%22-2.3%22%20y1%3D%220%22%20x2%3D%22-2.3%22%20y2%3D%22304%22%20stroke%3D%22%23786b4e%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%222.3%22%20y1%3D%220%22%20x2%3D%222.3%22%20y2%3D%22304%22%20stroke%3D%22%23786b4e%22%20stroke-width%3D%22.65%22%2F%3E%3Cg%20transform%3D%22translate(0%20304)%22%20%3E%3Cpath%20d%3D%22M0%20-2.5%201.4%200%200%202.5%20-1.4%200Z%22%20fill%3D%22%23c8af78%22%20stroke%3D%22%23786b4e%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #c8af78;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #c8af78;
+      --slider-edge: #786b4e;
+    }
+
+    :host([data-theme=telegram]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22chronicle-telegram-cap%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23c5a36f%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23e6d2a9%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23796344%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-12-1.5-9H1.5Z%22%20fill%3D%22url(%23chronicle-telegram-cap)%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.65%22%2F%3E%3Cpath%20d%3D%22M-7-6Q0-12%207-6L5.5-4H-5.5Z%22%20fill%3D%22url(%23chronicle-telegram-cap)%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M-5.5-4H5.5L3.5%207H-3.5Z%22%20fill%3D%22%23302c24%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M-3-3H3L2.5%205H-2.5Z%22%20fill%3D%22%23d4ac6933%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22-4%22%20x2%3D%220%22%20y2%3D%226%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M-5%206H5L3%209H-3ZM-1%209V12H1V9%22%20fill%3D%22url(%23chronicle-telegram-cap)%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.65%22%2F%3E%3Cpath%20d%3D%22M-7-3Q-10%202-6%205M7-3Q10%202%206%205%22%20fill%3D%22none%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22chronicle-telegram-grip%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23c5a36f%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23e6d2a9%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23796344%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%223.5%22%20ry%3D%226.5%22%20fill%3D%22%23443328%22%20stroke%3D%22%23c5a36f%22%2F%3E%3Cpath%20d%3D%22M-1.5-3.5Q-2.4-1-1.8%201%22%20fill%3D%22none%22%20stroke%3D%22%23b8a07a%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M-1-6H1M-1%206H1%22%20fill%3D%22none%22%20stroke%3D%22url(%23chronicle-telegram-grip)%22%20stroke-width%3D%221.2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M1-1H6M1%201H4.5%22%20fill%3D%22none%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c5a36f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%22-1.5%22%20y1%3D%220%22%20x2%3D%22-1.5%22%20y2%3D%22304%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%220%22%20x2%3D%221.5%22%20y2%3D%22304%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.65%22%2F%3E%3Cg%20transform%3D%22translate(0%208)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%2027)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%2046)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%2065)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%2084)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20103)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20122)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20141)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20160)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20179)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20198)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20217)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20236)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20255)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20274)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(0%20293)%22%20%3E%3Cpath%20d%3D%22M-2-2%200%200%202-2%22%20fill%3D%22none%22%20stroke%3D%22%23796344%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #c5a36f;
+      --slider-progress-width: 1.1px;
+      --slider-accent: #c5a36f;
+      --slider-edge: #796344;
+    }
+
+    :host([data-theme=aurora]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22chronicle-aurora-cap%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23cedce1%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23f2f7ed%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2378949e%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23cedce1%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-11%208-7%207%202Q5%208%200%2011-5%208-7%202L-8-7Z%22%20fill%3D%22url(%23chronicle-aurora-cap)%22%20stroke%3D%22%2378949e%22%20%2F%3E%3Cpath%20d%3D%22M0-8%205-5%204%202%200%207-4%202-5-5Z%22%20fill%3D%22%23344953%22%20stroke%3D%22%23cedce1%22%20stroke-width%3D%22.75%22%2F%3E%3Cg%20transform%3D%22translate(0%20-0.5)%22%20%3E%3Cpath%20d%3D%22M0%20-4%201%20-1%204%200%201%201%200%204%20-1%201%20-4%200%20-1%20-1Z%22%20fill%3D%22%23c1cf9d%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M-10%200H-8.5M8.5%200H10%22%20fill%3D%22none%22%20stroke%3D%22%2378949e%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22chronicle-aurora-grip%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23cedce1%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23f2f7ed%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2378949e%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23cedce1%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225.3%22%20fill%3D%22url(%23chronicle-aurora-grip)%22%20stroke%3D%22%2378949e%22%20%2F%3E%3Ccircle%20cx%3D%22-1.3%22%20cy%3D%22-1.5%22%20r%3D%221.4%22%20fill%3D%22%23f2f7ed%22%20stroke%3D%22none%22%20%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%22-7.3%22%20x2%3D%220%22%20y2%3D%22-5.3%22%20stroke%3D%22%2378949e%22%20stroke-width%3D%22.7%22%2F%3E%3Cline%20x1%3D%220%22%20y1%3D%225.3%22%20x2%3D%220%22%20y2%3D%227.3%22%20stroke%3D%22%2378949e%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23cedce1%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%222%22%20y2%3D%220%22%20stroke%3D%22%2378949e%22%20stroke-width%3D%22.6%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%22-2%22%20width%3D%222%22%20height%3D%224%22%20rx%3D%220.8%22%20fill%3D%22%23cedce1%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23cedce1%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%22-2.4%22%20y1%3D%220%22%20x2%3D%22-2.4%22%20y2%3D%22304%22%20stroke%3D%22%2378949e%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%222.4%22%20y1%3D%220%22%20x2%3D%222.4%22%20y2%3D%22304%22%20stroke%3D%22%2378949e%22%20stroke-width%3D%22.65%22%2F%3E%3Cg%20transform%3D%22translate(0%20304)%22%20%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%221.5%22%20fill%3D%22%23cedce1%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #cedce1;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #cedce1;
+      --slider-edge: #78949e;
+    }
+
+    :host([data-theme=peach]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23a8cde8%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22scale(0.375)%22%3E%3Cg%20transform%3D%22translate(-32%20-32)%22%20fill%3D%22%23fff%22%20stroke%3D%22%238fb2ce%22%20stroke-width%3D%221.7%22%3E%3Cpath%20d%3D%22M17%2025C21%2019%2027%2018%2032%2019C38%2018%2044%2020%2047%2025C51%2027%2056%2026%2060%2028C65%2031%2062%2042%2056%2042C51%2042%2048%2038%2046%2034C48%2043%2042%2047%2032%2046C22%2047%2016%2043%2018%2034C15%2039%2011%2042%207%2042C1%2042-1%2032%203%2028C7%2026%2012%2027%2017%2025Z%22%2F%3E%3Cellipse%20fill%3D%22%23f3c5d6%22%20stroke%3D%22none%22%20cx%3D%2222%22%20cy%3D%2238%22%20rx%3D%223.3%22%20ry%3D%221.8%22%2F%3E%3Cellipse%20fill%3D%22%23f3c5d6%22%20stroke%3D%22none%22%20cx%3D%2242%22%20cy%3D%2238%22%20rx%3D%223.3%22%20ry%3D%221.8%22%2F%3E%3Cellipse%20fill%3D%22%23668fb5%22%20stroke%3D%22none%22%20cx%3D%2225%22%20cy%3D%2232%22%20rx%3D%221.8%22%20ry%3D%222.8%22%2F%3E%3Cellipse%20fill%3D%22%23668fb5%22%20stroke%3D%22none%22%20cx%3D%2239%22%20cy%3D%2232%22%20rx%3D%221.8%22%20ry%3D%222.8%22%2F%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23668fb5%22%20stroke-width%3D%221.8%22%20d%3D%22M29%2037C29%2040%2032%2040%2032%2037C32%2040%2035%2040%2035%2037%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23a8cde8%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%222.5%22%20rx%3D%224.7%22%20ry%3D%223.8%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%237e9dbb%22%2F%3E%3Cellipse%20cx%3D%22-4%22%20cy%3D%22-1.2%22%20rx%3D%221.6%22%20ry%3D%222.1%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%237e9dbb%22%2F%3E%3Cellipse%20cx%3D%22-1.5%22%20cy%3D%22-3.4%22%20rx%3D%221.6%22%20ry%3D%222.1%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%237e9dbb%22%2F%3E%3Cellipse%20cx%3D%221.7%22%20cy%3D%22-3.4%22%20rx%3D%221.6%22%20ry%3D%222.1%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%237e9dbb%22%2F%3E%3Cellipse%20cx%3D%224.2%22%20cy%3D%22-1%22%20rx%3D%221.6%22%20ry%3D%222%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%237e9dbb%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%223%22%20rx%3D%222%22%20ry%3D%221.5%22%20fill%3D%22%23f1d0df%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23a8cde8%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%222%22%20y2%3D%220%22%20stroke%3D%22%237e9dbb%22%20stroke-width%3D%22.6%22%2F%3E%3Cg%20transform%3D%22translate(4%200)%22%20%3E%3Cpath%20d%3D%22M0%20-2.5%200.8%20-0.8%202.5%200%200.8%200.8%200%202.5%20-0.8%200.8%20-2.5%200%20-0.8%20-0.8Z%22%20fill%3D%22%23d9efff%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23a8cde8%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-1.8%22%20y%3D%220%22%20width%3D%223.6%22%20height%3D%22304%22%20rx%3D%221.8%22%20fill%3D%22%233e586d%22%20stroke%3D%22%238ba9c1%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #b4def7;
+      --slider-progress-width: 3.6px;
+      --slider-accent: #a8cde8;
+      --slider-edge: #7e9dbb;
+    }
+
+    :host([data-scene-mode=light][data-theme=none]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225.5%22%20fill%3D%22%2359675f%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-3.5%22%20y%3D%22-6%22%20width%3D%227%22%20height%3D%2212%22%20rx%3D%223.5%22%20fill%3D%22%23d7ded9%22%20stroke%3D%22%238a978e%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-2.5%205%200%200%202.5Z%22%20fill%3D%22%2359675f%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-0.6%22%20y%3D%220%22%20width%3D%221.2%22%20height%3D%22304%22%20rx%3D%220.6%22%20fill%3D%22%23edf2ed%22%20stroke%3D%22%238a978e%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #59675f;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #59675f;
+      --slider-edge: #8a978e;
+    }
+
+    :host([data-scene-mode=light][data-theme=game]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2349627f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-10%206%200%200%2010-6%200Z%22%20fill%3D%22%23f1f6fa%22%20stroke%3D%22%2349627f%22%20%2F%3E%3Cpath%20d%3D%22M0-10%203%200%200%2010Z%22%20fill%3D%22%2349627f%22%20stroke%3D%22none%22%20%2F%3E%3Cpath%20d%3D%22M-6%200H6%22%20fill%3D%22none%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M-10-3V-7H-7M7%207H10V3%22%20fill%3D%22none%22%20stroke%3D%22%239bafc3%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2349627f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%224.5%22%20fill%3D%22%23b7d2ed%22%20stroke%3D%22%2349627f%22%20%2F%3E%3Ccircle%20cx%3D%22-1.2%22%20cy%3D%22-1.2%22%20r%3D%221.3%22%20fill%3D%22%23f8fcff%22%20stroke%3D%22none%22%20%2F%3E%3Cpath%20d%3D%22M-7%200H-5.5M5.5%200H7M-2%205.5%200%207%202%205.5%22%20fill%3D%22none%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2349627f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%22-2.5%22%20x2%3D%220%22%20y2%3D%223%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M0-2.5H5L3.5%200H0Z%22%20fill%3D%22%2349627f%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2349627f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-0.9%22%20y%3D%220%22%20width%3D%221.8%22%20height%3D%22304%22%20rx%3D%220.9%22%20fill%3D%22%23f1f6fa%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%227%22%20x2%3D%226%22%20y2%3D%227%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2229%22%20x2%3D%225%22%20y2%3D%2229%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2251%22%20x2%3D%225%22%20y2%3D%2251%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2273%22%20x2%3D%225%22%20y2%3D%2273%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%2295%22%20x2%3D%226%22%20y2%3D%2295%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22117%22%20x2%3D%225%22%20y2%3D%22117%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22139%22%20x2%3D%225%22%20y2%3D%22139%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22161%22%20x2%3D%225%22%20y2%3D%22161%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22183%22%20x2%3D%226%22%20y2%3D%22183%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22205%22%20x2%3D%225%22%20y2%3D%22205%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22227%22%20x2%3D%225%22%20y2%3D%22227%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22249%22%20x2%3D%225%22%20y2%3D%22249%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%223%22%20y1%3D%22271%22%20x2%3D%226%22%20y2%3D%22271%22%20stroke%3D%22%239bafc3%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #49627f;
+      --slider-progress-width: 1.8px;
+      --slider-accent: #49627f;
+      --slider-edge: #9bafc3;
+    }
+
+    :host([data-scene-mode=light][data-theme=sf]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23126a76%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%227%22%20fill%3D%22%23ecf7f8%22%20stroke%3D%22%23539eaa%22%20%2F%3E%3Cg%20transform%3D%22rotate(0)%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%2211%22%20ry%3D%224%22%20fill%3D%22none%22%20stroke%3D%22%23126a76%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%222%22%20fill%3D%22%23126a76%22%20stroke%3D%22none%22%20%2F%3E%3Cpath%20d%3D%22M-3-7Q4-12%207-5%22%20fill%3D%22none%22%20stroke%3D%22%23126a76%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23126a76%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-7%205-1%203%205-1%207-5%201-3-5Z%22%20fill%3D%22%2355b9ba%22%20stroke%3D%22%23126a76%22%20%2F%3E%3Cpath%20d%3D%22M0-5%202%200-1%204-2-1Z%22%20fill%3D%22%23c5fff3%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23126a76%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%222%22%20y2%3D%220%22%20stroke%3D%22%23539eaa%22%20%2F%3E%3Cpath%20d%3D%22M2-2H6V2H2Z%22%20fill%3D%22%23ecf7f8%22%20stroke%3D%22%23126a76%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23126a76%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%22-1.5%22%20y1%3D%220%22%20x2%3D%22-1.5%22%20y2%3D%22304%22%20stroke%3D%22%23539eaa%22%20stroke-width%3D%22.65%22%2F%3E%3Cline%20x1%3D%221.5%22%20y1%3D%220%22%20x2%3D%221.5%22%20y2%3D%22304%22%20stroke%3D%22%23539eaa%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #126a76;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #126a76;
+      --slider-edge: #539eaa;
+    }
+
+    :host([data-scene-mode=light][data-theme=glass]) .chronicle {
+      --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%233c657b%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22scale(0.375)%22%3E%3Cg%20transform%3D%22translate(-32%20-32)%22%20fill%3D%22%23ffffffc9%22%20stroke%3D%22%233c657b%22%20stroke-width%3D%223%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2223%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2214%22%2F%3E%3Cpath%20d%3D%22M18%2020Q23%2012%2034%2013%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%233c657b%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%224.6%22%20ry%3D%225.4%22%20fill%3D%22%23d9f1ff55%22%20stroke%3D%22%233c657b%22%2F%3E%3Cellipse%20cx%3D%22-1.2%22%20cy%3D%22-1.3%22%20rx%3D%221.3%22%20ry%3D%222.2%22%20fill%3D%22%23ffffff66%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22M-2.5%202.5Q1%204.5%203%201.8%22%20fill%3D%22none%22%20stroke%3D%22%237695a2%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%233c657b%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cline%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%22-2%22%20y2%3D%220%22%20stroke%3D%22%237695a2%22%20stroke-width%3D%22.65%22%2F%3E%3Cg%20transform%3D%22translate(-5%200)%22%20%3E%3Cpath%20d%3D%22M0-2%204%200%200%202Z%22%20fill%3D%22%23d8efff88%22%20stroke%3D%22%233c657b%22%20stroke-width%3D%22.65%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-rail: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%200%2014%20304%22%20preserveAspectRatio%3D%22none%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%233c657b%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-1.5%22%20y%3D%220%22%20width%3D%223%22%20height%3D%22304%22%20rx%3D%221.5%22%20fill%3D%22%23e4f5ff12%22%20stroke%3D%22%237695a2%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      --slider-progress: #3c657b;
+      --slider-progress-width: 1.2px;
+      --slider-accent: #3c657b;
+      --slider-edge: #7695a2;
+    }
+
+    /* 피스톤 아래의 약액을 표시하고, 눈금과 바늘은 그 위에 그린다. */
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])[data-theme=menhera]) .chronicle-spine::before {
+      width: 4px;
+      background: linear-gradient(to bottom,transparent 0 1.3%,#e891b7 1.3% 92.8%,transparent 92.8%);
+    }
+
+    :host(:not([data-theme=kowloon]):not([data-theme=chuhan])[data-theme=menhera]) .chronicle-spine::after {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 50%;
+      width: 14px;
+      height: 100%;
+      transform: translateX(-50%);
+      background: var(--slider-rail) center / 14px 100% no-repeat;
+      pointer-events: none;
+      z-index: 2;
     }
 
     .bookmark-tooltip {
