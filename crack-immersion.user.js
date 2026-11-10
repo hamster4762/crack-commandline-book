@@ -3822,7 +3822,7 @@
     }
     return new Promise(resolve => {
       const id = ++regexSequence;
-      const timer = page.setTimeout(() => stopRegexWorker('정규식 처리 시간이 길어 중단했습니다. 반복 기호를 줄여주세요.'), 500);
+      const timer = page.setTimeout(() => stopRegexWorker('정규식 처리 제한 시간(2초)을 초과했습니다.'), 2000);
       regexJobs.set(id, { resolve, timer });
       regexWorker.postMessage({ id, text, source });
     });
@@ -4081,6 +4081,7 @@
   }
 
   let highlightRevision = 0;
+  let lastThemeErrorAt = 0;
   const highlighted = new Map();
   const changedMessages = new Set();
   let messageFrame = 0;
@@ -4255,7 +4256,13 @@
       const text = run.map(block => block.text).join('\n');
       const result = await findMatches(text, settings);
       if (highlighted.get(root) !== record || !immersive || !root.isConnected) return;
-      if (result.error) continue;
+      if (result.error) {
+        if (!suspended && Date.now() - lastThemeErrorAt >= 4000) {
+          lastThemeErrorAt = Date.now();
+          toast('대사 테마 적용에 실패했습니다. 페이지를 새로고침해주세요. ' + result.error);
+        }
+        continue;
+      }
       const groups = [];
       for (const match of result.matches) {
         const first = chunks.findIndex(chunk => chunk.end > match.start);
