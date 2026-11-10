@@ -151,13 +151,12 @@
   let database;
   let databasePromise;
   let storageError = null;
-  let storageReady;
+  let storageReady = Promise.resolve();
+  let storageLoading = false;
   let book;
   let updatedAt = null;
-  let pendingImageUpdate = null;
   let alwaysOn = false;
   const bookmarkRooms = new Map();
-  let bookmarkData = {};
   let draftBookmarks = null;
   const chatTitles = new Map();
   let bookmarkSaving = false;
@@ -198,18 +197,15 @@
     if (ui && !bookmarkRoom) renderBookmarkRooms();
   }
 
-  async function loadBookmarks(id) {
-    if (!id) return;
+  async function loadBookmarkRoom(id) {
+    if (draftBookmarks?.has(id)) return;
     const revision = bookmarkRevision;
-    const data = await book.load('bookmarks') || {};
-    if (revision !== bookmarkRevision) return;
-    bookmarkData = data;
-    const value = data[bookmarkPath(id).slice('bookmarks/'.length)];
-    bookmarkRooms.set(id, { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: value != null });
-    refreshBookmarks();
+    const value = await book.load(bookmarkPath(id));
+    if (revision !== bookmarkRevision) throw new Error('저장소가 변경되었습니다. 다시 시도해주세요.');
+    bookmarkRooms.set(id, { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: value !== null });
   }
 
-  // 설정창에서는 편집 사본에 반영하고, 슬라이더의 등록 버튼은 해당 북마크를 저장한다.
+  // 설정창에서는 편집 사본에 반영하고, 슬라이더의 등록 버튼은 해당 방만 저장한다.
   async function changeBookmarks(id, change) {
     if (bookmarkSaving || saving) throw new Error('저장 중입니다. 잠시 뒤 다시 시도해주세요.');
     if (draftBookmarks) {
@@ -222,16 +218,10 @@
     try {
       await storageReady;
       const revision = bookmarkRevision;
-      const key = bookmarkPath(id).slice('bookmarks/'.length);
-      const value = bookmarkData[key];
-      const items = change(Array.isArray(value?.items) ? value.items : []);
+      const items = change(bookmarkRooms.get(id)?.items || []);
       const title = roomTitle(id);
-      const data = { ...bookmarkData };
-      if (items.length) data[key] = { title, items };
-      else delete data[key];
-      await book.save(data, 'bookmarks');
+      await book.save(items.length ? { title, items } : null, bookmarkPath(id));
       if (revision === bookmarkRevision) {
-        bookmarkData = data;
         bookmarkRooms.set(id, { title, items, stored: !!items.length });
         closeBookmarkPopover();
         refreshBookmarks();
@@ -376,9 +366,13 @@
       const open = make('button', 'bookmark-room-open');
       open.append(make('span', '', roomTitle(id)), make('small', '', value.items.length + '개'));
       open.title = id;
-      open.addEventListener('click', () => { bookmarkRoom = id; renderBookmarkRooms(); });
-      row.append(open, bookmarkIcon('remove', '채팅방 북마크 전체 삭제', () => {
-        changeBookmarks(id, () => []).catch(showError);
+      open.addEventListener('click', async () => {
+        try { await loadBookmarkRoom(id); bookmarkRoom = id; renderBookmarkRooms(); }
+        catch (error) { showError(error); }
+      });
+      row.append(open, bookmarkIcon('remove', '채팅방 북마크 전체 삭제', async () => {
+        try { await loadBookmarkRoom(id); await changeBookmarks(id, () => []); }
+        catch (error) { showError(error); }
       }));
       container.append(row);
     }
@@ -388,24 +382,17 @@
   async function openBookmarkRooms() {
     bookmarkRoom = '';
     $('bookmark-browser').hidden = false;
-    $('bookmark-browser-title').textContent = '다른 채팅방 북마크';
-    $('bookmark-back').hidden = true;
-    $('bookmark-browser-list').replaceChildren(make('p', 'bookmark-empty', '불러오는 중…'));
     try {
       const revision = bookmarkRevision;
       const values = await book.load('bookmarks');
       if (revision !== bookmarkRevision) return;
-      bookmarkData = values || {};
       bookmarkRooms.clear();
       for (const [key, value] of Object.entries(values || {})) {
         bookmarkRooms.set(decodeURIComponent(key), { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: true });
       }
       if (chatId && !bookmarkRooms.has(chatId)) bookmarkRooms.set(chatId, { title: '', items: [], stored: false });
-      refreshBookmarks();
-    } catch (error) {
-      $('bookmark-browser-list').replaceChildren(make('p', 'bookmark-empty', '북마크를 불러오지 못했습니다. 창을 다시 열어주세요.'));
-      showError(error);
-    }
+      renderBookmarkRooms();
+    } catch (error) { showError(error); }
   }
 
   let bookmarkDisplayRevision = 0;
@@ -448,15 +435,17 @@
     });
   }
 
-  // config는 별도로 읽고, 이미지만 updatedAt에 따라 로컬 캐시를 사용한다.
-  async function loadSettings(refresh = false) {
+  // 채팅방 진입 시 config·북마크·이미지 버전을 함께 읽는다.
+  async function loadSettings() {
+    const room = chatId;
     const saved = await readCache();
     alwaysOn = saved.alwaysOn;
     persistedPortraits = new Map(saved.images.map(item => [normalizeName(item.name), item.blob]));
     let config = await book.load('config');
+    let bookmark = await book.load(bookmarkPath(room));
     let revision = await book.load('updatedAt');
     let images;
-    if (!refresh && saved.config?.updatedAt === revision && revision !== null) {
+    if (saved.config?.updatedAt === revision && revision !== null) {
       images = new Map(persistedPortraits);
     } else {
       let values = await book.load('images');
@@ -470,6 +459,7 @@
             config: normalizeSettings(legacy.config), images: await imageRecords(images) };
           await book.save(value);
           config = await book.load('config');
+          bookmark = await book.load(bookmarkPath(room));
           revision = await book.load('updatedAt');
           values = value.images;
         }
@@ -479,11 +469,41 @@
     try { await cacheSettings(images, revision); }
     catch (error) { toast('이미지 캐시를 갱신하지 못했습니다. ' + error.message); }
     updatedAt = revision;
-    pendingImageUpdate = null;
     settings = normalizeSettings(config);
     syncThemeFonts();
     portraits = images;
+    bookmarkRooms.clear();
+    bookmarkRooms.set(room, { title: bookmark?.title || '', items: Array.isArray(bookmark?.items) ? bookmark.items : [], stored: bookmark !== null });
     storageError = null;
+  }
+
+  function reloadChatSettings() {
+    const generation = routeGeneration, wasImmersive = immersive;
+    immersive = false;
+    storageLoading = true;
+    if (draft) closeSettings();
+    updateImmersion();
+    updateToggleButton();
+    storageReady = storageReady.then(async () => {
+      if (generation !== routeGeneration) return;
+      await loadSettings();
+      if (generation !== routeGeneration) return;
+      storageLoading = false;
+      immersive = alwaysOn || wasImmersive;
+      syncPronunciationWorker();
+      refreshBookmarks();
+      highlightRevision += 1;
+      restoreHighlights();
+      updateImmersion();
+      updateToggleButton();
+      scheduleSync();
+      releaseUnusedImages();
+    }).catch(error => {
+      if (generation !== routeGeneration) return;
+      storageLoading = false;
+      storageError = error;
+      showError(error);
+    });
   }
 
   function portraitBlob(data) {
@@ -3325,20 +3345,14 @@
   // 화면·대사 설정의 편집 사본을 만들고 미리보기를 준비한다.
   async function openSettings() {
     await storageReady;
-    if (storageError) await (storageReady = loadSettings(true).catch(error => { storageError = error; }));
+    if (storageError) { showError(storageError); return; }
+    if (!chatId || storageLoading) { toast('채팅방 설정을 불러온 뒤 다시 시도해주세요.'); return; }
     if (!doc.body) return;
     ensureUI();
     closeBookmarkPopover();
     if (draft) {
       $('focus-window').focus();
       return;
-    }
-    if (chatId) {
-      try { await loadBookmarks(chatId); }
-      catch (error) { showError(error); }
-    } else {
-      try { bookmarkData = await book.load('bookmarks') || {}; }
-      catch (error) { showError(error); return; }
     }
     draft = page.structuredClone(settings);
     draftPortraits = new Map(portraits);
@@ -3371,7 +3385,6 @@
     updateToggleButton();
     refreshBookmarks();
     $('close-settings').focus();
-    if (storageError) showError(storageError);
   }
 
   // 취소하면 설정 사본과 미리보기에만 쓰던 이미지 URL을 정리한다.
@@ -3401,14 +3414,14 @@
     let warning = '';
     try {
       if (storageError) throw storageError;
-      if (draft.pattern === 'custom') {
-        const result = await findMatches($('sample-input').value, draft);
-        if (result.error) throw new Error(result.error);
-      }
       const next = normalizeSettings(draft);
       const images = new Map(draftPortraits);
       const nextAlwaysOn = $('always-on').checked;
       if (JSON.stringify(next) !== JSON.stringify(settings)) {
+        if (next.pattern === 'custom') {
+          const result = await findMatches($('sample-input').value, next);
+          if (result.error) throw new Error(result.error);
+        }
         await book.save(next, 'config');
         settings = next;
         saved = true;
@@ -3417,29 +3430,19 @@
       if (imagesChanged) {
         const records = await imageRecords(images);
         await book.save(records, 'images');
-        portraits = images;
-        pendingImageUpdate = Math.max(Date.now(), (updatedAt ?? 0) + 1);
         saved = true;
-      }
-      if (pendingImageUpdate !== null) {
-        try { await book.save(pendingImageUpdate, 'updatedAt'); }
+        const revision = Math.max(Date.now(), (updatedAt ?? 0) + 1);
+        try { await book.save(revision, 'updatedAt'); }
         catch (error) { throw new Error('이미지는 저장됐지만 updatedAt 저장에 실패했습니다. 설정 저장을 다시 시도해주세요. ' + error.message); }
-        updatedAt = pendingImageUpdate;
-        pendingImageUpdate = null;
+        updatedAt = revision;
+        portraits = images;
         try { await cacheSettings(portraits, updatedAt); }
         catch (error) { warning = '이미지 캐시를 갱신하지 못했습니다. ' + error.message; }
       }
-      if (draftBookmarks.size) {
-        const data = { ...bookmarkData };
-        for (const [id, room] of draftBookmarks) {
-          const key = bookmarkPath(id).slice('bookmarks/'.length);
-          if (room.items.length) data[key] = { title: room.title, items: room.items };
-          else delete data[key];
-        }
-        await book.save(data, 'bookmarks');
-        bookmarkData = data;
-        for (const [id, room] of draftBookmarks) bookmarkRooms.set(id, room);
-        draftBookmarks.clear();
+      for (const [id, room] of draftBookmarks) {
+        await book.save(room.items.length ? { title: room.title, items: room.items } : null, bookmarkPath(id));
+        bookmarkRooms.set(id, room);
+        draftBookmarks.delete(id);
         saved = true;
       }
       const enableByDefault = nextAlwaysOn && !alwaysOn;
@@ -4721,6 +4724,8 @@
 
   // 현재 채팅방의 몰입모드를 켜거나 끈다.
   function toggleImmersion() {
+    if (storageError) { showError(storageError); return; }
+    if (storageLoading) { return; }
     if (!immersive && (!currentChatId() || !editor())) {
       toast('크랙 채팅방에서 사용할 수 있습니다.');
       return;
@@ -5056,12 +5061,15 @@
       chatId = nextChat;
       bookmarkRoom = '';
       refreshBookmarks();
-      if (chatId) loadBookmarks(chatId).catch(showError);
-      immersive = !!chatId && (alwaysOn || immersive);
-      updateImmersion();
-      updateToggleButton();
+      if (chatId) reloadChatSettings();
+      else {
+        immersive = false;
+        storageLoading = false;
+        updateImmersion();
+        updateToggleButton();
+      }
     }
-    if (!chatId) return;
+    if (!chatId || storageLoading || storageError) return;
     if (immersive) {
       updateImmersion();
       refreshLatest();
@@ -5074,7 +5082,6 @@
   }
   // 문서와 저장소가 준비되면 화면을 초기화한다.
   async function boot() {
-    await storageReady;
     syncThemeFonts();
     runtimeStyle?.remove();
     runtimeStyle = make('style');
@@ -5089,34 +5096,19 @@
   }
   book = page.CrackCommandline.register({ id: 'crack-immersion', label: '몰입모드', useDatabse: true,
     lambda: openSettings });
-  storageReady = loadSettings().catch(error => {
-    storageError = error;
-    const notify = () => showError(error);
-    if (doc.body) notify();
-    else doc.addEventListener('DOMContentLoaded', notify, { once: true });
-  });
   doc.addEventListener('cc-content-data-changed', event => {
     if (event.detail.id !== 'crack-immersion') return;
     bookmarkRevision += 1;
     bookmarkRooms.clear();
     closeBookmarkPopover();
-    storageReady = storageReady.then(async () => {
-      if (draft) closeSettings();
-      await loadSettings(true);
-      if (chatId) await loadBookmarks(chatId);
-      else refreshBookmarks();
-      syncPronunciationWorker();
-      highlightRevision += 1;
-      restoreHighlights();
-      updateImmersion();
-      scheduleSync();
-      releaseUnusedImages();
-    }).catch(error => { storageError = error; showError(error); });
+    if (chatId) reloadChatSettings();
   });
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', () => boot().catch(showError), { once: true });
   else boot().catch(showError);
   page.addEventListener('pagehide', () => {
     suspended = true;
+    routeGeneration += 1;
+    chatId = '';
     messageObserver.disconnect();
     observedBody = null;
     page.cancelAnimationFrame(syncFrame);
