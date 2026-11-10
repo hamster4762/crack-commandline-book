@@ -172,6 +172,8 @@
   }
 
   function roomTitle(id) {
+    const savedTitle = editableBookmarkRoom(id)?.title;
+    if (savedTitle) return savedTitle;
     if (chatTitles.has(id)) return chatTitles.get(id);
     const link = [...doc.querySelectorAll('a[href*="/episodes/"]')].find(node => {
       try { return new page.URL(node.href).pathname.match(/\/episodes\/([^/]+)/)?.[1] === id; }
@@ -179,7 +181,7 @@
     });
     const title = (link?.querySelector('h1,h2,h3')?.textContent || link?.textContent)?.trim();
     if (title) chatTitles.set(id, title);
-    return chatTitles.get(id) || bookmarkRooms.get(id)?.title || id;
+    return chatTitles.get(id) || id;
   }
 
   // 페이지가 실제로 조회한 채팅방 응답에서 이름만 보관한다. 별도 API를 추측해 요청하지 않는다.
@@ -195,14 +197,6 @@
       if (typeof id === 'string' && typeof title === 'string' && title.trim()) chatTitles.set(id, title.trim());
     }
     if (ui && !bookmarkRoom) renderBookmarkRooms();
-  }
-
-  async function loadBookmarkRoom(id) {
-    if (draftBookmarks?.has(id)) return;
-    const revision = bookmarkRevision;
-    const value = await book.load(bookmarkPath(id));
-    if (revision !== bookmarkRevision) throw new Error('저장소가 변경되었습니다. 다시 시도해주세요.');
-    bookmarkRooms.set(id, { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: value !== null });
   }
 
   // 설정창에서는 편집 사본에 반영하고, 슬라이더의 등록 버튼은 해당 방만 저장한다.
@@ -250,16 +244,60 @@
     return button;
   }
 
+  function renderBookmarkRoomTitle(container, id) {
+    container.replaceChildren();
+    const title = make('span', 'bookmark-name', roomTitle(id));
+    title.title = title.textContent;
+    container.append(title, bookmarkIcon('edit', '채팅방명 수정', () => {
+      if (!draftBookmarks || saving) return;
+      const original = draftBookmarks.get(id);
+      const input = make('input', 'text-input');
+      input.value = title.textContent;
+      input.required = true;
+      input.setAttribute('aria-label', '채팅방명');
+      input.addEventListener('input', () => {
+        const value = input.value.trim();
+        if (!value || !draftBookmarks || saving) return;
+        const room = editableBookmarkRoom(id);
+        draftBookmarks.set(id, { ...room, title: value, items: room?.items || [], stored: true });
+      });
+      input.addEventListener('blur', () => {
+        if (!input.value.trim()) return;
+        renderBookmarkRoomTitle(container, id);
+      });
+      input.addEventListener('keydown', event => {
+        if (event.isComposing) return;
+        if (event.key === 'Enter') { event.preventDefault(); input.blur(); }
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          event.stopPropagation();
+          if (original) draftBookmarks.set(id, original);
+          else draftBookmarks.delete(id);
+          renderBookmarkRoomTitle(container, id);
+        }
+      });
+      container.replaceChildren(input);
+      input.focus();
+      input.select();
+    }));
+  }
+
   function renderBookmarkList(container, id) {
     container.replaceChildren();
     const room = editableBookmarkRoom(id);
     const items = [...(room?.items || [])].sort((a, b) => a.turn - b.turn);
+    const tools = make('div', 'bookmark-tools');
+    if (id && id === chatId && container === $('bookmark-list')) {
+      const title = make('div', 'bookmark-room-title');
+      renderBookmarkRoomTitle(title, id);
+      tools.append(title);
+    }
+    container.append(tools);
     if (!items.length) {
       container.append(make('p', 'bookmark-empty', !id ? '채팅방에서 사용할 수 있습니다.' : !room ? '북마크 불러오는 중…' : '등록된 북마크가 없습니다.'));
       return;
     }
     const selected = new Set();
-    const tools = make('div', 'bookmark-tools');
     const toggle = bookmarkIcon('select', '일괄 선택', () => {
       container.classList.add('is-selecting');
       toggle.hidden = true;
@@ -289,7 +327,6 @@
     select.hidden = remove.hidden = cancelSelection.hidden = true;
     container.classList.remove('is-selecting');
     tools.append(toggle, select, remove, cancelSelection);
-    container.append(tools);
     const checkboxes = [];
     const updateSelection = () => {
       const label = selected.size === items.length ? '전체 선택 해제' : '전체 선택';
@@ -357,7 +394,8 @@
     const room = editableBookmarkRoom(bookmarkRoom);
     if (bookmarkRoom && !room?.stored) bookmarkRoom = '';
     $('bookmark-back').hidden = !bookmarkRoom;
-    $('bookmark-browser-title').textContent = bookmarkRoom ? roomTitle(bookmarkRoom) : '다른 채팅방 북마크';
+    if (bookmarkRoom) renderBookmarkRoomTitle($('bookmark-browser-title'), bookmarkRoom);
+    else $('bookmark-browser-title').textContent = '다른 채팅방 북마크';
     if (bookmarkRoom) { renderBookmarkList(container, bookmarkRoom); return; }
     container.replaceChildren();
     for (const [id, value] of new Map([...bookmarkRooms, ...(draftBookmarks || [])])) {
@@ -366,13 +404,12 @@
       const open = make('button', 'bookmark-room-open');
       open.append(make('span', '', roomTitle(id)), make('small', '', value.items.length + '개'));
       open.title = id;
-      open.addEventListener('click', async () => {
-        try { await loadBookmarkRoom(id); bookmarkRoom = id; renderBookmarkRooms(); }
-        catch (error) { showError(error); }
+      open.addEventListener('click', () => {
+        bookmarkRoom = id;
+        renderBookmarkRooms();
       });
-      row.append(open, bookmarkIcon('remove', '채팅방 북마크 전체 삭제', async () => {
-        try { await loadBookmarkRoom(id); await changeBookmarks(id, () => []); }
-        catch (error) { showError(error); }
+      row.append(open, bookmarkIcon('remove', '채팅방 북마크 전체 삭제', () => {
+        changeBookmarks(id, () => []).catch(showError);
       }));
       container.append(row);
     }
@@ -992,7 +1029,7 @@
     <section class="bookmark-browser" id="bookmark-browser" role="dialog" aria-label="다른 채팅방 북마크" hidden="">
       <header class="bookmark-browser-heading">
         <button class="bookmark-icon" id="bookmark-back" aria-label="채팅방 목록으로" hidden="">←</button>
-        <strong id="bookmark-browser-title">다른 채팅방 북마크</strong>
+        <strong class="bookmark-room-title" id="bookmark-browser-title">다른 채팅방 북마크</strong>
         <button class="bookmark-icon" id="bookmark-browser-close" aria-label="북마크 창 닫기">×</button>
       </header>
       <div id="bookmark-browser-list"></div>
@@ -1517,6 +1554,9 @@
     :host([data-scene-mode=light][data-theme=glass]) .bookmark-popover { color-scheme: light; }
 
     .bookmark-tools { display: flex; justify-content: flex-end; align-items: center; gap: 2px; margin: 0 0 3px; }
+    .bookmark-room-title { display: flex; align-items: center; min-width: 0; gap: 2px; }
+    .bookmark-tools .bookmark-room-title { flex: 1; margin-right: auto; }
+    .bookmark-room-title .text-input { width: 100%; min-width: 0; padding: 4px; }
     .bookmark-row {
       display: grid;
       grid-template-columns: 5ch minmax(0,1fr) 28px 28px;
@@ -3406,7 +3446,7 @@
   async function saveSettings() {
     if (!draft || saving) return;
     if (bookmarkSaving) { toast('북마크 저장 중입니다. 잠시 뒤 다시 시도해주세요.'); return; }
-    const emptyName = [...ui.querySelectorAll('.bookmark-row .text-input')].find(input => !input.value.trim());
+    const emptyName = [...ui.querySelectorAll('.bookmark-row .text-input, .bookmark-room-title .text-input')].find(input => !input.value.trim());
     if (emptyName) { emptyName.focus(); emptyName.reportValidity(); return; }
     saving = true;
     $('save-preview').disabled = true;
@@ -3439,11 +3479,25 @@
         try { await cacheSettings(portraits, updatedAt); }
         catch (error) { warning = '이미지 캐시를 갱신하지 못했습니다. ' + error.message; }
       }
-      for (const [id, room] of draftBookmarks) {
-        await book.save(room.items.length ? { title: room.title, items: room.items } : null, bookmarkPath(id));
-        bookmarkRooms.set(id, room);
-        draftBookmarks.delete(id);
+      if (draftBookmarks.size) {
+        const otherRoomsChanged = [...draftBookmarks.keys()].some(id => id !== chatId);
+        if (otherRoomsChanged) {
+          const values = {};
+          for (const [id, room] of new Map([...bookmarkRooms, ...draftBookmarks])) {
+            if (room.stored) values[bookmarkPath(id).slice('bookmarks/'.length)] = { title: room.title, items: room.items };
+          }
+          await book.save(Object.keys(values).length ? values : null, 'bookmarks');
+        } else {
+          const room = draftBookmarks.get(chatId);
+          await book.save(room.stored ? { title: room.title, items: room.items } : null, bookmarkPath(chatId));
+        }
+        for (const [id, room] of draftBookmarks) bookmarkRooms.set(id, room);
+        draftBookmarks.clear();
         saved = true;
+        if (otherRoomsChanged) {
+          const room = await book.load(bookmarkPath(chatId));
+          bookmarkRooms.set(chatId, { title: room?.title || '', items: Array.isArray(room?.items) ? room.items : [], stored: room !== null });
+        }
       }
       const enableByDefault = nextAlwaysOn && !alwaysOn;
       try {
