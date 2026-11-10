@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.5.1
+// @version      1.0.5.2
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -2551,6 +2551,10 @@
       line-height: 1.7;
     }
 
+    [data-scene-mode=light] .dialogue[data-theme=simple] .dialogue-body > * {
+      color: var(--ink);
+    }
+
     .dialogue[data-theme=simple] .speaker-portrait {
       display: none;
     }
@@ -2568,6 +2572,10 @@
       grid-area: 1 / 2 / 4 / 3;
       border-left: 1px solid currentColor;
       opacity: .25;
+    }
+
+    [data-scene-mode=light] .dialogue[data-theme=simple] .dialogue-body::before {
+      border-left-color: var(--ink);
     }
 
     .dialogue[data-theme=simple] .dialogue-name {
