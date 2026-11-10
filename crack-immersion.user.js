@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.4.0
+// @version      1.0.4.1
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -146,6 +146,7 @@
   let persistedPortraits = new Map();
   let draft = null;
   let draftPortraits = null;
+  let imageEditReady = false;
   const themeFonts = new Map();
   let database;
   let databasePromise;
@@ -153,8 +154,10 @@
   let storageReady;
   let book;
   let updatedAt = null;
+  let pendingImageUpdate = null;
   let alwaysOn = false;
   const bookmarkRooms = new Map();
+  let bookmarkData = {};
   let draftBookmarks = null;
   const chatTitles = new Map();
   let bookmarkSaving = false;
@@ -198,9 +201,11 @@
   async function loadBookmarks(id) {
     if (!id) return;
     const revision = bookmarkRevision;
-    const value = await book.load(bookmarkPath(id));
+    const data = await book.load('bookmarks') || {};
     if (revision !== bookmarkRevision) return;
-    bookmarkRooms.set(id, { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: value !== null });
+    bookmarkData = data;
+    const value = data[bookmarkPath(id).slice('bookmarks/'.length)];
+    bookmarkRooms.set(id, { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: value != null });
     refreshBookmarks();
   }
 
@@ -217,13 +222,16 @@
     try {
       await storageReady;
       const revision = bookmarkRevision;
-      const path = bookmarkPath(id);
-      const value = await book.load(path);
-      if (revision !== bookmarkRevision) throw new Error('저장소가 변경되었습니다. 다시 시도해주세요.');
+      const key = bookmarkPath(id).slice('bookmarks/'.length);
+      const value = bookmarkData[key];
       const items = change(Array.isArray(value?.items) ? value.items : []);
       const title = roomTitle(id);
-      await book.save(items.length ? { title, items } : null, path);
+      const data = { ...bookmarkData };
+      if (items.length) data[key] = { title, items };
+      else delete data[key];
+      await book.save(data, 'bookmarks');
       if (revision === bookmarkRevision) {
+        bookmarkData = data;
         bookmarkRooms.set(id, { title, items, stored: !!items.length });
         closeBookmarkPopover();
         refreshBookmarks();
@@ -387,6 +395,7 @@
       const revision = bookmarkRevision;
       const values = await book.load('bookmarks');
       if (revision !== bookmarkRevision) return;
+      bookmarkData = values || {};
       bookmarkRooms.clear();
       for (const [key, value] of Object.entries(values || {})) {
         bookmarkRooms.set(decodeURIComponent(key), { title: value?.title || '', items: Array.isArray(value?.items) ? value.items : [], stored: true });
@@ -407,7 +416,7 @@
     updateChronicle();
   }
 
-  // 기존 전용 저장소는 설정·이미지의 열람용 사본과 기기 전용 토글에 사용한다.
+  // 기존 전용 저장소는 이미지 캐시와 기기 전용 토글에 사용한다.
   function openCache() {
     if (databasePromise) return databasePromise;
     databasePromise = new Promise((resolve, reject) => {
@@ -439,36 +448,39 @@
     });
   }
 
-  // 저장 버전만 조회하고 같으면 이미지가 포함된 본문 대신 로컬 사본을 사용한다.
+  // config는 별도로 읽고, 이미지만 updatedAt에 따라 로컬 캐시를 사용한다.
   async function loadSettings(refresh = false) {
     const saved = await readCache();
     alwaysOn = saved.alwaysOn;
     persistedPortraits = new Map(saved.images.map(item => [normalizeName(item.name), item.blob]));
+    let config = await book.load('config');
     let revision = await book.load('updatedAt');
-    let next, images;
+    let images;
     if (!refresh && saved.config?.updatedAt === revision && revision !== null) {
-      next = normalizeSettings(saved.config.config);
       images = new Map(persistedPortraits);
     } else {
-      let value = await book.load();
+      let values = await book.load('images');
       // 최초 등록의 기본 저장소는 core의 Local이다. 기존 값이 없을 때만 구버전 데이터를 이어받는다.
-      if (value === null) {
+      if (values === null && config === null && await book.load() === null) {
         const legacy = saved.config === undefined ? await readLegacySettings() : saved;
         if (legacy?.config?.version === 1) {
           const images = new Map((legacy.images || []).filter(item => typeof item.name === 'string' && item.blob instanceof page.Blob)
             .map(item => [normalizeName(item.name), item.blob]));
-          value = await settingsRecord(normalizeSettings(legacy.config), images);
+          const value = { updatedAt: Math.max(Date.now(), (updatedAt ?? 0) + 1),
+            config: normalizeSettings(legacy.config), images: await imageRecords(images) };
           await book.save(value);
+          config = await book.load('config');
+          revision = await book.load('updatedAt');
+          values = value.images;
         }
       }
-      revision = value?.updatedAt ?? null;
-      next = normalizeSettings(value?.config);
-      images = new Map((value?.images || []).map(item => [normalizeName(item.name), portraitBlob(item.data)]));
-      try { await cacheSettings(next, images, revision); }
-      catch { toast('설정을 불러왔지만 로컬 사본을 갱신하지 못했습니다.'); }
+      images = new Map((values || []).map(item => [normalizeName(item.name), portraitBlob(item.data)]));
     }
+    try { await cacheSettings(images, revision); }
+    catch (error) { toast('이미지 캐시를 갱신하지 못했습니다. ' + error.message); }
     updatedAt = revision;
-    settings = next;
+    pendingImageUpdate = null;
+    settings = normalizeSettings(config);
     syncThemeFonts();
     portraits = images;
     storageError = null;
@@ -480,7 +492,7 @@
     return new page.Blob([bytes], { type: header.slice(5, header.indexOf(';')) });
   }
 
-  async function settingsRecord(config, images) {
+  async function imageRecords(images) {
     const records = [];
     for (const [name, blob] of images) {
       const data = await new Promise((resolve, reject) => {
@@ -491,7 +503,7 @@
       });
       records.push({ name, data });
     }
-    return { updatedAt: Math.max(Date.now(), (updatedAt ?? 0) + 1), config, images: records };
+    return records;
   }
 
   // 이전 통합판의 로컬 데이터 중 이 스크립트가 쓰는 값만 이어받는다.
@@ -524,14 +536,13 @@
     });
   }
 
-  // core에 저장한 버전과 화자 이미지 사본을 함께 갱신한다.
-  async function cacheSettings(next, images, revision, localAlwaysOn) {
+  // 이미지와 그 버전만 캐싱한다. config는 캐시에 저장하지 않는다.
+  async function cacheSettings(images, revision) {
     await openCache();
     const nextPortraits = new Map(images);
     return new Promise((resolve, reject) => {
       const transaction = database.transaction(['settings', 'portraits'], 'readwrite');
-      transaction.objectStore('settings').put({ updatedAt: revision, config: next }, 'current');
-      if (localAlwaysOn !== undefined) transaction.objectStore('settings').put(localAlwaysOn, 'alwaysOn');
+      transaction.objectStore('settings').put({ updatedAt: revision }, 'current');
       const store = transaction.objectStore('portraits');
       for (const name of persistedPortraits.keys()) if (!nextPortraits.has(name)) store.delete(name);
       for (const [name, blob] of nextPortraits) if (persistedPortraits.get(name) !== blob) store.put({ name, blob });
@@ -541,6 +552,17 @@
       };
       transaction.onerror = () => reject(new Error('설정 저장을 완료하지 못했습니다. 저장 공간을 확인해주세요.'));
       transaction.onabort = () => reject(new Error('설정 저장을 완료하지 못했습니다.'));
+    });
+  }
+
+  async function saveAlwaysOn(value) {
+    await openCache();
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction('settings', 'readwrite');
+      transaction.objectStore('settings').put(value, 'alwaysOn');
+      transaction.oncomplete = resolve;
+      transaction.onabort = () => reject(transaction.error);
+      transaction.onerror = () => {};
     });
   }
 
@@ -3314,9 +3336,13 @@
     if (chatId) {
       try { await loadBookmarks(chatId); }
       catch (error) { showError(error); }
+    } else {
+      try { bookmarkData = await book.load('bookmarks') || {}; }
+      catch (error) { showError(error); return; }
     }
     draft = page.structuredClone(settings);
     draftPortraits = new Map(portraits);
+    imageEditReady = false;
     draftBookmarks = new Map();
     for (const [id, key] of Object.entries({
       'hide-left': 'hideLeft',
@@ -3371,6 +3397,8 @@
     if (emptyName) { emptyName.focus(); emptyName.reportValidity(); return; }
     saving = true;
     $('save-preview').disabled = true;
+    let saved = false;
+    let warning = '';
     try {
       if (storageError) throw storageError;
       if (draft.pattern === 'custom') {
@@ -3380,45 +3408,64 @@
       const next = normalizeSettings(draft);
       const images = new Map(draftPortraits);
       const nextAlwaysOn = $('always-on').checked;
-      const current = await book.load();
-      if ((current?.updatedAt ?? null) !== updatedAt) {
-        throw new Error('저장된 설정이 변경되었습니다. 페이지를 새로고침한 뒤 확인해주세요.');
+      if (JSON.stringify(next) !== JSON.stringify(settings)) {
+        await book.save(next, 'config');
+        settings = next;
+        saved = true;
       }
-      const record = await settingsRecord(next, images);
-      const bookmarks = { ...current?.bookmarks };
-      for (const [id, room] of draftBookmarks) {
-        const key = bookmarkPath(id).slice('bookmarks/'.length);
-        if (room.items.length) bookmarks[key] = { title: room.title, items: room.items };
-        else delete bookmarks[key];
+      const imagesChanged = images.size !== portraits.size || [...images].some(([name, blob]) => portraits.get(name) !== blob);
+      if (imagesChanged) {
+        const records = await imageRecords(images);
+        await book.save(records, 'images');
+        portraits = images;
+        pendingImageUpdate = Math.max(Date.now(), (updatedAt ?? 0) + 1);
+        saved = true;
       }
-      await book.save({ ...current, ...record, bookmarks });
-      for (const [id, room] of draftBookmarks) bookmarkRooms.set(id, room);
-      draftBookmarks.clear();
-      refreshBookmarks();
-      settings = next;
-      syncThemeFonts();
-      syncPronunciationWorker();
-      portraits = images;
-      updatedAt = record.updatedAt;
+      if (pendingImageUpdate !== null) {
+        try { await book.save(pendingImageUpdate, 'updatedAt'); }
+        catch (error) { throw new Error('이미지는 저장됐지만 updatedAt 저장에 실패했습니다. 설정 저장을 다시 시도해주세요. ' + error.message); }
+        updatedAt = pendingImageUpdate;
+        pendingImageUpdate = null;
+        try { await cacheSettings(portraits, updatedAt); }
+        catch (error) { warning = '이미지 캐시를 갱신하지 못했습니다. ' + error.message; }
+      }
+      if (draftBookmarks.size) {
+        const data = { ...bookmarkData };
+        for (const [id, room] of draftBookmarks) {
+          const key = bookmarkPath(id).slice('bookmarks/'.length);
+          if (room.items.length) data[key] = { title: room.title, items: room.items };
+          else delete data[key];
+        }
+        await book.save(data, 'bookmarks');
+        bookmarkData = data;
+        for (const [id, room] of draftBookmarks) bookmarkRooms.set(id, room);
+        draftBookmarks.clear();
+        saved = true;
+      }
       const enableByDefault = nextAlwaysOn && !alwaysOn;
-      let warning = '';
       try {
-        await cacheSettings(next, images, updatedAt, nextAlwaysOn);
+        if (nextAlwaysOn !== alwaysOn) await saveAlwaysOn(nextAlwaysOn);
         alwaysOn = nextAlwaysOn;
-      } catch {
-        warning = '설정은 저장됐지만 로컬 사본과 상시 켜기를 저장하지 못했습니다.';
+      } catch (error) {
+        warning = '상시 켜기를 저장하지 못했습니다. ' + error.message;
         $('always-on').checked = alwaysOn;
       }
       if (enableByDefault && alwaysOn && currentChatId() && editor()) immersive = true;
-      highlightRevision += 1;
-      restoreHighlights();
-      updateImmersion();
-      updateToggleButton();
-      syncPage();
+      saved = true;
       toast(warning || '몰입모드 설정을 저장했습니다.');
     } catch (error) {
-      showError(error);
+      showError(saved ? new Error('일부 변경사항은 저장됐습니다. ' + error.message) : error);
     } finally {
+      if (saved) {
+        syncThemeFonts();
+        syncPronunciationWorker();
+        refreshBookmarks();
+        highlightRevision += 1;
+        restoreHighlights();
+        updateImmersion();
+        updateToggleButton();
+        syncPage();
+      }
       saving = false;
       $('save-preview').disabled = false;
       releaseUnusedImages();
@@ -3954,6 +4001,19 @@
 
   let uploadName = '';
 
+  // 캐시에서 표시한 이미지는 편집 시작 시 저장 기준 원본을 확인한다.
+  async function prepareImageEdit() {
+    if (imageEditReady) return;
+    const session = draft, original = portraits;
+    const current = await book.load('images') || [];
+    const records = await imageRecords(original);
+    const byName = new Map(current.map(item => [normalizeName(item.name), item.data]));
+    if (current.length !== records.length || records.some(item => byName.get(item.name) !== item.data)) {
+      throw new Error('저장된 이미지가 변경되었습니다. 페이지를 새로고침한 뒤 확인해주세요.');
+    }
+    if (draft === session) imageEditReady = true;
+  }
+
   // 지정한 화자의 이미지 파일 선택창을 연다.
   function chooseImage(name) {
     uploadName = name;
@@ -3973,11 +4033,16 @@
       edit.addEventListener('click', () => chooseImage(name));
       const remove = make('button', 'speaker-remove', '×');
       remove.setAttribute('aria-label', name + ' 이미지 삭제');
-      remove.addEventListener('click', () => {
-        draftPortraits.delete(name);
-        renderSpeakers();
-        updatePreview();
-        releaseUnusedImages();
+      remove.addEventListener('click', async () => {
+        const session = draft;
+        try {
+          await prepareImageEdit();
+          if (draft !== session) return;
+          draftPortraits.delete(name);
+          renderSpeakers();
+          updatePreview();
+          releaseUnusedImages();
+        } catch (error) { showError(error); }
       });
       row.append(image, edit, remove);
       $('speaker-list').append(row);
@@ -3992,6 +4057,9 @@
       toast('PNG·WebP·JPEG·GIF 이미지를 선택해주세요.');
       return;
     }
+    try { await prepareImageEdit(); }
+    catch (error) { showError(error); return; }
+    if (draft !== session) return;
     try {
       const image = await page.createImageBitmap(file);
       const canvas = make('canvas');
@@ -5014,7 +5082,12 @@
   }
   book = page.CrackCommandline.register({ id: 'crack-immersion', label: '몰입모드', useDatabse: true,
     lambda: openSettings });
-  storageReady = loadSettings().catch(error => { storageError = error; });
+  storageReady = loadSettings().catch(error => {
+    storageError = error;
+    const notify = () => showError(error);
+    if (doc.body) notify();
+    else doc.addEventListener('DOMContentLoaded', notify, { once: true });
+  });
   doc.addEventListener('cc-content-data-changed', event => {
     if (event.detail.id !== 'crack-immersion') return;
     bookmarkRevision += 1;
