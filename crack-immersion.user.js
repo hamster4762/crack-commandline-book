@@ -4285,6 +4285,16 @@
     }
     for (const node of root.children) {
       if (own(node)) continue;
+      if (node.tagName === 'BLOCKQUOTE') {
+        flush();
+        const paragraphs = [...node.children];
+        if (paragraphs.length && paragraphs.every(child => child.tagName === 'P' && textOnly(child))) {
+          // 렌더링으로 사라진 인용 기호와 연속 줄 들여쓰기를 복원한다.
+          const text = paragraphs.map(child => '> ' + serializeInline(child).replace(/\n/g, '\n ')).join('\n');
+          runs.push([{ node, nodes: [node], text }]);
+        }
+        continue;
+      }
       if (node.tagName !== 'P') {
         flush();
         continue;
