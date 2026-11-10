@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드 진단용 (원본과 동시 사용 금지)
 // @namespace    crack-commandline-diagnostic
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      0.0.1
+// @version      0.0.2
 // @description  휴대폰 최초 로드 타이밍 진단. 팝업 로그와 진단용 core를 내장합니다.
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -73,14 +73,14 @@
     if (host || !doc.documentElement) return;
     host = doc.createElement('aside');
     host.dataset.ccFocusOwned = '';
-    host.style.cssText = 'position:fixed;right:8px;bottom:8px;z-index:2147483647;width:min(96vw,660px);';
+    host.style.cssText = 'position:fixed;right:8px;top:max(8px,env(safe-area-inset-top));z-index:2147483647;width:min(96vw,660px);';
     const shadow = host.attachShadow({ mode: 'open' });
     shadow.innerHTML = `<style>
       :host{font:13px system-ui;color:#f4f4f5;color-scheme:dark}
       section{background:#18181b;border:1px solid #71717a;border-radius:10px;box-shadow:0 4px 24px #0008;overflow:hidden}
       header{display:flex;gap:6px;align-items:center;padding:8px;flex-wrap:wrap}strong{flex:1;min-width:130px}
       button{font:inherit;min-height:36px;padding:5px 10px;color:#fff;background:#3f3f46;border:1px solid #71717a;border-radius:6px}
-      textarea{box-sizing:border-box;display:block;width:100%;height:48dvh;max-height:470px;resize:vertical;padding:8px;border:0;border-top:1px solid #52525b;background:#09090b;color:#e4e4e7;font:11px/1.5 monospace;white-space:pre;overflow:auto}
+      textarea{box-sizing:border-box;display:block;width:100%;height:32dvh;max-height:320px;resize:vertical;padding:8px;border:0;border-top:1px solid #52525b;background:#09090b;color:#e4e4e7;font:11px/1.5 monospace;white-space:pre;overflow:auto}
       textarea[hidden]{display:none}p{margin:0;padding:0 8px 8px;color:#d4d4d8;font-size:11px}
     </style><section><header><strong></strong><button id="settings">설정 열기</button><button id="copy">로그 복사</button><button id="toggle">접기</button></header><p>원본 몰입모드는 끄고 사용하세요. 이전 실행 로그도 함께 남습니다.</p><textarea readonly aria-label="진단 로그" spellcheck="false"></textarea></section>`;
     output = shadow.querySelector('textarea');
@@ -91,6 +91,8 @@
     };
     shadow.getElementById('settings').onclick = () => page.dispatchEvent(new page.Event('cc-immersion-diagnostic-open'));
     shadow.getElementById('copy').onclick = async event => {
+      page.dispatchEvent(new page.Event('cc-immersion-diagnostic-snapshot'));
+      log('LOG.copy', state());
       const text = lines.join('\n');
       try { await page.navigator.clipboard.writeText(text); event.target.textContent = '복사됨'; }
       catch { output.hidden = false; output.focus(); output.select(); event.target.textContent = '선택됨 · 길게 눌러 복사'; }
@@ -5638,6 +5640,7 @@
       messageFrame = 0;
       const roots = [...changedMessages];
       changedMessages.clear();
+      debug('THEME.queue-batch', { count: roots.length, theme: settings.theme, immersive });
       for (const root of roots) {
         if (root.isConnected && root.matches(MESSAGE_ROOT)) emphasizeRoot(root).catch(showError);
         else {
@@ -5775,6 +5778,7 @@
   async function emphasizeRoot(root) {
     if (!immersive || settings.theme === 'none' || !root.isConnected) return;
     let runs = paragraphRuns(root);
+    debug('THEME.scan', { runs: runs.length, theme: settings.theme, pattern: settings.pattern });
     const signature = highlightRevision + ':' + runs.map(run => run.map(block => block.text).join('\n')).join('\uFFFF');
     const previous = highlighted.get(root);
     if (previous?.signature === signature &&
@@ -5796,6 +5800,7 @@
       });
       const text = run.map(block => block.text).join('\n');
       const result = await findMatches(text, settings);
+      debug('THEME.matches', { count: result.matches?.length, error: result.error, theme: settings.theme });
       if (highlighted.get(root) !== record || !immersive || !root.isConnected) return;
       if (result.error) continue;
       const groups = [];
@@ -6689,6 +6694,45 @@
       boot().catch(showError);
     }
   });
+  // 원래 관찰자가 놓친 DOM·속성 변화를 별도로 기록한다. 화면 재적용은 호출하지 않는다.
+  let debugDOMFrame = 0, debugDOMLast = '';
+  function debugDOMSnapshot(reason, force = false) {
+    const scroll = nativeScroller();
+    const snapshot = {
+      ...diagnostic.state(), immersive, alwaysOn, suspended,
+      theme: settings.theme, pattern: settings.pattern, showSlider: settings.showSlider,
+      storageError: storageError?.message, runtimeStylePresent: !!runtimeStyle,
+      mainPresent: !!doc.querySelector('main'), editorPresent: !!editor(),
+      editorCandidates: [...doc.querySelectorAll('.__chat_input_textarea')].slice(0, 4)
+        .map(node => ({ tag: node.tagName, editable: node.getAttribute('contenteditable') })),
+      textareaCount: doc.querySelectorAll('textarea').length,
+      contenteditableCount: doc.querySelectorAll('[contenteditable="true"]').length,
+      scrollPresent: !!scroll, scrollMatchesRecorded: scroll === messageScroller,
+      messageCount: doc.querySelectorAll(MESSAGE_ROOT).length,
+      themedCount: doc.querySelectorAll('cc-focus-dialogue').length,
+      hiddenSourceCount: doc.querySelectorAll('[data-cc-focus-source]').length,
+      highlightedCount: highlighted.size, queuedCount: changedMessages.size,
+      observedBodyPresent: !!observedBody, observedBodyIsCurrent: observedBody === doc.body
+    };
+    const signature = JSON.stringify(snapshot);
+    if (force || signature !== debugDOMLast) {
+      debugDOMLast = signature;
+      debug('DOM.snapshot', { reason, ...snapshot });
+    }
+  }
+  const debugDOMObserver = new page.MutationObserver(records => {
+    const relevant = records.filter(record => !own(record.target.nodeType === 1 ? record.target : record.target.parentElement));
+    if (!relevant.length || debugDOMFrame) return;
+    const attributes = [...new Set(relevant.filter(record => record.type === 'attributes').map(record => record.attributeName))];
+    debugDOMFrame = page.requestAnimationFrame(() => {
+      debugDOMFrame = 0;
+      debugDOMSnapshot(attributes.length ? 'attributes:' + attributes.join(',') : 'childList');
+    });
+  });
+  debugDOMObserver.observe(doc.documentElement, { childList: true, subtree: true, attributes: true,
+    attributeFilter: ['class', 'contenteditable', 'data-message-group-id'] });
+  page.addEventListener('cc-immersion-diagnostic-snapshot', () => debugDOMSnapshot('copy-button', true));
+  debugDOMSnapshot('diagnostic-attached', true);
 })();
 
 unsafeWindow.addEventListener('pagehide', () => unsafeWindow.__ccImmersionDiagnostic.flush());
