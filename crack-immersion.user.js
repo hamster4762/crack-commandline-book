@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.5.0
+// @version      1.0.5.1
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -72,6 +72,7 @@
 
   const themes = [
     ['none', '미설정', '—'],
+    ['simple', '심플', 'Aa'],
     ['game', '게임 말풍선', '···'],
     ['sf', 'SF 통신', '⌁'],
     ['glass', '글라스', '◌'],
@@ -1537,7 +1538,8 @@
     :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-position i { background: var(--slider-edge); }
     :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-position small { color: var(--slider-edge); }
 
-    :host([data-theme=none]) .chronicle {
+    :host([data-theme=none]) .chronicle,
+    :host([data-theme=simple]) .chronicle {
       --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225.5%22%20fill%3D%22%23bcc5c0%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-3.5%22%20y%3D%22-6%22%20width%3D%227%22%20height%3D%2212%22%20rx%3D%223.5%22%20fill%3D%22%23d7ded9%22%20stroke%3D%22%2365726b%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-2.5%205%200%200%202.5Z%22%20fill%3D%22%23bcc5c0%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
@@ -1662,7 +1664,8 @@
       --slider-edge: #7e9dbb;
     }
 
-    :host([data-scene-mode=light][data-theme=none]) .chronicle {
+    :host([data-scene-mode=light][data-theme=none]) .chronicle,
+    :host([data-scene-mode=light][data-theme=simple]) .chronicle {
       --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225.5%22%20fill%3D%22%2359675f%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-3.5%22%20y%3D%22-6%22%20width%3D%227%22%20height%3D%2212%22%20rx%3D%223.5%22%20fill%3D%22%23d7ded9%22%20stroke%3D%22%238a978e%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-2.5%205%200%200%202.5Z%22%20fill%3D%22%2359675f%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
@@ -2272,6 +2275,12 @@
       background: #111a22;
     }
 
+    .theme-art.simple {
+      color: inherit;
+      font: inherit;
+      background: none;
+    }
+
     .theme-art.game {
       background: #2c3540;
       color: #bfcfe1;
@@ -2531,6 +2540,86 @@
       flex-shrink: 0;
       object-fit: cover;
       align-self: center;
+    }
+
+    .dialogue[data-theme=simple] {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      font-family: inherit;
+      line-height: 1.7;
+    }
+
+    .dialogue[data-theme=simple] .speaker-portrait {
+      display: none;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-body {
+      display: grid;
+      grid-template-columns: fit-content(30%) minmax(0,1fr);
+      grid-template-rows: repeat(3,auto);
+      column-gap: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-body::before {
+      content: '';
+      grid-area: 1 / 2 / 4 / 3;
+      border-left: 1px solid currentColor;
+      opacity: .25;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-name {
+      display: grid;
+      grid-area: 1 / 1 / 4 / 2;
+      grid-template-rows: subgrid;
+      align-items: start;
+      gap: 0;
+      margin: 0;
+      color: inherit;
+      font: inherit;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-name small {
+      grid-row: 2;
+      color: inherit;
+      font: inherit;
+      font-size: .85em;
+      opacity: .65;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-speech,
+    .dialogue[data-theme=simple] .dialogue-pronunciation,
+    .dialogue[data-theme=simple] .dialogue-translation {
+      grid-column: 2;
+      margin: 0;
+      padding-left: 10px;
+      color: inherit;
+      font: inherit;
+      overflow-wrap: anywhere;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-speech { grid-row: 1; }
+    .dialogue[data-theme=simple] .dialogue-speech::before,
+    .dialogue[data-theme=simple] .dialogue-speech::after { content: '"'; }
+
+    .dialogue[data-theme=simple] .dialogue-pronunciation {
+      grid-row: 2;
+      font-size: .85em;
+      opacity: .65;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-translation {
+      grid-row: 2;
+      font-size: .92em;
+    }
+
+    .dialogue[data-theme=simple] .dialogue-body:has(.dialogue-pronunciation) .dialogue-translation { grid-row: 3; }
+    .dialogue[data-theme=simple] .dialogue-body:not(:has(.dialogue-pronunciation,.dialogue-translation)) .dialogue-name {
+      display: flex;
+      gap: 6px;
+      align-items: baseline;
     }
 
     .dialogue[data-theme=game] {
