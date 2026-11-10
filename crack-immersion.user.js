@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.4.1
+// @version      1.0.5.0
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -100,8 +100,14 @@
       pronunciationLanguage: 'ja',
       pattern: 0,
       customTemplate: '',
-      customRegex: presets[0].regex
+      customTemplates: []
     };
+  }
+  const MAX_CUSTOM_TEMPLATES = 100;
+  // 줄바꿈과 앞뒤 공백을 맞춰 같은 대사 형식을 하나로 취급한다.
+  const cleanTemplate = template => String(template).replace(/\r\n?/g, '\n').trim();
+  function isValidTemplate(template) {
+    try { templateToRegex(template); return true; } catch { return false; }
   }
   // 저장값 중 이 스크립트가 사용하는 유효한 설정만 받아들인다.
   function normalizeSettings(value) {
@@ -114,9 +120,20 @@
     if (Number.isInteger(value.themeFontSize) && value.themeFontSize >= 80 && value.themeFontSize <= 200 && value.themeFontSize % 10 === 0) next.themeFontSize = value.themeFontSize;
     if (typeof value.themeFontCSS === 'string') next.themeFontCSS = value.themeFontCSS.trim();
     if (['ja', 'zh'].includes(value.pronunciationLanguage)) next.pronunciationLanguage = value.pronunciationLanguage;
-    if (value.pattern === 'custom' || Number.isInteger(value.pattern) && presets[value.pattern]) next.pattern = value.pattern;
-    if (typeof value.customTemplate === 'string') next.customTemplate = value.customTemplate.slice(0, 4096);
-    if (typeof value.customRegex === 'string') next.customRegex = value.customRegex.slice(0, 4096);
+    const templates = new Set();
+    // 이전 버전의 단일 커스텀 형식도 목록으로 옮긴다.
+    const legacy = typeof value.customTemplate === 'string' ? cleanTemplate(value.customTemplate) : '';
+    for (const template of [...(Array.isArray(value.customTemplates) ? value.customTemplates : []), legacy]) {
+      if (typeof template !== 'string' || templates.size >= MAX_CUSTOM_TEMPLATES) continue;
+      const clean = cleanTemplate(template);
+      if (clean && isValidTemplate(clean)) templates.add(clean);
+    }
+    next.customTemplates = [...templates];
+    if (Number.isInteger(value.pattern) && presets[value.pattern]) next.pattern = value.pattern;
+    else if (value.pattern === 'custom' && templates.has(legacy)) {
+      next.pattern = 'custom';
+      next.customTemplate = legacy;
+    }
     return next;
   }
 
@@ -137,6 +154,12 @@
     if (!fields.has('speech')) throw new Error('대사 형식에 {speech}를 넣어주세요.');
     if (source.length + 2 > 4096) throw new Error('대사 형식이 너무 깁니다. 내용을 줄여주세요.');
     return '^' + source + '$';
+  }
+  // 대사를 인식할 때마다 다시 변환하지 않도록 형식별 변환 결과를 보관한다.
+  const customRegexCache = new Map();
+  function customRegex(template) {
+    if (!customRegexCache.has(template)) customRegexCache.set(template, templateToRegex(template));
+    return customRegexCache.get(template);
   }
   // 화자 이름을 이미지 검색에 사용할 형태로 정리한다.
   function normalizeName(name) {
@@ -977,14 +1000,6 @@
             </div>
           </div>
           <div id="preset-list" class="preset-list" role="group" aria-label="대사 패턴"></div>
-          <div id="custom-pattern" hidden="">
-            <label class="field-label" for="template-input">대사 형식</label>
-            <textarea id="template-input" class="text-input template-input" spellcheck="false" maxlength="4096" placeholder="&gt; {name} ―&#10;&gt; &quot;{speech}&quot;&#10;&gt; ({translation})"></textarea>
-            <small class="template-help"><code>{name}</code> 이름 · <code>{translatedName}</code> 번역명 · <code>{speech}</code> 대사(필수) · <code>{translation}</code> 번역 · <code>{pronunciation}</code> 발음</small>
-            <button class="button subtle" id="convert-template">정규식으로 변환</button>
-            <label class="field-label" for="regex-input">인식할 정규식</label>
-            <textarea id="regex-input" class="text-input regex-input" spellcheck="false" aria-label="대사 인식 정규식"></textarea>
-          </div>
         </section>
         <section class="section speaker-section">
           <div class="section-heading">
@@ -1034,6 +1049,20 @@
         <button class="bookmark-icon" id="bookmark-browser-close" aria-label="북마크 창 닫기">×</button>
       </header>
       <div id="bookmark-browser-list"></div>
+    </section>
+    <section class="pattern-editor" id="pattern-editor" role="dialog" aria-labelledby="pattern-editor-title" hidden="">
+      <header class="bookmark-browser-heading">
+        <strong id="pattern-editor-title">대사 형식 추가</strong>
+        <button class="bookmark-icon" id="pattern-editor-close" aria-label="대사 형식 창 닫기">×</button>
+      </header>
+      <label class="field-label" for="template-input">대사 형식</label>
+      <textarea id="template-input" class="text-input template-input" spellcheck="false" maxlength="4096" placeholder="&gt; {name} ―&#10;&gt; &quot;{speech}&quot;&#10;&gt; ({translation})"></textarea>
+      <small class="template-help"><code>{name}</code> 이름 · <code>{translatedName}</code> 번역명 · <code>{speech}</code> 대사(필수) · <code>{translation}</code> 번역 · <code>{pronunciation}</code> 발음</small>
+      <small class="template-help pattern-editor-error" id="pattern-editor-error" role="alert"></small>
+      <div class="pattern-editor-actions">
+        <button class="button subtle" id="pattern-editor-cancel">취소</button>
+        <button class="button" id="pattern-editor-submit">추가</button>
+      </div>
     </section>
   </section>
 </div>
@@ -1577,7 +1606,8 @@
     .bookmark-icon svg { width: 16px; height: 16px; }
     .bookmark-icon:hover { background: #c5a77122; }
     .bookmark-empty { margin: 12px 0; color: #9ca89e; font-size: 12px; }
-    .bookmark-browser {
+    .bookmark-browser,
+    .pattern-editor {
       position: fixed;
       top: 50%;
       left: 50%;
@@ -1848,8 +1878,61 @@
       gap: 5px;
     }
 
-    .preset-choice:last-child {
-      grid-column: 1 / -1;
+    .preset-item {
+      position: relative;
+      display: grid;
+    }
+
+    .cc-ui .preset-item .preset-choice {
+      padding-right: 84px;
+    }
+
+    .preset-item .preset-choice[aria-pressed=true]::after {
+      right: 68px;
+    }
+
+    .preset-item .preset-choice code {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+    }
+
+    .preset-tools {
+      position: absolute;
+      top: 50%;
+      right: 4px;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 2px;
+    }
+
+    .cc-ui .preset-tools .delete-confirm {
+      width: auto;
+      padding: 4px 6px;
+      font-size: 10px;
+      color: #e6a08f;
+    }
+
+    .cc-ui .preset-add {
+      text-align: center;
+      border-style: dashed;
+    }
+
+    .pattern-editor-error:empty {
+      display: none;
+    }
+
+    .pattern-editor-error {
+      color: #e6a08f;
+    }
+
+    .pattern-editor-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 8px;
     }
 
     .cc-ui .preset-choice {
@@ -1894,17 +1977,18 @@
       color: #e1c89d;
     }
 
-    #custom-pattern {
-      margin-top: 9px;
+    .pattern-editor {
+      width: min(420px,calc(100vw - 40px));
       font-size: 10px;
       color: #a5b4b4;
     }
 
-    .cc-ui .regex-input,
     .cc-ui .template-input {
       display: block;
-      min-height: 62px;
-      height: 62px;
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 90px;
+      height: 90px;
       resize: vertical;
       font: 10px/1.6 Consolas,monospace;
       overflow-wrap: anywhere;
@@ -1920,10 +2004,6 @@
 
     .template-help code {
       color: #dcc79c;
-    }
-
-    #convert-template {
-      margin-bottom: 9px;
     }
 
     /* 테마 선택, 화자 이미지, 미리보기. */
@@ -3273,13 +3353,6 @@
         if (draft) draft[key] = $(id).checked;
       });
     }
-    [...presets, { name: '직접 작성', hint: '커스텀 정규식' }].forEach((preset, index) => {
-      const button = make('button', 'preset-choice');
-      button.dataset.preset = index === presets.length ? 'custom' : String(index);
-      button.append(make('strong', '', preset.name), make('code', '', preset.hint));
-      button.addEventListener('click', () => selectPattern(index === presets.length ? 'custom' : index));
-      $('preset-list').append(button);
-    });
     themes.forEach(([id, label, symbol]) => {
       const button = make('button', 'theme-choice');
       button.dataset.theme = id;
@@ -3303,22 +3376,10 @@
       updatePreview();
     });
     ui.querySelectorAll('button[data-scene-mode]').forEach(button => button.addEventListener('click', () => setPreviewMode(button.dataset.sceneMode)));
-    $('template-input').addEventListener('input', () => {
-      draft.customTemplate = $('template-input').value;
-    });
-    $('convert-template').addEventListener('click', () => {
-      try {
-        draft.customRegex = templateToRegex(draft.customTemplate);
-        $('regex-input').value = draft.customRegex;
-        updatePreview();
-      } catch (error) {
-        showError(error);
-      }
-    });
-    $('regex-input').addEventListener('input', () => {
-      draft.customRegex = $('regex-input').value;
-      updatePreview();
-    });
+    $('template-input').addEventListener('input', () => { $('pattern-editor-error').textContent = ''; });
+    $('pattern-editor-submit').addEventListener('click', submitPatternEditor);
+    $('pattern-editor-cancel').addEventListener('click', closePatternEditor);
+    $('pattern-editor-close').addEventListener('click', closePatternEditor);
     $('sample-input').addEventListener('input', updatePreview);
     $('auto-pronunciation').addEventListener('change', () => {
       if (!draft) return;
@@ -3408,8 +3469,7 @@
       'show-slider': 'showSlider'
     })) $(id).checked = draft[key];
     $('sample-input').value = patternSample(draft) ?? presets[0].sample;
-    $('template-input').value = draft.customTemplate;
-    $('regex-input').value = draft.customRegex;
+    pendingDelete = null;
     $('auto-pronunciation').checked = draft.autoPronunciation;
     $('theme-font-size').value = String(draft.themeFontSize);
     $('theme-font-size-value').textContent = draft.themeFontSize + '%';
@@ -3435,6 +3495,7 @@
     previewRevision += 1;
     $('settings-scrim').hidden = true;
     $('bookmark-browser').hidden = true;
+    closePatternEditor();
     draft = null;
     draftPortraits = null;
     draftBookmarks = null;
@@ -3870,8 +3931,12 @@
   // 기본 패턴은 직접, 사용자 패턴은 제한시간이 있는 워커에서 실행한다.
   async function findMatches(text, config) {
     if (text.length > 1000000) return { matches: [], error: '대사가 너무 길어 원문으로 표시합니다.' };
-    const source = config.pattern === 'custom' ? config.customRegex : presets[config.pattern].regex;
-    if (!source) return { matches: [] };
+    let source;
+    try {
+      source = config.pattern === 'custom' ? customRegex(config.customTemplate) : presets[config.pattern].regex;
+    } catch (error) {
+      return { matches: [], error: error.message };
+    }
     if (config.pattern !== 'custom') {
       try {
         return { matches: scanText(text, source) };
@@ -3937,10 +4002,98 @@
     updatePreview();
   }
 
-  // 선택한 대사 인식 패턴을 표시한다.
+  // 기본 패턴, 저장한 대사 형식, 추가 버튼을 같은 크기로 표시한다.
+  let pendingDelete = null;
+  let editingTemplate = null;
   function renderPatternButtons() {
-    ui.querySelectorAll('[data-preset]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.preset === String(draft.pattern))));
-    $('custom-pattern').hidden = draft.pattern !== 'custom';
+    const list = $('preset-list');
+    const choice = (title, hint, pressed, onSelect) => {
+      const button = make('button', 'preset-choice');
+      button.type = 'button';
+      button.setAttribute('aria-pressed', String(pressed));
+      button.append(make('strong', '', title), make('code', '', hint));
+      button.addEventListener('click', onSelect);
+      return button;
+    };
+    list.replaceChildren(...presets.map((preset, index) => choice(preset.name, preset.hint, draft.pattern === index, () => selectPattern(index))));
+    for (const template of draft.customTemplates) {
+      const item = make('div', 'preset-item');
+      const selected = draft.pattern === 'custom' && draft.customTemplate === template;
+      const button = choice('직접 작성', template, selected, () => selectPattern('custom', template));
+      button.title = template;
+      const tools = make('div', 'preset-tools');
+      const remove = pendingDelete === template ? make('button', 'bookmark-icon delete-confirm', '삭제?') : bookmarkIcon('remove', '대사 형식 삭제', null);
+      remove.type = 'button';
+      if (pendingDelete === template) remove.setAttribute('aria-label', '한 번 더 누르면 삭제');
+      remove.addEventListener('click', () => {
+        if (pendingDelete !== template) pendingDelete = template;
+        else removeCustomTemplate(template);
+        renderPatternButtons();
+        list.querySelector('.delete-confirm')?.focus();
+      });
+      tools.append(bookmarkIcon('edit', '대사 형식 수정', () => openPatternEditor(template)), remove);
+      item.append(button, tools);
+      list.append(item);
+    }
+    if (draft.customTemplates.length < MAX_CUSTOM_TEMPLATES) {
+      const add = choice('+ 대사 형식 추가', '직접 작성 (' + draft.customTemplates.length + '/' + MAX_CUSTOM_TEMPLATES + ')', false, () => openPatternEditor(null));
+      add.classList.add('preset-add');
+      add.removeAttribute('aria-pressed');
+      list.append(add);
+    }
+  }
+
+  // 편집 사본에서만 지운다. 설정 저장을 눌러야 반영된다.
+  function removeCustomTemplate(template) {
+    pendingDelete = null;
+    if (editingTemplate === template) closePatternEditor();
+    draft.customTemplates = draft.customTemplates.filter(item => item !== template);
+    if (draft.pattern === 'custom' && draft.customTemplate === template) selectPattern(0);
+  }
+
+  // 대사 형식 입력 팝업. template이 null이면 새 형식을 추가한다.
+  function openPatternEditor(template) {
+    editingTemplate = template;
+    pendingDelete = null;
+    renderPatternButtons();
+    $('pattern-editor-title').textContent = template === null ? '대사 형식 추가' : '대사 형식 수정';
+    $('pattern-editor-submit').textContent = template === null ? '추가' : '수정';
+    $('template-input').value = template ?? '';
+    $('pattern-editor-error').textContent = '';
+    $('pattern-editor').hidden = false;
+    $('template-input').focus();
+  }
+
+  function closePatternEditor() {
+    if (!$('pattern-editor') || $('pattern-editor').hidden) return;
+    $('pattern-editor').hidden = true;
+    editingTemplate = null;
+  }
+
+  // 형식을 검증하고 중복을 막은 뒤 편집 사본에 넣고 선택한다.
+  function submitPatternEditor() {
+    const template = cleanTemplate($('template-input').value);
+    try {
+      templateToRegex(template);
+    } catch (error) {
+      $('pattern-editor-error').textContent = error.message;
+      return;
+    }
+    if (template !== editingTemplate && draft.customTemplates.includes(template)) {
+      $('pattern-editor-error').textContent = '이미 저장된 대사 형식입니다.';
+      return;
+    }
+    if (editingTemplate === null) {
+      if (draft.customTemplates.length >= MAX_CUSTOM_TEMPLATES) {
+        $('pattern-editor-error').textContent = '대사 형식은 ' + MAX_CUSTOM_TEMPLATES + '개까지 저장할 수 있습니다.';
+        return;
+      }
+      draft.customTemplates.push(template);
+    } else {
+      draft.customTemplates = draft.customTemplates.map(item => item === editingTemplate ? template : item);
+    }
+    closePatternEditor();
+    selectPattern('custom', template);
   }
 
   // 커스텀 대사 형식의 항목을 예시 값으로 채운다.
@@ -3959,11 +4112,12 @@
   }
 
   // 패턴을 바꾸고 예시와 미리보기를 갱신한다.
-  function selectPattern(pattern) {
+  function selectPattern(pattern, template = '') {
     draft.pattern = pattern;
+    draft.customTemplate = pattern === 'custom' ? template : '';
+    pendingDelete = null;
     const sample = patternSample(draft);
     if (sample !== null) $('sample-input').value = sample;
-    $('regex-input').value = draft.customRegex;
     renderPatternButtons();
     updatePreview();
   }
@@ -5050,6 +5204,12 @@
         return;
       }
       if (event.composedPath().some(node => node.matches?.('.bookmark-row input'))) return;
+      if ($('pattern-editor') && !$('pattern-editor').hidden) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        closePatternEditor();
+        return;
+      }
     }
     if (draft) {
       if (event.code === 'Escape') {
