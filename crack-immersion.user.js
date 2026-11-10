@@ -1500,6 +1500,105 @@
       pointer-events: none;
     }
 
+    /* 홍콩 벽지 슬라이더: 매화 문양, 꽃눈 달린 가지, 매화 손잡이. */
+    :host([data-theme=kowloon]) .chronicle-cap {
+      filter: drop-shadow(0 1px 2px #1a0406aa);
+    }
+
+    :host([data-theme=kowloon]) .chronicle-cap svg {
+      stroke-width: 2.5;
+    }
+
+    :host([data-theme=kowloon]) .chronicle-spine,
+    :host([data-theme=chuhan]) .chronicle-spine {
+      left: calc(50% - 1.5px);
+      width: 3px;
+      border-radius: 2px;
+      box-shadow: none;
+    }
+
+    :host([data-theme=kowloon]) .chronicle-spine {
+      background: #8a4a2a;
+    }
+
+    :host([data-theme=kowloon]) .chronicle-fill,
+    :host([data-theme=chuhan]) .chronicle-fill {
+      border-radius: 2px;
+      box-shadow: none;
+    }
+
+    :host([data-theme=kowloon]) .chronicle-fill {
+      background: #e9b75a;
+    }
+
+
+    :host([data-theme=kowloon]) .chronicle-gem {
+      width: 18px;
+      height: 18px;
+      border: 0;
+      border-radius: 0;
+      background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Ccircle%20cx='10.0'%20cy='4.5'%20r='4.6'%20fill='%23e9b75a'%20stroke='%232a0709'%20stroke-width='.9'/%3E%3Ccircle%20cx='15.2'%20cy='8.3'%20r='4.6'%20fill='%23e9b75a'%20stroke='%232a0709'%20stroke-width='.9'/%3E%3Ccircle%20cx='13.2'%20cy='14.4'%20r='4.6'%20fill='%23e9b75a'%20stroke='%232a0709'%20stroke-width='.9'/%3E%3Ccircle%20cx='6.8'%20cy='14.4'%20r='4.6'%20fill='%23e9b75a'%20stroke='%232a0709'%20stroke-width='.9'/%3E%3Ccircle%20cx='4.8'%20cy='8.3'%20r='4.6'%20fill='%23e9b75a'%20stroke='%232a0709'%20stroke-width='.9'/%3E%3Ccircle%20cx='10'%20cy='10'%20r='2.2'%20fill='%238a2a24'/%3E%3C/svg%3E") center / contain no-repeat;
+      box-shadow: none;
+      filter: drop-shadow(0 1px 1px #0008);
+    }
+
+    :host([data-scene-mode=light][data-theme=kowloon]) .chronicle-spine { background: #c9a090; }
+    :host([data-scene-mode=light][data-theme=kowloon]) .chronicle-fill { background: #a52a2c; }
+
+    :host([data-scene-mode=light][data-theme=kowloon]) .chronicle-gem {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Ccircle%20cx='10.0'%20cy='4.5'%20r='4.6'%20fill='%23a52a2c'%20stroke='%23f3e6dc'%20stroke-width='.9'/%3E%3Ccircle%20cx='15.2'%20cy='8.3'%20r='4.6'%20fill='%23a52a2c'%20stroke='%23f3e6dc'%20stroke-width='.9'/%3E%3Ccircle%20cx='13.2'%20cy='14.4'%20r='4.6'%20fill='%23a52a2c'%20stroke='%23f3e6dc'%20stroke-width='.9'/%3E%3Ccircle%20cx='6.8'%20cy='14.4'%20r='4.6'%20fill='%23a52a2c'%20stroke='%23f3e6dc'%20stroke-width='.9'/%3E%3Ccircle%20cx='4.8'%20cy='8.3'%20r='4.6'%20fill='%23a52a2c'%20stroke='%23f3e6dc'%20stroke-width='.9'/%3E%3Ccircle%20cx='10'%20cy='10'%20r='2.2'%20fill='%23e9b75a'/%3E%3C/svg%3E");
+      filter: drop-shadow(0 1px 1px #6e141944);
+    }
+
+    /* 비단 매화 슬라이더: 접부채와 매듭 장식, 매듭끈, 옥구슬 손잡이. */
+    :host([data-theme=chuhan]) .chronicle-cap {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 1px 2px #0007);
+    }
+
+    :host([data-theme=chuhan]) .chronicle-cap svg {
+      stroke-width: 2.2;
+    }
+
+    :host([data-theme=chuhan]) .chronicle-cap svg path.chronicle-detail {
+      stroke-width: 1.2;
+    }
+
+    :host([data-theme=chuhan]) .chronicle-cap .chronicle-seal {
+      fill: none;
+      stroke: #b8433a;
+      stroke-width: 2.4;
+    }
+
+    :host([data-theme=chuhan]) .chronicle-spine {
+      background: #6b5640;
+    }
+
+    :host([data-theme=chuhan]) .chronicle-fill {
+      background: #b8433a;
+    }
+
+
+    :host([data-theme=chuhan]) .chronicle-gem {
+      width: 18px;
+      height: 18px;
+      border: 0;
+      border-radius: 50%;
+      background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Ccircle%20cx='10'%20cy='10'%20r='8'%20fill='%238fb3a0'%20stroke='%23262523'%20stroke-width='1.5'/%3E%3Ccircle%20cx='10'%20cy='10'%20r='5.2'%20fill='none'%20stroke='%235f8a76'%20stroke-width='.8'%20stroke-opacity='.6'/%3E%3Ccircle%20cx='7.5'%20cy='7'%20r='2.2'%20fill='%23eaf4ee'%20fill-opacity='.85'/%3E%3C/svg%3E") center / contain no-repeat;
+      box-shadow: none;
+      filter: drop-shadow(0 1px 1px #0008);
+    }
+
+    :host([data-scene-mode=light][data-theme=chuhan]) .chronicle-cap { filter: drop-shadow(0 1px 1px #5a4a3c44); }
+    :host([data-scene-mode=light][data-theme=chuhan]) .chronicle-cap .chronicle-seal { stroke: #a8302a; }
+    :host([data-scene-mode=light][data-theme=chuhan]) .chronicle-spine { background: #a39a8c; }
+    :host([data-scene-mode=light][data-theme=chuhan]) .chronicle-fill { background: #a8302a; }
+    :host([data-scene-mode=light][data-theme=chuhan]) .chronicle-gem {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Ccircle%20cx='10'%20cy='10'%20r='8'%20fill='%238fb3a0'%20stroke='%23ecebe5'%20stroke-width='1.5'/%3E%3Ccircle%20cx='10'%20cy='10'%20r='5.2'%20fill='none'%20stroke='%235f8a76'%20stroke-width='.8'%20stroke-opacity='.6'/%3E%3Ccircle%20cx='7.5'%20cy='7'%20r='2.2'%20fill='%23eaf4ee'%20fill-opacity='.85'/%3E%3C/svg%3E");
+      filter: drop-shadow(0 1px 1px #5a4a3c55);
+    }
+
     .chronicle-cap {
       padding: 0;
       border: 0;
@@ -1539,6 +1638,43 @@
       height: 8px;
       box-shadow: 0 0 0 2px var(--turn-paper,#263036);
     }
+    /* 두 테마는 북마크를 가지의 꽃눈·매듭끈의 매듭으로 표시해 손잡이와 구분한다. */
+    :host([data-theme=kowloon]) .chronicle-gem.bookmark-symbol,
+    :host([data-theme=chuhan]) .chronicle-gem.bookmark-symbol {
+      width: 22px;
+      height: 22px;
+      border: 0;
+      border-radius: 0;
+      background: center / contain no-repeat;
+      box-shadow: none;
+    }
+
+    :host([data-theme=kowloon]) .chronicle-gem.bookmark-symbol {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20d='M10%2012L4.5%206.5'%20stroke='%23e9b75a'%20stroke-width='1.6'%20fill='none'%20stroke-linecap='round'/%3E%3Ccircle%20cx='4.5'%20cy='6'%20r='3.6'%20fill='%23e9b75a'%20stroke='%232a0709'%20stroke-width='1.2'/%3E%3C/svg%3E");
+      filter: drop-shadow(0 1px 1px #0008);
+    }
+
+    :host([data-theme=kowloon]) .bookmark-marker:nth-child(even) .bookmark-symbol {
+      transform: translate(-50%,-50%) scaleX(-1);
+    }
+
+    :host([data-scene-mode=light][data-theme=kowloon]) .chronicle-gem.bookmark-symbol {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20d='M10%2012L4.5%206.5'%20stroke='%23a52a2c'%20stroke-width='1.6'%20fill='none'%20stroke-linecap='round'/%3E%3Ccircle%20cx='4.5'%20cy='6'%20r='3.6'%20fill='%23a52a2c'%20stroke='%23f3e6dc'%20stroke-width='1.2'/%3E%3C/svg%3E");
+      filter: drop-shadow(0 1px 1px #6e141944);
+    }
+
+    :host([data-theme=chuhan]) .chronicle-gem.bookmark-symbol {
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20d='M10%203L17%2010L10%2017L3%2010Z'%20fill='%23262523'%20stroke='%23b8433a'%20stroke-width='2'/%3E%3Cpath%20d='M10%207L13%2010L10%2013L7%2010Z'%20fill='%23b8433a'/%3E%3C/svg%3E");
+      filter: drop-shadow(0 1px 1px #0008);
+    }
+
+    :host([data-scene-mode=light][data-theme=chuhan]) .chronicle-gem.bookmark-symbol {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20d='M10%203L17%2010L10%2017L3%2010Z'%20fill='%23ecebe5'%20stroke='%23a8302a'%20stroke-width='2'/%3E%3Cpath%20d='M10%207L13%2010L10%2013L7%2010Z'%20fill='%23a8302a'/%3E%3C/svg%3E");
+      filter: drop-shadow(0 1px 1px #5a4a3c55);
+    }
+
     .bookmark-tooltip {
       display: none;
       position: absolute;
@@ -5171,8 +5307,8 @@
     telegram: '<circle cx="32" cy="30" r="21"/><circle cx="32" cy="30" r="16"/><path class="chronicle-detail" d="M18 13Q8 19 10 31M46 13Q56 19 54 31M20 48Q32 57 44 48M26 8Q32 3 38 8"/><path d="M32 18C39 18 35 25 40 26C47 29 39 35 35 33C37 43 27 43 29 33C20 37 16 27 25 26C29 26 25 18 32 18Z"/><circle class="chronicle-ink" cx="32" cy="30" r="3"/>',
     aurora: '<path d="M32 5L54 13V31Q54 47 32 59Q10 47 10 31V13ZM32 16L35 27L46 30L35 33L32 44L29 33L18 30L29 27Z"></path>',
     peach: '<path d="M17 25C21 19 27 18 32 19C38 18 44 20 47 25C51 27 56 26 60 28C65 31 62 42 56 42C51 42 48 38 46 34C48 43 42 47 32 46C22 47 16 43 18 34C15 39 11 42 7 42C1 42-1 32 3 28C7 26 12 27 17 25Z"/><ellipse class="chronicle-blush" cx="22" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-blush" cx="42" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-ink" cx="25" cy="32" rx="1.8" ry="2.8"/><ellipse class="chronicle-ink" cx="39" cy="32" rx="1.8" ry="2.8"/><path class="chronicle-detail" d="M29 37C29 40 32 40 32 37C32 40 35 40 35 37"/>',
-    kowloon: '<path d="M8 4H56V60H8Z"/><path class="chronicle-detail" d="M12 18V8H22M14 18V14H18V12H22M52 18V8H42M50 18V14H46V12H42M12 46V56H22M52 46V56H42"/><path d="M32 16V48"/><path class="chronicle-ink" d="M32 24C38 18 46 18 48 24C42 24 40 30 32 28ZM32 38C26 32 18 32 16 38C22 38 24 44 32 42Z"/>',
-    chuhan: '<path d="M14 10H50V54H14Z"/><path class="chronicle-detail" d="M10 10H54M10 54H54"/><path d="M46 16Q36 22 32 32T22 48" fill="none"/><circle class="chronicle-ink" cx="30" cy="22" r="3"/><circle class="chronicle-ink" cx="38" cy="38" r="2.5"/><circle class="chronicle-ink" cx="24" cy="44" r="2"/>'
+    kowloon: '<circle cx="32.0" cy="18.0" r="11"/><circle cx="45.3" cy="27.7" r="11"/><circle cx="40.2" cy="43.3" r="11"/><circle cx="23.8" cy="43.3" r="11"/><circle cx="18.7" cy="27.7" r="11"/><path class="chronicle-detail" d="M32 32L37.3 24.7M32 32L40.6 34.8M32 32L32.0 41.0M32 32L23.4 34.8M32 32L26.7 24.7"/><circle class="chronicle-ink" cx="32" cy="32" r="5"/>',
+    chuhan: '<path d="M2.6 33A34 34 0 0 1 61.4 33L42.4 44A12 12 0 0 0 21.6 44Z"/><path class="chronicle-detail" d="M32 50L10.1 24.0M32 50L20.4 18.1M32 50L32.0 16.0M32 50L43.6 18.1M32 50L53.9 24.0"/><circle class="chronicle-ink" cx="32" cy="50" r="2.5"/><path class="chronicle-seal" d="M32 52V55M32 55L35.5 58.5L32 62L28.5 58.5Z"/>'
   };
 
   // 턴 슬라이더를 한 번 만들고 이동 이벤트를 연결한다.
