@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.5.2
+// @version      1.0.5.3
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -4124,7 +4124,7 @@
       return output.replace(/[\u00a0\t\r\n]+/g, ' ').replace(/ {2,}/g, ' ')
         .replace(/([,，、;；:：])(?=\S)/g, '$1 ')
         .replace(/((?:…)+|\.{3,})(?=\S)/g, '$1 ')
-        .replace(/([!?。！？]|(?<!\.)\.(?!\.))(?=[^\s」』”’）)\]])/g, '$1 ').trim();
+        .replace(/([!?。！？]|(?<!\.)\.(?!\.))(?=[^\s!?！？」』”’）)\]])/g, '$1 ').trim();
     }
 
     async function convert(text) {
@@ -4134,7 +4134,8 @@
         surface: token.surface_form,
         value: validReading(token.pronunciation) ? hira(token.pronunciation)
           : validReading(token.reading) ? hira(token.reading) : isHan(token.surface_form) ? null : hira(token.surface_form),
-        pos: token.pos
+        pos: token.pos,
+        detail: token.pos_detail_1
       }));
       // 미등록 한자어는 주변 토큰까지 포함해 가장 긴 실제 표제어로 다시 찾는다.
       const lexicon = units.some(unit => unit.value === null) ? await supplemental() : null;
@@ -4161,11 +4162,13 @@
         if (unit.pos === '助詞') unit.value = ({ 'は': 'わ', 'へ': 'え', 'を': 'お' })[unit.surface] || unit.value;
         const punct = /^[、。，．！？!?…・「」『』（）()\s]+$/u.test(unit.surface);
         const opening = /^[「『（(]+$/u.test(unit.surface);
-        const attach = !output || punct || opening || unit.pos === '助詞' || unit.pos === '助動詞'
-          || unit.pos === '接尾' || previous?.opening || ['助詞', '助動詞', '接頭詞'].includes(previous?.pos);
+        // 조사·조동사·접미사, て형 뒤의 보조동사(いる·しまう 등), 문말의 ん·の, 이어지는 숫자는 앞 단어에 붙이고, 그 뒤에서 새 어절을 시작한다.
+        const attach = !output || punct || opening || unit.pos === '助詞' || unit.pos === '助動詞' || unit.detail === '接尾'
+          || unit.detail === '非自立' && (['動詞', '形容詞'].includes(unit.pos) || ['ん', 'の'].includes(unit.surface))
+          || previous?.opening || previous?.pos === '接頭詞' || unit.detail === '数' && previous?.detail === '数';
         if (!attach && !/[\s、。！？!?…]$/u.test(output)) output += ' ';
         output += unit.value;
-        previous = { pos: unit.pos, opening };
+        previous = { pos: unit.pos, detail: unit.detail, opening };
       }
       return toKorean(output);
     }
@@ -4178,8 +4181,10 @@
       'ü:위 üe:웨 üan:위안 ün:윈 m:음 n:은 ng:응'
     ].join(' ').split(/\s+/).map(pair => pair.split(':')));
     let chineseReady = false;
+    const chineseWords = new Intl.Segmenter('zh', { granularity: 'word' });
+    const chineseParticle = /^[的地得了着著过過们們吗嗎呢吧啊呀啦嘛么麼里裡儿兒乎哉矣焉兮]$/u;
 
-    // 사전의 문맥별 보통화 병음을 한글로 옮긴다.
+    // 사전의 문맥별 보통화 병음을 한글로 옮기고, 단어 단위로 띄어 쓴다.
     function convertChinese(text) {
       if (!chineseReady) {
         status('pinyin', '보통화 사전 불러오는 중…');
@@ -4187,7 +4192,7 @@
         chineseReady = true;
         status('pinyin', '보통화 사전 준비됨');
       }
-      return self.pinyinPro.pinyin(text, { type: 'all', toneType: 'none' }).map(item => {
+      const chars = self.pinyinPro.pinyin(text, { type: 'all', toneType: 'none', traditional: true }).map(item => {
         if (!item.isZh) return /\p{Script=Han}/u.test(item.origin) ? '〔미확인:' + item.origin + '〕' : item.origin;
         const syllable = item.pinyin.normalize('NFD').replace(/[\u0300\u0301\u0304\u030c]/g, '').normalize('NFC')
           .replace(/^yu/, 'ü').replace(/^yi/, 'i').replace(/^y/, 'i').replace(/^wu/, 'u').replace(/^w/, 'u');
@@ -4196,7 +4201,22 @@
         if (/^[jqx]$/.test(initial)) final = final.replace(/^u/, 'ü');
         const korean = final === 'i' && /^(zh|ch|sh|r|z|c|s)$/.test(initial) ? '으' : chineseFinals.get(final);
         return korean ? String.fromCharCode(korean.charCodeAt(0) + (chineseInitials[initial] - 11) * 588) + korean.slice(1) : '〔미확인:' + item.origin + '〕';
-      }).join('').replace(/\s+/g, ' ').trim();
+      });
+      // pinyin 결과는 코드 포인트 단위라 단어 길이만큼 차례로 소비한다. 문장부호·허사는 앞에, 不·没 뒤 단어는 붙인다.
+      const origins = Array.from(text);
+      let output = '', index = 0, previous;
+      for (const { segment, isWordLike } of chineseWords.segment(text)) {
+        let value = '';
+        for (let length = 0; length < segment.length && index < chars.length; index += 1) {
+          value += chars[index];
+          length += origins[index].length;
+        }
+        const attach = !output || !isWordLike || chineseParticle.test(segment) || /^[不没沒]$/u.test(previous);
+        if (!attach) output += ' ';
+        output += value;
+        previous = segment;
+      }
+      return output.replace(/\s+/g, ' ').trim();
     }
 
     self.onmessage = async ({ data }) => {
