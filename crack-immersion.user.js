@@ -81,7 +81,9 @@
     ['grave', '고딕 초상', '⚜'],
     ['telegram', '황동 액자', '✉'],
     ['aurora', '은빛 방패', '✦'],
-    ['peach', '파스텔 구름', '☁']
+    ['peach', '파스텔 구름', '☁'],
+    ['kowloon', '붉은 벽지', '❦'],
+    ['chuhan', '비단 매화', '❀']
   ];
 
   // 화면 설정과 대사 테마만 저장한다. 키 배정은 이 스크립트에서 다루지 않는다.
@@ -1288,6 +1290,40 @@
       --turn-emblem-fill: #fafdff;
     }
 
+    :host([data-theme=kowloon]) {
+      --turn-paper: #2a0709;
+      --turn-accent: #e9b75a;
+      --turn-edge: #8a4a2a;
+      --turn-fill: linear-gradient(#6b2e2a,#e9b75a);
+      --turn-radius: 1px;
+      --turn-emblem-fill: #4e1c1e;
+    }
+
+    :host([data-scene-mode=light][data-theme=kowloon]) {
+      --turn-paper: #f3e6dc;
+      --turn-accent: #a52a2c;
+      --turn-edge: #c9a090;
+      --turn-fill: linear-gradient(#d9b9a8,#a52a2c);
+      --turn-emblem-fill: #f3e6dc;
+    }
+
+    :host([data-theme=chuhan]) {
+      --turn-paper: #262523;
+      --turn-accent: #ddd3bd;
+      --turn-edge: #6b5640;
+      --turn-fill: linear-gradient(#6b5640,#b8433a);
+      --turn-radius: 1px;
+      --turn-emblem-fill: #262523;
+    }
+
+    :host([data-scene-mode=light][data-theme=chuhan]) {
+      --turn-paper: #ecebe5;
+      --turn-accent: #5a4a3c;
+      --turn-edge: #a39a8c;
+      --turn-fill: linear-gradient(#a39a8c,#a8302a);
+      --turn-emblem-fill: #ecebe5;
+    }
+
     :host([data-slider-themed]) .chronicle-cap {
       filter: drop-shadow(0 0 5px var(--turn-edge));
     }
@@ -1528,6 +1564,8 @@
     :host([data-theme=glass]) .bookmark-tooltip { backdrop-filter: blur(12px); }
     :host([data-theme=menhera]) .bookmark-tooltip,
     :host([data-theme=peach]) .bookmark-tooltip { border-radius: 8px; }
+    :host([data-theme=kowloon]) .bookmark-tooltip { border-radius: 0; }
+    :host([data-theme=chuhan]) .bookmark-tooltip { border-radius: 1px; }
     .bookmark-popover {
       position: fixed;
       box-sizing: border-box;
@@ -1579,9 +1617,13 @@
     :host([data-theme=telegram]) .bookmark-popover { border-width: 3px; box-shadow: inset 0 0 0 2px #16130f,0 3px 12px #0007; }
     :host([data-theme=aurora]) .bookmark-popover { border-radius: 3px 3px 14px 14px; }
     :host([data-theme=peach]) .bookmark-popover { border-radius: 18px; color-scheme: light; box-shadow: 0 3px #a8bec755,0 8px 24px #0002; }
+    :host([data-theme=kowloon]) .bookmark-popover { border-radius: 0; }
+    :host([data-theme=chuhan]) .bookmark-popover { border-radius: 1px; border-width: 1px 0; }
     :host([data-scene-mode=light][data-theme=game]) .bookmark-popover,
     :host([data-scene-mode=light][data-theme=sf]) .bookmark-popover,
-    :host([data-scene-mode=light][data-theme=glass]) .bookmark-popover { color-scheme: light; }
+    :host([data-scene-mode=light][data-theme=glass]) .bookmark-popover,
+    :host([data-scene-mode=light][data-theme=chuhan]) .bookmark-popover,
+    :host([data-scene-mode=light][data-theme=kowloon]) .bookmark-popover { color-scheme: light; }
 
     .bookmark-tools { display: flex; justify-content: flex-end; align-items: center; gap: 2px; margin: 0 0 3px; }
     .bookmark-room-title { display: flex; align-items: center; min-width: 0; gap: 2px; }
@@ -2095,6 +2137,19 @@
       color: #557d8f;
     }
 
+    .theme-art.kowloon {
+      background: #4e1c1e;
+      color: #e9b75a;
+      font: 15px Georgia,serif;
+    }
+
+    .theme-art.chuhan {
+      background: #ecebe5;
+      color: #a8302a;
+      font: 700 13px 'Batang',serif;
+      box-shadow: inset 3px 0 #5a4a3c,inset -3px 0 #5a4a3c;
+    }
+
     .speaker-form {
       display: flex;
       gap: 5px;
@@ -2425,21 +2480,21 @@
       font: 500 calc(10px * var(--dialogue-font-scale, 1))/1.5 'Malgun Gothic',sans-serif;
     }
 
-    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) {
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach],[data-theme=kowloon],[data-theme=chuhan]) {
       box-sizing: border-box;
       font: calc(13px * var(--dialogue-font-scale, 1))/1.55 'Malgun Gothic',sans-serif;
     }
 
-    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-name {
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach],[data-theme=kowloon],[data-theme=chuhan]) .dialogue-name {
       flex-wrap: wrap;
       overflow-wrap: anywhere;
     }
 
-    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-speech {
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach],[data-theme=kowloon],[data-theme=chuhan]) .dialogue-speech {
       font: inherit;
     }
 
-    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach]) .dialogue-translation {
+    .dialogue:is([data-theme=ashen],[data-theme=neon],[data-theme=menhera],[data-theme=grave],[data-theme=telegram],[data-theme=aurora],[data-theme=peach],[data-theme=kowloon],[data-theme=chuhan]) .dialogue-translation {
       font-size: calc(10px * var(--dialogue-font-scale, 1));
       overflow-wrap: anywhere;
     }
@@ -2792,6 +2847,114 @@
       background: #ffffff70;
       border: 1px solid #cad5da;
       border-radius: 9px;
+    }
+
+    /* 붉은 벽지: 진홍 잎사귀 벽지와 아르데코 계단 모서리. */
+    .dialogue[data-theme=kowloon] {
+      --ink: #fbeee0;
+      --accent: #f4c76c;
+      --subtle: #c99890;
+      --secondary: #e0b4ac;
+      padding: 15px 18px;
+      overflow: hidden;
+      background:
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform=''%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23e9b75a'%20stroke-width='1.3'/%3E%3C/svg%3E") left 4px top 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform='scale%28-1%201%29%20translate%28-20%200%29'%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23e9b75a'%20stroke-width='1.3'/%3E%3C/svg%3E") right 4px top 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform='scale%281%20-1%29%20translate%280%20-20%29'%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23e9b75a'%20stroke-width='1.3'/%3E%3C/svg%3E") left 4px bottom 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform='scale%28-1%20-1%29%20translate%28-20%20-20%29'%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23e9b75a'%20stroke-width='1.3'/%3E%3C/svg%3E") right 4px bottom 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20150'%3E%3Cg%20fill='%23e2ad52'%20fill-opacity='.2'%20stroke='%23e2ad52'%20stroke-opacity='.2'%3E%3Cg%20transform='translate%2870%205%29%20scale%28.9%29'%3E%3Cpath%20d='M0%200V200'%20fill='none'%20stroke-width='2.5'/%3E%3Cpath%20transform='translate%280%200%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2046%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2092%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20138%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2023%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2069%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20115%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20161%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3C/g%3E%3Cg%20transform='translate%28150%20-25%29%20scale%28.9%29'%3E%3Cpath%20d='M0%200V200'%20fill='none'%20stroke-width='2.5'/%3E%3Cpath%20transform='translate%280%200%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2046%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2092%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20138%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2023%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2069%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20115%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20161%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") right -56px top -30px / 200px auto repeat-y,
+        #4e1c1e;
+      border: 0;
+      box-shadow: inset 0 0 26px #1a0406cc;
+    }
+
+    [data-scene-mode=light] .dialogue[data-theme=kowloon] {
+      --ink: #2e1c1a;
+      --accent: #a52a2c;
+      --subtle: #9a7a72;
+      --secondary: #86625a;
+      background:
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform=''%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23a52a2c'%20stroke-width='1.3'/%3E%3C/svg%3E") left 4px top 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform='scale%28-1%201%29%20translate%28-20%200%29'%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23a52a2c'%20stroke-width='1.3'/%3E%3C/svg%3E") right 4px top 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform='scale%281%20-1%29%20translate%280%20-20%29'%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23a52a2c'%20stroke-width='1.3'/%3E%3C/svg%3E") left 4px bottom 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20transform='scale%28-1%20-1%29%20translate%28-20%20-20%29'%20d='M1%2019V1H19M5%2019V9H9V5H19'%20fill='none'%20stroke='%23a52a2c'%20stroke-width='1.3'/%3E%3C/svg%3E") right 4px bottom 4px / 20px 20px no-repeat,
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%20150'%3E%3Cg%20fill='%23a52a2c'%20fill-opacity='.1'%20stroke='%23a52a2c'%20stroke-opacity='.1'%3E%3Cg%20transform='translate%2870%205%29%20scale%28.9%29'%3E%3Cpath%20d='M0%200V200'%20fill='none'%20stroke-width='2.5'/%3E%3Cpath%20transform='translate%280%200%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2046%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2092%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20138%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2023%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2069%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20115%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20161%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3C/g%3E%3Cg%20transform='translate%28150%20-25%29%20scale%28.9%29'%3E%3Cpath%20d='M0%200V200'%20fill='none'%20stroke-width='2.5'/%3E%3Cpath%20transform='translate%280%200%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2046%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2092%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20138%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2023%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%2069%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20115%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3Cpath%20transform='translate%280%20161%29%20scale%28-1%201%29'%20d='M0%2018C14%204%2034%202%2050%2012C42%2014%2046%2022%2036%2024C40%2030%2028%2034%2020%2030C14%2034%206%2030%200%2018Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") right -56px top -30px / 200px auto repeat-y,
+        #f3e6dc;
+      box-shadow: 0 1px 3px #6e141922;
+    }
+
+    .dialogue[data-theme=kowloon] .speaker-portrait {
+      width: 38px;
+      height: 46px;
+    }
+
+    .dialogue[data-theme=kowloon] .dialogue-name {
+      font: 700 calc(11px * var(--dialogue-font-scale, 1))/1.5 'Batang',serif;
+      letter-spacing: .16em;
+    }
+
+    .dialogue[data-theme=kowloon] .dialogue-name small {
+      letter-spacing: 0;
+    }
+
+    .dialogue[data-theme=kowloon] .dialogue-speech,
+    .dialogue[data-theme=kowloon] .dialogue-translation {
+      font-family: 'Batang',serif;
+    }
+
+    /* 비단 매화: 양끝 축이 달린 두루마리, 오른쪽에 잘린 매화 가지. */
+    .dialogue[data-theme=chuhan] {
+      --ink: #e6e2da;
+      --accent: #ddd3bd;
+      --subtle: #8f8b82;
+      --secondary: #a9a59c;
+      --seal: #b8433a;
+      padding: 10px 16px;
+      overflow: hidden;
+      background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20140'%3E%3Cg%20fill='none'%20stroke='%23d8d3c6'%20stroke-opacity='.10'%20stroke-linecap='round'%3E%3Cpath%20d='M200%2010Q150%2030%20130%2060T70%20120'%20stroke-width='5'/%3E%3Cpath%20d='M150%2032Q120%2020%20100%2026'%20stroke-width='2.5'/%3E%3Cpath%20d='M118%2074Q140%2090%20150%20120'%20stroke-width='2.5'/%3E%3Cpath%20d='M96%2098Q80%2086%2060%2088'%20stroke-width='2'/%3E%3C/g%3E%3Cg%20fill='%23c4554a'%20fill-opacity='.16'%3E%3Ccircle%20cx='100'%20cy='26'%20r='6'/%3E%3Ccircle%20cx='112'%20cy='20'%20r='4'/%3E%3Ccircle%20cx='150'%20cy='118'%20r='6'/%3E%3Ccircle%20cx='60'%20cy='88'%20r='5'/%3E%3Ccircle%20cx='132'%20cy='56'%20r='5'/%3E%3Ccircle%20cx='84'%20cy='108'%20r='4'/%3E%3C/g%3E%3C/svg%3E") right -24px top -22px / 220px auto no-repeat,#262523;
+      border: 0;
+      border-left: 8px solid #6b5640;
+      border-right: 8px solid #6b5640;
+      border-radius: 3px;
+    }
+
+    [data-scene-mode=light] .dialogue[data-theme=chuhan] {
+      --ink: #2a2723;
+      --accent: #26231f;
+      --subtle: #77736a;
+      --secondary: #57534b;
+      --seal: #a8302a;
+      background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20140'%3E%3Cg%20fill='none'%20stroke='%234e4a43'%20stroke-opacity='.16'%20stroke-linecap='round'%3E%3Cpath%20d='M200%2010Q150%2030%20130%2060T70%20120'%20stroke-width='5'/%3E%3Cpath%20d='M150%2032Q120%2020%20100%2026'%20stroke-width='2.5'/%3E%3Cpath%20d='M118%2074Q140%2090%20150%20120'%20stroke-width='2.5'/%3E%3Cpath%20d='M96%2098Q80%2086%2060%2088'%20stroke-width='2'/%3E%3C/g%3E%3Cg%20fill='%23a8302a'%20fill-opacity='.14'%3E%3Ccircle%20cx='100'%20cy='26'%20r='6'/%3E%3Ccircle%20cx='112'%20cy='20'%20r='4'/%3E%3Ccircle%20cx='150'%20cy='118'%20r='6'/%3E%3Ccircle%20cx='60'%20cy='88'%20r='5'/%3E%3Ccircle%20cx='132'%20cy='56'%20r='5'/%3E%3Ccircle%20cx='84'%20cy='108'%20r='4'/%3E%3C/g%3E%3C/svg%3E") right -24px top -22px / 220px auto no-repeat,#ecebe5;
+      border-color: #5a4a3c;
+    }
+
+    .dialogue[data-theme=chuhan] .speaker-portrait {
+      width: 38px;
+      height: 46px;
+    }
+
+    .dialogue[data-theme=chuhan] .dialogue-name {
+      align-items: center;
+      font: 700 calc(11px * var(--dialogue-font-scale, 1))/1.5 'Batang',serif;
+      letter-spacing: .12em;
+    }
+
+    .dialogue[data-theme=chuhan] .dialogue-name::before {
+      content: '';
+      flex-shrink: 0;
+      width: calc(6px * var(--dialogue-font-scale, 1));
+      height: calc(6px * var(--dialogue-font-scale, 1));
+      background: var(--seal);
+      border-radius: 1px;
+    }
+
+    .dialogue[data-theme=chuhan] .dialogue-name small {
+      letter-spacing: 0;
+    }
+
+    .dialogue[data-theme=chuhan] .dialogue-speech,
+    .dialogue[data-theme=chuhan] .dialogue-translation {
+      font-family: 'Batang',serif;
     }
 
     .sample-tools {
@@ -5007,7 +5170,9 @@
     menhera: '<path d="M28 28L18 53L27 48L33 56L37 30M36 28L47 52L39 48L34 55L28 30"/><path d="M29 22C19 10 5 8 6 20L7 33C8 42 24 33 29 29ZM35 22C45 10 59 8 58 20L57 33C56 42 40 33 35 29Z"/><path class="chronicle-detail" d="M13 20L26 26L13 32M51 20L38 26L51 32"/><path class="chronicle-ink" d="M32 35L24 27C18 20 27 15 32 22C37 15 46 20 40 27Z"/>',
     telegram: '<circle cx="32" cy="30" r="21"/><circle cx="32" cy="30" r="16"/><path class="chronicle-detail" d="M18 13Q8 19 10 31M46 13Q56 19 54 31M20 48Q32 57 44 48M26 8Q32 3 38 8"/><path d="M32 18C39 18 35 25 40 26C47 29 39 35 35 33C37 43 27 43 29 33C20 37 16 27 25 26C29 26 25 18 32 18Z"/><circle class="chronicle-ink" cx="32" cy="30" r="3"/>',
     aurora: '<path d="M32 5L54 13V31Q54 47 32 59Q10 47 10 31V13ZM32 16L35 27L46 30L35 33L32 44L29 33L18 30L29 27Z"></path>',
-    peach: '<path d="M17 25C21 19 27 18 32 19C38 18 44 20 47 25C51 27 56 26 60 28C65 31 62 42 56 42C51 42 48 38 46 34C48 43 42 47 32 46C22 47 16 43 18 34C15 39 11 42 7 42C1 42-1 32 3 28C7 26 12 27 17 25Z"/><ellipse class="chronicle-blush" cx="22" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-blush" cx="42" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-ink" cx="25" cy="32" rx="1.8" ry="2.8"/><ellipse class="chronicle-ink" cx="39" cy="32" rx="1.8" ry="2.8"/><path class="chronicle-detail" d="M29 37C29 40 32 40 32 37C32 40 35 40 35 37"/>'
+    peach: '<path d="M17 25C21 19 27 18 32 19C38 18 44 20 47 25C51 27 56 26 60 28C65 31 62 42 56 42C51 42 48 38 46 34C48 43 42 47 32 46C22 47 16 43 18 34C15 39 11 42 7 42C1 42-1 32 3 28C7 26 12 27 17 25Z"/><ellipse class="chronicle-blush" cx="22" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-blush" cx="42" cy="38" rx="3.3" ry="1.8"/><ellipse class="chronicle-ink" cx="25" cy="32" rx="1.8" ry="2.8"/><ellipse class="chronicle-ink" cx="39" cy="32" rx="1.8" ry="2.8"/><path class="chronicle-detail" d="M29 37C29 40 32 40 32 37C32 40 35 40 35 37"/>',
+    kowloon: '<path d="M8 4H56V60H8Z"/><path class="chronicle-detail" d="M12 18V8H22M14 18V14H18V12H22M52 18V8H42M50 18V14H46V12H42M12 46V56H22M52 46V56H42"/><path d="M32 16V48"/><path class="chronicle-ink" d="M32 24C38 18 46 18 48 24C42 24 40 30 32 28ZM32 38C26 32 18 32 16 38C22 38 24 44 32 42Z"/>',
+    chuhan: '<path d="M14 10H50V54H14Z"/><path class="chronicle-detail" d="M10 10H54M10 54H54"/><path d="M46 16Q36 22 32 32T22 48" fill="none"/><circle class="chronicle-ink" cx="30" cy="22" r="3"/><circle class="chronicle-ink" cx="38" cy="38" r="2.5"/><circle class="chronicle-ink" cx="24" cy="44" r="2"/>'
   };
 
   // 턴 슬라이더를 한 번 만들고 이동 이벤트를 연결한다.
