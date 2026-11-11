@@ -2572,6 +2572,7 @@
       grid-area: 1 / 2 / 4 / 3;
       border-left: 1px solid currentColor;
       opacity: .25;
+      pointer-events: none;
     }
 
     [data-scene-mode=light] .dialogue[data-theme=simple] .dialogue-body::before {
