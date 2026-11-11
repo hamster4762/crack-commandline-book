@@ -58,7 +58,9 @@
     action('choice1', '추천 답변 1 선택', '답변1', combo('Digit1', true), 'chat'),
     action('choice2', '추천 답변 2 선택', '답변2', combo('Digit2', true), 'chat'),
     action('choice3', '추천 답변 3 선택', '답변3', combo('Digit3', true), 'chat'),
+    action('responseSettings', '답변 길이 및 생각 조절', '답변설정', null, 'chat'),
     action('image', '상황 이미지 생성', '이미지', combo('KeyK', true), 'chat'),
+    action('imageVisibility', '상황 이미지 보기', '이미지보기', null, 'chat'),
     action('situation', '상황 추가', '상황', combo('KeyE', true, false, true), 'chat'),
     action('regenerate', '답변 재생성', '재생성', combo('KeyR', true, true), 'chat'),
     action('search', '메시지 검색', '검색', combo('KeyC', false, true), 'tools')
@@ -1090,8 +1092,8 @@
   function renderActions() {
     if (!draft) return;
     $('action-columns').replaceChildren();
-    const list = configuredActions(), tail = list.slice(16), split = Math.ceil(tail.length / 2);
-    const columns = [['화면 · 채팅', list.slice(0, 8)], ['도구 · 답변', list.slice(8, 16)], ['도구 · 모델', tail.slice(0, split)], ['모델 선택', tail.slice(split)]];
+    const list = configuredActions(), tail = list.slice(18), split = Math.ceil(tail.length / 2);
+    const columns = [['화면 · 채팅', list.slice(0, 8)], ['도구 · 답변', list.slice(8, 18)], ['도구 · 모델', tail.slice(0, split)], ['모델 선택', tail.slice(split)]];
     for (const [title, items] of columns) {
       const section = make('section', 'action-group'), heading = make('h2', '', title);
       heading.append(make('small', '', items.length + '개'));
@@ -1151,7 +1153,7 @@
 
   // 크랙의 현재 모델 선택 버튼을 찾는다.
   function modelTrigger() {
-    return doc.querySelector('button[aria-label="메시지 검색"]')?.parentElement.querySelector('button[aria-haspopup="dialog"]');
+    return doc.querySelector('button[aria-haspopup="dialog"][aria-controls]:has(> img[src*="/model-icon/"])');
   }
 
   // 열린 모델 메뉴에서 선택 가능한 항목을 읽는다.
@@ -1348,6 +1350,15 @@
     }
     if (item.id === 'profile') {
       openChatProfile().catch(showError);
+      return;
+    }
+    if (item.id === 'responseSettings' || item.id === 'imageVisibility') {
+      const button = item.id === 'responseSettings'
+        ? doc.getElementById('max-output-modal-menu-button')
+        : [...doc.querySelectorAll('[role="button"]:has(button[role="switch"])')]
+          .find(row => row.textContent.trim() === item.name);
+      if (button) button.click();
+      else toast('「' + item.name + '」 항목을 찾지 못했습니다.');
       return;
     }
     if (item.id === 'note') {
