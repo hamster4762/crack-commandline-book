@@ -1369,8 +1369,15 @@
     remoteKeyCache.clear();
     cacheGeneration += 1;
   }
-  if (window.navigation) window.navigation.addEventListener('navigatesuccess', resetPageCache);
-  else window.addEventListener('popstate', resetPageCache);
+  // 같은 URL의 replaceState도 navigatesuccess를 발생시키므로, URL이 바뀐 경우만 새 페이지로 본다.
+  let pageUrl = location.href;
+  function resetPageCacheOnRoute() {
+    if (location.href === pageUrl) return;
+    pageUrl = location.href;
+    resetPageCache();
+  }
+  if (window.navigation) window.navigation.addEventListener('navigatesuccess', resetPageCacheOnRoute);
+  else window.addEventListener('popstate', resetPageCacheOnRoute);
   window.addEventListener('pagehide', resetPageCache);
   startBookWindowEvents();
   startCommandInput();
