@@ -4822,6 +4822,7 @@
   let highlightRevision = 0;
   let lastThemeErrorAt = 0;
   const highlighted = new Map();
+  const hiddenSourceText = new WeakMap();
   const changedMessages = new Set();
   let messageFrame = 0;
   let messageScroller = null;
@@ -4865,6 +4866,7 @@
     if (suspended) return;
     if (currentChatId() !== chatId) scheduleSync();
     for (const record of records) {
+      if (record.type === 'characterData') hiddenSourceText.delete(record.target);
       const target = record.target.nodeType === 1 ? record.target : record.target.parentElement;
       if (!target || own(target)) continue;
       const root = target.closest(MESSAGE_ROOT);
@@ -4892,7 +4894,7 @@
   // 인라인 서식을 유지하며 텍스트를 직렬화한다.
   function serializeInline(node) {
     if (own(node)) return '';
-    if (node.nodeType === page.Node.TEXT_NODE) return node.textContent;
+    if (node.nodeType === page.Node.TEXT_NODE) return node.data || hiddenSourceText.get(node) || '';
     if (node.nodeType !== page.Node.ELEMENT_NODE) return '';
     if (node.tagName === 'BR') return '\n';
     const text = [...node.childNodes].map(serializeInline).join('');
@@ -4962,9 +4964,13 @@
   // 테마 표시를 제거하고 원래 텍스트 노드를 복원한다.
   function clearHighlight(record) {
     changeHighlights(() => {
-      record.overlays.forEach(node => node.remove());
+      record.overlays.forEach(({ overlay }) => overlay.remove());
       record.sources.forEach(node => node.removeAttribute('data-cc-focus-source'));
-      record.textSources.forEach(node => node.replaceWith(...node.childNodes));
+      for (const node of record.textSources) {
+        const text = hiddenSourceText.get(node);
+        if (text !== undefined && !node.data) node.data = text;
+        hiddenSourceText.delete(node);
+      }
     });
     record.overlays = [];
     record.sources = [];
@@ -4988,7 +4994,8 @@
     if (previous?.signature === signature &&
       previous.nodes.every(node => root.contains(node)) &&
       previous.sources.every(node => root.contains(node) && node.hasAttribute('data-cc-focus-source')) &&
-      previous.overlays.every(node => root.contains(node))) return;
+      previous.textSources.every(node => hiddenSourceText.has(node) && !node.data) &&
+      previous.overlays.every(({ overlay, anchor }) => root.contains(overlay) && overlay.nextSibling === anchor)) return;
     if (previous) {
       clearHighlight(previous);
       runs = paragraphRuns(root);
@@ -5026,7 +5033,8 @@
       }
       changeHighlights(() => {
         for (const group of groups) {
-          if (!chunks[group.first].node.isConnected) continue;
+          const anchor = chunks[group.first].node;
+          if (!anchor.isConnected) continue;
           const overlay = make('div');
           overlay.dataset.ccFocusOwned = '';
           let position = chunks[group.first].start;
@@ -5036,21 +5044,22 @@
             position = match.end;
           }
           appendMarkdown(overlay, text.slice(position, chunks[group.last].end));
-          chunks[group.first].node.before(overlay);
+          anchor.before(overlay);
           for (let i = group.first; i <= group.last; i += 1) {
             for (const node of chunks[i].nodes) {
-              let source = node;
               if (node.nodeType === page.Node.TEXT_NODE) {
-                source = make('span');
-                node.before(source);
-                source.append(node);
-                record.textSources.push(source);
+                if (!node.data) continue;
+                // 크랙이 이미지를 다시 그릴 때 참조하는 원본 텍스트 노드는 제자리에 둔다.
+                hiddenSourceText.set(node, node.data);
+                node.data = '';
+                record.textSources.push(node);
+              } else {
+                node.dataset.ccFocusSource = '';
+                record.sources.push(node);
               }
-              source.dataset.ccFocusSource = '';
-              record.sources.push(source);
             }
           }
-          record.overlays.push(overlay);
+          record.overlays.push({ overlay, anchor });
         }
       });
     }
