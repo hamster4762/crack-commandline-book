@@ -122,7 +122,7 @@
     if (themes.some(([id]) => id === value.theme)) next.theme = value.theme;
     if (Number.isInteger(value.themeFontSize) && value.themeFontSize >= 80 && value.themeFontSize <= 200 && value.themeFontSize % 10 === 0) next.themeFontSize = value.themeFontSize;
     if (typeof value.themeFontCSS === 'string') next.themeFontCSS = value.themeFontCSS.trim();
-    if (['ja', 'zh'].includes(value.pronunciationLanguage)) next.pronunciationLanguage = value.pronunciationLanguage;
+    if (['ja', 'zh', 'yue'].includes(value.pronunciationLanguage)) next.pronunciationLanguage = value.pronunciationLanguage;
     const templates = new Set();
     // 이전 버전의 단일 커스텀 형식도 목록으로 옮긴다.
     const legacy = typeof value.customTemplate === 'string' ? cleanTemplate(value.customTemplate) : '';
@@ -1028,7 +1028,7 @@
           </div>
           <label class="setting-line"><span>발음 자동 생성<small>원문에 발음이 없을 때 대사에서 한글 발음 생성</small></span><input class="switch" id="auto-pronunciation" type="checkbox"></label>
           <label class="field-label" for="pronunciation-language">대사 언어</label>
-          <select class="text-input" id="pronunciation-language" disabled><option value="ja">일본어 → 한글 발음</option><option value="zh">중국어(보통화) → 한글 발음</option></select>
+          <select class="text-input" id="pronunciation-language" disabled><option value="ja">일본어 → 한글 발음</option><option value="zh">중국어(보통화) → 한글 발음</option><option value="yue">중국어(광둥어) → 한글 발음</option></select>
           <small class="template-help">인명·고유명사의 읽기는 실제 발음과 다를 수 있습니다.</small>
           <small class="template-help" id="pronunciation-status" role="status">자동 발음 꺼짐 · 사전 미로드</small>
           <small class="template-help">사전 출처: <a href="https://github.com/hexenq/kuroshiro-analyzer-kuromoji" target="_blank" rel="noopener noreferrer">Kuromoji Analyzer (MIT)</a> · <a href="https://github.com/takuyaa/kuromoji.js" target="_blank" rel="noopener noreferrer">Kuromoji (Apache-2.0)</a> · <a href="https://github.com/Doublevil/JmdictFurigana" target="_blank" rel="noopener noreferrer">JMdictFurigana / Doublevil</a> · <a href="https://www.edrdg.org/jmdict/j_jmdict.html" target="_blank" rel="noopener noreferrer">JMdict / EDRDG (CC BY-SA)</a> · <a href="https://github.com/zh-lx/pinyin-pro" target="_blank" rel="noopener noreferrer">pinyin-pro (MIT)</a></small>
@@ -4181,19 +4181,19 @@
       'u:우 ua:와 uo:워 uai:와이 uei:웨이 ui:웨이 uan:완 uen:원 un:운 uang:왕 ueng:웡',
       'ü:위 üe:웨 üan:위안 ün:윈 m:음 n:은 ng:응'
     ].join(' ').split(/\s+/).map(pair => pair.split(':')));
-    let chineseReady = false;
+    let chineseReady = false, cantoneseReady = false;
     const chineseWords = new Intl.Segmenter('zh', { granularity: 'word' });
-    const chineseParticle = /^[的地得了着著过過们們吗嗎呢吧啊呀啦嘛么麼里裡儿兒乎哉矣焉兮]$/u;
+    const chineseParticle = /^[的地得了着著过過们們吗嗎呢吧啊呀啦嘛么麼里裡儿兒乎哉矣焉兮嘅咗緊喇嘞喎囉吖噃㗎咩哋]$/u;
 
-    // 사전의 문맥별 보통화 병음을 한글로 옮기고, 단어 단위로 띄어 쓴다.
-    function convertChinese(text) {
+    // 사전의 문맥별 보통화 병음을 한글로 옮긴다.
+    function mandarinReadings(text) {
       if (!chineseReady) {
         status('pinyin', '보통화 사전 불러오는 중…');
         importScripts('https://cdn.jsdelivr.net/npm/pinyin-pro@3.28.2/dist/index.js');
         chineseReady = true;
         status('pinyin', '보통화 사전 준비됨');
       }
-      const chars = self.pinyinPro.pinyin(text, { type: 'all', toneType: 'none', traditional: true }).map(item => {
+      return self.pinyinPro.pinyin(text, { type: 'all', toneType: 'none', traditional: true }).map(item => {
         if (!item.isZh) return /\p{Script=Han}/u.test(item.origin) ? '〔미확인:' + item.origin + '〕' : item.origin;
         const syllable = item.pinyin.normalize('NFD').replace(/[\u0300\u0301\u0304\u030c]/g, '').normalize('NFC')
           .replace(/^yu/, 'ü').replace(/^yi/, 'i').replace(/^y/, 'i').replace(/^wu/, 'u').replace(/^w/, 'u');
@@ -4203,7 +4203,35 @@
         const korean = final === 'i' && /^(zh|ch|sh|r|z|c|s)$/.test(initial) ? '으' : chineseFinals.get(final);
         return korean ? String.fromCharCode(korean.charCodeAt(0) + (chineseInitials[initial] - 11) * 588) + korean.slice(1) : '〔미확인:' + item.origin + '〕';
       });
-      // pinyin 결과는 코드 포인트 단위라 단어 길이만큼 차례로 소비한다. 문장부호·허사는 앞에, 不·没 뒤 단어는 붙인다.
+    }
+
+    // 사전의 문맥별 광둥어 월어병음(Jyutping)을 한글로 옮긴다. 모음 색인은 [기본, j 뒤, w 뒤] 순서다.
+    const cantoneseInitials = { b: 7, p: 17, m: 6, f: 17, d: 3, t: 16, n: 2, l: 5, g: 0, k: 15, ng: 11, h: 18, gw: 0, kw: 15, w: 11, z: 13, c: 14, s: 10, j: 11 };
+    const cantoneseVowels = { aa: [0, 2, 9], a: [0, 2, 9], e: [5, 7, 15], i: [20, 20, 16], o: [8, 12, 14], u: [13, 17, 13], oe: [4, 6, 14], eo: [4, 6, 14], yu: [16, 16, 16] };
+    const cantoneseCodas = { m: 16, n: 4, ng: 21, p: 17, t: 19, k: 1 };
+    function cantoneseReadings(text) {
+      if (!cantoneseReady) {
+        status('jyutping', '광둥어 사전 불러오는 중…');
+        importScripts('https://cdn.jsdelivr.net/npm/to-jyutping@3.1.1/dist/index.js');
+        cantoneseReady = true;
+        status('jyutping', '광둥어 사전 준비됨');
+      }
+      return self.ToJyutping.getJyutpingList(text).map(([origin, jyutping]) => {
+        if (!jyutping) return /\p{Script=Han}/u.test(origin) ? '〔미확인:' + origin + '〕' : origin;
+        const syllable = jyutping.replace(/\d$/, '');
+        if (syllable === 'm' || syllable === 'ng') return syllable === 'm' ? '음' : '응';
+        const [, initial = '', nucleus, coda = ''] = /^(ng|gw|kw|[bpmfdtnlgkhwzcsj])?(aa|oe|eo|yu|[aeiou])(i|u|m|n|ng|p|t|k)?$/.exec(syllable) || [];
+        if (!nucleus) return '〔미확인:' + origin + '〕';
+        const vowel = cantoneseVowels[nucleus][initial === 'j' ? 1 : /^(gw|kw|w)$/.test(initial) ? 2 : 0];
+        return String.fromCharCode(0xac00 + ((initial ? cantoneseInitials[initial] : 11) * 21 + vowel) * 28 + (cantoneseCodas[coda] || 0))
+          + ({ i: '이', u: '우' }[coda] || '');
+      });
+    }
+
+    // 글자별 한글 발음을 단어 단위로 띄어 쓴다.
+    function convertChinese(text, cantonese) {
+      const chars = cantonese ? cantoneseReadings(text) : mandarinReadings(text);
+      // 사전 결과는 코드 포인트 단위라 단어 길이만큼 차례로 소비한다. 문장부호·허사는 앞에, 不·没·唔·冇 뒤 단어는 붙인다. 광둥어 呢는 주로 지시사(이것)라 허사로 보지 않는다.
       const origins = Array.from(text);
       let output = '', index = 0, previous;
       for (const { segment, isWordLike } of chineseWords.segment(text)) {
@@ -4212,7 +4240,7 @@
           value += chars[index];
           length += origins[index].length;
         }
-        const attach = !output || !isWordLike || chineseParticle.test(segment) || /^[不没沒]$/u.test(previous);
+        const attach = !output || !isWordLike || chineseParticle.test(segment) && !(cantonese && segment === '呢') || /^[不没沒唔冇]$/u.test(previous);
         if (!attach) output += ' ';
         output += value;
         previous = segment;
@@ -4230,7 +4258,7 @@
         return;
       }
       try {
-        const text = data.language === 'zh' ? convertChinese(data.text) : await convert(data.text);
+        const text = data.language === 'ja' ? await convert(data.text) : convertChinese(data.text, data.language === 'yue');
         self.postMessage({ id: data.id, text });
       } catch (error) {
         self.postMessage({ id: data.id, error: error.message });
@@ -4240,14 +4268,14 @@
 
   let pronunciationWorker = null, pronunciationSequence = 0, pronunciationError = '';
   const pronunciationJobs = new Map(), pronunciationCache = new Map(), pronunciationDownloads = new Set();
-  const pronunciationStatus = { kuromoji: '기본 사전 미로드', jmdict: '보조 사전 미로드 · 미등록 한자어가 있을 때 로드', pinyin: '보통화 사전 미로드' };
+  const pronunciationStatus = { kuromoji: '기본 사전 미로드', jmdict: '보조 사전 미로드 · 미등록 한자어가 있을 때 로드', pinyin: '보통화 사전 미로드', jyutping: '광둥어 사전 미로드' };
 
   function renderPronunciationStatus() {
     if (!ui) return;
     const config = draft || settings;
     $('pronunciation-language').disabled = !config.autoPronunciation;
     $('pronunciation-status').textContent = config.autoPronunciation
-      ? pronunciationError || (config.pronunciationLanguage === 'zh' ? pronunciationStatus.pinyin : pronunciationStatus.kuromoji + '\n' + pronunciationStatus.jmdict)
+      ? pronunciationError || ({ zh: pronunciationStatus.pinyin, yue: pronunciationStatus.jyutping })[config.pronunciationLanguage] || pronunciationStatus.kuromoji + '\n' + pronunciationStatus.jmdict
       : '자동 발음 꺼짐' + (settings.autoPronunciation && draft ? ' · 저장 전까지 채팅에는 기존 설정 적용' : ' · 사전 미로드');
   }
 
@@ -4266,6 +4294,7 @@
     pronunciationStatus.kuromoji = '기본 사전 미로드';
     pronunciationStatus.jmdict = '보조 사전 미로드 · 미등록 한자어가 있을 때 로드';
     pronunciationStatus.pinyin = '보통화 사전 미로드';
+    pronunciationStatus.jyutping = '광둥어 사전 미로드';
     renderPronunciationStatus();
   }
 
@@ -4621,13 +4650,13 @@
     }
     body.append(make('p', 'dialogue-speech', fields.speech));
     if (fields.pronunciation) body.append(make('p', 'dialogue-pronunciation', fields.pronunciation));
-    else if (config.autoPronunciation && (config.pronunciationLanguage === 'zh' ? /\p{Script=Han}/u : /[\u3040-\u30ff\uff66-\uff9d\p{Script=Han}]/u).test(fields.speech)) {
+    else if (config.autoPronunciation && (config.pronunciationLanguage === 'ja' ? /[\u3040-\u30ff\uff66-\uff9d\p{Script=Han}]/u : /\p{Script=Han}/u).test(fields.speech)) {
       const pronunciation = make('p', 'dialogue-pronunciation', '발음 생성 중…');
       body.append(pronunciation);
       getPronunciation(fields.speech, config.pronunciationLanguage).then(value => {
         if (!host.isConnected || suspended) return;
         pronunciation.textContent = value || '발음을 생성하지 못했습니다.';
-        pronunciation.title = value ? '' : pronunciationError || pronunciationStatus[config.pronunciationLanguage === 'zh' ? 'pinyin' : 'jmdict'];
+        pronunciation.title = value ? '' : pronunciationError || pronunciationStatus[({ zh: 'pinyin', yue: 'jyutping' })[config.pronunciationLanguage] || 'jmdict'];
       });
     }
     if (fields.translation) body.append(make('p', 'dialogue-translation', fields.translation));
