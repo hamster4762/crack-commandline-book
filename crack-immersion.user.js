@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.6.0
+// @version      1.0.6.1
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -145,7 +145,9 @@
     const fields = new Set();
     const source = template.replace(/\r\n?/g, '\n').split(/(\{[a-zA-Z]+\})/).map(part => {
       const token = /^\{([a-zA-Z]+)\}$/.exec(part);
-      if (!token) return part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\n/g, '\\n');
+      // 줄바꿈 뒤의 들여쓰기와 인용 기호(>)는 있든 없든 같은 대사로 인식한다.
+      if (!token) return part.split('\n').map((line, index) => (index ? line.replace(/^[ \t]*(?:>[ \t]*)?/, '') : line)
+        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\n(?:[ \\t]*>)?[ \\t]*');
       const field = token[1];
       if (!['name', 'translatedName', 'speech', 'translation', 'pronunciation'].includes(field)) {
         throw new Error('지원하지 않는 항목입니다: {' + field + '}');
@@ -4940,8 +4942,8 @@
         flush();
         const paragraphs = [...node.children];
         if (paragraphs.length && paragraphs.every(child => child.tagName === 'P' && textOnly(child))) {
-          // 렌더링으로 사라진 인용 기호와 연속 줄 들여쓰기를 복원한다.
-          const text = paragraphs.map(child => '> ' + serializeInline(child).replace(/\n/g, '\n ')).join('\n');
+          // 렌더링으로 사라진 인용 기호를 줄마다 복원해 붙어 있는 대사도 각각 인식되게 한다.
+          const text = paragraphs.map(child => serializeInline(child).split('\n').map(line => '> ' + line).join('\n')).join('\n');
           runs.push([{ node, nodes: [node], text }]);
         }
         continue;
