@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.6.1
+// @version      1.0.7.1
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -73,6 +73,10 @@
   const themes = [
     ['none', '미설정', '—'],
     ['simple', '심플', 'Aa'],
+    ['initial', '이니셜', 'A'],
+    ['log', '기록형', '>'],
+    ['quote', '인용선', '│'],
+    ['brackets', '낫표', '「」'],
     ['game', '게임 말풍선', '···'],
     ['sf', 'SF 통신', '⌁'],
     ['glass', '글라스', '◌'],
@@ -1540,8 +1544,7 @@
     :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-position i { background: var(--slider-edge); }
     :host(:not([data-theme=kowloon]):not([data-theme=chuhan])) .chronicle-position small { color: var(--slider-edge); }
 
-    :host([data-theme=none]) .chronicle,
-    :host([data-theme=simple]) .chronicle {
+    :host(:is([data-theme=none],[data-theme=simple],[data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets])) .chronicle {
       --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225.5%22%20fill%3D%22%23bcc5c0%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-3.5%22%20y%3D%22-6%22%20width%3D%227%22%20height%3D%2212%22%20rx%3D%223.5%22%20fill%3D%22%23d7ded9%22%20stroke%3D%22%2365726b%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bcc5c0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-2.5%205%200%200%202.5Z%22%20fill%3D%22%23bcc5c0%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
@@ -1666,8 +1669,7 @@
       --slider-edge: #7e9dbb;
     }
 
-    :host([data-scene-mode=light][data-theme=none]) .chronicle,
-    :host([data-scene-mode=light][data-theme=simple]) .chronicle {
+    :host([data-scene-mode=light]:is([data-theme=none],[data-theme=simple],[data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets])) .chronicle {
       --slider-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-12%20-12%2024%2024%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%220%22%20r%3D%225.5%22%20fill%3D%22%2359675f%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-grip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-11%20-11%2022%2022%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%22-3.5%22%20y%3D%22-6%22%20width%3D%227%22%20height%3D%2212%22%20rx%3D%223.5%22%20fill%3D%22%23d7ded9%22%20stroke%3D%22%238a978e%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
       --slider-marker: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22-7%20-7%2014%2014%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2359675f%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0-2.5%205%200%200%202.5Z%22%20fill%3D%22%2359675f%22%20stroke%3D%22none%22%20%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
@@ -2277,7 +2279,7 @@
       background: #111a22;
     }
 
-    .theme-art.simple {
+    .theme-art:is(.simple,.initial,.log,.quote,.brackets) {
       color: inherit;
       font: inherit;
       background: none;
@@ -2632,6 +2634,129 @@
       gap: 6px;
       align-items: baseline;
     }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) {
+      --ink: #f0efea;
+      --secondary: #ccd7ce;
+      --subtle: #afb4af;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 0;
+      border: 0;
+      background: none;
+      font: calc(13px * var(--dialogue-font-scale, 1))/1.6 'Instrument Sans','Malgun Gothic',sans-serif;
+    }
+
+    [data-scene-mode=light] .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) {
+      --ink: #282925;
+      --secondary: #415348;
+      --subtle: #5d625b;
+    }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) .speaker-portrait {
+      align-self: flex-start;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+    }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) .dialogue-body {
+      overflow-wrap: anywhere;
+    }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets])
+    :is(.dialogue-name,.dialogue-speech,.dialogue-pronunciation,.dialogue-translation) { font: inherit; }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) .dialogue-name {
+      display: block;
+      margin-bottom: 0;
+      font-weight: 700;
+    }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) .dialogue-name small {
+      margin-inline-start: .45em;
+      font: inherit;
+      font-size: .85em;
+      font-weight: 400;
+    }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) .dialogue-pronunciation {
+      margin-top: 0;
+      font-size: .82em;
+    }
+
+    .dialogue:is([data-theme=initial],[data-theme=log],[data-theme=quote],[data-theme=brackets]) .dialogue-translation {
+      margin-top: 0;
+      font-size: .93em;
+    }
+
+    .dialogue[data-theme=initial] { --accent: #e6d1bb; --secondary: #d8cfc4; }
+    [data-scene-mode=light] .dialogue[data-theme=initial] { --accent: #74462d; --secondary: #51483d; }
+
+    .dialogue[data-theme=initial] .speaker-initial {
+      display: grid;
+      place-items: center;
+      color: #efd1b8;
+      background: #483a31;
+      font: 700 12px/1 'Instrument Sans','Malgun Gothic',sans-serif;
+    }
+
+    [data-scene-mode=light] .dialogue[data-theme=initial] .speaker-initial {
+      color: #74462d;
+      background: #f2e4d9;
+    }
+
+    .dialogue[data-theme=log] { --accent: #b5cdb4; }
+    [data-scene-mode=light] .dialogue[data-theme=log] { --accent: #3a6141; }
+    .dialogue[data-theme=log] .dialogue-name { font-family: 'IBM Plex Mono',Consolas,'Malgun Gothic',monospace; }
+    .dialogue[data-theme=log] .dialogue-name::before { content: '[' / ''; }
+    .dialogue[data-theme=log] .dialogue-name::after { content: ']' / ''; }
+
+    .dialogue[data-theme=log] :is(.dialogue-speech,.dialogue-pronunciation,.dialogue-translation) { padding-inline-start: 15px; }
+    .dialogue[data-theme=log] .dialogue-speech { position: relative; }
+    .dialogue[data-theme=log] .dialogue-speech::before {
+      content: '>' / '';
+      position: absolute;
+      inset-inline-start: 0;
+      color: var(--accent);
+    }
+
+    .dialogue[data-theme=quote] { --accent: #b0c6b8; --edge: #759d89; }
+    [data-scene-mode=light] .dialogue[data-theme=quote] { --accent: #386453; --edge: #709280; }
+    .dialogue[data-theme=quote] .dialogue-body {
+      border-inline-start: 2px solid var(--edge);
+      padding-inline-start: 13px;
+    }
+
+    .dialogue[data-theme=brackets] {
+      --ink: #f4eee3;
+      --secondary: #d8c7b1;
+      --subtle: #c0b5a6;
+      --accent: #e4cba5;
+      font-family: 'Nanum Myeongjo',Batang,Georgia,serif;
+      line-break: strict;
+    }
+
+    [data-scene-mode=light] .dialogue[data-theme=brackets] {
+      --ink: #2c2621;
+      --secondary: #624c38;
+      --subtle: #645a4f;
+      --accent: #6f4727;
+    }
+
+    .dialogue[data-theme=brackets] :is(.dialogue-name,.dialogue-speech,.dialogue-pronunciation,.dialogue-translation) {
+      display: inline;
+      margin: 0;
+      white-space: normal;
+    }
+
+    .dialogue[data-theme=brackets] .dialogue-name small { margin-inline-start: 0; }
+    .dialogue[data-theme=brackets] .dialogue-speech::before { content: '「'; }
+    .dialogue[data-theme=brackets] .dialogue-speech::after { content: '」'; }
+    .dialogue[data-theme=brackets] .dialogue-pronunciation { font-size: .79em; }
+    .dialogue[data-theme=brackets] .dialogue-pronunciation::before { content: '('; }
+    .dialogue[data-theme=brackets] .dialogue-pronunciation::after { content: ')'; }
+    .dialogue[data-theme=brackets] .dialogue-translation { font-size: .9em; }
 
     .dialogue[data-theme=game] {
       --paper: #28313d;
@@ -4636,6 +4761,7 @@
     const bubble = make('article', 'dialogue');
     bubble.dataset.theme = config.theme;
     bubble.style.setProperty('--dialogue-font-scale', String(config.themeFontSize / 100));
+    const speakerName = fields.name || fields.translatedName;
     const blob = images.get(normalizeName(fields.name)) || images.get(normalizeName(fields.translatedName));
     if (blob) {
       const image = make('img', 'speaker-portrait');
@@ -4643,10 +4769,15 @@
       image.alt = '';
       bubble.append(image);
       bubble.classList.add('has-portrait');
+    } else if (config.theme === 'initial' && speakerName) {
+      const [initial] = speakerName;
+      const badge = make('span', 'speaker-portrait speaker-initial', initial);
+      badge.setAttribute('aria-hidden', 'true');
+      bubble.append(badge);
     }
     const body = make('div', 'dialogue-body');
-    if (fields.name || fields.translatedName) {
-      const name = make('div', 'dialogue-name', fields.name || fields.translatedName);
+    if (speakerName) {
+      const name = make('div', 'dialogue-name', speakerName);
       if (fields.name && fields.translatedName) name.append(make('small', '', fields.translatedName));
       body.append(name);
     }
@@ -4662,6 +4793,10 @@
       });
     }
     if (fields.translation) body.append(make('p', 'dialogue-translation', fields.translation));
+    if (config.theme === 'brackets') {
+      body.querySelector('.dialogue-name small')?.before(' ');
+      for (const field of Array.from(body.children).slice(1)) field.before(' ');
+    }
     themeFonts.get(config.themeFontCSS)?.family.then(family => {
       if (!family || !host.isConnected || suspended) return;
       body.style.fontFamily = family;
