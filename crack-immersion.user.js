@@ -2750,6 +2750,7 @@
       white-space: normal;
     }
 
+    .dialogue[data-theme=brackets] .dialogue-name { margin-inline-end: .25em; }
     .dialogue[data-theme=brackets] .dialogue-name small { margin-inline-start: 0; }
     .dialogue[data-theme=brackets] .dialogue-speech::before { content: '「'; }
     .dialogue[data-theme=brackets] .dialogue-speech::after { content: '」'; }
