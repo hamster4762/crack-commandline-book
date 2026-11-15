@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.7.1
+// @version      1.0.7.2
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -33,6 +33,8 @@
   let suspended = false;
   const EDITOR = '.__chat_input_textarea[contenteditable="true"],textarea.__chat_input_textarea';
   const MESSAGE_ROOT = '[data-message-group-id] .wrtn-markdown';
+  // 생성 중인 답변은 메시지 ID가 없는 임시 영역에 그려지고, 완료되면 정식 메시지로 교체된다.
+  const STREAM_ROOT = 'main .flex-col-reverse > :not([data-message-group-id]) .wrtn-markdown';
   const API_ORIGIN = 'https://crack-api.wrtn.ai';
   const own = node => node?.nodeType === 1 && (node.matches('[data-cc-focus-owned]') || !!node.closest('[data-cc-focus-owned]'));
 
@@ -4966,6 +4968,22 @@
   let messageScroller = null;
   let observedBody = null;
   const messageObserver = new page.MutationObserver(observeMessages);
+  const streamRoots = new WeakSet();
+
+  // 글자가 흘러들어오는 중(.animate)인 임시 답변 본문인지 확인한다.
+  function isStreamRoot(root) {
+    if (streamRoots.has(root)) return true;
+    if (!root.matches(STREAM_ROOT) || root.closest('button') || !root.querySelector('.animate')) return false;
+    streamRoots.add(root);
+    return true;
+  }
+
+  // 생성 중인 답변은 마지막 문단만 계속 바뀐다. 새 문단이 시작되거나 완성된 문단이 바뀔 때만 다시 그린다.
+  function touchStream(root, target) {
+    let block = target;
+    while (block !== root && block.parentElement !== root) block = block.parentElement;
+    if (block !== root.lastElementChild) queueMessage(root);
+  }
 
   // 변경된 본문만 모으고, 같은 프레임의 중복 변경은 한 번만 처리한다.
   function queueMessage(root) {
@@ -4976,7 +4994,7 @@
       const roots = [...changedMessages];
       changedMessages.clear();
       for (const root of roots) {
-        if (root.isConnected && root.matches(MESSAGE_ROOT)) emphasizeRoot(root).catch(showError);
+        if (root.isConnected && (root.matches(MESSAGE_ROOT) || streamRoots.has(root))) emphasizeRoot(root).catch(showError);
         else {
           const record = highlighted.get(root);
           if (record) clearHighlight(record);
@@ -4991,8 +5009,13 @@
     if (node.nodeType !== 1 || own(node)) return false;
     let found = false;
     const collect = root => {
-      if (!root.matches(MESSAGE_ROOT) && !highlighted.has(root)) return;
-      queueMessage(root);
+      if (!root.matches(MESSAGE_ROOT) && !highlighted.has(root)) {
+        if (root.isConnected && isStreamRoot(root)) queueMessage(root);
+        return;
+      }
+      // 임시 답변이 정식 메시지로 교체될 때 원문이 한 프레임 보이지 않도록 그리기 전에 바로 적용한다.
+      if (root.isConnected && !highlighted.has(root)) emphasizeRoot(root).catch(showError);
+      else queueMessage(root);
       found = true;
     };
     if (node.matches('.wrtn-markdown')) collect(node);
@@ -5009,6 +5032,10 @@
       if (!target || own(target)) continue;
       const root = target.closest(MESSAGE_ROOT);
       if (root) queueMessage(root);
+      else {
+        const stream = target.closest('.wrtn-markdown');
+        if (stream && isStreamRoot(stream)) touchStream(stream, target);
+      }
       if (record.type !== 'childList') continue;
       for (const node of [...record.addedNodes, ...record.removedNodes]) {
         if (collectMessages(node)) scheduleSync();
@@ -5051,8 +5078,10 @@
       run = [];
     };
     // 텍스트가 아닌 요소는 경계로 두고, 연속된 텍스트와 인라인 서식만 대사 패턴에 전달한다.
+    // 생성 중인 답변에는 글자 없는 빈 span이 끼어 있으므로 경계로 보지 않는다.
     const textOnly = node => node.nodeType === page.Node.TEXT_NODE || node.nodeType === 1 &&
-      (node.tagName === 'BR' || node.tagName !== 'PRE' && node.childNodes.length > 0 && [...node.childNodes].every(textOnly));
+      (node.tagName === 'BR' || node.tagName === 'SPAN' && !node.childNodes.length ||
+        node.tagName !== 'PRE' && node.childNodes.length > 0 && [...node.childNodes].every(textOnly));
     function collect(container) {
       let nodes = [];
       const block = () => {
@@ -5072,7 +5101,10 @@
       }
       block();
     }
+    // 생성 중인 답변의 마지막 문단은 아직 완성되지 않았으므로 읽지 않는다.
+    const unfinished = streamRoots.has(root) ? root.lastElementChild : null;
     for (const node of root.children) {
+      if (node === unfinished) break;
       if (own(node)) continue;
       if (node.tagName === 'BLOCKQUOTE') {
         flush();
