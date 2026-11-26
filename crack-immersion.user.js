@@ -784,13 +784,16 @@
   let chatId = '';
   let immersive = false;
   let routeGeneration = 0;
+  // 메시지 ID → { id, role, turnId, parentTurnId, order, older, turn }
+  // order는 API 최신순 위치(클수록 오래됨), older는 API 순서상 바로 다음 메시지다.
+  // turn은 최신 메시지에서 이어지는 턴 경로에 있을 때만 1 이상이다.
   let metadata = new Map();
+  let byTurn = new Map();
+  let newest = null;
   let turns = [];
-  let ordinal = new Map();
   let indexComplete = false;
   let indexJob = null;
   let indexAbort = null;
-  let latestMessageId = '';
   let pendingTurn = null;
   let seeking = false;
   let aroundTimer;
@@ -802,58 +805,96 @@
     return suspended ? '' : page.location.pathname.match(/\/episodes\/([^/?#]+)/)?.[1] || '';
   }
 
-  // 턴 탐색에 필요한 메시지 메타데이터만 보관한다.
-  function remember(messages) {
-    for (const item of messages) {
-      if (!item || typeof item._id !== 'string' || !['user', 'assistant'].includes(item.role)) continue;
-      metadata.set(item._id, {
-        id: item._id,
-        role: item.role,
-        turnId: item.turnId,
-        parentTurnId: item.parentTurnId,
-        createdAt: item.createdAt || '',
-        status: item.status
-      });
-    }
+  function isTurnMessage(item) {
+    return item && typeof item._id === 'string' && (item.role === 'user' || item.role === 'assistant');
   }
 
-  // 부모 턴 연결을 따라 현재 대화의 턴 순서를 만든다.
-  function buildTurns() {
-    const byTurn = new Map([...metadata.values()].filter(item => item.turnId).map(item => [item.turnId, item]));
-    const latest = metadata.get(latestMessageId);
-    if (!latest) return;
-    const chain = [];
-    const visited = new Set();
-    let item = latest;
-    while (item && !visited.has(item.id)) {
-      chain.push(item);
-      visited.add(item.id);
-      item = item.parentTurnId ? byTurn.get(item.parentTurnId) : null;
+  // 턴 탐색에 필요한 메시지 메타데이터만 보관한다.
+  function addRecord(records, turnIds, item, order) {
+    const record = {
+      id: item._id,
+      role: item.role,
+      turnId: item.turnId,
+      parentTurnId: item.parentTurnId,
+      order,
+      older: null,
+      turn: 0
+    };
+    records.set(record.id, record);
+    if (record.turnId) turnIds.set(record.turnId, record);
+    return record;
+  }
+
+  // 부모 턴을 우선하고, 부모가 없거나 삭제되어 찾지 못하면 API 순서상 직전 메시지로 이어간다.
+  // 항상 더 오래된 메시지로만 이동하므로 탐색이 반복되지 않는다.
+  function previousOf(record) {
+    const parent = byTurn.get(record.parentTurnId);
+    return parent?.order > record.order ? parent : record.older;
+  }
+
+  // AI 응답이 바로 앞 유저 메시지를 부모로 가리킬 때만 한 턴으로 묶는다.
+  function isReplyTo(user, reply) {
+    return user?.role === 'user' && reply.role === 'assistant' && !!reply.parentTurnId && reply.parentTurnId === user.turnId;
+  }
+
+  // 최신 메시지에서 거슬러 올라가 기존 턴 경로와 만나는 곳까지만 턴을 정한다.
+  function connectLatest(latest) {
+    const added = [];
+    let anchor = latest;
+    while (anchor && !anchor.turn) {
+      added.push(anchor);
+      anchor = previousOf(anchor);
     }
-    chain.reverse();
-    turns = [];
-    ordinal = new Map();
-    let turn = 0;
-    let previousRole = '';
-    for (const message of chain) {
-      // user → assistant만 한 턴으로 묶고, 단독 메시지는 각각 한 턴으로 센다.
-      if (message.role !== 'assistant' || previousRole !== 'user') turn += 1;
-      turns[turn] = { id: message.id };
-      ordinal.set(message.id, turn);
-      previousRole = message.role;
+    // 리롤처럼 경로가 갈라진 기존 끝부분은 턴에서 뺀다.
+    for (let item = newest; item && item !== anchor; item = previousOf(item)) item.turn = 0;
+    turns.length = anchor ? anchor.turn + 1 : 0;
+    if (anchor) turns[anchor.turn] = { id: anchor.id };
+    let turn = anchor ? anchor.turn : 0;
+    let previous = anchor;
+    for (let index = added.length - 1; index >= 0; index -= 1) {
+      const item = added[index];
+      if (!isReplyTo(previous, item)) turn += 1;
+      item.turn = turn;
+      turns[turn] = { id: item.id };
+      previous = item;
     }
-    if (!turns[0] && turns[1]) turns[0] = turns[1];
+    if (turns[1]) turns[0] = turns[1];
+    newest = latest;
     updateChronicle();
   }
 
-  // 크랙이 이미 읽은 기록에서 턴 메타데이터를 갱신한다.
+  // 최신 페이지에서 처음 보는 메시지만 앞에 붙이고 턴 경로를 이어간다.
+  function mergeLatest(data) {
+    const fresh = [];
+    let connected = false;
+    for (const item of data.messages) {
+      if (!isTurnMessage(item)) continue;
+      if (metadata.has(item._id)) {
+        connected = true;
+        break;
+      }
+      fresh.push(item);
+    }
+    if (!fresh.length) return;
+    // 아는 메시지와 이어지지 않으면 사이에 빠진 기록이 있을 수 있어 전체를 다시 읽는다.
+    if (!connected) {
+      invalidateIndex();
+      return;
+    }
+    let older = newest;
+    for (let index = fresh.length - 1; index >= 0; index -= 1) {
+      const record = addRecord(metadata, byTurn, fresh[index], older.order - 1);
+      record.older = older;
+      older = record;
+    }
+    connectLatest(older);
+  }
+
+  // 크랙이 읽은 최신 페이지로 새 메시지를 반영한다. 과거 페이지는 이미 인덱스에 있다.
   function ingestNative(url, value) {
     if (messageRoute(url) !== chatId || !Array.isArray(value?.data?.messages)) return;
-    const messages = value.data.messages;
-    remember(messages);
     const isLatestPage = !url.pathname.endsWith('/around') && !url.searchParams.has('cursor') && url.searchParams.get('sortOrder') !== 'asc';
-    if (isLatestPage && messages[0]?._id) latestMessageId = messages[0]._id;
-    if (indexComplete) buildTurns();
+    if (indexComplete && isLatestPage) mergeLatest(value.data);
     scheduleSync();
   }
 
@@ -868,15 +909,15 @@
   // 새 메시지가 생기면 최신 턴만 갱신한다.
   function refreshLatest() {
     if (!indexComplete || latestRefresh || Date.now() - lastRefreshAt < 1500) return;
-    const newest = doc.querySelector('[data-message-group-id]')?.dataset.messageGroupId.replace(/^search:/, '');
-    if (!newest || metadata.has(newest)) return;
+    const shownId = doc.querySelector('[data-message-group-id]')?.dataset.messageGroupId.replace(/^search:/, '');
+    if (!shownId || metadata.has(shownId)) return;
     const generation = routeGeneration;
+    const records = metadata;
     lastRefreshAt = Date.now();
-    latestRefresh = readMessages('?limit=200&sortOrder=desc').then(data => {
-      if (generation !== routeGeneration || suspended) return;
-      remember(data.messages);
-      if (data.messages[0]?._id) latestMessageId = data.messages[0]._id;
-      buildTurns();
+    // 새 메시지만 필요하므로 적게 읽고, 기존 기록과 이어지지 않으면 mergeLatest가 전체를 다시 읽는다.
+    latestRefresh = readMessages('?limit=20&sortOrder=desc').then(data => {
+      if (generation !== routeGeneration || suspended || !indexComplete || records !== metadata) return;
+      mergeLatest(data);
     }).catch(showError).finally(() => {
       latestRefresh = null;
     });
@@ -892,22 +933,35 @@
     indexJob = (async () => {
       updateChronicle('기록 연결 중');
       let cursor = '';
+      let latest = null;
+      let last = null;
+      const records = new Map();
+      const turnIds = new Map();
       const seen = new Set();
       do {
         const query = new page.URLSearchParams({ limit: '200', sortOrder: 'desc' });
         if (cursor) query.set('cursor', cursor);
         const data = await readMessages('?' + query, controller.signal);
         if (generation !== routeGeneration) return;
-        remember(data.messages);
-        if (!cursor && data.messages[0]?._id) latestMessageId = data.messages[0]._id;
+        for (const item of data.messages) {
+          if (!isTurnMessage(item) || records.has(item._id)) continue;
+          const record = addRecord(records, turnIds, item, records.size);
+          if (last) last.older = record;
+          else latest = record;
+          last = record;
+        }
         cursor = data.hasNext === false || !data.messages.length ? '' : data.nextCursor || '';
         if (cursor && seen.has(cursor)) throw new Error('기록 커서가 반복되어 조회를 중단했습니다.');
         seen.add(cursor);
-        updateChronicle('기록 ' + metadata.size + '개 확인');
+        updateChronicle('기록 ' + records.size + '개 확인');
       } while (cursor && !controller.signal.aborted);
       if (generation !== routeGeneration || controller.signal.aborted) return;
+      metadata = records;
+      byTurn = turnIds;
+      newest = null;
+      turns = [];
       indexComplete = true;
-      buildTurns();
+      connectLatest(latest);
     })().finally(() => {
       if (indexAbort === controller) {
         indexJob = null;
@@ -5324,23 +5378,57 @@
     },
     releaseScroll() {
       const lock = this.scrollLock;
-      if (lock && lock.context.targetScrollTop === lock.hold) lock.context.targetScrollTop = lock.previous;
       this.scrollLock = null;
+      lock?.release();
     },
     stopScroll(scroll, hold = false) {
-      const root = scroll?.closest('.stick-to-bottom');
-      let fiber = root?.[Object.keys(root).find(key => key.startsWith('__reactFiber$'))];
-      for (let depth = 0; fiber && depth < 5; depth += 1, fiber = fiber.return) {
+      let fiber = scroll?.[Object.keys(scroll).find(key => key.startsWith('__reactFiber$'))];
+      for (let depth = 0; fiber && depth < 6; depth += 1, fiber = fiber.return) {
         const value = fiber.memoizedProps?.value;
         if (typeof value?.stopScroll === 'function' && typeof value.scrollToBottom === 'function') {
-          if (hold && this.scrollLock?.context.scrollRef !== value.scrollRef) {
+          if (hold && this.scrollLock?.scrollRef !== value.scrollRef) {
             this.releaseScroll();
             const previous = value.targetScrollTop;
-            const hold = (_, { scrollElement }) => scrollElement.scrollTop;
-            value.targetScrollTop = hold;
-            this.scrollLock = { context: value, previous, hold };
+            const keepPosition = (_, { scrollElement }) => scrollElement.scrollTop;
+            value.targetScrollTop = keepPosition;
+            this.scrollLock = {
+              scrollRef: value.scrollRef,
+              scrollToBottom: value.scrollToBottom,
+              release() {
+                if (value.targetScrollTop === keepPosition) value.targetScrollTop = previous;
+              }
+            };
           }
           value.stopScroll();
+          return true;
+        }
+        if (fiber.memoizedProps?.scrollRef?.current !== scroll) continue;
+        // 크랙의 채팅 렌더러가 하단 고정 훅을 직접 사용할 때는 스크롤 ref를 넘긴 렌더러에서 찾는다.
+        for (let hook = fiber.return?.memoizedState; hook; hook = hook.next) {
+          const state = hook.memoizedState?.[0];
+          const position = state && Object.getOwnPropertyDescriptor(state, 'scrollTop');
+          const bottomHook = hook.next?.memoizedState;
+          const stop = hook.next?.next?.memoizedState?.[0];
+          if (!position?.get || !position.set || !position.configurable || typeof bottomHook?.[0] !== 'function' ||
+            !Array.isArray(bottomHook[1]) || !bottomHook[1].includes(state) || typeof stop !== 'function') continue;
+          if (hold && this.scrollLock?.state !== state) {
+            this.releaseScroll();
+            const keepPosition = top => {
+              // 새 기록을 붙일 때 하단으로 따라가는 애니메이션만 멈춘다.
+              if (state.animation && top > position.get.call(state)) stop();
+              else position.set.call(state, top);
+            };
+            Object.defineProperty(state, 'scrollTop', { ...position, set: keepPosition });
+            this.scrollLock = {
+              state,
+              release() {
+                if (Object.getOwnPropertyDescriptor(state, 'scrollTop')?.set === keepPosition) {
+                  Object.defineProperty(state, 'scrollTop', position);
+                }
+              }
+            };
+          }
+          stop();
           return true;
         }
       }
@@ -5367,8 +5455,8 @@
               check = deps[2];
             }
             // 같은 메시지 수로 앵커만 바뀌면 생략되는 크랙의 기록 스크롤 초기화를 보충한다.
-            if (deps?.length === 5 && deps[0] > 0 && deps[1] === false &&
-              deps[2] === this.scrollLock?.context.scrollToBottom && deps[4] === 'none' &&
+            if (this.scrollLock?.scrollToBottom && deps?.length === 5 && deps[0] > 0 && deps[1] === false &&
+              deps[2] === this.scrollLock.scrollToBottom && deps[4] === 'none' &&
               typeof hook.memoizedState.create === 'function') {
               hook.memoizedState.create();
             }
@@ -5937,8 +6025,8 @@
       crackNavigation.recheckPaging(scroll);
       let nearest = null, distance = Infinity;
       for (const group of crackNavigation.groups()) {
-        const id = group.dataset.messageGroupId.replace(/^search:/, ''), turn = ordinal.get(id);
-        if (turn === undefined) continue;
+        const id = group.dataset.messageGroupId.replace(/^search:/, ''), turn = metadata.get(id)?.turn;
+        if (!turn) continue;
         const bounds = group.getBoundingClientRect(), delta = Math.abs(bounds.top - (rect.top + rect.height * .35));
         if (bounds.bottom >= rect.top && bounds.top <= rect.bottom && delta < distance) {
           distance = delta;
@@ -5983,11 +6071,11 @@
       routeGeneration += 1;
       indexAbort?.abort();
       metadata = new Map();
+      byTurn = new Map();
+      newest = null;
       turns = [];
-      ordinal = new Map();
       indexComplete = false;
       indexJob = null;
-      latestMessageId = '';
       restoreHighlights();
       cancelSeek();
       closeBookmarkPopover();
