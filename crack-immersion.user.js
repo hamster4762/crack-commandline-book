@@ -2,7 +2,7 @@
 // @name         크랙 몰입모드
 // @namespace    crack-commandline
 // @icon         https://github.com/hamster4762/crack-commandline-book/raw/refs/heads/main/images/crack-commandline.svg
-// @version      1.0.7.3
+// @version      2.0.0.0
 // @description  PC·모바일 지원. !몰입모드로 화면과 대사 테마를 설정하고 F9로 몰입모드를 전환합니다.  (version 관리방식: 데이터구조버전.크랙UI변경.기능추가및수정.버그수정)
 // @match        https://crack.wrtn.ai/*
 // @run-at       document-start
@@ -23,6 +23,29 @@
 // @updateURL    https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-immersion.user.js
 // @downloadURL  https://raw.githubusercontent.com/hamster4762/crack-commandline-book/refs/heads/main/crack-immersion.user.js
 // ==/UserScript==
+
+/*
+ * 영구 데이터 (core 저장소 crack-immersion, Local·Firebase 공통)
+ * ├─ meta
+ * │  └─ version: 2
+ * └─ v2
+ *    ├─ config
+ *    │  ├─ hideLeft, hideTop, closeRight, autoGrow, showSlider: boolean
+ *    │  ├─ theme: string                    // themes[][0]
+ *    │  ├─ fontSize: number                 // 80~200, 10 단위
+ *    │  ├─ fontId: string | null            // fonts[].id, null = 기본 폰트
+ *    │  ├─ autoPronunciation: boolean
+ *    │  ├─ pronunciationLanguage: 'ja' | 'zh' | 'yue'
+ *    │  ├─ patterns: [{ id, template }]     // 사용자 대사 형식, 최대 100개
+ *    │  ├─ patternLinks
+ *    │  │  └─ {작품 ID}: { name, patternId } // patternId = presets[].id | patterns[].id
+ *    │  └─ fonts: [{ id, name, source }]    // source = 웹폰트 CSS
+ *    ├─ portraits
+ *    │  ├─ revision: number                 // 이미지 캐시 기준값
+ *    │  └─ items: [{ name, data }]          // data = 이미지 data URL
+ *    └─ bookmarks
+ *       └─ {채팅방 ID}: { title, items: [{ turn, name }] }
+ */
 
 /* 공유 core가 먼저 실행된 스크립트의 권한을 사용하므로 Firebase 권한도 동일하게 선언한다. */
 (() => {
@@ -47,24 +70,28 @@
 
   const presets = [
     {
+      id: 'preset-name',
       name: '이름 + 대사',
       hint: '**이름 |** "대사"',
       sample: '**루엔 |** "별이 사라져도, 이 길의 끝에서 기다리겠습니다."',
       regex: '^\\*\\*(?<name>[^|｜*]+)\\s*[|｜]\\*\\*\\s*["“](?<speech>[^"”\\n]+)["”]$'
     },
     {
+      id: 'preset-translation',
       name: '외국어 대사 + 번역',
       hint: '**이름 |** "대사"\n(한국어 번역)',
       sample: '**Aerin |** "Even the longest night gives way to dawn."\n(가장 긴 밤도 결국 새벽에게 길을 내어주지요.)',
       regex: '^\\*\\*(?<name>[^|｜*]+)\\s*[|｜]\\*\\*\\s*["“](?<speech>[^"”]+)["”]\\s*\\((?<translation>[^)]+)\\)$'
     },
     {
+      id: 'preset-decorated',
       name: '장식 이름 + 번역명',
       hint: '⧙ **이름** *번역명* ⧙\n❝ 대사 *번역* ❞',
       sample: '⧙ **Aerin** *에린* ⧙\n❝ Follow the silver light. *은빛을 따라오세요.* ❞',
       regex: '^⧙\\s*\\*\\*(?<name>[^*]+)\\*\\*\\s*\\*(?<translatedName>[^*]+)\\*\\s*⧙\\s*❝\\s*(?<speech>[^*]+?)\\s*\\*(?<translation>[^*]+)\\*\\s*❞$'
     },
     {
+      id: 'preset-pronunciation',
       name: '원문 + 발음 + 번역',
       hint: '⧙ 이름 번역명 ⧙\n"원문 / 한글 발음 / 번역"',
       sample: '⧙ Aerin 에린 ⧙\n" Lux inter tenebras.\n룩스 인테르 테네브라스.\n어둠 속에서도 빛은 남아 있습니다. "',
@@ -93,26 +120,34 @@
     ['chuhan', '비단 매화', '❀']
   ];
 
-  // 화면 설정과 대사 테마만 저장한다. 키 배정은 이 스크립트에서 다루지 않는다.
+  // 영구 저장 구조 버전. 데이터는 'v' + 버전 경로 아래에 두고 버전은 meta/version에 기록한다.
+  const DATA_VERSION = 2;
+  const CONFIG_PATH = 'v2/config';
+  const PORTRAITS_PATH = 'v2/portraits';
+  const BOOKMARKS_PATH = 'v2/bookmarks';
+
+  // 화면 설정, 대사 테마, 대사 패턴, 폰트를 저장한다. 키 배정은 이 스크립트에서 다루지 않는다.
+  // patterns·fonts의 id는 randomUUID, 기본 패턴의 id는 presets[].id라 서로 겹치지 않는다.
+  // patternLinks는 작품 ID별로 연결한 패턴이며, 연결이 없는 작품은 대사 패턴을 적용하지 않는다.
   function defaultSettings() {
     return {
-      version: 1,
       hideLeft: true,
       hideTop: true,
       closeRight: true,
       autoGrow: true,
       showSlider: true,
       theme: 'none',
-      themeFontSize: 100,
-      themeFontCSS: '',
+      fontSize: 100,
+      fontId: null,
       autoPronunciation: false,
       pronunciationLanguage: 'ja',
-      pattern: 0,
-      customTemplate: '',
-      customTemplates: []
+      patterns: [],
+      patternLinks: {},
+      fonts: []
     };
   }
   const MAX_CUSTOM_TEMPLATES = 100;
+  const newId = () => page.crypto.randomUUID();
   // 줄바꿈과 앞뒤 공백을 맞춰 같은 대사 형식을 하나로 취급한다.
   const cleanTemplate = template => String(template).replace(/\r\n?/g, '\n').trim();
   function isValidTemplate(template) {
@@ -121,29 +156,45 @@
   // 저장값 중 이 스크립트가 사용하는 유효한 설정만 받아들인다.
   function normalizeSettings(value) {
     const next = defaultSettings();
-    if (!value || value.version !== 1) return next;
+    if (!value || typeof value !== 'object') return next;
     for (const key of ['hideLeft', 'hideTop', 'closeRight', 'autoGrow', 'showSlider', 'autoPronunciation']) {
       if (typeof value[key] === 'boolean') next[key] = value[key];
     }
     if (themes.some(([id]) => id === value.theme)) next.theme = value.theme;
-    if (Number.isInteger(value.themeFontSize) && value.themeFontSize >= 80 && value.themeFontSize <= 200 && value.themeFontSize % 10 === 0) next.themeFontSize = value.themeFontSize;
-    if (typeof value.themeFontCSS === 'string') next.themeFontCSS = value.themeFontCSS.trim();
+    if (Number.isInteger(value.fontSize) && value.fontSize >= 80 && value.fontSize <= 200 && value.fontSize % 10 === 0) next.fontSize = value.fontSize;
     if (['ja', 'zh', 'yue'].includes(value.pronunciationLanguage)) next.pronunciationLanguage = value.pronunciationLanguage;
-    const templates = new Set();
-    // 이전 버전의 단일 커스텀 형식도 목록으로 옮긴다.
-    const legacy = typeof value.customTemplate === 'string' ? cleanTemplate(value.customTemplate) : '';
-    for (const template of [...(Array.isArray(value.customTemplates) ? value.customTemplates : []), legacy]) {
-      if (typeof template !== 'string' || templates.size >= MAX_CUSTOM_TEMPLATES) continue;
-      const clean = cleanTemplate(template);
-      if (clean && isValidTemplate(clean)) templates.add(clean);
+    const ids = new Set(presets.map(preset => preset.id)), templates = new Set();
+    for (const item of Array.isArray(value.patterns) ? value.patterns : []) {
+      const template = typeof item?.template === 'string' ? cleanTemplate(item.template) : '';
+      if (next.patterns.length >= MAX_CUSTOM_TEMPLATES || typeof item?.id !== 'string' || !item.id || ids.has(item.id) ||
+        templates.has(template) || !isValidTemplate(template)) continue;
+      ids.add(item.id);
+      templates.add(template);
+      next.patterns.push({ id: item.id, template });
     }
-    next.customTemplates = [...templates];
-    if (Number.isInteger(value.pattern) && presets[value.pattern]) next.pattern = value.pattern;
-    else if (value.pattern === 'custom' && templates.has(legacy)) {
-      next.pattern = 'custom';
-      next.customTemplate = legacy;
+    const links = value.patternLinks && typeof value.patternLinks === 'object' ? value.patternLinks : {};
+    for (const [story, link] of Object.entries(links)) {
+      if (!ids.has(link?.patternId)) continue;
+      next.patternLinks[story] = { name: typeof link.name === 'string' && link.name.trim() ? link.name.trim() : story, patternId: link.patternId };
     }
+    for (const font of Array.isArray(value.fonts) ? value.fonts : []) {
+      const name = typeof font?.name === 'string' ? font.name.trim() : '';
+      const source = typeof font?.source === 'string' ? font.source.trim() : '';
+      if (typeof font?.id === 'string' && font.id && name && source && !next.fonts.some(item => item.id === font.id)) next.fonts.push({ id: font.id, name, source });
+    }
+    if (next.fonts.some(font => font.id === value.fontId)) next.fontId = value.fontId;
     return next;
+  }
+
+  // 현재 작품에 연결된 패턴. 기본 패턴은 regex, 사용자 패턴은 template을 가진다.
+  function linkedPattern(config) {
+    const id = config.patternLinks[storyId]?.patternId;
+    return presets.find(preset => preset.id === id) || config.patterns.find(pattern => pattern.id === id) || null;
+  }
+
+  // 선택한 폰트의 웹폰트 CSS. 선택하지 않았으면 빈 문자열이다.
+  function fontSource(config) {
+    return config.fonts.find(font => font.id === config.fontId)?.source || '';
   }
 
   // 고정 기호는 이스케이프하고 대사 항목만 이름 있는 정규식 그룹으로 바꾼다.
@@ -189,17 +240,19 @@
   let storageReady = Promise.resolve();
   let storageLoading = false;
   let book;
-  let updatedAt = null;
+  let portraitRevision = null;
   let alwaysOn = false;
   const bookmarkRooms = new Map();
   let draftBookmarks = null;
   const chatTitles = new Map();
+  // 작품 ID → 작품명. 페이지가 조회한 작품 응답에서만 채운다.
+  const storyNames = new Map();
   let bookmarkSaving = false;
   let bookmarkRoom = '';
   let bookmarkRevision = 0;
 
   function bookmarkPath(id) {
-    return 'bookmarks/' + encodeURIComponent(id).replace(/\./g, '%2E');
+    return BOOKMARKS_PATH + '/' + encodeURIComponent(id).replace(/\./g, '%2E');
   }
 
   function editableBookmarkRoom(id) {
@@ -217,6 +270,13 @@
     const title = (link?.querySelector('h1,h2,h3')?.textContent || link?.textContent)?.trim();
     if (title) chatTitles.set(id, title);
     return chatTitles.get(id) || id;
+  }
+
+  // 페이지가 실제로 조회한 작품 응답에서 작품명만 보관한다.
+  function observeStoryName(url, value) {
+    const id = /^\/crack-api\/stories\/([^/]+)\/?$/.exec(url.pathname)?.[1];
+    const name = value?.data?.name;
+    if (id && typeof name === 'string' && name.trim()) storyNames.set(id, name.trim());
   }
 
   // 페이지가 실제로 조회한 채팅방 응답에서 이름만 보관한다. 별도 API를 추측해 요청하지 않는다.
@@ -266,7 +326,8 @@
     save: '<path d="m3 9 4 4 8-9"/>',
     cancel: '<path d="m4 4 10 10M14 4 4 14"/>',
     select: '<rect x="3" y="3" width="12" height="12" rx="2"/><path d="m6 9 2 2 4-4"/>',
-    all: '<path d="M3 6V3h3M12 3h3v3M15 12v3h-3M6 15H3v-3m3-3 2 2 4-4"/>'
+    all: '<path d="M3 6V3h3M12 3h3v3M15 12v3h-3M6 15H3v-3m3-3 2 2 4-4"/>',
+    link: '<path d="M7.5 10.5a3 3 0 0 0 4.2 0l2.4-2.4a3 3 0 0 0-4.2-4.2l-.9.9M10.5 7.5a3 3 0 0 0-4.2 0l-2.4 2.4a3 3 0 0 0 4.2 4.2l.9-.9"/>'
   };
 
   function bookmarkIcon(icon, label, action) {
@@ -456,7 +517,7 @@
     $('bookmark-browser').hidden = false;
     try {
       const revision = bookmarkRevision;
-      const values = await book.load('bookmarks');
+      const values = await book.load(BOOKMARKS_PATH);
       if (revision !== bookmarkRevision) return;
       bookmarkRooms.clear();
       for (const [key, value] of Object.entries(values || {})) {
@@ -507,40 +568,58 @@
     });
   }
 
+  // meta/version이 없으면 v1 데이터를 v2로 옮긴다. 더 높은 버전이면 읽거나 저장하지 않는다.
+  async function prepareStorage() {
+    const version = await book.load('meta/version');
+    if (version === DATA_VERSION) return;
+    if (version !== null) {
+      throw new Error(Number(version) > DATA_VERSION
+        ? '최신 버전의 몰입모드로 저장된 데이터입니다. 스크립트를 업데이트해주세요.'
+        : '저장 데이터의 버전(' + version + ')을 확인할 수 없습니다.');
+    }
+    // 최상위 전체를 한 번에 교체해 v1 경로가 남지 않게 한다.
+    await book.save(await migrateV1(await book.load() || {}));
+  }
+
+  // v1: config(version 1)·images·updatedAt·bookmarks가 최상위에 있다. 공용 대사 패턴은 연결할 작품이 없어 옮기지 않는다.
+  async function migrateV1(value) {
+    const old = value.config || {};
+    const config = normalizeSettings({ ...old, fontSize: old.themeFontSize });
+    const templates = Array.isArray(old.customTemplates) ? old.customTemplates : [];
+    config.patterns = normalizeSettings({ patterns: templates.map(template => ({ id: newId(), template })) }).patterns;
+    const css = typeof old.themeFontCSS === 'string' ? old.themeFontCSS.trim() : '';
+    if (css) {
+      const family = await readFontFamily(css).catch(() => '');
+      const name = family.split(',')[0].trim().replace(/^(['"])(.*)\1$/, '$2');
+      config.fonts = [{ id: newId(), name: name || '기존 폰트', source: css }];
+      config.fontId = config.fonts[0].id;
+    }
+    const v2 = { config };
+    if (Array.isArray(value.images) && value.images.length) v2.portraits = { revision: value.updatedAt ?? Date.now(), items: value.images };
+    if (value.bookmarks) v2.bookmarks = value.bookmarks;
+    return { meta: { version: DATA_VERSION }, v2 };
+  }
+
   // 채팅방 진입 시 config·북마크·이미지 버전을 함께 읽는다.
   async function loadSettings() {
     const room = chatId;
+    await prepareStorage();
     const saved = await readCache();
     alwaysOn = saved.alwaysOn;
     persistedPortraits = new Map(saved.images.map(item => [normalizeName(item.name), item.blob]));
-    let config = await book.load('config');
-    let bookmark = await book.load(bookmarkPath(room));
-    let revision = await book.load('updatedAt');
+    const config = await book.load(CONFIG_PATH);
+    const bookmark = await book.load(bookmarkPath(room));
+    const revision = await book.load(PORTRAITS_PATH + '/revision');
     let images;
     if (saved.config?.updatedAt === revision && revision !== null) {
       images = new Map(persistedPortraits);
     } else {
-      let values = await book.load('images');
-      // 최초 등록의 기본 저장소는 core의 Local이다. 기존 값이 없을 때만 구버전 데이터를 이어받는다.
-      if (values === null && config === null && await book.load() === null) {
-        const legacy = saved.config === undefined ? await readLegacySettings() : saved;
-        if (legacy?.config?.version === 1) {
-          const images = new Map((legacy.images || []).filter(item => typeof item.name === 'string' && item.blob instanceof page.Blob)
-            .map(item => [normalizeName(item.name), item.blob]));
-          const value = { updatedAt: Math.max(Date.now(), (updatedAt ?? 0) + 1),
-            config: normalizeSettings(legacy.config), images: await imageRecords(images) };
-          await book.save(value);
-          config = await book.load('config');
-          bookmark = await book.load(bookmarkPath(room));
-          revision = await book.load('updatedAt');
-          values = value.images;
-        }
-      }
-      images = new Map((values || []).map(item => [normalizeName(item.name), portraitBlob(item.data)]));
+      const items = await book.load(PORTRAITS_PATH + '/items');
+      images = new Map((items || []).map(item => [normalizeName(item.name), portraitBlob(item.data)]));
     }
     try { await cacheSettings(images, revision); }
     catch (error) { toast('이미지 캐시를 갱신하지 못했습니다. ' + error.message); }
-    updatedAt = revision;
+    portraitRevision = revision;
     settings = normalizeSettings(config);
     syncThemeFonts();
     portraits = images;
@@ -596,36 +675,6 @@
       records.push({ name, data });
     }
     return records;
-  }
-
-  // 이전 통합판의 로컬 데이터 중 이 스크립트가 쓰는 값만 이어받는다.
-  async function readLegacySettings() {
-    if (!page.indexedDB.databases) return null;
-    const databases = await page.indexedDB.databases();
-    if (!databases.some(item => item.name === 'crack-key-focus-local')) return null;
-    return new Promise((resolve, reject) => {
-      const request = page.indexedDB.open('crack-key-focus-local');
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        const legacy = request.result;
-        if (!legacy.objectStoreNames.contains('settings')) {
-          legacy.close();
-          resolve(null);
-          return;
-        }
-        const transaction = legacy.transaction(['settings', 'portraits']);
-        const config = transaction.objectStore('settings').get('current');
-        const images = transaction.objectStore('portraits').getAll();
-        transaction.oncomplete = () => {
-          legacy.close();
-          resolve({ config: config.result, images: images.result });
-        };
-        transaction.onerror = () => {
-          legacy.close();
-          reject(transaction.error);
-        };
-      };
-    });
   }
 
   // 이미지와 그 버전만 캐싱한다. config는 캐시에 저장하지 않는다.
@@ -703,6 +752,10 @@
           (init?.method || input?.method || 'GET').toUpperCase() === 'GET') {
         response.clone().json().then(value => observeChatTitles(url, value)).catch(() => {});
       }
+      if (url && /^\/crack-api\/stories\/[^/]+\/?$/.test(url.pathname) && response.ok &&
+          (init?.method || input?.method || 'GET').toUpperCase() === 'GET') {
+        response.clone().json().then(value => observeStoryName(url, value)).catch(() => {});
+      }
       if (messageRoute(url)) {
         scheduleSync();
         if ((init?.method || input?.method || 'GET').toUpperCase() === 'GET' && response.ok) {
@@ -733,6 +786,13 @@
       this.addEventListener('load', () => {
         if (this.status < 200 || this.status >= 300) return;
         try { observeChatTitles(record.url, this.responseType === 'json' ? this.response : JSON.parse(this.responseText)); }
+        catch { /* JSON 이외의 응답은 사용하지 않는다. */ }
+      }, { once: true });
+    }
+    if (record?.method === 'GET' && record.url && /^\/crack-api\/stories\/[^/]+\/?$/.test(record.url.pathname)) {
+      this.addEventListener('load', () => {
+        if (this.status < 200 || this.status >= 300) return;
+        try { observeStoryName(record.url, this.responseType === 'json' ? this.response : JSON.parse(this.responseText)); }
         catch { /* JSON 이외의 응답은 사용하지 않는다. */ }
       }, { once: true });
     }
@@ -782,6 +842,8 @@
   }
 
   let chatId = '';
+  // 대사 패턴은 채팅방이 아닌 작품 단위로 연결한다.
+  let storyId = '';
   let immersive = false;
   let routeGeneration = 0;
   // 메시지 ID → { id, role, turnId, parentTurnId, order, older, turn }
@@ -803,6 +865,11 @@
   // 현재 경로에서 채팅방 ID를 읽는다.
   function currentChatId() {
     return suspended ? '' : page.location.pathname.match(/\/episodes\/([^/?#]+)/)?.[1] || '';
+  }
+
+  // 현재 경로에서 작품 ID를 읽는다. 채팅방 경로는 /stories/{작품 ID}/episodes/{채팅방 ID}이다.
+  function currentStoryId() {
+    return suspended ? '' : page.location.pathname.match(/\/stories\/([^/?#]+)\/episodes\//)?.[1] || '';
   }
 
   function isTurnMessage(item) {
@@ -1038,8 +1105,8 @@
             <output id="theme-font-size-value" for="theme-font-size">100%</output>
           </div>
           <div class="theme-font-field">
-            <label for="theme-font">폰트</label>
-            <textarea class="text-input" id="theme-font" spellcheck="false" placeholder="웹폰트 CSS를 붙여넣으세요. 비우면 기본 폰트.&#10;@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&amp;display=swap');&#10;또는 @font-face { font-family: 'MyFont'; src: url('https://example.com/font.woff2'); }"></textarea>
+            <span class="field-caption" id="font-list-label">폰트</span>
+            <div class="font-list" id="font-list" role="group" aria-labelledby="font-list-label"></div>
           </div>
         </section>
         <section class="sample-section">
@@ -1127,6 +1194,21 @@
       <div class="pattern-editor-actions">
         <button class="button subtle" id="pattern-editor-cancel">취소</button>
         <button class="button" id="pattern-editor-submit">추가</button>
+      </div>
+    </section>
+    <section class="pattern-editor" id="font-editor" role="dialog" aria-labelledby="font-editor-title" hidden="">
+      <header class="bookmark-browser-heading">
+        <strong id="font-editor-title">폰트 추가</strong>
+        <button class="bookmark-icon" id="font-editor-close" aria-label="폰트 추가 창 닫기">×</button>
+      </header>
+      <label class="field-label" for="font-name-input">폰트명</label>
+      <input id="font-name-input" class="text-input" maxlength="60" spellcheck="false">
+      <label class="field-label" for="font-source-input">웹폰트</label>
+      <textarea id="font-source-input" class="text-input template-input" spellcheck="false" placeholder="@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&amp;display=swap');&#10;또는 @font-face { font-family: 'MyFont'; src: url('https://example.com/font.woff2'); }"></textarea>
+      <small class="template-help pattern-editor-error" id="font-editor-error" role="alert"></small>
+      <div class="pattern-editor-actions">
+        <button class="button subtle" id="font-editor-cancel">취소</button>
+        <button class="button" id="font-editor-submit">추가</button>
       </div>
     </section>
   </section>
@@ -2037,7 +2119,7 @@
     }
 
     .theme-font-control label,
-    .theme-font-field label {
+    .theme-font-field .field-caption {
       color: #c1a777;
       font: 600 10px/1.5 'Malgun Gothic',sans-serif;
       letter-spacing: .04em;
@@ -2051,14 +2133,83 @@
       margin-top: 10px;
     }
 
-    .theme-font-field label {
+    .theme-font-field .field-caption {
       padding-top: 8px;
     }
 
-    .cc-ui #theme-font {
-      height: 80px;
-      resize: vertical;
-      font-family: Consolas,'Malgun Gothic',monospace;
+    .cc-ui #font-name-input {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .font-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(78px,1fr));
+      gap: 5px;
+    }
+
+    .font-item {
+      position: relative;
+      display: grid;
+    }
+
+    .cc-ui .font-choice {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 2px;
+      min-height: 62px;
+      padding: 6px 4px;
+      border: 1px solid #56635f;
+      border-radius: 2px;
+      background: #131e25a3;
+      color: #b9c7c6;
+      min-width: 0;
+    }
+
+    .cc-ui .font-choice[aria-pressed=true] {
+      border-color: #b79b67;
+      background: #9e885018;
+      color: #e1c89d;
+    }
+
+    .cc-ui .font-add {
+      border-style: dashed;
+      font-size: 18px;
+      color: #8c9a99;
+    }
+
+    .font-sample {
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .font-name {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 9px;
+    }
+
+    .cc-ui .font-item > .bookmark-icon {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      color: #8c9a99;
+      font-size: 13px;
+    }
+
+    .cc-ui .font-item > .delete-confirm {
+      width: auto;
+      padding: 0 4px;
+      font-size: 10px;
+      color: #e6a08f;
+      background: #1b2229;
     }
 
     .theme-font-control output {
@@ -2174,11 +2325,92 @@
     }
 
     .cc-ui .preset-item .preset-choice {
-      padding-right: 84px;
+      padding-right: 58px;
     }
 
     .preset-item .preset-choice[aria-pressed=true]::after {
-      right: 68px;
+      right: 42px;
+    }
+
+    .cc-ui .preset-item.is-editable .preset-choice {
+      padding-right: 116px;
+    }
+
+    .preset-item.is-editable .preset-choice[aria-pressed=true]::after {
+      right: 100px;
+    }
+
+    .preset-item:has(.link-count[open]) {
+      z-index: 2;
+    }
+
+    .cc-ui .link-count {
+      position: relative;
+      display: grid;
+      place-items: center;
+      height: 32px;
+      margin-right: 2px;
+      border: 0;
+      background: none;
+    }
+
+    .cc-ui .link-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      min-width: 0;
+      min-height: 0;
+      height: 20px;
+      padding: 0 6px 0 5px;
+      border: 1px solid #6d755f66;
+      border-radius: 10px;
+      background: none;
+      box-shadow: none;
+      color: #c5a771;
+      font: 10px/1 Consolas,monospace;
+      font-weight: 400;
+    }
+
+    .cc-ui .link-badge svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    .cc-ui .link-count.is-empty .link-badge {
+      color: #5d6b6c;
+      border-color: #56635f40;
+    }
+
+    .cc-ui .link-count summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .cc-ui .link-count summary:hover,
+    .cc-ui .link-count[open] summary {
+      border-color: #b79b67;
+      background: #c5a77118;
+      box-shadow: none;
+    }
+
+    .link-list {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      z-index: 3;
+      width: max-content;
+      max-width: 240px;
+      max-height: 200px;
+      overflow: auto;
+      margin: 2px 0 0;
+      padding: 6px 10px;
+      list-style: none;
+      background: #1b2229;
+      border: 1px solid #a58b60;
+      border-radius: 3px;
+      box-shadow: 0 6px 18px #0008;
+      font: 11px/1.7 'Malgun Gothic',sans-serif;
+      color: #c8d3cc;
+      overflow-wrap: anywhere;
     }
 
     .preset-item .preset-choice code {
@@ -2435,33 +2667,36 @@
 
     .speaker-list {
       display: grid;
-      gap: 4px;
-      max-height: 80px;
-      overflow: auto;
-      scrollbar-width: thin;
+      grid-template-columns: repeat(auto-fill,minmax(64px,1fr));
+      gap: 6px;
     }
 
-    .speaker-row {
-      display: flex;
-      align-items: center;
-      gap: 7px;
+    .speaker-card {
+      position: relative;
+      min-width: 0;
+    }
+
+    .cc-ui .speaker-edit {
+      display: grid;
+      gap: 3px;
+      width: 100%;
+      padding: 3px;
       background: #111c23;
       border: 1px solid #6d755f33;
-      padding: 2px 5px;
-      min-height: 32px;
+    }
+
+    .cc-ui .speaker-edit:hover {
+      border-color: #b79b6788;
     }
 
     .speaker-thumb {
-      width: 26px;
-      height: 26px;
+      width: 100%;
+      aspect-ratio: 1;
       object-fit: cover;
       background: repeating-conic-gradient(#354247 0% 25%,#27333a 0% 50%) 0/8px 8px;
     }
 
-    .speaker-edit {
-      flex: 1;
-      min-width: 0;
-      text-align: left;
+    .speaker-name {
       font-size: 10px;
       color: #c8d3cc;
       overflow: hidden;
@@ -2469,10 +2704,18 @@
       white-space: nowrap;
     }
 
-    .speaker-remove {
+    .cc-ui .speaker-remove {
+      position: absolute;
+      top: 4px;
+      right: 4px;
       width: 18px;
-      color: #8c9a99;
-      font-size: 14px;
+      height: 18px;
+      padding: 0;
+      border-radius: 2px;
+      background: #0d151bcc;
+      color: #c8d3cc;
+      font-size: 13px;
+      line-height: 18px;
     }
 
     .sample-section {
@@ -3922,11 +4165,11 @@
     return '';
   }
 
-  // 웹폰트 CSS는 저장값과 편집 중인 값만 문서에 등록해 대사마다 중복 로드하지 않는다.
+  // 웹폰트 CSS는 선택한 폰트와 설정창의 등록 폰트만 문서에 등록해 대사마다 중복 로드하지 않는다.
   function syncThemeFonts() {
     const parent = doc.head || doc.documentElement;
     if (!parent) return;
-    const sources = new Set([settings.themeFontCSS, draft?.themeFontCSS].filter(css => css?.trim()));
+    const sources = new Set([fontSource(settings), ...(draft?.fonts.map(font => font.source) || [])].filter(Boolean));
     for (const [css, font] of themeFonts) if (!sources.has(css)) {
       font.style.remove();
       themeFonts.delete(css);
@@ -3996,15 +4239,15 @@
     });
     $('theme-font-size').addEventListener('input', () => {
       if (!draft) return;
-      draft.themeFontSize = Number($('theme-font-size').value);
-      $('theme-font-size-value').textContent = draft.themeFontSize + '%';
+      draft.fontSize = Number($('theme-font-size').value);
+      $('theme-font-size-value').textContent = draft.fontSize + '%';
       updatePreview();
     });
-    $('theme-font').addEventListener('input', () => {
-      if (!draft) return;
-      draft.themeFontCSS = $('theme-font').value.trim();
-      updatePreview();
-    });
+    $('font-name-input').addEventListener('input', () => { $('font-editor-error').textContent = ''; });
+    $('font-source-input').addEventListener('input', () => { $('font-editor-error').textContent = ''; });
+    $('font-editor-submit').addEventListener('click', submitFontEditor);
+    $('font-editor-cancel').addEventListener('click', closeFontEditor);
+    $('font-editor-close').addEventListener('click', closeFontEditor);
     ui.querySelectorAll('button[data-scene-mode]').forEach(button => button.addEventListener('click', () => setPreviewMode(button.dataset.sceneMode)));
     $('template-input').addEventListener('input', () => { $('pattern-editor-error').textContent = ''; });
     $('pattern-editor-submit').addEventListener('click', submitPatternEditor);
@@ -4098,12 +4341,12 @@
       'auto-grow': 'autoGrow',
       'show-slider': 'showSlider'
     })) $(id).checked = draft[key];
-    $('sample-input').value = patternSample(draft) ?? presets[0].sample;
+    $('sample-input').value = patternSample(linkedPattern(draft)) ?? presets[0].sample;
     pendingDelete = null;
+    pendingFontDelete = null;
     $('auto-pronunciation').checked = draft.autoPronunciation;
-    $('theme-font-size').value = String(draft.themeFontSize);
-    $('theme-font-size-value').textContent = draft.themeFontSize + '%';
-    $('theme-font').value = draft.themeFontCSS;
+    $('theme-font-size').value = String(draft.fontSize);
+    $('theme-font-size-value').textContent = draft.fontSize + '%';
     $('pronunciation-language').value = draft.pronunciationLanguage;
     $('always-on').checked = alwaysOn;
     syncPronunciationWorker();
@@ -4112,6 +4355,7 @@
     selectTab(activeTab);
     renderPatternButtons();
     renderThemeButtons();
+    renderFonts();
     renderSpeakers();
     updatePreview();
     updateToggleButton();
@@ -4126,6 +4370,7 @@
     $('settings-scrim').hidden = true;
     $('bookmark-browser').hidden = true;
     closePatternEditor();
+    closeFontEditor();
     draft = null;
     draftPortraits = null;
     draftBookmarks = null;
@@ -4151,25 +4396,24 @@
       const images = new Map(draftPortraits);
       const nextAlwaysOn = $('always-on').checked;
       if (JSON.stringify(next) !== JSON.stringify(settings)) {
-        if (next.pattern === 'custom') {
-          const result = await findMatches($('sample-input').value, next);
+        const pattern = linkedPattern(next);
+        if (pattern?.template) {
+          const result = await findMatches($('sample-input').value, pattern);
           if (result.error) throw new Error(result.error);
         }
-        await book.save(next, 'config');
+        await book.save(next, CONFIG_PATH);
         settings = next;
         saved = true;
       }
       const imagesChanged = images.size !== portraits.size || [...images].some(([name, blob]) => portraits.get(name) !== blob);
       if (imagesChanged) {
-        const records = await imageRecords(images);
-        await book.save(records, 'images');
+        const revision = Math.max(Date.now(), (portraitRevision ?? 0) + 1);
+        const items = await imageRecords(images);
+        await book.save(items.length ? { revision, items } : null, PORTRAITS_PATH);
         saved = true;
-        const revision = Math.max(Date.now(), (updatedAt ?? 0) + 1);
-        try { await book.save(revision, 'updatedAt'); }
-        catch (error) { throw new Error('이미지는 저장됐지만 updatedAt 저장에 실패했습니다. 설정 저장을 다시 시도해주세요. ' + error.message); }
-        updatedAt = revision;
+        portraitRevision = items.length ? revision : null;
         portraits = images;
-        try { await cacheSettings(portraits, updatedAt); }
+        try { await cacheSettings(portraits, portraitRevision); }
         catch (error) { warning = '이미지 캐시를 갱신하지 못했습니다. ' + error.message; }
       }
       if (draftBookmarks.size) {
@@ -4177,9 +4421,9 @@
         if (otherRoomsChanged) {
           const values = {};
           for (const [id, room] of new Map([...bookmarkRooms, ...draftBookmarks])) {
-            if (room.stored) values[bookmarkPath(id).slice('bookmarks/'.length)] = { title: room.title, items: room.items };
+            if (room.stored) values[bookmarkPath(id).slice(BOOKMARKS_PATH.length + 1)] = { title: room.title, items: room.items };
           }
-          await book.save(Object.keys(values).length ? values : null, 'bookmarks');
+          await book.save(Object.keys(values).length ? values : null, BOOKMARKS_PATH);
         } else {
           const room = draftBookmarks.get(chatId);
           await book.save(room.stored ? { title: room.title, items: room.items } : null, bookmarkPath(chatId));
@@ -4607,16 +4851,17 @@
     regexJobs.clear();
   }
 
-  // 기본 패턴은 직접, 사용자 패턴은 제한시간이 있는 워커에서 실행한다.
-  async function findMatches(text, config) {
+  // 기본 패턴은 직접, 사용자 패턴은 제한시간이 있는 워커에서 실행한다. 패턴이 없으면 인식하지 않는다.
+  async function findMatches(text, pattern) {
+    if (!pattern) return { matches: [] };
     if (text.length > 1000000) return { matches: [], error: '대사가 너무 길어 원문으로 표시합니다.' };
     let source;
     try {
-      source = config.pattern === 'custom' ? customRegex(config.customTemplate) : presets[config.pattern].regex;
+      source = pattern.template ? customRegex(pattern.template) : pattern.regex;
     } catch (error) {
       return { matches: [], error: error.message };
     }
-    if (config.pattern !== 'custom') {
+    if (!pattern.template) {
       try {
         return { matches: scanText(text, source) };
       } catch {
@@ -4683,9 +4928,12 @@
 
   // 기본 패턴, 저장한 대사 형식, 추가 버튼을 같은 크기로 표시한다.
   let pendingDelete = null;
-  let editingTemplate = null;
+  let editingPatternId = null;
   function renderPatternButtons() {
     const list = $('preset-list');
+    const active = draft.patternLinks[storyId]?.patternId;
+    const linkedNames = new Map();
+    for (const link of Object.values(draft.patternLinks)) linkedNames.set(link.patternId, [...(linkedNames.get(link.patternId) || []), link.name]);
     const choice = (title, hint, pressed, onSelect) => {
       const button = make('button', 'preset-choice');
       button.type = 'button';
@@ -4694,50 +4942,91 @@
       button.addEventListener('click', onSelect);
       return button;
     };
-    list.replaceChildren(...presets.map((preset, index) => choice(preset.name, preset.hint, draft.pattern === index, () => selectPattern(index))));
-    for (const template of draft.customTemplates) {
-      const item = make('div', 'preset-item');
-      const selected = draft.pattern === 'custom' && draft.customTemplate === template;
-      const button = choice('직접 작성', template, selected, () => selectPattern('custom', template));
-      button.title = template;
+    const item = (id, title, hint, editable) => {
+      const element = make('div', 'preset-item' + (editable ? ' is-editable' : ''));
+      const button = choice(title, hint, active === id, () => selectPattern(id));
+      button.title = hint;
       const tools = make('div', 'preset-tools');
-      const remove = pendingDelete === template ? make('button', 'bookmark-icon delete-confirm', '삭제?') : bookmarkIcon('remove', '대사 형식 삭제', null);
+      tools.append(linkCount(linkedNames.get(id) || []));
+      element.append(button, tools);
+      return { element, tools };
+    };
+    list.replaceChildren(...presets.map(preset => item(preset.id, preset.name, preset.hint, false).element));
+    for (const pattern of draft.patterns) {
+      const { element, tools } = item(pattern.id, '직접 작성', pattern.template, true);
+      const remove = pendingDelete === pattern.id ? make('button', 'bookmark-icon delete-confirm', '삭제?') : bookmarkIcon('remove', '대사 형식 삭제', null);
       remove.type = 'button';
-      if (pendingDelete === template) remove.setAttribute('aria-label', '한 번 더 누르면 삭제');
+      if (pendingDelete === pattern.id) remove.setAttribute('aria-label', '한 번 더 누르면 삭제');
       remove.addEventListener('click', () => {
-        if (pendingDelete !== template) pendingDelete = template;
-        else removeCustomTemplate(template);
+        if (pendingDelete !== pattern.id) pendingDelete = pattern.id;
+        else removeCustomTemplate(pattern.id);
         renderPatternButtons();
         list.querySelector('.delete-confirm')?.focus();
       });
-      tools.append(bookmarkIcon('edit', '대사 형식 수정', () => openPatternEditor(template)), remove);
-      item.append(button, tools);
-      list.append(item);
+      tools.append(bookmarkIcon('edit', '대사 형식 수정', () => openPatternEditor(pattern.id)), remove);
+      list.append(element);
     }
-    if (draft.customTemplates.length < MAX_CUSTOM_TEMPLATES) {
-      const add = choice('+ 대사 형식 추가', '직접 작성 (' + draft.customTemplates.length + '/' + MAX_CUSTOM_TEMPLATES + ')', false, () => openPatternEditor(null));
+    if (draft.patterns.length < MAX_CUSTOM_TEMPLATES) {
+      const add = choice('+ 대사 형식 추가', '직접 작성 (' + draft.patterns.length + '/' + MAX_CUSTOM_TEMPLATES + ')', false, () => openPatternEditor(null));
       add.classList.add('preset-add');
       add.removeAttribute('aria-pressed');
       list.append(add);
     }
   }
 
-  // 편집 사본에서만 지운다. 설정 저장을 눌러야 반영된다.
-  function removeCustomTemplate(template) {
-    pendingDelete = null;
-    if (editingTemplate === template) closePatternEditor();
-    draft.customTemplates = draft.customTemplates.filter(item => item !== template);
-    if (draft.pattern === 'custom' && draft.customTemplate === template) selectPattern(0);
+  // 패턴에 연결된 작품 수. 누르면 작품명 목록을 펼친다.
+  function linkCount(names) {
+    const badge = tag => {
+      const element = make(tag, 'link-badge');
+      element.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true">' + bookmarkIcons.link + '</svg>';
+      element.append(String(names.length));
+      element.title = names.length ? '연결된 작품 ' + names.length + '개' : '연결된 작품 없음';
+      return element;
+    };
+    if (!names.length) {
+      const empty = make('span', 'link-count is-empty');
+      empty.append(badge('span'));
+      return empty;
+    }
+    const details = make('details', 'link-count');
+    const summary = badge('summary');
+    const list = make('ul', 'link-list');
+    list.append(...[...names].sort((a, b) => a.localeCompare(b)).map(name => make('li', '', name)));
+    details.append(summary, list);
+    details.addEventListener('toggle', () => {
+      if (details.open) closeLinkLists([details]);
+    });
+    return details;
   }
 
-  // 대사 형식 입력 팝업. template이 null이면 새 형식을 추가한다.
-  function openPatternEditor(template) {
-    editingTemplate = template;
+  // 열린 연결 작품 목록 중 path에 없는 것을 닫는다.
+  function closeLinkLists(path = []) {
+    let closed = false;
+    ui?.querySelectorAll('.link-count[open]').forEach(details => {
+      if (path.includes(details)) return;
+      details.open = false;
+      closed = true;
+    });
+    return closed;
+  }
+
+  // 편집 사본에서만 지운다. 설정 저장을 눌러야 반영되며, 연결된 작품도 함께 해제한다.
+  function removeCustomTemplate(id) {
+    pendingDelete = null;
+    if (editingPatternId === id) closePatternEditor();
+    draft.patterns = draft.patterns.filter(pattern => pattern.id !== id);
+    for (const [story, link] of Object.entries(draft.patternLinks)) if (link.patternId === id) delete draft.patternLinks[story];
+    updatePreview();
+  }
+
+  // 대사 형식 입력 팝업. id가 null이면 새 형식을 추가한다.
+  function openPatternEditor(id) {
+    editingPatternId = id;
     pendingDelete = null;
     renderPatternButtons();
-    $('pattern-editor-title').textContent = template === null ? '대사 형식 추가' : '대사 형식 수정';
-    $('pattern-editor-submit').textContent = template === null ? '추가' : '수정';
-    $('template-input').value = template ?? '';
+    $('pattern-editor-title').textContent = id === null ? '대사 형식 추가' : '대사 형식 수정';
+    $('pattern-editor-submit').textContent = id === null ? '추가' : '수정';
+    $('template-input').value = draft.patterns.find(pattern => pattern.id === id)?.template ?? '';
     $('pattern-editor-error').textContent = '';
     $('pattern-editor').hidden = false;
     $('template-input').focus();
@@ -4746,10 +5035,10 @@
   function closePatternEditor() {
     if (!$('pattern-editor') || $('pattern-editor').hidden) return;
     $('pattern-editor').hidden = true;
-    editingTemplate = null;
+    editingPatternId = null;
   }
 
-  // 형식을 검증하고 중복을 막은 뒤 편집 사본에 넣고 선택한다.
+  // 형식을 검증하고 중복을 막은 뒤 편집 사본에 넣는다. 수정해도 id가 같아 작품 연결은 유지된다.
   function submitPatternEditor() {
     const template = cleanTemplate($('template-input').value);
     try {
@@ -4758,27 +5047,26 @@
       $('pattern-editor-error').textContent = error.message;
       return;
     }
-    if (template !== editingTemplate && draft.customTemplates.includes(template)) {
+    if (draft.patterns.some(pattern => pattern.template === template && pattern.id !== editingPatternId)) {
       $('pattern-editor-error').textContent = '이미 저장된 대사 형식입니다.';
       return;
     }
-    if (editingTemplate === null) {
-      if (draft.customTemplates.length >= MAX_CUSTOM_TEMPLATES) {
-        $('pattern-editor-error').textContent = '대사 형식은 ' + MAX_CUSTOM_TEMPLATES + '개까지 저장할 수 있습니다.';
-        return;
-      }
-      draft.customTemplates.push(template);
-    } else {
-      draft.customTemplates = draft.customTemplates.map(item => item === editingTemplate ? template : item);
-    }
+    const editing = draft.patterns.find(pattern => pattern.id === editingPatternId);
+    if (editing) editing.template = template;
+    else if (draft.patterns.length >= MAX_CUSTOM_TEMPLATES) {
+      $('pattern-editor-error').textContent = '대사 형식은 ' + MAX_CUSTOM_TEMPLATES + '개까지 저장할 수 있습니다.';
+      return;
+    } else draft.patterns.push({ id: newId(), template });
     closePatternEditor();
-    selectPattern('custom', template);
+    if (editing && linkedPattern(draft) === editing) $('sample-input').value = patternSample(editing);
+    renderPatternButtons();
+    updatePreview();
   }
 
-  // 커스텀 대사 형식의 항목을 예시 값으로 채운다.
-  function patternSample(config) {
-    if (typeof config.pattern === 'number') return presets[config.pattern].sample;
-    if (!config.customTemplate.trim()) return null;
+  // 대사 형식의 항목을 예시 값으로 채운다.
+  function patternSample(pattern) {
+    if (!pattern) return null;
+    if (!pattern.template) return pattern.sample;
     const fields = {
       name: 'Aerin',
       translatedName: '에린',
@@ -4786,17 +5074,20 @@
       pronunciation: '룩스 인테르 테네브라스.',
       translation: '어둠 속에서도 빛은 남아 있습니다.'
     };
-    if (!config.customTemplate.includes('{translation}')) fields.speech = fields.translation;
-    return config.customTemplate.replace(/\{(name|translatedName|speech|pronunciation|translation)\}/g, (_, field) => fields[field]);
+    if (!pattern.template.includes('{translation}')) fields.speech = fields.translation;
+    return pattern.template.replace(/\{(name|translatedName|speech|pronunciation|translation)\}/g, (_, field) => fields[field]);
   }
 
-  // 패턴을 바꾸고 예시와 미리보기를 갱신한다.
-  function selectPattern(pattern, template = '') {
-    draft.pattern = pattern;
-    draft.customTemplate = pattern === 'custom' ? template : '';
+  // 현재 작품에 패턴을 연결한다. 이미 연결된 패턴을 다시 누르면 연결을 해제한다.
+  function selectPattern(id) {
+    if (!storyId) { toast('작품 정보를 찾지 못해 패턴을 연결할 수 없습니다. 작품의 채팅방에서 다시 시도해주세요.'); return; }
     pendingDelete = null;
-    const sample = patternSample(draft);
-    if (sample !== null) $('sample-input').value = sample;
+    const link = draft.patternLinks[storyId];
+    if (link?.patternId === id) delete draft.patternLinks[storyId];
+    else {
+      draft.patternLinks[storyId] = { name: storyNames.get(storyId) || link?.name || storyId, patternId: id };
+      $('sample-input').value = patternSample(linkedPattern(draft));
+    }
     renderPatternButtons();
     updatePreview();
   }
@@ -4804,6 +5095,89 @@
   // 현재 대사 테마를 선택 표시한다.
   function renderThemeButtons() {
     ui.querySelectorAll('.theme-choice').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.theme === draft.theme)));
+  }
+
+  // 등록한 폰트를 미리보기 글자와 이름으로 표시한다. 선택한 폰트를 다시 누르면 기본 폰트로 돌아간다.
+  let pendingFontDelete = null;
+  function renderFonts() {
+    syncThemeFonts();
+    const list = $('font-list');
+    const add = make('button', 'font-choice font-add', '+');
+    add.type = 'button';
+    add.title = '폰트 추가';
+    add.setAttribute('aria-label', '폰트 추가');
+    add.addEventListener('click', openFontEditor);
+    list.replaceChildren(add);
+    for (const font of draft.fonts) {
+      const item = make('div', 'font-item');
+      const button = make('button', 'font-choice');
+      button.type = 'button';
+      button.title = font.name;
+      button.setAttribute('aria-pressed', String(draft.fontId === font.id));
+      const sample = make('span', 'font-sample', '가 Aa');
+      button.append(sample, make('span', 'font-name', font.name));
+      button.addEventListener('click', () => {
+        pendingFontDelete = null;
+        draft.fontId = draft.fontId === font.id ? null : font.id;
+        renderFonts();
+        updatePreview();
+      });
+      themeFonts.get(font.source)?.family.then(family => { if (family) sample.style.fontFamily = family; });
+      const remove = pendingFontDelete === font.id ? make('button', 'bookmark-icon delete-confirm', '삭제?') : make('button', 'bookmark-icon font-remove', '×');
+      remove.type = 'button';
+      remove.setAttribute('aria-label', pendingFontDelete === font.id ? '한 번 더 누르면 삭제' : font.name + ' 폰트 삭제');
+      remove.addEventListener('click', () => {
+        if (pendingFontDelete !== font.id) pendingFontDelete = font.id;
+        else {
+          pendingFontDelete = null;
+          draft.fonts = draft.fonts.filter(item => item.id !== font.id);
+          if (draft.fontId === font.id) draft.fontId = null;
+          updatePreview();
+        }
+        renderFonts();
+        list.querySelector('.delete-confirm')?.focus();
+      });
+      item.append(button, remove);
+      list.append(item);
+    }
+  }
+
+  function openFontEditor() {
+    pendingFontDelete = null;
+    renderFonts();
+    $('font-name-input').value = '';
+    $('font-source-input').value = '';
+    $('font-editor-error').textContent = '';
+    $('font-editor').hidden = false;
+    $('font-name-input').focus();
+  }
+
+  function closeFontEditor() {
+    if (!$('font-editor') || $('font-editor').hidden) return;
+    $('font-editor').hidden = true;
+  }
+
+  // 폰트명과 웹폰트 CSS를 확인한 뒤 편집 사본에 등록한다.
+  function submitFontEditor() {
+    const name = $('font-name-input').value.trim();
+    const source = $('font-source-input').value.trim();
+    if (!name) {
+      $('font-editor-error').textContent = '폰트명을 입력해주세요.';
+      $('font-name-input').focus();
+      return;
+    }
+    if (!source) {
+      $('font-editor-error').textContent = '웹폰트 CSS를 입력해주세요.';
+      $('font-source-input').focus();
+      return;
+    }
+    if (draft.fonts.some(font => font.source === source)) {
+      $('font-editor-error').textContent = '이미 등록된 웹폰트입니다.';
+      return;
+    }
+    draft.fonts.push({ id: newId(), name, source });
+    closeFontEditor();
+    renderFonts();
   }
 
   // 감지된 대사를 전용 Shadow DOM 테마로 그린다.
@@ -4817,7 +5191,7 @@
     wrapper.dataset.sceneMode = mode;
     const bubble = make('article', 'dialogue');
     bubble.dataset.theme = config.theme;
-    bubble.style.setProperty('--dialogue-font-scale', String(config.themeFontSize / 100));
+    bubble.style.setProperty('--dialogue-font-scale', String(config.fontSize / 100));
     const speakerName = fields.name || fields.translatedName;
     const blob = images.get(normalizeName(fields.name)) || images.get(normalizeName(fields.translatedName));
     if (blob) {
@@ -4854,7 +5228,7 @@
       body.querySelector('.dialogue-name small')?.before(' ');
       for (const field of Array.from(body.children).slice(1)) field.before(' ');
     }
-    themeFonts.get(config.themeFontCSS)?.family.then(family => {
+    themeFonts.get(fontSource(config))?.family.then(family => {
       if (!family || !host.isConnected || suspended) return;
       body.style.fontFamily = family;
       body.querySelectorAll('*').forEach(element => { element.style.fontFamily = family; });
@@ -4922,13 +5296,14 @@
     if (!draft || !ui || !$('sample-input')) return;
     syncThemeFonts();
     const revision = ++previewRevision, config = page.structuredClone(draft);
-    const raw = $('sample-input').value, result = await findMatches(raw, config);
+    const raw = $('sample-input').value, pattern = linkedPattern(config), result = await findMatches(raw, pattern);
     if (revision !== previewRevision || !draft) return;
     const output = $('dialogue-preview');
     output.replaceChildren();
     if (config.theme === 'none' || !result.matches.length || result.error) appendMarkdown(output, raw);
     else output.append(makeDialogue(result.matches[0].fields, config, draftPortraits, uiShell.dataset.sceneMode));
-    $('sample-match').textContent = result.error ? '정규식 확인 필요' : config.theme === 'none' ? '원문 표시' : result.matches.length ? '패턴 인식됨' : '인식 안 됨 · 원문 표시';
+    $('sample-match').textContent = result.error ? '정규식 확인 필요' : config.theme === 'none' ? '원문 표시' : !pattern ? '패턴 미설정 · 원문 표시'
+      : result.matches.length ? '패턴 인식됨' : '인식 안 됨 · 원문 표시';
     $('sample-match').title = result.error || '';
   }
 
@@ -4938,7 +5313,7 @@
   async function prepareImageEdit() {
     if (imageEditReady) return;
     const session = draft, original = portraits;
-    const current = await book.load('images') || [];
+    const current = (await book.load(PORTRAITS_PATH))?.items || [];
     const records = await imageRecords(original);
     const byName = new Map(current.map(item => [normalizeName(item.name), item.data]));
     if (current.length !== records.length || records.some(item => byName.get(item.name) !== item.data)) {
@@ -4954,15 +5329,17 @@
     $('speaker-file').click();
   }
 
-  // 화자별 이미지와 변경·삭제 버튼을 표시한다.
+  // 화자별 이미지를 썸네일로 표시한다. 썸네일을 누르면 이미지를 바꾸고 ×로 삭제한다.
   function renderSpeakers() {
     $('speaker-list').replaceChildren();
     for (const [name, blob] of draftPortraits) {
-      const row = make('div', 'speaker-row'), image = make('img', 'speaker-thumb');
+      const row = make('div', 'speaker-card'), image = make('img', 'speaker-thumb');
       image.src = imageUrl(blob);
       image.alt = '';
-      const edit = make('button', 'speaker-edit', name);
-      edit.title = '이미지 바꾸기';
+      const edit = make('button', 'speaker-edit');
+      edit.type = 'button';
+      edit.title = name + ' · 이미지 바꾸기';
+      edit.append(image, make('span', 'speaker-name', name));
       edit.addEventListener('click', () => chooseImage(name));
       const remove = make('button', 'speaker-remove', '×');
       remove.setAttribute('aria-label', name + ' 이미지 삭제');
@@ -4977,7 +5354,7 @@
           releaseUnusedImages();
         } catch (error) { showError(error); }
       });
-      row.append(image, edit, remove);
+      row.append(edit, remove);
       $('speaker-list').append(row);
     }
   }
@@ -5234,7 +5611,7 @@
         return chunk;
       });
       const text = run.map(block => block.text).join('\n');
-      const result = await findMatches(text, settings);
+      const result = await findMatches(text, linkedPattern(settings));
       if (highlighted.get(root) !== record || !immersive || !root.isConnected) return;
       if (result.error) {
         if (!suspended && Date.now() - lastThemeErrorAt >= 4000) {
@@ -5968,10 +6345,21 @@
         return;
       }
       if (event.composedPath().some(node => node.matches?.('.bookmark-row input'))) return;
+      if (closeLinkLists()) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        return;
+      }
       if ($('pattern-editor') && !$('pattern-editor').hidden) {
         event.preventDefault();
         event.stopImmediatePropagation();
         closePatternEditor();
+        return;
+      }
+      if ($('font-editor') && !$('font-editor').hidden) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        closeFontEditor();
         return;
       }
     }
@@ -6008,6 +6396,7 @@
     const bookmarkTarget = path.some(node => node.matches?.('.bookmark-marker,.chronicle-cap'));
     if (bookmarkPopoverKey && !path.includes(bookmarkPopover) && !path.includes(bookmarkAnchor) && !bookmarkTarget) closeBookmarkPopover();
     if ($('bookmark-browser') && !$('bookmark-browser').hidden && !path.includes($('bookmark-browser')) && !path.includes($('bookmark-rooms'))) $('bookmark-browser').hidden = true;
+    closeLinkLists(path);
     if (event.target.closest?.('button[aria-label="메시지 검색"]')) crackNavigation.showSearch();
   }, true);
   doc.addEventListener('pointerup', () => { sliderDragging = false; }, true);
@@ -6080,6 +6469,7 @@
       cancelSeek();
       closeBookmarkPopover();
       chatId = nextChat;
+      storyId = currentStoryId();
       bookmarkRoom = '';
       refreshBookmarks();
       if (chatId) reloadChatSettings();
@@ -6130,6 +6520,7 @@
     suspended = true;
     routeGeneration += 1;
     chatId = '';
+    storyId = '';
     messageObserver.disconnect();
     observedBody = null;
     page.cancelAnimationFrame(syncFrame);
